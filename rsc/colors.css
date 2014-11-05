@@ -1,0 +1,202 @@
+
+body {
+    background: url(img/cartographer.png);
+}
+
+header {
+    background: url(img/grey.png);
+    opacity: 0.90;
+}
+
+footer {
+    background: url('img/grey.png');
+    opacity: 0.90;
+}
+
+#center {
+    background: url(img/notebook.png);
+}
+
+/* top: input */
+
+.unitlabel .tooltipOn {
+    background: white;
+    border: 2px solid black;
+    border-radius: 3px;
+}
+
+
+/* tabs for player and computer units */
+.inputTab {
+    background: rgba(215, 235, 145,0.5);
+}
+.inputTabActive {
+    background: rgba(205, 225, 135,0.75);
+    font-weight: bold;
+}
+
+.units_area {
+    background: rgba(205, 225, 135,0.75);
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+/*
+.unitUnchecked {
+    background: red;
+}
+*/
+/* left part of the input area */
+
+.selOpt {
+    border-radius: 5px;
+}
+.selOptActive {
+    background: rgba(225, 245, 155,0.75);
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+
+#genSelLabel {
+    text-decoration: underline;
+}
+#towerSelLabel {
+    text-decoration: underline;
+}
+
+
+#buttonStatistics {
+    border-radius: 5px;
+}
+#buttonCombatLog {
+    border-radius: 5px;
+}
+
+
+
+.resultTable {
+    #border: 5px solid rgba(205, 225, 135,1);
+    #border-radius: 5px;
+    border-collapse: collapse;
+    #margin-bottom: 0.25em;
+    background: rgba(205, 225, 135,0.75);
+    background: rgba(215, 235, 145,0.5);
+}
+
+.tableHead {
+    /*width: 25%;*/
+    background: rgba(128,128,128,0.75);
+    border-bottom: 2px solid black;
+}
+
+.tabDataRounds {
+    #background: rgb(160, 160, 160);
+    ##background: rgba(128,128,128,0.75);
+    border-bottom: 1px solid black;
+}
+
+
+
+.resultLog {
+    background: rgba(205, 225, 135,0.5);
+    background: rgba(205, 225, 135,0.75);
+    background: rgba(215, 235, 145,0.5);
+
+    border-radius: 5px;
+}
+
+
+.roundLeft {
+    #background: rgba(225, 245, 155,0.75);
+    border: 1px solid black;
+}
+
+.logRound {
+    #border: 5px solid rgba(205, 225, 135,0.5);
+}
+
+.initLeft {
+    #background: rgba(225, 245, 155,0.75);
+    border: 1px solid black;
+}
+
+
+.logComputer.gatHighlight {
+    border: 2px solid rgba(176,176,235,1);
+}
+.logPlayer.gatHighlight {
+    border: 2px solid rgba(235,176,176,1);
+}
+
+
+.logUnitAttack {
+    border-collapse: collapse;
+    border: 2px solid rgba(0,0,0,0);
+}
+
+/*.logUnitAttack*/
+.logPlayer {
+    background: rgba(196,255,196,0.5);
+}
+/*.logUnitAttack*/
+.logComputer {
+    background: rgba(196,196,255,0.5);
+}
+
+.logRoundLabel {
+    border-bottom: 2px solid black;
+}
+
+.logInitLabel {
+    border-bottom: 1px solid black;
+}
+
+.logAtHead {
+    font-weight: normal;
+    border-bottom: 1px solid black;
+}
+
+
+/* ------------------------- */
+
+.waveTabBorderOn {
+    border: 1px solid rgba(0,0,0,1);
+}
+.waveTabBorderOff {
+    border: 1px solid rgba(0,0,0,0);
+}
+
+.tableDiags {
+    background: rgba(215, 235, 145,0.5);
+}
+/*
+.diagram {
+    background: white;
+    #background: url(img/tiny_grid.png);
+    #background: url(img/gridme.png);
+    border: 1px solid black;
+}
+
+.diagLegendFiltered {
+    background: blue;
+    background: rgb(64,64,196);
+}
+.diagLegendTotal {
+    background: red;
+    background: rgb(255,64,64);
+}
+
+.diagLine {
+    border-right: 2px solid black;
+}
+
+.diagBarTotal {
+    background: red;
+    background: rgb(225,64,64);
+}
+.diagBarFiltered {
+    background: blue;
+    background: rgb(64,64,225);
+}
+
+*/

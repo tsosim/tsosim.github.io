@@ -1,0 +1,872 @@
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+header {
+    width: 900px;
+    text-align: center;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+#simVersions {
+    display: flex;
+    flex-direction: row;
+}
+.versionButton {
+    margin: 10px;
+    width:6%;
+    border: 3px double black;
+    cursor: pointer;
+}
+.vbHighlighted {
+    border: 3px solid black;
+}
+.vbClicked {
+    background: rgba(0,0,0,0.15);
+    border: 3px solid black;
+    font-weight: bold;
+    cursor: default;
+}
+
+footer {
+    width: 900px;
+    height: 40px;
+    margin-top: 5px;
+    border-radius : 5px;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8em;
+}
+#fleft{
+    margin-left: 1em;
+}
+#fright {
+    margin-right: 1em;
+}
+
+
+#contact {
+    font-size: 10pt;
+    text-align : right;
+    margin-right: 1em;
+}
+
+#center {
+    width: 900px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items : center;    
+}
+
+/* top: input */
+
+#centerInput {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex-start;
+}
+
+.unittablerow {
+    #align-content: center;
+    position: relative;
+}
+
+.unitlabel {
+    width : 200px;
+    #vertical-align: middle;
+    position: relative;
+}
+
+.unitlabel .tooltipOn {
+    display: inline-block;
+    background: white;
+    border: 2px solid black;
+    border-radius: 3px;
+    position: absolute;
+    left: +10px;
+    top: +30px;
+    padding: 5px;
+    z-index: +1;
+}
+
+.unitnumber {
+    width : 50px;
+    text-align: right;
+    border-spacing: 0px;
+    margin: 0px;
+}
+
+.unitCosts {
+    width : 50px;
+    text-align: right;
+}
+
+.unittable {
+    width= 90%;
+    align-self: center;
+    #align-content: center;
+    padding: 5px;
+    #border-spacing: 0px;
+}
+
+/* tabs for player and computer units */
+.inputTab {
+    background: rgba(215, 235, 145,0.5);
+    padding-top: 10px;
+    padding-bottom: 10px;
+    cursor: pointer;
+}
+.inputTabActive {
+    background: rgba(205, 225, 135,0.75);
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-weight: bold;
+    cursor: default;
+}
+
+.units_area {
+    background: rgba(205, 225, 135,0.75);
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-bottom: 1em;
+}
+
+
+/* left part of the input area */
+#player {
+    width: 45%;
+}
+#generals {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  text-align: center;
+}
+
+.genTab {
+    width: 23%;
+}
+
+
+.unitsOptionBlock {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.selOpt {
+    padding: 5px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.selOptActive {
+    background: rgba(225, 245, 155,0.75);
+    padding: 5px;
+    text-align: center;
+    cursor: pointer;
+    font-weight: bold;
+    cursor: default;
+    border-radius: 5px;
+}
+
+.genSel {
+    width: 40px;
+}
+
+#genSelLabel {
+    width: 80px;
+    padding: 5px;
+    text-decoration: underline;
+    #cursor: default;
+    text-align: center;
+}
+
+/* tooltips for unit data */
+
+.tooltipOff {
+    display:none;
+}
+
+.tooltipDataLabel {
+    padding-right: 10px;
+}
+
+/* right part of the input area */
+#computer {
+    width: 45%;
+}
+
+#advmaps {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    text-align: center;
+}
+.compTab {
+}
+
+#tabPlayerIsland {
+    width: 30%;    
+}
+#tabAdvSelect {
+    width: 70%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+#selAdv {
+    width : 150px;
+    margin-left:  0.5em;
+}
+
+.towerSel {
+    width: 32px;
+}
+#towerSelLabel {
+    width: 120px;
+    padding: 5px;
+    text-align: center;
+    text-decoration: underline;
+    cursor: default;
+}
+
+
+
+
+/* center : control */
+
+#centerControl {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    padding-top : 0.5em;
+    padding-bottom : 0.5em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+}
+#buttonsSim {
+    width: 45%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+#buttonsResOptions {
+    width: 45%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+#inpNumIter {
+    width: 60px;
+    text-align: right;
+}
+
+#buttonStatistics {
+    width: 25%;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+}
+#buttonCombatLog {
+    width: 25%;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+}
+
+
+/* bottom : results*/
+
+#centerResults {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+    padding-bottom: 2em;
+}
+
+
+
+#waveResults {
+    width: 90%;
+}
+
+.waveInfoLine {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.waveResultInfo {
+    text-align: left;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.waveVictoryInfo {
+    width: 20%;
+    text-align: left;
+    margin-left: 2em;
+    font-weight: bold;
+}
+
+/* statistics table */
+
+/*
+#resulttables {
+    width: 40%;
+}*/
+
+.resultTable {
+    width: 100%;
+    #border: 5px solid rgba(205, 225, 135,1);
+    #border-radius: 5px;
+    border-collapse: collapse;
+    #margin-bottom: 0.25em;
+    background: rgba(205, 225, 135,0.75);
+    /*margin: 1px;*/
+}
+
+.tableHead {
+    /*width: 25%;*/
+    background: rgba(128,128,128,0.75);
+    border-bottom: 2px solid black;
+}
+
+.tabDataRounds {
+    #background: rgb(160, 160, 160);
+    ##background: rgba(128,128,128,0.75);
+    #width: 12%;
+    border-bottom: 1px solid black;
+}
+
+.tds_Default {
+    text-align: right;
+    padding-right: 5px;
+    width: 1%;
+    cursor: default;
+}
+
+.tds_unitName{
+    text-align: left;
+    width: 1%;
+    padding-left: 5px;
+    padding-left: 5px;
+    white-space:nowrap;
+}
+.tds_valSeparator{
+    width: 1%;
+    text-align: center;
+}
+.tds_unitTotal{
+    width: 1%;
+    padding-left: 5px;
+}
+.tds_unitLoss{
+    width: 1%;
+    padding-left: 10px;
+}
+.tds_Spacer {
+    width:auto;
+}
+
+
+/* combat log */
+
+
+.resultLog {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    background: rgba(205, 225, 135,0.5);
+    background: rgba(205, 225, 135,0.75);
+    border-radius: 5px;
+    margin-top: 1em;
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+
+
+.logBase {
+    display: flex;
+    flex-direction: row;
+    #margin-top: 1em;
+    #margin-bottom: 1em;
+    #margin-left: 1em;
+    width: 95%;
+    padding: 2px;
+    padding-left: 1em;
+}
+
+.roundLeft {
+    font-size: 22;
+    font-weight: bold;
+    margin-right: 0.5em;
+    padding: 2px;
+    ##background: rgba(225, 245, 155,0.75);
+    cursor: pointer;
+}
+.roundRight {
+    #padding: 5px;
+    width: 100%;
+}
+
+.logRound {
+    width: 100%;
+    #border: 5px solid rgba(205, 225, 135,0.5);
+    #margin-bottom: 1em;
+}
+
+.logInit {
+    width: 100%;
+}
+
+
+.initBase {
+    display: flex;
+    flex-direction: row;
+    padding: 2px;
+    #padding-left: 1em;
+    margin-top: 0.5em;
+    width:95%;
+}
+.initLeft {
+    font-size: 22;
+    font-weight: bold;
+    margin-right: 0.5em;
+    padding: 2px;
+    ##background: rgba(225, 245, 155,0.75);
+    cursor: pointer;
+}
+.initRight {
+    #padding: 5px;
+    width: 100%;
+}
+
+
+.initBase {
+    #position:relative;
+    #left: +20px;
+#    width: 90%;
+}
+.initBaseNoShow {
+    display: none;
+}
+
+.logGroup {
+    #position:relative;
+    #left: +20px;
+    width: 90%;
+}
+.logGroupNoShow {
+    display: none;
+}
+.groupTable {
+    #width: 90%;
+    width: 100%;
+    margin-top: 0.5em;
+    border-collapse: collapse;
+}
+.groupBase {
+    cursor: pointer;
+}
+.gtHide {
+    display: none;
+}
+
+.gaBase {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+.gaShow {
+    width: 100%;
+}
+.gaHide {
+    width: 100%;
+    display: none;
+}
+/*.gaHighlight {
+    background: rgba(0,0,0,0.5);
+}*/
+.gaSpacer {
+    width:auto;
+}
+.gaMin {
+    width: 1%;
+}
+.gaNum {
+    text-align: right;
+}
+.gaName {
+    width:1%;
+    text-align: left;
+    padding-left: 5px;
+    padding-right: 10px;
+    white-space:nowrap;
+}
+
+
+
+
+.logUnitAttack {
+    width: 95%;
+    border-collapse: collapse;
+    margin:auto;
+    cursor: pointer;
+}
+
+/*.logUnitAttack*/
+.logPlayer {
+    background: rgba(255,196,196,0.5);
+}
+/*.logUnitAttack*/
+.logComputer {
+    background: rgba(196,196,255,0.5);
+}
+
+
+.logRoundLabel {
+    display: flex;
+    align-content: stretch;
+    width: 100%;
+    #width: 500px;
+    #background: yellow;
+    #opacity: 0.8;
+    text-align: left;
+    border-bottom: 2px solid black;
+    font-size: 18;
+    font-weight: bold;
+    #margin-bottom: 1em;
+}
+
+.logInitLabel {
+    display: flex;
+    align-content: center;
+    #width: 90%;
+    width: 100%;
+    text-align: left;
+    border-bottom: 1px solid black;
+    font-size: 14;
+    font-weight: bold;
+    #margin-top: 0.5em;
+    #margin-bottom: 0.5em;
+}
+
+.logAtHead {
+    font-weight: normal;
+    border-bottom: 1px solid black;
+}
+
+.attSpacer {
+    width: auto;
+}
+.attMin {
+    width: 1%;
+}
+.attNum {
+    text-align: right;
+    padding-right: 2px;
+}
+.attName {
+    text-align: left;
+    white-space:nowrap;
+}
+.attDmg {
+    text-align: right;
+    width:100px;
+}
+.attArrow {
+    text-align: center;
+    width: 50px;
+}
+.defNum {
+    text-align: right;
+    width: 50px;
+}
+.defName {
+    text-align: left;
+    width:150px;
+}
+.defHp {
+    text-align: right;
+    width:100px;
+}
+
+
+/* ------------------------- */
+
+.tableDiags {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.waveTabBorderOn {
+    margin-bottom: 0.75em;
+    border: 1px solid rgba(0,0,0,1);
+    cursor: pointer;
+}
+.waveTabBorderOff {
+    margin-bottom: 0.75em;
+    border: 1px solid rgba(0,0,0,0);
+}
+
+.diagram {
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    background: white;
+    border: 1px solid black;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 5px;
+}
+
+.diagHide {
+    display: none;
+}
+
+
+.diagRow {
+    display: flex;
+    flex-direction: row;
+    #width: 500px;
+    align-items: center;
+}
+
+.diagLeftValue {
+    #width:50px;
+    width: 10%;
+    text-align: right;
+    padding-right: 5px;
+   /* padding-left: 6px; */
+}
+
+.diagLine {
+    width: 1px;
+    height: 1.5em;
+    border-right: 2px solid black;
+}
+
+.diagBarContainer {
+    width: 75%;
+}
+.diagBarTotal {
+    background: red;
+    height: 0.5em;
+    margin-top:2px;
+}
+.diagBarFiltered {
+    background: blue;
+    height: 0.5em;
+    margin-bottom:2px;
+}
+
+
+.diagPercent{
+    #width: 50px;
+    width: 15%;
+    margin-left: 5px;
+    font-size: 0.8em;
+    text-align: right;
+    padding-right: 5px;
+}
+
+
+/* ----- */
+
+.diagram {
+    width: 90%;
+}
+
+.diagLegend {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.diagLegendVictory {
+    width:10px;
+    background: blue;
+    margin-left: 10px;
+}
+.diagLegendDefeat {
+    width:10px;
+    background: blue;
+    margin-left: 10px;
+}
+.diagLegendTotal {
+    width: 10px;
+    background: red;
+    margin-left: 10px;
+}
+.diagLegendText {
+    font-size: 0.5em;
+    margin-left: 5px;
+    margin-right: 10px;
+}
+
+
+.diagColumns {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.diagCol {
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+.diagColContainer {
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    margin-left: 2px;
+    margin-right: 2px;
+}
+
+.diagBottomValue {
+    padding-top: 5px;
+}
+.diagBottomValue.widthMin {
+    font-size: 0.8em;
+}
+
+.diagBorderLine {
+    border-top: 2px solid black;
+    ##width: 50px;
+}
+.diagColTotal {
+    background: rgb(196,255,196);
+    position: relative;
+    
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-end;
+}
+.diagColTotal.widthNormal {
+    width: 40px;
+}
+.diagColTotal.widthSmall {
+    width: 34px;
+}
+.diagColTotal.widthTiny {
+    width: 30px;
+}
+.diagColTotal.widthMin {
+    width: 20px;
+}
+
+
+.diagColPercent {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid black;
+    ##width: 50px;
+}
+.diagColPercent.widthNormal {
+    font-size: 0.9em;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+.diagColPercent.widthSmall {
+    font-size: 0.8em;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+.diagColPercent.widthTiny {
+    font-size: 0.6em;
+    padding-left: 3px;
+    padding-right: 3px;
+}
+.diagColPercent.widthMin {
+    display: none;
+}
+
+
+.diagInnerCol {
+    height:100%;
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: flex-start;
+}
+.diagInnerCol.widthNormal {
+    width: 18px;
+}
+.diagInnerCol.widthSmall {
+    width: 15px;
+}
+.diagInnerCol.widthTiny {
+    width: 13px;
+}
+.diagInnerCol.widthMin {
+    width: 8px;
+}
+
+.diagColVic {
+    background: rgb(225,96,96);
+}
+.diagColDef {
+    background: rgb(96,96,225);
+}
+
+.innerColText {
+    display: none;
+}
+.mouseOver .innerColText {
+    display: inherit;
+    position: relative;
+    top: +30px;
+    transform: rotate(-90deg);
+    font-size: 8pt;
+    white-space: nowrap;
+}
+.innerColText.textOut {
+    position: relative;
+    top: -25px;
+}
+
+.diagLegendVictory {
+    background: rgb(225,96,96);
+}
+.diagLegendDefeat {
+    background: rgb(96,96,225);
+}
+.diagLegendTotal {
+    background: rgb(196,255,196);
+}
+
