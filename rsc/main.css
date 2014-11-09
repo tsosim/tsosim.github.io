@@ -87,6 +87,11 @@ footer {
     #vertical-align: middle;
     position: relative;
 }
+.camplabel {
+    width : 100px;
+    #vertical-align: middle;
+    position: relative;
+}
 
 .unitlabel .tooltipOn {
     display: inline-block;
@@ -113,11 +118,19 @@ footer {
 }
 
 .unittable {
-    width= 90%;
+    display: flex;
+    width: 90%;
     align-self: center;
-    #align-content: center;
+    justify-content: center;
     padding: 5px;
     #border-spacing: 0px;
+}
+.computerCamp {
+    width: 90%;
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    margin-top: 5px;
 }
 
 /* tabs for player and computer units */
@@ -236,10 +249,13 @@ footer {
     margin-left:  0.5em;
 }
 
+.towerLive {
+    width: 50px;
+}
 .towerSel {
     width: 32px;
 }
-#towerSelLabel {
+#towerBonusLabel {
     width: 120px;
     padding: 5px;
     text-align: center;

@@ -10,6 +10,7 @@ function VersionData() {
     this.allUnits = {};
     this.playerUnits = {};
     this.computerUnits = {};
+    this.camps = {};
     this.generals = {};
     this.functions = {};
 }
@@ -121,10 +122,11 @@ tso.data.test.functions.getUnitListBySkillAttackWeakest = function(groups) {
 /* --------------------------------------------------- */
 
 tso.data.live.functions.defineUnits = function () {
-    var vData, pu, cu, au, idx;
+    var vData, pu, cu, au, camp, idx;
     vData = tso.data.live;
     pu = vData.playerUnits;
     cu = vData.computerUnits;
+    camp = vData.camps;
     au = vData.allUnits;
 
     // -------------- //
@@ -136,7 +138,7 @@ tso.data.live.functions.defineUnits = function () {
     pu.bowman        = new Unit("Bowman",         10, [20,  40],  80, Initiative.SECOND, getAID(), [Skills.TOWER_BONUS]);
     pu.longbowman    = new Unit("Longbowman",     10, [30,  60],  80, Initiative.SECOND, getAID(), [Skills.TOWER_BONUS]);
     pu.crossbowman   = new Unit("Crossbowman",    10, [45,  90],  80, Initiative.SECOND, getAID(), [Skills.TOWER_BONUS]);
-    pu.cannoneer     = new Unit("Cannoneer",      60, [60, 120],  90, Initiative.THIRD,  getAID(), [Skills.TOWER_BONUS, Skills.ARMOR_PENETRATION]);
+    pu.cannoneer     = new Unit("Cannoneer",      60, [60, 120],  90, Initiative.THIRD,  getAID(), [Skills.TOWER_BONUS, Skills.ARMOR_PENETRATION, Skills.CAMP_DMG_BONUS]);
     
     setUnitIDs(pu);
     setUnitClass(pu, EnemyType.PLAYER);
@@ -255,25 +257,42 @@ tso.data.live.functions.defineUnits = function () {
     cu.epGreedyInnkeeper = new Unit("Greedy Innkeeper", 50000, [ 1500, 2000], 80, Initiative.THIRD,     getAID(), [Skills.SPLASH_DAMAGE, Skills.ATTACK_WEAKEST]);   //
     
     
-    cu.wolf       = new Unit("Wolf",               10, [  2,   3], 80, Initiative.FIRST,  getAID(), []);                       //
-    cu.croaker    = new Unit("Croaker",         10000, [500, 700], 50, Initiative.THIRD,  getAID(), [Skills.ATTACK_WEAKEST]);  //
-    cu.mystShaman = new Unit("Mystical Shaman",  9000, [200, 500], 70, Initiative.SECOND, getAID(), [Skills.ATTACK_WEAKEST, Skills.SPLASH_DAMAGE]);  //
+    cu.wolf              = new Unit("Wolf",               10, [  2,   3], 80, Initiative.FIRST,  getAID(), []);                       //
+    cu.croaker           = new Unit("Croaker",         10000, [500, 700], 50, Initiative.THIRD,  getAID(), [Skills.ATTACK_WEAKEST]);  //
+    cu.mystShaman        = new Unit("Mystical Shaman",  9000, [200, 500], 70, Initiative.SECOND, getAID(), [Skills.ATTACK_WEAKEST, Skills.SPLASH_DAMAGE]);  //
     
-    setUnitIDs(cu.computerUnits);
+    
+    // camps
+    camp.campNone          = new Unit("No Camp",             0, [0,0], 0, Initiative.THIRD,  getAID(), [Skills.CAMP]);
+    camp.campRegular       = new Unit("Regular Camp",      250, [0,0], 0, Initiative.THIRD,  getAID(), [Skills.CAMP]);
+    camp.campBlackCastle   = new Unit("Black Castle",     2000, [0,0], 0, Initiative.THIRD,  getAID(), [Skills.CAMP]);
+    camp.campBoneChurch    = new Unit("Bone Church",      2000, [0,0], 0, Initiative.THIRD,  getAID(), [Skills.CAMP]);
+    camp.campWatchTower    = new Unit("Watchtower",       1000, [0,0], 0, Initiative.THIRD,  getAID(), [Skills.CAMP]);
+    camp.campReinfTower    = new Unit("Reinforced Tower", 1500, [0,0], 0, Initiative.THIRD,  getAID(), [Skills.CAMP]);
+    camp.campStoneTower    = new Unit("Stone Tower",      2000, [0,0], 0, Initiative.THIRD,  getAID(), [Skills.CAMP]);
+    camp.campWitchTower    = new Unit("Witch Tower",      2000, [0,0], 0, Initiative.THIRD,  getAID(), [Skills.CAMP]);
+    setUnitIDs(camp);
+    for (idx in camp) {
+        if (camp.hasOwnProperty(idx)) {
+            cu[idx] = camp[idx];
+        }
+    }
+    
+    setUnitIDs(cu);
     for (idx in cu) {
         if (pu.hasOwnProperty(idx)) {
             au[idx] = cu[idx];
         }
     }
-
 };
 
 
 tso.data.test.functions.defineUnits = function () {
-    var vData, pu, cu, au, idx;
+    var vData, pu, cu, au, idx, camp;
     vData = tso.data.test;
     pu = vData.playerUnits;
     cu = vData.computerUnits;
+    camp = vData.camps;
     au = vData.allUnits;
 
     // -------------- //
@@ -403,10 +422,31 @@ tso.data.test.functions.defineUnits = function () {
     cu.epAssassine       = new Unit("Assassine",        30000, [ 150,   300], 80, Initiative.SECOND,    getAID(), [Skills.SPLASH_DAMAGE]);
     cu.epGreedyInnkeeper = new Unit("Greedy Innkeeper", 50000, [ 1000, 2000], 80, Initiative.LAST,      getAID(), [Skills.SPLASH_DAMAGE, Skills.ATTACK_WEAKEST, Skills.TOWER_BONUS]);
     
-    
     cu.wolf = new Unit("Wolf", 30, [1, 150], 85, Initiative.SECOND, 62000, [Skills.SPLASH_DAMAGE, Skills.WEAK]);
     
+    // camps
+    camp.campNone          = new Unit("No Camp",             0, [0,0], 0, Initiative.THIRD,  getAID(), [Skills.CAMP]);
+    camp.campRegular       = new Unit("Regular Camp",      250, [0,0], 0, Initiative.THIRD,  getAID(), [Skills.CAMP]);
+    camp.campBlackCastle   = new Unit("Black Castle",     2000, [0,0], 0, Initiative.THIRD,  getAID(), [Skills.CAMP]);
+    camp.campBoneChurch    = new Unit("Bone Church",      2000, [0,0], 0, Initiative.THIRD,  getAID(), [Skills.CAMP]);
+    camp.campWatchTower    = new Unit("Watchtower",       1000, [0,0], 0, Initiative.THIRD,  getAID(), [Skills.CAMP]);
+    camp.campReinfTower    = new Unit("Reinforced Tower", 1500, [0,0], 0, Initiative.THIRD,  getAID(), [Skills.CAMP]);
+    camp.campStoneTower    = new Unit("Stone Tower",      2000, [0,0], 0, Initiative.THIRD,  getAID(), [Skills.CAMP]);
+    camp.campWitchTower    = new Unit("Witch Tower",      2000, [0,0], 0, Initiative.THIRD,  getAID(), [Skills.CAMP]);
+    setUnitIDs(camp);
+    for (idx in camp) {
+        if (camp.hasOwnProperty(idx)) {
+            cu[idx] = camp[idx];
+        }
+    }
+    
     setUnitIDs(cu.computerUnits);
+    
+    for (idx in cu) {
+        if (pu.hasOwnProperty(idx)) {
+            au[idx] = cu[idx];
+        }
+    }
 };
 
 /*
@@ -562,7 +602,7 @@ function defineComputerUnits() {
 function defineAdventureMaps(units, adv_maps) {
     var cu = units;
     //var cu = tso.data.live.allUnits;
-    adv_maps.playerIsland      = [cu.bWildMary, cu.bChuck, cu.bMetalToothed, cu.bScavenger, cu.bThug, cu.bGuardDog, cu.bRoughneck, cu.bStoneThrower, cu.bRanger, cu.bSkunk, cu.bOneEyedBert ];
+    adv_maps.playerIsland      = [cu.bWildMary, cu.bChuck, cu.bMetalToothed, cu.bScavenger, cu.bThug, cu.bGuardDog, cu.bRoughneck, cu.bStoneThrower, cu.bRanger, cu.bSkunk, cu.bOneEyedBert];
     adv_maps.garrunTheTrapper  = [];
     adv_maps.banditnest        = [cu.bChuck, cu.bMetalToothed, cu.bScavenger, cu.bThug, cu.bGuardDog, cu.bRoughneck, cu.bRanger, cu.bOneEyedBert];
     adv_maps.gunpowder         = [cu.desMilitia, cu.desCavalry, cu.desSoldier, cu.desEliteSoldier, cu.desBowman, cu.desLongbow, cu.desCrossbow, cu.desCannoneer, cu.desBigBertha];
@@ -639,7 +679,7 @@ function defineAdventureMaps(units, adv_maps) {
         "Stealing from the rich"    : adv_maps.stealingFromRich,
         "Surprise Attack"           : adv_maps.surpriseAtack,
         "The betrayed little Taylor": adv_maps.tBetrLittTaylor,
-        "The Black Knighty"         : adv_maps.tBlackKnights,
+        "The Black Knights"         : adv_maps.tBlackKnights,
         "The Buccaneer Roundup"     : adv_maps.tBuccaneerRoundup,
         "The clever little Taylor"  : adv_maps.tCleverLittTaylor,
         "The Dark Brotherhood"      : adv_maps.tDarkBrotherhood,
@@ -678,6 +718,7 @@ function setupTsoSim(versionId) {
         tsosim.units    = tso.data[versionId].playerUnits;
         tsosim.generals = tso.data[versionId].generals;
         tsosim.computerUnits = tso.data[versionId].computerUnits;
+        tsosim.camps    = tso.data[versionId].camps;
         tsosim.adv_maps = {};
         defineAdventureMaps(tsosim.computerUnits, tsosim.adv_maps);
     }

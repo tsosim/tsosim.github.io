@@ -44,13 +44,13 @@ function Simulator() {
     this.stats = { attacker: [], defender: [] };
     
     this.getVictoryProbability = function (waveNum) {
-        var prob = -1.0;
+        var prob = -1.0, groups, idx;
         
         // get unit groups from the right garrison
-        var groups = this.garrison.attacker[waveNum].groups;
+        groups = this.garrison.attacker[waveNum].groups;
         
         // iterate over all units in this group
-        for(var idx in groups) {
+        for (idx in groups) {
             if (groups.hasOwnProperty(idx)) {
                 // find general units
                 if (groups[idx].type.hasSkill(Skills.GENERAL)) {
@@ -60,7 +60,7 @@ function Simulator() {
             }
         }
         return prob;
-    }
+    };
   
     this.startCombat = function () {
         var i, idx, idy, attacker, defender, LOG, rounds;
@@ -163,14 +163,12 @@ function Simulator() {
                 defense_groups = defender_g.getAttackListByInitiative(current_init);
                 
                 if (LOG && (attack_groups.length > 0 || defense_groups.length > 0)) { LOG.startInitiative(current_init); }
-
                 
                 // offense
                 for (att = 0; att < attack_groups.length; att += 1) {
                     current_group = attack_groups[att];
                     if (current_group.number >= 1) {
                         // do stuff
-
                         this.computeAttackOnGarrison(current_group, defender_g, LOG);
                         attack_happened = true;
                     }
@@ -181,7 +179,6 @@ function Simulator() {
                     current_group = defense_groups[def];
                     if (current_group.number >= 1) {
                         // do stuff
-
                         this.computeAttackOnGarrison(current_group, attacker_g, LOG);
                         attack_happened = true;
                     }
@@ -212,58 +209,65 @@ function Simulator() {
   
     this.computeAttackOnGarrison = function (attacking_group, defending_garrison, LOG) {
         // determine defender's group ordering
-        var def_groups, idx, current_def_group, defense_bonus;
+        var def_groups, idx, current_def_group, defense_bonus, defense_pen_value, extraParams;
         
+        if (attacking_group.type.hasSkill(Skills.CAMP)) {
+            return;
+        }
         
         //def_groups = attacking_group.type.hasSkill(Skills.ATTACK_WEAKEST) ? defending_garrison.getDefendListByWeakness() : defending_garrison.getDefendList();
         
         //def_groups = attacking_group.type.hasSkill(Skills.ATTACK_WEAKEST) ? defending_garrison.getDefendListByHitpoints() : defending_garrison.getDefendList();
         def_groups = attacking_group.type.hasSkill(Skills.ATTACK_WEAKEST) ? defending_garrison.getDefendListBySkillAttackWeakest() : defending_garrison.getDefendList();
     
-        defense_bonus = defending_garrison.towerBonus;
-        
-        //for (idx in def_groups) {
-        for(idx = 0; idx < def_groups.length; idx += 1) {
-            /*if (def_groups.hasOwnProperty(idx))*/ {
-                current_def_group = def_groups[idx];
-                if (current_def_group.number_after_attack >= 1) {
-                    current_def_group.number_after_attack = this.computeAttackOnUnitgroup(attacking_group, current_def_group, defense_bonus, LOG);
+        extraParams = {
+            defBonus        : defending_garrison.towerBonus,
+            defPenValue     : tsosim.version === tso.versions[0].name ? 100 : 10,
+            hasCampDmgBonus : attacking_group.type.hasSkill(Skills.CAMP_DMG_BONUS),
+            defIsCamp       : false
+        };
+            
+        for (idx = 0; idx < def_groups.length; idx += 1) {
+            current_def_group = def_groups[idx];
+            if (current_def_group.number_after_attack >= 1) {
+                extraParams.isCamp = current_def_group.type.hasSkill(Skills.CAMP);
+                current_def_group.number_after_attack = this.computeAttackOnUnitgroup(attacking_group, current_def_group, extraParams, LOG);
 
-                    if (current_def_group.number_after_attack > 0) {
-                        // there are still units left in this group -> abort computation
-                        break;
-                    }
+                    //if (current_def_group.number_after_attack > 0) {
+                if (current_def_group.number_after_attack > 0 || attacking_group.dmg_left > 0) {
+                    // there are still units left in this group -> abort computation
+                    break;
                 }
             }
         }
     };
   
-    this.computeAttackOnUnitgroup = function (attacking_group, defending_group, defense_bonus, LOG) {
-        var current_def, current_att, rand_num, damage, bonus_damage, defense_bonus, def_bonus, damage_left;
+    this.computeAttackOnUnitgroup = function (attacking_group, defending_group, extraParams, LOG) {
+        var current_def, current_att, rand_num, damage, bonus_damage, defense_bonus, def_bonus, damage_left, defHasTower, attHasSplash, numAttacked, attNum, defNum, appliedDamage, maxDamage;
         
         if (defending_group.number_after_attack < 1) {
             return 0;
         }
         
         //if (LOG) { LOG.currentInitiative.addGroupAttack(attacking_group, defending_group, attacking_group.number_left_to_attack, defending_group.number, 0, 0); }
-        if (LOG)   { LOG.currentInitiative.addGroupAttack(attacking_group, defending_group, attacking_group.number, defending_group.number, 0, 0); }
+        if (LOG) { LOG.currentInitiative.addGroupAttack(attacking_group, defending_group, attacking_group.number, defending_group.number, 0, 0); }
     
         current_def = defending_group.number_after_attack - 1;
         current_att = attacking_group.number_left_to_attack;
     
-        var defHasTower  = defending_group.type.hasSkill(Skills.TOWER_BONUS);
-        var attHasSplash = attacking_group.type.hasSkill(Skills.SPLASH_DAMAGE);
+        defHasTower  = defending_group.type.hasSkill(Skills.TOWER_BONUS);
+        attHasSplash = attacking_group.type.hasSkill(Skills.SPLASH_DAMAGE);
         
-        var numAttacked = 1;
-        var attNum = attacking_group.number - attacking_group.number_left_to_attack + 1;
-        var defNum = 1;
-        var appliedDamage = 0;
-        var maxDamage = 0;
+        numAttacked = 1;
+        attNum = attacking_group.number - attacking_group.number_left_to_attack + 1;
+        defNum = 1;
+        appliedDamage = 0;
+        maxDamage = 0;
         
         while (current_att > 0) {
             if (current_def < 0) {
                 // attacker wins, no defenders left
-                if (LOG) { LOG.currentInitiative.currentGroup.finishGroupAttack(numAttacked, attacking_group.number - attacking_group.number_left_to_attack + 1, defNum-1); }
+                if (LOG) { LOG.currentInitiative.currentGroup.finishGroupAttack(numAttacked, attacking_group.number - attacking_group.number_left_to_attack + 1, defNum - 1); }
                 return 0;
             }
       
@@ -289,14 +293,19 @@ function Simulator() {
             /*
              * Compute tower defense bonus
              */
-            if (defHasTower && (defense_bonus > 0)) {
-                def_bonus = defense_bonus - (attacking_group.type.hasSkill(Skills.ARMOR_PENETRATION) ? 10 : 0);
+            if (defHasTower && (extraParams.defBonus > 0)) {
+                def_bonus = defense_bonus - (attacking_group.type.hasSkill(Skills.ARMOR_PENETRATION) ? extraParams.defPenValue : 0);
                 if (def_bonus < 0) {
                     def_bonus = 0;
                 }
                 damage = Math.floor(damage * (100 - def_bonus) / 100.0);
+                //damage = Math.ceil(damage * (100 - def_bonus) / 100.0);
             }
       
+            if(extraParams.defIsCamp && extraParams.hasCampDmgBonus) {
+                damage *= 2; // cannoneers have 100% damage bonus against buildings
+            }
+            
             maxDamage = damage;
             
             /*
@@ -333,7 +342,7 @@ function Simulator() {
                     numAttacked += 1;
                 }
             } else {
-                if(defending_group.hitpoints[current_def] > damage) {
+                if (defending_group.hitpoints[current_def] > damage) {
                     appliedDamage = damage;
                     defending_group.hitpoints[current_def] -= appliedDamage;
                     
@@ -356,7 +365,7 @@ function Simulator() {
             attacking_group.number_left_to_attack = current_att;
         }
         
-        if (LOG) { LOG.currentInitiative.currentGroup.finishGroupAttack(numAttacked-1, attacking_group.number - attacking_group.number_left_to_attack, defNum-1); }
+        if (LOG) { LOG.currentInitiative.currentGroup.finishGroupAttack(numAttacked - 1, attacking_group.number - attacking_group.number_left_to_attack, defNum - 1); }
       
         return current_def >= 0 ? (current_def + 1) : 0;
     };

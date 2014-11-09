@@ -415,27 +415,33 @@ function setupAdventureTabs() {
 }
 
 // (2) create general selection option (200, 220, 250, 270, mma)
-function setupTowerBonusSelectionOption(value, text, att_id, att_class) {
+function setupTowerBonusSelectionOption(value, text, att_id, att_class, active, tooltip) {
     var span = document.createElement("span");
     span.setAttribute("id", att_id);
-    span.setAttribute("class", att_class);
+    span.setAttribute("class", att_class + (active===true ? " selOptActive" : " selOpt"));
     span.setAttribute("value", value);
     span.innerHTML = text;
+    span.setAttribute("title",tooltip);
     
     // if option is clicked, then the currently selection option is disabled and the selected one disabled (via css)
     span.onclick = function () {
         console.log("clicked TB: " + value);
         var options, opt, node, attr;
-        options = ["towerSel0", "towerSel10", "towerSel20", "towerSel30", "towerSel40", "towerSel50"];
+        if(tsosim.version == tso.versions[0].name) {
+            options = ["towerBonus0", "towerBonus50", "towerBonus75", "towerBonus90"];
+        } else {
+            options = ["towerBonus0", "towerBonus10", "towerBonus20", "towerBonus30", "towerBonus40", "towerBonus50"];
+        }
         for (opt = 0; opt < options.length; opt += 1) {
             node = document.getElementById(options[opt]);
             attr = node.getAttribute("class");
-            if (attr === "towerSel selOptActive") {
-                node.setAttribute("class", "towerSel selOpt");
+            //if (attr === "towerSel selOptActive") {
+            if (attr === att_class + " selOptActive") {
+                node.setAttribute("class", att_class + " selOpt");
                 break;
             }
         }
-        span.setAttribute("class", "towerSel selOptActive");
+        span.setAttribute("class", att_class + " selOptActive");
     };
     return span;
 }
@@ -445,23 +451,30 @@ function setupTowerBonusSelectionArea() {
     var base, label;
     
     base = document.createElement("div");
-    base.setAttribute("id", "towerSel");
+    base.setAttribute("id", "towerBonus");
     base.setAttribute("class", "unitsOptionBlock");
 
     
     label = document.createElement("label");
-    label.setAttribute("id", "towerSelLabel");
-    label.innerHTML = "Tower bonus: ";
+    label.setAttribute("id", "towerBonusLabel");
+    label.innerHTML = "Tower Bonus: ";
     
     base.appendChild(label);
     
-    base.appendChild(setupTowerBonusSelectionOption(0,  "0%",  "towerSel0",  "towerSel selOptActive"));
-    base.appendChild(setupTowerBonusSelectionOption(10, "10%", "towerSel10", "towerSel selOpt"));
-    base.appendChild(setupTowerBonusSelectionOption(20, "20%", "towerSel20", "towerSel selOpt"));
-    base.appendChild(setupTowerBonusSelectionOption(30, "30%", "towerSel30", "towerSel selOpt"));
-    base.appendChild(setupTowerBonusSelectionOption(40, "40%", "towerSel40", "towerSel selOpt"));
-    base.appendChild(setupTowerBonusSelectionOption(50, "50%", "towerSel50", "towerSel selOpt"));
-    
+    // live
+    if(tsosim.version == tso.versions[0].name) {
+        base.appendChild(setupTowerBonusSelectionOption(0,  "None", "towerBonus0",  "towerLive", true,  "No watchtower"));
+        base.appendChild(setupTowerBonusSelectionOption(50, "WT",   "towerBonus50", "towerLive", false, "Watchtower - 50%"));
+        base.appendChild(setupTowerBonusSelectionOption(75, "RWT",  "towerBonus75", "towerLive", false, "Reinforced Watchtower - 75%"));
+        base.appendChild(setupTowerBonusSelectionOption(90, "ST",   "towerBonus90", "towerLive", false, "Stone tower - 90%"));
+    } else {
+        base.appendChild(setupTowerBonusSelectionOption(0,  "0%",  "towerBonus0",  "towerSel", true));
+        base.appendChild(setupTowerBonusSelectionOption(10, "10%", "towerBonus10", "towerSel", false));
+        base.appendChild(setupTowerBonusSelectionOption(20, "20%", "towerBonus20", "towerSel", false));
+        base.appendChild(setupTowerBonusSelectionOption(30, "30%", "towerBonus30", "towerSel", false));
+        base.appendChild(setupTowerBonusSelectionOption(40, "40%", "towerBonus40", "towerSel", false));
+        base.appendChild(setupTowerBonusSelectionOption(50, "50%", "towerBonus50", "towerSel", false));
+    }
     return base;
 }
 
@@ -490,7 +503,7 @@ function setComputerGarrisonValues(map_id, garrison) {
     
     // set tower bonus
     garrison.towerBonus;
-    node = document.getElementById("towerSel" + garrison.towerBonus);
+    node = document.getElementById("towerBonus" + garrison.towerBonus);
     if (node !== undefined) {
         node.onclick();
     } else {
@@ -504,6 +517,8 @@ function setupComputerInputFields(units, capacity) {
     
     if (base.children.length === 0) {
         base.appendChild(setupTowerBonusSelectionArea());
+    } else {
+        base.replaceChild(setupTowerBonusSelectionArea(), base.firstChild);
     }
     
     table = document.createElement("table");
@@ -517,10 +532,36 @@ function setupComputerInputFields(units, capacity) {
     }
   
     if (base.children.length > 1) {
-        base.replaceChild(table, base.lastChild);
+        //base.replaceChild(table, base.lastChild);
+        base.replaceChild(table, base.children[base.children.length-1]);
     } else {
         base.appendChild(table);
     }
+    
+    var campSpan = document.createElement("span");
+    campSpan.setAttribute("class","computerCamp");
+    var label = document.createElement("label");
+    label.setAttribute("class","camplabel");
+    label.innerHTML = "Camp";
+    campSpan.appendChild(label);
+    
+    var campSelect = document.createElement("select");
+    campSelect.setAttribute("id","computerCamp");
+    for(idx in tsosim.camps) {
+        if (tsosim.camps.hasOwnProperty(idx) && tsosim.camps[idx].hasSkill(Skills.CAMP)) {
+            var option = document.createElement("option");
+            option.text = tsosim.camps[idx].name;
+            campSelect.add(option);
+        }
+    }
+    campSpan.appendChild(campSelect);
+    
+    if (base.children.length > 2) {
+        base.replaceChild(campSpan, base.lastChild);
+    } else {
+        base.appendChild(campSpan);
+    }
+    
 }
 
 // setup combobox (select) with all available adventures
@@ -580,11 +621,25 @@ function storeComputerGarrisonValues(map_id, units) {
         }
     }
     
+    // store camp
+    node = document.getElementById("computerCamp");
+    for(var idx in tsosim.camps) {
+        if (tsosim.camps.hasOwnProperty(idx)) {
+            if(tsosim.camps[idx].name === node.value) {
+                garrison.addUnits(tsosim.camps[idx], 1);
+            }
+        }
+    }
+    
     // store tower bonus
-    towerIds = ["towerSel0", "towerSel10", "towerSel20", "towerSel30", "towerSel40", "towerSel50"];
+    if(tsosim.version == tso.versions[0].name) {
+        towerIds = ["towerBonus0", "towerBonus50", "towerBonus75", "towerBonus90"];
+    } else {
+        towerIds = ["towerBonus0", "towerBonus10", "towerBonus20", "towerBonus30", "towerBonus40", "towerBonus50"];
+    }
     for (t = 0; t < towerIds.length; t += 1) {
         node = document.getElementById(towerIds[t]);
-        if (node.getAttribute("class") === "towerSel selOptActive") {
+        if (node.getAttribute("class").search("selOptActive") >= 0) {
             value = node.getAttribute("value");
             garrison.setTowerBonus(parseInt(value, 10));
         }
@@ -1036,43 +1091,4 @@ window.onload = function () {
 
     buttonLog = document.getElementById("buttonCombatLog");
     buttonLog.onclick = function () { setControlButtonState(buttonLog); };
-};
-
-var testSim = function (sim) {
-    var g1, g2;
-    g1 = new Garrison();
-    g1.addUnits(tsosim.units.recruit, 100);
-    g1.addUnits(tsosim.units.cavalry, 50);
-    //g1.addUnits(units.militia, 25);
-    //g1.addUnits(units.soldier, 40);
-    //g1.addUnits(units.cavalry, 57);
-
-    //g1.printInfo();
-
-
-    g2 = new Garrison();
-    g2.addUnits(tsosim.units.militia, 50);
-    //g1.addUnits(units.militia, 25);
-    //g1.addUnits(units.soldier, 40);
-    //g1.addUnits(units.cavalry, 57);
-
-    //g2.printInfo();
-
-    sim.setGarrisons(g1, g2);
-    //sim.repeats = 1;
-    sim.startCombat();
-    //sim.computeCombat(g1, g2);
-
-    //g1.printInfo();
-    //g2.printInfo();
-
-    /**
-    //var gr1 = g1.getAttackListByInitiative(Initiative.SECOND);
-    var gr1 = g1.getDefendListByWeakness();
-
-    console.log("## groups by initiative ##");
-    for(var idx in gr1) {
-        console.log(gr1[idx].type.name + ", " + gr1[idx].number + " [" + gr1[idx].type.attackId + "]");
-    }
-    **/
 };

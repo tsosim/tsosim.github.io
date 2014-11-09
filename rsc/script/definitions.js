@@ -10,6 +10,8 @@ var Skills = {
     ATTACK_WEAKEST: 8,
     WEAK: 16,
     GENERAL: 32,
+    CAMP: 64,
+    CAMP_DMG_BONUS : 128,
   
     hasSkill: function (num, skill) {
         return (num & skill) !== 0;
