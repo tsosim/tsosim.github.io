@@ -533,7 +533,7 @@ function setupComputerInputFields(units, capacity) {
   
     if (base.children.length > 1) {
         //base.replaceChild(table, base.lastChild);
-        base.replaceChild(table, base.children[base.children.length-1]);
+        base.replaceChild(table, base.children[base.children.length-2]);
     } else {
         base.appendChild(table);
     }
