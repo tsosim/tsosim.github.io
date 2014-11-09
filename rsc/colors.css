@@ -29,16 +29,23 @@ footer {
 /* tabs for player and computer units */
 .inputTab {
     background: rgba(215, 235, 145,0.5);
+    border-left: 1px solid rgba(0,0,0,0);
+    border-right: 1px solid rgba(0,0,0,0);
+    border-top: 1px solid rgba(0,0,0,0);
 }
 .inputTabActive {
     background: rgba(205, 225, 135,0.75);
     font-weight: bold;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    border-top: 1px solid black;
 }
 
 .units_area {
     background: rgba(205, 225, 135,0.75);
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
+    border: 1px solid black;
+    /*border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;*/
 }
 /*
 .unitUnchecked {
@@ -60,7 +67,7 @@ footer {
 #genSelLabel {
     text-decoration: underline;
 }
-#towerSelLabel {
+#towerBonusLabel {
     text-decoration: underline;
 }
 
@@ -68,8 +75,20 @@ footer {
 #buttonStatistics {
     border-radius: 5px;
 }
+#buttonStatistics.inputTabActive {
+    border: 1px solid black;
+}
+#buttonStatistics.inputTab {
+    border: 1px solid rgba(0,0,0,0);
+}
 #buttonCombatLog {
     border-radius: 5px;
+}
+#buttonCombatLog.inputTabActive {
+    border: 1px solid black;
+}
+#buttonCombatLog.inputTab {
+    border: 1px solid rgba(0,0,0,0);
 }
 
 

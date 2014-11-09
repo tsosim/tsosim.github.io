@@ -61,7 +61,7 @@ function setupDiagramLegend(textVictory, textDefeat, textTotal) {
     span4.innerHTML = textDefeat;
     div.appendChild(span4);
 
-    
+    /*
     var span5 = document.createElement("span");
     span5.setAttribute("class", "diagLegendTotal");
     div.appendChild(span5);
@@ -70,7 +70,7 @@ function setupDiagramLegend(textVictory, textDefeat, textTotal) {
     span6.setAttribute("class", "diagLegendText");
     span6.innerHTML = textTotal;
     div.appendChild(span6);
-    
+    */
     return div;
 }
 

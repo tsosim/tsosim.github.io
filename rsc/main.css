@@ -137,8 +137,6 @@ footer {
 
 .units_area {
     background: rgba(205, 225, 135,0.75);
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -175,6 +173,7 @@ footer {
     text-align: center;
     cursor: pointer;
     border-radius: 5px;
+    border: 1px solid rgba(0,0,0,0);
 }
 .selOptActive {
     background: rgba(225, 245, 155,0.75);
@@ -184,6 +183,7 @@ footer {
     font-weight: bold;
     cursor: default;
     border-radius: 5px;
+    border: 1px solid black;
 }
 
 .genSel {
@@ -770,7 +770,8 @@ footer {
     ##width: 50px;
 }
 .diagColTotal {
-    background: rgb(196,255,196);
+    /*background: rgb(196,255,196);*/
+    background: rgb(255,255,255);
     position: relative;
     
     display: flex;
@@ -838,16 +839,17 @@ footer {
 }
 
 .diagColVic {
-    background: rgb(225,96,96);
+    background: rgb(96,96,225);
 }
 .diagColDef {
-    background: rgb(96,96,225);
+    background: rgb(225,96,96);
 }
 
 .innerColText {
     display: none;
 }
-.mouseOver .innerColText {
+/*.mouseOver .innerColText {*/
+.innerColText {
     display: inherit;
     position: relative;
     top: +30px;
@@ -861,12 +863,13 @@ footer {
 }
 
 .diagLegendVictory {
-    background: rgb(225,96,96);
-}
-.diagLegendDefeat {
     background: rgb(96,96,225);
 }
+.diagLegendDefeat {
+    background: rgb(225,96,96);
+}
 .diagLegendTotal {
-    background: rgb(196,255,196);
+    /*background: rgb(196,255,196);*/
+    background: rgba(196,255,196,0);
 }
 

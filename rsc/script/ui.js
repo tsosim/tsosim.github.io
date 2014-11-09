@@ -819,7 +819,7 @@ function setupStatisticsTable(simulation) {
             var diags = [
                 setupDiagrams(div, simulation.stats.attacker[idx], "Rounds - Victory/Total", tableID+"_diagVT", function(v) {return v > 0;} ),
                 setupDiagrams(div, simulation.stats.attacker[idx], "Rounds - Defeat/Total", tableID+"_diagDT", function(v) {return v === 0;} ),
-                setupHorizontalDiagram(div, simulation.stats.attacker[idx], "Rounds - Victory/Defeat/Total", tableID+"_colH", function(v) {return v > 0;}, function(v) {return v === 0;})
+                setupHorizontalDiagram(div, simulation.stats.attacker[idx], "Rounds - Victory/Defeat", tableID+"_colH", function(v) {return v > 0;}, function(v) {return v === 0;})
             ];
             //div.appendChild(diags[0]);
             div.appendChild(diags[2]);
