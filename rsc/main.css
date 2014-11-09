@@ -119,7 +119,8 @@ footer {
 
 .unittable {
     display: flex;
-    width: 90%;
+    flex-direction: column;
+    #width: 90%;
     align-self: center;
     justify-content: center;
     padding: 5px;
