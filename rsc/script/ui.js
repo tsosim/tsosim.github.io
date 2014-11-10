@@ -259,6 +259,28 @@ function storeGarrisonValues() {
     }
 }
 
+function resetGarrisonValues() {
+    var tabs, i, idx, node;
+    tabs = [document.getElementById("pgen1"), document.getElementById("pgen2"), document.getElementById("pgen3"), document.getElementById("pgen4")];
+    for (i = 0; i < tabs.length; i += 1) {
+        if (tabs[i].getAttribute("class") === "genTab inputTabActive") {
+
+            for (idx in tsosim.units) {
+                if (tsosim.units.hasOwnProperty(idx)) {
+                    node = document.getElementById("inp_" + idx);
+                    node.value = 0;
+                }
+            }
+        
+        }
+    }
+    for (i in garrisonData.player) {
+        if (garrisonData.player.hasOwnProperty(i)) {
+            garrisonData.player[i].garrison.clear();
+        }
+    }
+}
+
 // (3) store the unit valus from the page in the respective garrison object (determined by the selected genetal tab)
 //     gen_id : general tab id
 //     units  : read values for units from this attay
@@ -593,6 +615,35 @@ function storeAdventureValues() {
                 storeComputerGarrisonValues(advName, tsosim.adv_maps.names[advName]);
             }
             break;
+        }
+    }
+}
+
+function resetAdventureValues() {
+    var tabs, i, select, advName, units, idx, node;
+    tabs = [document.getElementById("tabPlayerIsland"), document.getElementById("tabAdvSelect")];
+    for (i = 0; i < tabs.length; i += 1) {
+        if (tabs[i].getAttribute("class") === "compTab inputTabActive") {
+            if (i === 0) {
+                units = tsosim.adv_maps.playerIsland;
+            } else {
+                select = document.getElementById("selAdv");
+                advName = select.value;
+                units = tsosim.adv_maps.names[advName];
+            }
+            
+            for (idx in units) {
+                if (units.hasOwnProperty(idx)) {
+                    node = document.getElementById("inp_" + units[idx].id);
+                    node.value = 0;
+                }
+            }
+            
+        }
+    }
+    for(i in garrisonData.computer) {
+        if(garrisonData.computer.hasOwnProperty(i)) {
+           garrisonData.computer[i].garrison.clear();
         }
     }
 }
@@ -1062,10 +1113,14 @@ function initializeUnitsAndUI(simVersion) {
     setupAdventureTabs();
 }
 
+function resetInput() {
+    resetGarrisonValues();
+    resetAdventureValues();
+}
 
 window.onload = function () {
   
-    var buttonStartSim, buttonStats, buttonLog;
+    var buttonStartSim, buttonReset, buttonStats, buttonLog;
     /* 
      * create rest of the page
      */
@@ -1085,6 +1140,9 @@ window.onload = function () {
     } else {
         console.log("Could not find button!");
     }
+    
+    buttonReset = document.getElementById("resetInput");
+    buttonReset.onclick = resetInput;
     
     buttonStats = document.getElementById("buttonStatistics");
     buttonStats.onclick = function () { setControlButtonState(buttonStats); };
