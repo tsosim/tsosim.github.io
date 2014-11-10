@@ -234,7 +234,7 @@ function Simulator() {
                 current_def_group.number_after_attack = this.computeAttackOnUnitgroup(attacking_group, current_def_group, extraParams, LOG);
 
                     //if (current_def_group.number_after_attack > 0) {
-                if (current_def_group.number_after_attack > 0 || attacking_group.dmg_left > 0) {
+                if (current_def_group.number_after_attack > 0 || attacking_group.dmg_left == 0) {
                     // there are still units left in this group -> abort computation
                     break;
                 }
