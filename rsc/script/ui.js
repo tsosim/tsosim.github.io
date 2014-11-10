@@ -5,6 +5,7 @@
 /*global console*/
 /*global garrisonData*/
 /*global Skills*/
+/*global tso*/
 /*global tsosim*/
 
 /*
@@ -226,7 +227,7 @@ function setupPlayerInputFields(units, capacity) {
     base = document.getElementById("units_player");
     
     // create general tabs (here, because the input fields are only created once)
-    if(base.children.length === 0) {
+    if (base.children.length === 0) {
         base.appendChild(setupGeneralSelectionArea());
     }
     
@@ -240,7 +241,7 @@ function setupPlayerInputFields(units, capacity) {
         }
     }
     
-    if(base.children.length > 1) {
+    if (base.children.length > 1) {
         base.replaceChild(table, base.lastChild);
     } else {
         base.appendChild(table);
@@ -440,16 +441,16 @@ function setupAdventureTabs() {
 function setupTowerBonusSelectionOption(value, text, att_id, att_class, active, tooltip) {
     var span = document.createElement("span");
     span.setAttribute("id", att_id);
-    span.setAttribute("class", att_class + (active===true ? " selOptActive" : " selOpt"));
+    span.setAttribute("class", att_class + (active === true ? " selOptActive" : " selOpt"));
     span.setAttribute("value", value);
     span.innerHTML = text;
-    span.setAttribute("title",tooltip);
+    span.setAttribute("title", tooltip);
     
     // if option is clicked, then the currently selection option is disabled and the selected one disabled (via css)
     span.onclick = function () {
         console.log("clicked TB: " + value);
         var options, opt, node, attr;
-        if(tsosim.version == tso.versions[0].name) {
+        if (tsosim.version === tso.versions[0].name) {
             options = ["towerBonus0", "towerBonus50", "towerBonus75", "towerBonus90"];
         } else {
             options = ["towerBonus0", "towerBonus10", "towerBonus20", "towerBonus30", "towerBonus40", "towerBonus50"];
@@ -484,7 +485,7 @@ function setupTowerBonusSelectionArea() {
     base.appendChild(label);
     
     // live
-    if(tsosim.version == tso.versions[0].name) {
+    if (tsosim.version === tso.versions[0].name) {
         base.appendChild(setupTowerBonusSelectionOption(0,  "None", "towerBonus0",  "towerLive", true,  "No watchtower"));
         base.appendChild(setupTowerBonusSelectionOption(50, "WT",   "towerBonus50", "towerLive", false, "Watchtower - 50%"));
         base.appendChild(setupTowerBonusSelectionOption(75, "RWT",  "towerBonus75", "towerLive", false, "Reinforced Watchtower - 75%"));
@@ -524,7 +525,6 @@ function setComputerGarrisonValues(map_id, garrison) {
     }
     
     // set tower bonus
-    garrison.towerBonus;
     node = document.getElementById("towerBonus" + garrison.towerBonus);
     if (node !== undefined) {
         node.onclick();
@@ -534,7 +534,7 @@ function setComputerGarrisonValues(map_id, garrison) {
 }
 
 function setupComputerInputFields(units, capacity) {
-    var base, table, idx, p;
+    var base, table, idx, p, campSpan, label, campSelect, option;
     base = document.getElementById("units_computer");
     
     if (base.children.length === 0) {
@@ -555,23 +555,23 @@ function setupComputerInputFields(units, capacity) {
   
     if (base.children.length > 1) {
         //base.replaceChild(table, base.lastChild);
-        base.replaceChild(table, base.children[base.children.length-2]);
+        base.replaceChild(table, base.children[base.children.length - 2]);
     } else {
         base.appendChild(table);
     }
     
-    var campSpan = document.createElement("span");
-    campSpan.setAttribute("class","computerCamp");
-    var label = document.createElement("label");
-    label.setAttribute("class","camplabel");
+    campSpan = document.createElement("span");
+    campSpan.setAttribute("class", "computerCamp");
+    label = document.createElement("label");
+    label.setAttribute("class", "camplabel");
     label.innerHTML = "Camp";
     campSpan.appendChild(label);
     
-    var campSelect = document.createElement("select");
-    campSelect.setAttribute("id","computerCamp");
-    for(idx in tsosim.camps) {
+    campSelect = document.createElement("select");
+    campSelect.setAttribute("id", "computerCamp");
+    for (idx in tsosim.camps) {
         if (tsosim.camps.hasOwnProperty(idx) && tsosim.camps[idx].hasSkill(Skills.CAMP)) {
-            var option = document.createElement("option");
+            option = document.createElement("option");
             option.text = tsosim.camps[idx].name;
             campSelect.add(option);
         }
@@ -641,9 +641,9 @@ function resetAdventureValues() {
             
         }
     }
-    for(i in garrisonData.computer) {
-        if(garrisonData.computer.hasOwnProperty(i)) {
-           garrisonData.computer[i].garrison.clear();
+    for (i in garrisonData.computer) {
+        if (garrisonData.computer.hasOwnProperty(i)) {
+            garrisonData.computer[i].garrison.clear();
         }
     }
 }
@@ -674,16 +674,16 @@ function storeComputerGarrisonValues(map_id, units) {
     
     // store camp
     node = document.getElementById("computerCamp");
-    for(var idx in tsosim.camps) {
+    for (idx in tsosim.camps) {
         if (tsosim.camps.hasOwnProperty(idx)) {
-            if(tsosim.camps[idx].name === node.value) {
+            if (tsosim.camps[idx].name === node.value) {
                 garrison.addUnits(tsosim.camps[idx], 1);
             }
         }
     }
     
     // store tower bonus
-    if(tsosim.version == tso.versions[0].name) {
+    if (tsosim.version === tso.versions[0].name) {
         towerIds = ["towerBonus0", "towerBonus50", "towerBonus75", "towerBonus90"];
     } else {
         towerIds = ["towerBonus0", "towerBonus10", "towerBonus20", "towerBonus30", "towerBonus40", "towerBonus50"];
@@ -707,12 +707,12 @@ function storeComputerGarrisonValues(map_id, units) {
 function createTableHeadings() {
     var tr, headings, spans, i, th;
     tr = document.createElement("tr");
-    headings = ["","Units/Rounds", "","","Minimum","","", "Average","","", "Maximum",""];
+    headings = ["", "Units/Rounds", "", "", "Minimum", "", "", "Average", "", "", "Maximum", ""];
     //headings = ["Units-Rounds", "Minimum", "Average", "Maximum"];
     //headings = ["aaaa", "aaa", "aa", "a"];
     //headings = ["12345678", "123456789012345", "Average", "Maximum"];
     //spans = [,4, 6, 6, 6];
-    spans = [1,2,1,1, 4,1,1, 4,1,1, 4,1];
+    spans = [1, 2, 1, 1, 4, 1, 1, 4, 1, 1, 4, 1];
     for (i = 0; i < headings.length; i += 1) {
         th = document.createElement("th");
         th.setAttribute("class", "tableHead");
@@ -755,7 +755,7 @@ function createTableRowForUnit(unitData, lastUnitData) {
         { value: "", "class": "tds_Spacer" }
     ];
 
-    if(lastUnitData) {
+    if (lastUnitData) {
         tmp = unitData.statistics.stat_min - lastUnitData.statistics.stat_min;
     } else {
         tmp = unitData.statistics.stat_min - unitData.startNumber;
@@ -764,7 +764,7 @@ function createTableRowForUnit(unitData, lastUnitData) {
         data[8].value = "[" + tmp + "]";
     }
     
-    if(lastUnitData) {
+    if (lastUnitData) {
         tmp = unitData.statistics.stat_average - lastUnitData.statistics.stat_average;
     } else {
         tmp = unitData.statistics.stat_average - unitData.startNumber;
@@ -773,7 +773,7 @@ function createTableRowForUnit(unitData, lastUnitData) {
         data[14].value = "[" + tmp.toFixed(2) + "]";
     }
 
-    if(lastUnitData) {
+    if (lastUnitData) {
         tmp = unitData.statistics.stat_max - lastUnitData.statistics.stat_max;
     } else {
         tmp = unitData.statistics.stat_max - unitData.startNumber;
@@ -836,27 +836,28 @@ function createStatisticsTable(stats, lastStats) {
 }
 
 function createWaveInfoLine(waveNum) {
-    var info_div = document.createElement("div");
+    var info_div, span1, span2;
+    info_div = document.createElement("div");
     info_div.setAttribute("class", "waveInfoLine");
     
-    var span1 = document.createElement("span");
+    span1 = document.createElement("span");
     span1.setAttribute("class", "waveResultInfo");
     span1.innerHTML = "Wave " + waveNum;
     info_div.appendChild(span1);
     
-    var span2 = document.createElement("span");
+    span2 = document.createElement("span");
     span2.setAttribute("class", "waveVictoryInfo");
-    span2.setAttribute("id", "waveVictory_w"+ waveNum);
+    span2.setAttribute("id", "waveVictory_w" + waveNum);
     info_div.appendChild(span2);
     
-    return info_div;    
+    return info_div;
 }
 
 function setWaveTabBorderOn(elem) {
-    return function() { elem.setAttribute("class", "waveTabBorderOn"); };
+    return function () { elem.setAttribute("class", "waveTabBorderOn"); };
 }
 function setWaveTabBorderOff(elem) {
-    return function() { elem.setAttribute("class", "waveTabBorderOff"); };
+    return function () { elem.setAttribute("class", "waveTabBorderOff"); };
 }
 
 
@@ -872,7 +873,7 @@ function setupResultStructure(waves) {
         waveNode = document.createElement("div");
         waveNode.setAttribute("class", "waveResult");
         waveNode.setAttribute("id", "waveResult_" + (idx + 1));
-        waveNode.appendChild(createWaveInfoLine(idx+1));
+        waveNode.appendChild(createWaveInfoLine(idx + 1));
         
         statTable1 = document.createElement("div");
         statTable1.setAttribute("id", "wave" + (idx + 1) + "table1");
@@ -896,36 +897,41 @@ function setupResultStructure(waves) {
 
 function clickOnTable(tableID) {
     console.log(tableID);
-    return function() {
-    var diags = [document.getElementById(tableID+"_diagVT"), document.getElementById(tableID+"_diagDT"), document.getElementById(tableID+"_colH")];
-    for(var i=0; i < diags.length; i += 1) {
-        if(diags[i]) {
-            if(diags[i].getAttribute("class") === "diagram diagHide") {
-                diags[i].setAttribute("class", "diagram");
-            } else {
-                diags[i].setAttribute("class", "diagram diagHide");
+    return function () {
+        var diags, i;
+        diags = [document.getElementById(tableID + "_diagVT"), document.getElementById(tableID + "_diagDT"), document.getElementById(tableID + "_colH")];
+        for (i = 0; i < diags.length; i += 1) {
+            if (diags[i]) {
+                if (diags[i].getAttribute("class") === "diagram diagHide") {
+                    diags[i].setAttribute("class", "diagram");
+                } else {
+                    diags[i].setAttribute("class", "diagram diagHide");
+                }
             }
         }
-    }
     };
 }
 
 function setupStatisticsTable(simulation) {
-    var node, idx;
+    var node, idx, table, div, diags, funcVictory, funcDefeat, tableID, prob;
+    
+    funcVictory = function (v) { return v > 0; };
+    funcDefeat  = function (v) { return v === 0; };
+    
     for (idx = 0; idx < simulation.stats.attacker.length; idx += 1) {
 
-        var tableID = "wave" + (idx + 1) + "table1";
+        tableID = "wave" + (idx + 1) + "table1";
         node = document.getElementById(tableID);
         if (node) {
             node.appendChild(createStatisticsTable(simulation.stats.attacker[idx]));
             
-            var div = document.createElement("div");
+            div = document.createElement("div");
             div.setAttribute("class", "tableDiags");
             
-            var diags = [
-                setupDiagrams(div, simulation.stats.attacker[idx], "Rounds - Victory/Total", tableID+"_diagVT", function(v) {return v > 0;} ),
-                setupDiagrams(div, simulation.stats.attacker[idx], "Rounds - Defeat/Total", tableID+"_diagDT", function(v) {return v === 0;} ),
-                setupHorizontalDiagram(div, simulation.stats.attacker[idx], "Rounds - Victory/Defeat", tableID+"_colH", function(v) {return v > 0;}, function(v) {return v === 0;})
+            diags = [
+                setupDiagrams(div, simulation.stats.attacker[idx], "Rounds - Victory/Total", tableID + "_diagVT", funcVictory),
+                setupDiagrams(div, simulation.stats.attacker[idx], "Rounds - Defeat/Total", tableID + "_diagDT", funcDefeat),
+                setupHorizontalDiagram(div, simulation.stats.attacker[idx], "Rounds - Victory/Defeat", tableID + "_colH", funcVictory, funcDefeat)
             ];
             //div.appendChild(diags[0]);
             div.appendChild(diags[2]);
@@ -937,13 +943,13 @@ function setupStatisticsTable(simulation) {
 
         node = document.getElementById("wave" + (idx + 1) + "table2");
         if (node) {
-            node.appendChild(createStatisticsTable(simulation.stats.defender[idx], simulation.stats.defender[idx-1]));
+            node.appendChild(createStatisticsTable(simulation.stats.defender[idx], simulation.stats.defender[idx - 1]));
         }
         
-        node = document.getElementById("waveVictory_w" + (idx+1));
+        node = document.getElementById("waveVictory_w" + (idx + 1));
         if (node) {
-            var prob = simulation.getVictoryProbability(idx);
-            node.innerHTML = "Victory  -  " + (prob*100).toFixed(2) + "%";
+            prob = simulation.getVictoryProbability(idx);
+            node.innerHTML = "Victory  -  " + (prob * 100).toFixed(2) + "%";
         }
     }
 }
@@ -954,7 +960,7 @@ function setupCombatLog(logs) {
 
         node = document.getElementById("wave" + (idx + 1) + "log");
         if (node) {
-            node.appendChild(logs[idx].createLogTable((idx+1), "logWave" + (idx + 1), "resultLog"));
+            node.appendChild(logs[idx].createLogTable((idx + 1), "logWave" + (idx + 1), "resultLog"));
         }
     }
 }
@@ -1034,22 +1040,22 @@ function setControlButtonState(button) {
 }
 
 function setupSimVersionButtons() {
-    var base, idx, div, v;
+    var base, idx, div, v, setOnclick, setOnmouseover, setOnmouseout;
     base = document.getElementById("simVersions");
     
-    var setOnclick = function(buttonId) {
-        return function() {
-            var elem = document.getElementById(buttonId);
-            var attr = elem.getAttribute("class");
-            if(attr.search("vbClicked") >= 0) {
+    setOnclick = function (buttonId) {
+        return function () {
+            var elem, elem2, attr, i, elemID, clickedID;
+            elem = document.getElementById(buttonId);
+            attr = elem.getAttribute("class");
+            if (attr.search("vbClicked") >= 0) {
                 return;
             } else {
-                var i, elemID, clickedID;
                 elemID = elem.getAttribute("id");
-                for(i = 0; i < tso.versions.length; i += 1) {
-                    var elem2 = document.getElementById("vb_"+tso.versions[i].name);
+                for (i = 0; i < tso.versions.length; i += 1) {
+                    elem2 = document.getElementById("vb_" + tso.versions[i].name);
                     elem2.setAttribute("class", "versionButton");
-                    if(elemID === ("vb_"+tso.versions[i].name)) {
+                    if (elemID === ("vb_" + tso.versions[i].name)) {
                         clickedID = tso.versions[i].name;
                     }
                 }
@@ -1058,37 +1064,37 @@ function setupSimVersionButtons() {
             }
         };
     };
-    var setOnmouseover = function(buttonId) {
-        return function() {
+    setOnmouseover = function (buttonId) {
+        return function () {
             var elem = document.getElementById(buttonId);
-            if(elem.getAttribute("class").search("vbClicked") < 0) {
+            if (elem.getAttribute("class").search("vbClicked") < 0) {
                 elem.setAttribute("class", "versionButton vbHighlighted");
             }
         };
     };
-    var setOnmouseout = function(buttonId) {
-        return function() {
+    setOnmouseout = function (buttonId) {
+        return function () {
             var elem = document.getElementById(buttonId);
-            if(elem.getAttribute("class").search("vbHighlighted") >= 0) {
+            if (elem.getAttribute("class").search("vbHighlighted") >= 0) {
                 elem.setAttribute("class", "versionButton");
             }
         };
     };
     
-    for(idx = 0 ; idx < tso.versions.length; idx += 1) {
+    for (idx = 0; idx < tso.versions.length; idx += 1) {
         v = tso.versions[idx];
         div = document.createElement("div");
         div.setAttribute("class", "versionButton");
-        div.setAttribute("id", "vb_"+v.name);
+        div.setAttribute("id", "vb_" + v.name);
         div.setAttribute("title", v.tt);
         div.innerHTML   = v.name;
-        div.onclick     = setOnclick("vb_"+v.name);
-        div.onmouseover = setOnmouseover("vb_"+v.name);
-        div.onmouseout  = setOnmouseout("vb_"+v.name);
+        div.onclick     = setOnclick("vb_" + v.name);
+        div.onmouseover = setOnmouseover("vb_" + v.name);
+        div.onmouseout  = setOnmouseout("vb_" + v.name);
         
-        if(base.childNodes[idx]) {
+        if (base.childNodes[idx]) {
             base.replaceChild(div, base.childNodes[idx]);
-        } else {         
+        } else {
             base.appendChild(div);
         }
     }
@@ -1120,14 +1126,14 @@ function resetInput() {
 
 window.onload = function () {
   
-    var buttonStartSim, buttonReset, buttonStats, buttonLog;
+    var buttonStartSim, buttonReset, buttonStats, buttonLog, def;
     /* 
      * create rest of the page
      */
     initializeUI();
-    initializeUnitsAndUI(tso.defaultVersion)
-    var def = document.getElementById("vb_"+tso.defaultVersion);
-    if(def) {
+    initializeUnitsAndUI(tso.defaultVersion);
+    def = document.getElementById("vb_" + tso.defaultVersion);
+    if (def) {
         def.onclick();
     }
     
