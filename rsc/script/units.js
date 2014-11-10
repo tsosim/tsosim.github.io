@@ -149,7 +149,7 @@ tso.data.live.functions.defineUnits = function () {
     }
 
     // -------------- //
-    vData.generals.general    = new Unit("General",                1, [120, 120], 80, Initiative.THIRD, getAID(), [Skills.GENERAL]);
+    vData.generals.general    = new Unit("General",                1, [120, 120], 80, Initiative.SECOND, getAID(), [Skills.GENERAL]);
     vData.generals.mma        = new Unit("Martial Arts General",   1, [450, 500], 80, Initiative.FIRST, getAID(), [Skills.GENERAL, Skills.SPLASH_DAMAGE, Skills.ATTACK_WEAKEST]);
     //vData.generals.leg_vet    = new Unit("Legendary Veteran", 1500, [  1, 200], 80, Initiative.THIRD, getAID(), [Skills.GENERAL, Skills.SPLASH_DAMAGE]);
     
@@ -263,14 +263,14 @@ tso.data.live.functions.defineUnits = function () {
     
     
     // camps
-    camp.campNone          = new Unit("No Camp",             0, [0,0], 0, Initiative.THIRD,  getAID(), [Skills.CAMP]);
-    camp.campRegular       = new Unit("Regular Camp",      250, [0,0], 0, Initiative.THIRD,  getAID(), [Skills.CAMP]);
-    camp.campBlackCastle   = new Unit("Black Castle",     2000, [0,0], 0, Initiative.THIRD,  getAID(), [Skills.CAMP]);
-    camp.campBoneChurch    = new Unit("Bone Church",      2000, [0,0], 0, Initiative.THIRD,  getAID(), [Skills.CAMP]);
-    camp.campWatchTower    = new Unit("Watchtower",       1000, [0,0], 0, Initiative.THIRD,  getAID(), [Skills.CAMP]);
-    camp.campReinfTower    = new Unit("Reinforced Tower", 1500, [0,0], 0, Initiative.THIRD,  getAID(), [Skills.CAMP]);
-    camp.campStoneTower    = new Unit("Stone Tower",      2000, [0,0], 0, Initiative.THIRD,  getAID(), [Skills.CAMP]);
-    camp.campWitchTower    = new Unit("Witch Tower",      2000, [0,0], 0, Initiative.THIRD,  getAID(), [Skills.CAMP]);
+    camp.campNone          = new Unit("No Camp",             0, [0,0], 0, Initiative.THIRD,  getAID(), [Skills.CAMP, Skills.GENERAL]);
+    camp.campRegular       = new Unit("Regular Camp",      250, [0,0], 0, Initiative.THIRD,  getAID(), [Skills.CAMP, Skills.GENERAL]);
+    camp.campBlackCastle   = new Unit("Black Castle",     2000, [0,0], 0, Initiative.THIRD,  getAID(), [Skills.CAMP, Skills.GENERAL]);
+    camp.campBoneChurch    = new Unit("Bone Church",      2000, [0,0], 0, Initiative.THIRD,  getAID(), [Skills.CAMP, Skills.GENERAL]);
+    camp.campWatchTower    = new Unit("Watchtower",       1000, [0,0], 0, Initiative.THIRD,  getAID(), [Skills.CAMP, Skills.GENERAL]);
+    camp.campReinfTower    = new Unit("Reinforced Tower", 1500, [0,0], 0, Initiative.THIRD,  getAID(), [Skills.CAMP, Skills.GENERAL]);
+    camp.campStoneTower    = new Unit("Stone Tower",      2000, [0,0], 0, Initiative.THIRD,  getAID(), [Skills.CAMP, Skills.GENERAL]);
+    camp.campWitchTower    = new Unit("Witch Tower",      2000, [0,0], 0, Initiative.THIRD,  getAID(), [Skills.CAMP, Skills.GENERAL]);
     setUnitIDs(camp);
     for (idx in camp) {
         if (camp.hasOwnProperty(idx)) {
@@ -425,14 +425,14 @@ tso.data.test.functions.defineUnits = function () {
     cu.wolf = new Unit("Wolf", 30, [1, 150], 85, Initiative.SECOND, 62000, [Skills.SPLASH_DAMAGE, Skills.WEAK]);
     
     // camps
-    camp.campNone          = new Unit("No Camp",             0, [0,0], 0, Initiative.THIRD,  getAID(), [Skills.CAMP]);
-    camp.campRegular       = new Unit("Regular Camp",      250, [0,0], 0, Initiative.THIRD,  getAID(), [Skills.CAMP]);
-    camp.campBlackCastle   = new Unit("Black Castle",     2000, [0,0], 0, Initiative.THIRD,  getAID(), [Skills.CAMP]);
-    camp.campBoneChurch    = new Unit("Bone Church",      2000, [0,0], 0, Initiative.THIRD,  getAID(), [Skills.CAMP]);
-    camp.campWatchTower    = new Unit("Watchtower",       1000, [0,0], 0, Initiative.THIRD,  getAID(), [Skills.CAMP]);
-    camp.campReinfTower    = new Unit("Reinforced Tower", 1500, [0,0], 0, Initiative.THIRD,  getAID(), [Skills.CAMP]);
-    camp.campStoneTower    = new Unit("Stone Tower",      2000, [0,0], 0, Initiative.THIRD,  getAID(), [Skills.CAMP]);
-    camp.campWitchTower    = new Unit("Witch Tower",      2000, [0,0], 0, Initiative.THIRD,  getAID(), [Skills.CAMP]);
+    camp.campNone          = new Unit("No Camp",             0, [0,0], 0, Initiative.THIRD,  getAID(), [Skills.CAMP, Skills.GENERAL]);
+    camp.campRegular       = new Unit("Regular Camp",      250, [0,0], 0, Initiative.THIRD,  getAID(), [Skills.CAMP, Skills.GENERAL]);
+    camp.campBlackCastle   = new Unit("Black Castle",     2000, [0,0], 0, Initiative.THIRD,  getAID(), [Skills.CAMP, Skills.GENERAL]);
+    camp.campBoneChurch    = new Unit("Bone Church",      2000, [0,0], 0, Initiative.THIRD,  getAID(), [Skills.CAMP, Skills.GENERAL]);
+    camp.campWatchTower    = new Unit("Watchtower",       1000, [0,0], 0, Initiative.THIRD,  getAID(), [Skills.CAMP, Skills.GENERAL]);
+    camp.campReinfTower    = new Unit("Reinforced Tower", 1500, [0,0], 0, Initiative.THIRD,  getAID(), [Skills.CAMP, Skills.GENERAL]);
+    camp.campStoneTower    = new Unit("Stone Tower",      2000, [0,0], 0, Initiative.THIRD,  getAID(), [Skills.CAMP, Skills.GENERAL]);
+    camp.campWitchTower    = new Unit("Witch Tower",      2000, [0,0], 0, Initiative.THIRD,  getAID(), [Skills.CAMP, Skills.GENERAL]);
     setUnitIDs(camp);
     for (idx in camp) {
         if (camp.hasOwnProperty(idx)) {
