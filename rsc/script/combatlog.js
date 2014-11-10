@@ -255,6 +255,7 @@ function CombatLog() {
 
             rnode = createRoundBase(base, waveNum, rnd + 1);
 
+            var hasData = false;
             for (init = 0; init < inits.length; init += 1) {
                 
                 if (currentRound.initData.hasOwnProperty(inits[init])) {
@@ -263,11 +264,13 @@ function CombatLog() {
                     if(currentInit.groupData.length > 0) {
                         inode = createInitBase(rnode, waveNum, rnd + 1, inits[init]);
                     }
-
+                    
                     var table = document.createElement("table");
                     table.setAttribute("class", "groupTable gtHide");
                     table.setAttribute("id", "gt_w"+waveNum+"r"+(rnd+1)+"i"+inits[init]);
                     for (gr = 0; gr < currentInit.groupData.length; gr += 1) {
+                        hasData = true;
+
                         group = currentInit.groupData[gr];
 
                         grow = createGroupRow(group, waveNum, rnd+1, inits[init], gr);
@@ -308,6 +311,9 @@ function CombatLog() {
                     }
                     inode.appendChild(table);
                 }
+            }
+            if(!hasData) {
+                base.removeChild(base.lastChild);
             }
         }
         return base;

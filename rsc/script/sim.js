@@ -215,8 +215,7 @@ function Simulator() {
             return;
         }
         
-        //def_groups = attacking_group.type.hasSkill(Skills.ATTACK_WEAKEST) ? defending_garrison.getDefendListByWeakness() : defending_garrison.getDefendList();
-        
+        //def_groups = attacking_group.type.hasSkill(Skills.ATTACK_WEAKEST) ? defending_garrison.getDefendListByWeakness()  : defending_garrison.getDefendList();
         //def_groups = attacking_group.type.hasSkill(Skills.ATTACK_WEAKEST) ? defending_garrison.getDefendListByHitpoints() : defending_garrison.getDefendList();
         def_groups = attacking_group.type.hasSkill(Skills.ATTACK_WEAKEST) ? defending_garrison.getDefendListBySkillAttackWeakest() : defending_garrison.getDefendList();
     
@@ -233,7 +232,7 @@ function Simulator() {
                 extraParams.defIsCamp = current_def_group.type.hasSkill(Skills.CAMP);
                 current_def_group.number_after_attack = this.computeAttackOnUnitgroup(attacking_group, current_def_group, extraParams, LOG);
 
-                    //if (current_def_group.number_after_attack > 0) {
+                //if (current_def_group.number_after_attack > 0) {
                 if (current_def_group.number_after_attack > 0 || attacking_group.dmg_left == 0) {
                     // there are still units left in this group -> abort computation
                     break;
@@ -248,6 +247,10 @@ function Simulator() {
         if (defending_group.number_after_attack < 1) {
             return 0;
         }
+        
+        if (extraParams.defIsCamp && defending_group.type.hitpoints === 0) {
+            return 0;
+        }            
         
         //if (LOG) { LOG.currentInitiative.addGroupAttack(attacking_group, defending_group, attacking_group.number_left_to_attack, defending_group.number, 0, 0); }
         if (LOG) { LOG.currentInitiative.addGroupAttack(attacking_group, defending_group, attacking_group.number, defending_group.number, 0, 0); }
