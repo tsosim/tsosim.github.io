@@ -440,7 +440,7 @@ tso.data.test.functions.defineUnits = function () {
         }
     }
     
-    setUnitIDs(cu.computerUnits);
+    setUnitIDs(cu);
     
     for (idx in cu) {
         if (pu.hasOwnProperty(idx)) {
