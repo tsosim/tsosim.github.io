@@ -177,10 +177,10 @@ function Garrison() {
     };
     
     this.addUnits = function (unitType, num) {
-        if (this.groups[unitType.name] === undefined) {
-            this.groups[unitType.name] = new UnitGroup(unitType, num);
+        if (this.groups[tsosim.lang.unit[unitType.id]] === undefined) {
+            this.groups[tsosim.lang.unit[unitType.id]] = new UnitGroup(unitType, num);
         } else {
-            this.groups[unitType.name].number += num;
+            this.groups[tsosim.lang.unit[unitType.id]].number += num;
         }
         if (!unitType.hasSkill(Skills.GENERAL)) {
             // ignore general(s)
@@ -193,7 +193,7 @@ function Garrison() {
         console.log("-- garrison -- ");
         for (gr in this.groups) {
             if (this.groups.hasOwnProperty(gr)) {
-                console.log("  " + this.groups[gr].type.name + " : " + this.groups[gr].number);
+                console.log("  " + tsosim.lang.unit[this.groups[gr].type.id] + " : " + this.groups[gr].number);
             }
         }
     };

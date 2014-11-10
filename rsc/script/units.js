@@ -66,7 +66,7 @@ var getAID = (function defIdFunction() {
 
 /*  Live */
 
-tso.data.live.functions.getUnitListByAttackId = function(groups) {
+tso.data.live.functions.getUnitListByAttackId = function (groups) {
     var out = [], gr;
     for (gr in groups) {
         if (groups.hasOwnProperty(gr)) {
@@ -74,10 +74,10 @@ tso.data.live.functions.getUnitListByAttackId = function(groups) {
         }
     }
     return out.sort(compareAttackId);
-}
+};
 
 
-tso.data.live.functions.getUnitListByInitiative = function(groups, init) {
+tso.data.live.functions.getUnitListByInitiative = function (groups, init) {
     var out = [], gr;
     for (gr in groups) {
         if (groups.hasOwnProperty(gr)) {
@@ -87,10 +87,10 @@ tso.data.live.functions.getUnitListByInitiative = function(groups, init) {
         }
     }
     return out.sort(this.compareAttackId);
-}
+};
 
 
-tso.data.live.functions.getUnitListBySkillAttackWeakest = function(groups) {
+tso.data.live.functions.getUnitListBySkillAttackWeakest = function (groups) {
     var out = [], gr;
     for (gr in groups) {
         if (groups.hasOwnProperty(gr)) {
@@ -98,14 +98,14 @@ tso.data.live.functions.getUnitListBySkillAttackWeakest = function(groups) {
         }
     }
     return out.sort(compareHitpoints);
-}
+};
 
 /*  Testserver */
 
 tso.data.test.functions.getUnitListByAttackId = tso.data.live.functions.getUnitListByAttackId;
 tso.data.test.functions.getUnitListByInitiative = tso.data.live.functions.getUnitListByInitiative;
 
-tso.data.test.functions.getUnitListBySkillAttackWeakest = function(groups) {
+tso.data.test.functions.getUnitListBySkillAttackWeakest = function (groups) {
     var out_weak = [], out_rest = [], gr;
     for (gr in groups) {
         if (groups.hasOwnProperty(gr)) {
@@ -117,7 +117,7 @@ tso.data.test.functions.getUnitListBySkillAttackWeakest = function(groups) {
         }
     }
     return out_weak.sort(compareHitpoints).concat(out_rest.sort(compareAttackId));
-}
+};
 
 /* --------------------------------------------------- */
 
@@ -720,6 +720,7 @@ function setupTsoSim(versionId) {
         tsosim.computerUnits = tso.data[versionId].computerUnits;
         tsosim.camps    = tso.data[versionId].camps;
         tsosim.adv_maps = {};
+        tsosim.lang = lang.de;
         defineAdventureMaps(tsosim.computerUnits, tsosim.adv_maps);
     }
 }

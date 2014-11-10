@@ -54,7 +54,7 @@ function Simulator() {
             if (groups.hasOwnProperty(idx)) {
                 // find general units
                 if (groups[idx].type.hasSkill(Skills.GENERAL)) {
-                    prob = this.stats.attacker[waveNum].data[groups[idx].type.name].statistics.stat_average;
+                    prob = this.stats.attacker[waveNum].data[tsosim.lang.unit[groups[idx].type.id]].statistics.stat_average;
                     return prob;
                 }
             }

@@ -111,8 +111,8 @@ function setupDiagrams(node, stats, title, diagID, filterFun) {
     
     var group = null;
     for(var g in tsosim.generals) {
-        if(stats.data.hasOwnProperty(tsosim.generals[g].name)) {
-            group = stats.data[tsosim.generals[g].name].iterationResults;
+        if(stats.data.hasOwnProperty(tsosim.lang.unit[tsosim.generals[g].id])) {
+            group = stats.data[tsosim.lang.unit[tsosim.generals[g].id]].iterationResults;
             break;
         }
     }
@@ -218,11 +218,9 @@ function setupDiagramColumn(key, value, total, scaling, numRounds) {
     barT.setAttribute("title", (100*columnValue).toFixed(2) + "% - " + value.total + "/" + total);
     
     barT.onmouseover = function() {
-        console.log("hello");
         barT.setAttribute("class", "diagColTotal mouseOver " + widthClass);
     };
     barT.onmouseout = function() {
-        console.log("world");
         barT.setAttribute("class", "diagColTotal " + widthClass);
     };
     
@@ -302,8 +300,8 @@ function setupHorizontalDiagram(node, stats, title, diagID, filter1, filter2) {
     // find general's data to determine victory or defeat rounds
     var group = null;
     for(var g in tsosim.generals) {
-        if(stats.data.hasOwnProperty(tsosim.generals[g].name)) {
-            group = stats.data[tsosim.generals[g].name].iterationResults;
+        if(stats.data.hasOwnProperty(tsosim.lang.unit[tsosim.generals[g].id])) {
+            group = stats.data[tsosim.lang.unit[tsosim.generals[g].id]].iterationResults;
             break;
         }
     }

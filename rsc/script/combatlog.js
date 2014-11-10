@@ -216,7 +216,7 @@ function CombatLog() {
         var i, j, inits, rd, id, g, group, at;
         inits = [Initiative.FIRST, Initiative.SECOND, Initiative.THIRD, Initiative.LAST];
         for (i = 0; i < this.roundData.length; i += 1) {
-            console.log("Round: " + (i + 1));
+            //console.log("Round: " + (i + 1));
             
             rd = this.roundData[i];
             for (j = 0; j < inits.length; j += 1) {
@@ -245,11 +245,11 @@ function CombatLog() {
         base.setAttribute("id", log_id);
         base.setAttribute("class", log_class);
         
-        this.printLog();
+        //this.printLog();
         
         inits = [Initiative.FIRST, Initiative.SECOND, Initiative.THIRD, Initiative.LAST];
         
-        console.log("rounds (" + this.roundData.length + ")");
+        //console.log("rounds (" + this.roundData.length + ")");
         for (rnd = 0; rnd < this.roundData.length; rnd += 1) {
             currentRound = this.roundData[rnd];
 
@@ -445,9 +445,9 @@ function createInitBase(parent, waveNum, rnd, init) {
     
     inb_s1.onclick = function () {
         var thisid, nameOn, nameOff, listOn, listOff, i, j;
-        console.log("init.click()");
+        //console.log("init.click()");
         thisid  = this.getAttribute("id");
-        console.log("thisid(init) : " + thisid);
+        //console.log("thisid(init) : " + thisid);
         var tab = document.getElementById("gt_"+thisid);
         if(tab.getAttribute("class") === "groupTable gtHide") {
             tab.setAttribute("class","groupTable gtShow");
@@ -506,21 +506,19 @@ function createRoundBase(parent, waveNum, rnd) {
     
     rnb_s1.onclick = function () {
         var thisid, nameOn, nameOff, listOn, listOff, i, j;
-        console.log("round.click()");
+        //console.log("round.click()");
         thisid  = this.getAttribute("id");
-        console.log("thisid(round) : " + thisid);
+        //console.log("thisid(round) : " + thisid);
         nameOn  = ".initBase.init_" + thisid;
         nameOff = ".initBaseNoShow.init_" + thisid;
         listOn  = document.querySelectorAll(nameOn);
         listOff = document.querySelectorAll(nameOff);
         if (listOn.length > 0) {
-            console.log("offing");
             for (i = 0; i < listOn.length; i += 1) {
                 listOn[i].setAttribute("class", "initBaseNoShow init_" + thisid);
             }
         }
         if (listOff.length > 0) {
-            console.log("onning");
             for (j = 0; j < listOff.length; j += 1) {
                 listOff[j].setAttribute("class", "initBase init_" + thisid);
             }
