@@ -35,10 +35,10 @@ function Statistics() {
             if (garrison.groups.hasOwnProperty(idx)) {
                 group = garrison.groups[idx];
 
-                if (this.data[group.type.name] === undefined) {
-                    this.data[group.type.name] = new StatsData();
+                if (this.data[tsosim.lang.unit[group.type.id]] === undefined) {
+                    this.data[tsosim.lang.unit[group.type.id]] = new StatsData();
                 }
-                unitdata = this.data[group.type.name];
+                unitdata = this.data[tsosim.lang.unit[group.type.id]];
                 unitdata.unittype      = group.type;
                 unitdata.startNumber   = group.number;
                 unitdata.numIterations = 0;
@@ -56,15 +56,15 @@ function Statistics() {
             if (garrison.groups.hasOwnProperty(idx)) {
                 group = garrison.groups[idx];
                 //var unitdata = null;
-                if (this.data[group.type.name] !== undefined) {
-                    unitdata = this.data[group.type.name];
+                if (this.data[tsosim.lang.unit[group.type.id]] !== undefined) {
+                    unitdata = this.data[tsosim.lang.unit[group.type.id]];
                     //unitdata.numIterations += 1;
                     //unitdata.iterationResults.push(group.number);
 
                     unitdata.iterationResults[unitdata.numIterations] = group.number;
                     unitdata.numIterations += 1;
                 } else {
-                    console.log("Combatlog.updateIteration(): unknown unit [" + group.type.name + "]; maybe using wrong garrison?");
+                    console.log("Combatlog.updateIteration(): unknown unit [" + tsosim.lang.unit[group.type.id] + "]; maybe using wrong garrison?");
                 }
             }
         }
@@ -125,7 +125,7 @@ function Statistics() {
             if (this.data.hasOwnProperty(idx)) {
                 cdata = this.data[idx];
 
-                console.log(" -- " + cdata.unittype.name + " <iterations:" + cdata.numIterations + "> -- ");
+                console.log(" -- " + tsosim.lang.unit[cdata.unittype.id] + " <iterations:" + cdata.numIterations + "> -- ");
                 console.log("   [" + cdata.startNumber + "] => min:" + cdata.statistics.stat_min + ", av:" + cdata.statistics.stat_average + ", max:" + cdata.statistics.stat_max);
                 console.log("   [" + cdata.startNumber + "] => " + cdata.iterationResults.join(","));
             }
@@ -226,9 +226,9 @@ function CombatLog() {
                         console.log("  Initiative : " + inits[j]);
                         for (g = 0; g < id.groupData.length; g += 1) {
                             group = id.groupData[g];
-                            console.log("    " + group.attackerGroup.type.name + " [" + group.numAttackers + "]  =>  " + group.defenderGroup.type.name + " [" + group.numDefenders + "]");
+                            console.log("    " + tsosim.lang.unit[group.attackerGroup.type.id] + " [" + group.numAttackers + "]  =>  " + tsosim.lang.unit[group.defenderGroup.type.id] + " [" + group.numDefenders + "]");
                             for (at = 0; at < group.attacks.length; at += 1) {
-                                console.log("      [" + group.attacks[at].attackerNumber + "] " + group.attackerGroup.type.name + " -> (" + group.attacks[at].defenderNumber + ") " + group.defenderGroup.type.name + "  " + group.attacks[at].hitpointsLeft + "/" + group.defenderGroup.type.hitpoints);
+                                console.log("      [" + group.attacks[at].attackerNumber + "] " + tsosim.lang.unit[group.attackerGroup.type.id] + " -> (" + group.attacks[at].defenderNumber + ") " + tsosim.lang.unit[group.defenderGroup.type.id] + "  " + group.attacks[at].hitpointsLeft + "/" + group.defenderGroup.type.hitpoints);
                             }
                         }
                     }
@@ -403,7 +403,7 @@ function createGroupRow(group, waveNum, rnd, init, gr) {
     
     tr.appendChild(toSpan("", "gaSpacer"));
     tr.appendChild(toSpan(group.attAttacked, "gaMin gaNum")); // "gaAttNum gaMin"));
-    tr.appendChild(toSpan(group.attackerGroup.type.name, "gaName gaMin"));
+    tr.appendChild(toSpan(tsosim.lang.unit[group.attackerGroup.type.id], "gaName gaMin"));
     tr.appendChild(toSpan("[","gaMin"));
     tr.appendChild(toSpan(group.attAttackedT,"gaMin gaNum"));
     tr.appendChild(toSpan("/", "gaMin"));
@@ -417,7 +417,7 @@ function createGroupRow(group, waveNum, rnd, init, gr) {
 
     tr.appendChild(toSpan("", "gaSpacer"));
     tr.appendChild(toSpan("-"+group.defKilled, "gaMin gaNum"));// + " killed", "gaDefNum"));
-    tr.appendChild(toSpan(group.defenderGroup.type.name, "gaName gaMin"));
+    tr.appendChild(toSpan(tsosim.lang.unit[group.defenderGroup.type.id], "gaName gaMin"));
     tr.appendChild(toSpan("[", "gaMin"));
     tr.appendChild(toSpan(group.numDefenders-group.defKilled, "gaMin gaNum"));
     tr.appendChild(toSpan("/", "gaMin"));
@@ -588,7 +588,7 @@ function createLogTableRow(attack, attGroup, defGroup) {
 
     tr.appendChild(setTd("","attSpacer"));
     tr.appendChild(setTd(attack.attackerNumber + ".", "attNum attMin"));
-    tr.appendChild(setTd(attGroup.type.name, "attName attMin"));
+    tr.appendChild(setTd(tsosim.lang.unit[attGroup.type.id], "attName attMin"));
     
     tr.appendChild(setTd("","attSpacer"));
 
@@ -603,7 +603,7 @@ function createLogTableRow(attack, attGroup, defGroup) {
 
     tr.appendChild(setTd("","attSpacer"));
     tr.appendChild(setTd(attack.defenderNumber + ". ", "attNum attMin"));
-    tr.appendChild(setTd(defGroup.type.name, "attName attMin"));
+    tr.appendChild(setTd(tsosim.lang.unit[defGroup.type.id], "attName attMin"));
 
     tr.appendChild(setTd("","attSpacer"));
 

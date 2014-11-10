@@ -32,7 +32,7 @@ var Initiative = { FIRST: 1, SECOND: 2, THIRD: 3, LAST: 4 };
  */
 function Unit(name, hp, dmg, acc, init, attack_id, skills, checked) {
     var sk, bd;
-    this.name       = name;
+    //this.name       = name;
     this.hitpoints  = hp;
     this.damage     = { min: dmg[0], max: dmg[1] };
     this.accuracy   = acc;

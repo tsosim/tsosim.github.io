@@ -39,7 +39,7 @@ function createUnitTooltip(unit) {
     tr = document.createElement("tr");
     th = document.createElement("th");
     th.setAttribute("colspan", 2);
-    th.innerHTML = unit.name;
+    th.innerHTML = tsosim.lang.unit[unit.id];
     tr.appendChild(th);
     tab.appendChild(tr);
     
@@ -77,7 +77,7 @@ function setupUnitInputField(unit, capacity) {
     label.setAttribute("class", "unitlabel" + (unit.checked ? "" : " unitUnchecked"));
     label.setAttribute("for", "inp_" + unit.id);
   
-    text = document.createTextNode(unit.name);
+    text = document.createTextNode(tsosim.lang.unit[unit.id]);
     label.appendChild(text);
     
     tr.appendChild(label);
@@ -572,7 +572,7 @@ function setupComputerInputFields(units, capacity) {
     for (idx in tsosim.camps) {
         if (tsosim.camps.hasOwnProperty(idx) && tsosim.camps[idx].hasSkill(Skills.CAMP)) {
             option = document.createElement("option");
-            option.text = tsosim.camps[idx].name;
+            option.text = tsosim.lang.unit[tsosim.camps[idx].id];
             campSelect.add(option);
         }
     }
@@ -676,7 +676,7 @@ function storeComputerGarrisonValues(map_id, units) {
     node = document.getElementById("computerCamp");
     for (idx in tsosim.camps) {
         if (tsosim.camps.hasOwnProperty(idx)) {
-            if (tsosim.camps[idx].name === node.value) {
+            if (tsosim.lang.unit[tsosim.camps[idx].id] === node.value) {
                 garrison.addUnits(tsosim.camps[idx], 1);
             }
         }
@@ -730,7 +730,7 @@ function createTableRowForUnit(unitData, lastUnitData) {
     data = [
         { value: "", "class": "tds_Spacer" },
         { value: unitData.startNumber, "class": "tds_unitNum tds_Default", tt: "Number of Units in the garrison" },
-        { value: unitData.unittype.name, "class": "tds_unitName", tt: "Name of the unit"  },
+        { value: tsosim.lang.unit[unitData.unittype.id], "class": "tds_unitName", tt: "Name of the unit"  },
         { value: "", "class": "tds_Spacer" },
 
         { value: "", "class": "tds_Spacer" },
