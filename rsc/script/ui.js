@@ -822,14 +822,17 @@ function createTableRowForRounds(roundsData) {
 
 
 function createStatisticsTable(stats, lastStats) {
-    var table, i;
+    var table, i, isBuilding;
     table = document.createElement("table");
     table.setAttribute("class", "resultTable");
     table.appendChild(createTableHeadings());
     table.appendChild(createTableRowForRounds(stats.rounds));
     for (i in stats.data) {
         if (stats.data.hasOwnProperty(i)) {
-            table.appendChild(createTableRowForUnit(stats.data[i], lastStats ? lastStats.data[i] : null));
+            isBuilding = stats.data[i].unittype.hasSkill(Skills.CAMP);
+            if (!isBuilding || (isBuilding && stats.data[i].unittype.hitpoints)) {
+                table.appendChild(createTableRowForUnit(stats.data[i], lastStats ? lastStats.data[i] : null));
+            }
         }
     }
     return table;
