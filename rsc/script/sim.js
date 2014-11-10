@@ -230,7 +230,7 @@ function Simulator() {
         for (idx = 0; idx < def_groups.length; idx += 1) {
             current_def_group = def_groups[idx];
             if (current_def_group.number_after_attack >= 1) {
-                extraParams.isCamp = current_def_group.type.hasSkill(Skills.CAMP);
+                extraParams.defIsCamp = current_def_group.type.hasSkill(Skills.CAMP);
                 current_def_group.number_after_attack = this.computeAttackOnUnitgroup(attacking_group, current_def_group, extraParams, LOG);
 
                     //if (current_def_group.number_after_attack > 0) {
