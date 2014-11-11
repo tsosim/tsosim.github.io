@@ -86,7 +86,7 @@ tso.data.live.functions.getUnitListByInitiative = function (groups, init) {
             }
         }
     }
-    return out.sort(this.compareAttackId);
+    return out.sort(compareAttackId);
 };
 
 
