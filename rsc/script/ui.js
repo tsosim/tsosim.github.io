@@ -1063,7 +1063,7 @@ function setupSimVersionButtons() {
                     }
                 }
                 elem.setAttribute("class", "versionButton vbClicked");
-                initializeUnitsAndUI(clickedID);
+                initializeUnitsAndUI(clickedID, tsosim.lang);
             }
         };
     };
@@ -1103,6 +1103,21 @@ function setupSimVersionButtons() {
     }
 }
 
+function setLanguage(language) {
+    var sel;
+    sel = document.getElementById("langSel");
+    
+    for (var idx in sel.options) {
+        console.log(idx + ", " + sel.options[idx]);
+        console.log(idx + ", " + sel.options[idx].text);
+        if(lang[language].name === sel.options[idx].text) {
+            sel.selectedIndex = idx;
+            sel.options[idx].onclick();
+            break;
+        }
+    }
+}
+
 function selectLanguage(langObj) {
     return function () {
         console.log("lang: " + langObj.name);
@@ -1120,6 +1135,7 @@ function setupLanguage() {
     
     var sel = document.createElement("select");
     sel.setAttribute("class", "langItem");
+    sel.setAttribute("id", "langSel");
     
     for(var idx in lang) {
         if(lang.hasOwnProperty(idx)) {
@@ -1175,6 +1191,11 @@ window.onload = function () {
     def = document.getElementById("vb_" + tso.defaultVersion);
     if (def) {
         def.onclick();
+    }
+    
+    var userLang = navigator.language || navigator.userLanguage;
+    if(lang[userLang]) {
+        setLanguage(userLang);
     }
     
     /*
