@@ -13,13 +13,22 @@ header {
     border-radius: 5px;
 }
 
+#simHead {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
 #simVersions {
     display: flex;
     flex-direction: row;
+    width: 50%;
 }
 .versionButton {
     margin: 10px;
-    width:6%;
+    width:12%;
     border: 3px double black;
     cursor: pointer;
 }
@@ -31,6 +40,14 @@ header {
     border: 3px solid black;
     font-weight: bold;
     cursor: default;
+}
+
+#simLang {
+    display: flex;
+    flex-direction: row;
+}
+.langItem {
+    margin: 10px;
 }
 
 footer {

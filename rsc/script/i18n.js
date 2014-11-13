@@ -1,6 +1,7 @@
 
 var lang = {
 	en : {
+        name : "English",
 		unit : {
 			recruit           : "Recruit",
 			militia           : "Militia",
@@ -116,6 +117,7 @@ var lang = {
         }
     },
 	de : {
+        name : "Deutsch",
 		unit : {
 			recruit           : "Rekrut",
 			militia           : "Miliz",

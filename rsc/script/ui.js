@@ -1103,9 +1103,45 @@ function setupSimVersionButtons() {
     }
 }
 
-function initializeUI() {
-    setupTsoSim(tso.defaultVersion);
+function selectLanguage(langObj) {
+    return function () {
+        console.log("lang: " + langObj.name);
+        initializeUnitsAndUI(tsosim.version,langObj);
+    };
+}
 
+function setupLanguage() {
+    var base;//, idx, div, v, setOnclick, setOnmouseover, setOnmouseout;
+    base = document.getElementById("simLang");
+    
+    var label = document.createElement("label");
+    label.innerHTML = "Language";
+    label.setAttribute("class", "langItem");
+    
+    var sel = document.createElement("select");
+    sel.setAttribute("class", "langItem");
+    
+    for(var idx in lang) {
+        if(lang.hasOwnProperty(idx)) {
+            var opt = document.createElement("option");
+            opt.text = lang[idx].name;
+            opt.onclick = selectLanguage(lang[idx]);
+            sel.appendChild(opt);
+        }
+    }
+    
+    if(base.children.length === 0) {
+        base.appendChild(label);
+        base.appendChild(sel);
+    } else {
+        base.replaceChild(label, base.firstChild);
+        base.replaceChild(sel, base.lastChild);
+    }
+}
+
+function initializeUI(lang) {
+    setupTsoSim(tso.defaultVersion, lang);
+    
     setupSimVersionButtons();
     setupGeneralTabs();
 
@@ -1113,8 +1149,8 @@ function initializeUI() {
     setupAdventureTabs();
 }
 
-function initializeUnitsAndUI(simVersion) {
-    setupTsoSim(simVersion);
+function initializeUnitsAndUI(simVersion, lang) {
+    setupTsoSim(simVersion, lang);
     //setupSimVersionButtons();
     //setupGeneralTabs();
     setupPlayerInputFields(tsosim.units, 500);
@@ -1133,6 +1169,7 @@ window.onload = function () {
     /* 
      * create rest of the page
      */
+    setupLanguage();
     initializeUI();
     initializeUnitsAndUI(tso.defaultVersion);
     def = document.getElementById("vb_" + tso.defaultVersion);

@@ -711,7 +711,13 @@ function defineAdventureMaps(units, adv_maps) {
 
 var tsosim = {};//tsosim2;
 
-function setupTsoSim(versionId) {
+function setupTsoSim(versionId, langObj) {
+
+    if(langObj === undefined) {
+        tsosim.lang = lang.en;
+    } else {
+        tsosim.lang = langObj;
+    }
     if(tsosim.version != versionId) {
         console.log("Setup simulation '" + versionId + "'");
         tsosim.version  = versionId;
@@ -720,7 +726,7 @@ function setupTsoSim(versionId) {
         tsosim.computerUnits = tso.data[versionId].computerUnits;
         tsosim.camps    = tso.data[versionId].camps;
         tsosim.adv_maps = {};
-        tsosim.lang = lang.de;
+        //tsosim.lang = lang.de;
         defineAdventureMaps(tsosim.computerUnits, tsosim.adv_maps);
     }
 }
