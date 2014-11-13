@@ -1108,21 +1108,13 @@ function setLanguage(language) {
     sel = document.getElementById("langSel");
     
     for (var idx in sel.options) {
-        console.log(idx + ", " + sel.options[idx]);
-        console.log(idx + ", " + sel.options[idx].text);
         if(lang[language].name === sel.options[idx].text) {
             sel.selectedIndex = idx;
-            sel.options[idx].onclick();
+            //sel.options[idx].onclick();
+            sel.onchange();
             break;
         }
     }
-}
-
-function selectLanguage(langObj) {
-    return function () {
-        console.log("lang: " + langObj.name);
-        initializeUnitsAndUI(tsosim.version,langObj);
-    };
 }
 
 function setupLanguage() {
@@ -1136,15 +1128,27 @@ function setupLanguage() {
     var sel = document.createElement("select");
     sel.setAttribute("class", "langItem");
     sel.setAttribute("id", "langSel");
-    
+
     for(var idx in lang) {
         if(lang.hasOwnProperty(idx)) {
             var opt = document.createElement("option");
             opt.text = lang[idx].name;
-            opt.onclick = selectLanguage(lang[idx]);
             sel.appendChild(opt);
         }
     }
+    
+    // this is for chrome
+    sel.onchange = function() {
+        //console.log("onChange: " + sel.selectedIndex);
+        for(var i in lang) {
+            if(lang.hasOwnProperty(i)) {
+                if(lang[i].name === sel.options[sel.selectedIndex].text) {
+                    initializeUnitsAndUI(tsosim.version,lang[i]);
+                }
+            }
+        }
+    }
+
     
     if(base.children.length === 0) {
         base.appendChild(label);
@@ -1181,7 +1185,7 @@ function resetInput() {
 
 window.onload = function () {
   
-    var buttonStartSim, buttonReset, buttonStats, buttonLog, def;
+    var buttonStartSim, buttonReset, buttonStats, buttonLog, def, userLang, idx;
     /* 
      * create rest of the page
      */
@@ -1193,7 +1197,15 @@ window.onload = function () {
         def.onclick();
     }
     
-    var userLang = navigator.language || navigator.userLanguage;
+    userLang = navigator.language || navigator.userLanguage;
+    for (idx in lang) {
+        if (lang.hasOwnProperty(idx)) {
+            if (userLang.search(idx) !== -1) {
+                userLang = idx;
+                break;
+            }
+        }
+    }
     if(lang[userLang]) {
         setLanguage(userLang);
     }
