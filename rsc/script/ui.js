@@ -43,10 +43,10 @@ function createUnitTooltip(unit) {
     tr.appendChild(th);
     tab.appendChild(tr);
     
-    tab.appendChild(createUnitTooltipLine("Hitpoints", unit.hitpoints));
-    tab.appendChild(createUnitTooltipLine("Damage", unit.damage.min + " - " + unit.damage.max));
-    tab.appendChild(createUnitTooltipLine("Accuracy", unit.accuracy + "%"));
-    tab.appendChild(createUnitTooltipLine("Initiative", unit.initiative));
+    tab.appendChild(createUnitTooltipLine(tsosim.lang.ui.hitpoints, unit.hitpoints));
+    tab.appendChild(createUnitTooltipLine(tsosim.lang.ui.damage, unit.damage.min + " - " + unit.damage.max));
+    tab.appendChild(createUnitTooltipLine(tsosim.lang.ui.accuracy, unit.accuracy + "%"));
+    tab.appendChild(createUnitTooltipLine(tsosim.lang.ui.initiative, unit.initiative));
     
     div.appendChild(tab);
     
@@ -201,6 +201,7 @@ function setupGeneralSelectionOption(value, text, att_id, att_class) {
 // (2) create tabs for general selection for multi-wave attacks
 function setupGeneralSelectionArea() {
     var base, label;
+
     base = document.createElement("div");
     base.setAttribute("id", "genSel");
     base.setAttribute("class", "unitsOptionBlock");
@@ -223,9 +224,13 @@ function setupGeneralSelectionArea() {
 //     units    : array of units that should be displayed on the page (label + input field)
 //     capacity : capacity of the garrison / general
 function setupPlayerInputFields(units, capacity) {
-    var base, table, idx, p;
+    var pustr, base, table, idx, p;
+
+    pustr = document.getElementById("puStr");
+    pustr.innerHTML = tsosim.lang.ui.playerUnits;
+
     base = document.getElementById("units_player");
-    
+
     // create general tabs (here, because the input fields are only created once)
     if (base.children.length === 0) {
         base.appendChild(setupGeneralSelectionArea());
@@ -372,10 +377,16 @@ function setPlayerGarrisonValues(gen_id) {
 
 // (1) setup event handlers for adventure tabs
 function setupAdventureTabs() {
-    var pisland, advtab, seladv;
+    var pisland, advtab, seladv, advstr, custr;
     pisland = document.getElementById("tabPlayerIsland");  // player island tab
     advtab  = document.getElementById("tabAdvSelect");     // adventure tab
     seladv  = document.getElementById("selAdv");           // adventure combobox
+    advstr  = document.getElementById("advStr");
+    custr   = document.getElementById("cuStr");
+    
+    pisland.innerHTML = tsosim.lang.ui.playerIsland;
+    advstr.innerHTML  = tsosim.lang.ui.adventure;
+    custr.innerHTML   = tsosim.lang.ui.computerUnits;
     
     // if an adventure is selected then ...
     seladv.onchange = function () {
@@ -480,7 +491,7 @@ function setupTowerBonusSelectionArea() {
     
     label = document.createElement("label");
     label.setAttribute("id", "towerBonusLabel");
-    label.innerHTML = "Tower Bonus: ";
+    label.innerHTML = tsosim.lang.ui.towerBonus;
     
     base.appendChild(label);
     
@@ -714,7 +725,7 @@ function storeComputerGarrisonValues(map_id, units) {
 function createTableHeadings() {
     var tr, headings, spans, i, th;
     tr = document.createElement("tr");
-    headings = ["", "Units/Rounds", "", "", "Minimum", "", "", "Average", "", "", "Maximum", ""];
+    headings = ["", tsosim.lang.ui.statUnits, "", "", tsosim.lang.ui.statMin, "", "", tsosim.lang.ui.statAverage, "", "", tsosim.lang.ui.statMax, ""];
     //headings = ["Units-Rounds", "Minimum", "Average", "Maximum"];
     //headings = ["aaaa", "aaa", "aa", "a"];
     //headings = ["12345678", "123456789012345", "Average", "Maximum"];
@@ -806,7 +817,7 @@ function createTableRowForRounds(roundsData) {
     var tr, data, data2, i, tdl, tdr;
     tr = document.createElement("tr");
     data  = [
-        { "value": "Rounds", "class": "tabDataRounds", "sep": 4 },
+        { "value": tsosim.lang.ui.rounds, "class": "tabDataRounds", "sep": 4 },
         { "value": roundsData.statistics.stat_min, "class": "tabDataRounds", "sep": 6 },
         { "value": roundsData.statistics.stat_average.toFixed(2), "class": "tabDataRounds", "sep": 6 },
         { "value": roundsData.statistics.stat_max, "class": "tabDataRounds", "sep": 6 }
@@ -852,7 +863,7 @@ function createWaveInfoLine(waveNum) {
     
     span1 = document.createElement("span");
     span1.setAttribute("class", "waveResultInfo");
-    span1.innerHTML = "Wave " + waveNum;
+    span1.innerHTML = tsosim.lang.ui.wave + " " + waveNum;
     info_div.appendChild(span1);
     
     span2 = document.createElement("span");
@@ -941,7 +952,7 @@ function setupStatisticsTable(simulation) {
             diags = [
                 setupDiagrams(div, simulation.stats.attacker[idx], "Rounds - Victory/Total", tableID + "_diagVT", funcVictory),
                 setupDiagrams(div, simulation.stats.attacker[idx], "Rounds - Defeat/Total", tableID + "_diagDT", funcDefeat),
-                setupHorizontalDiagram(div, simulation.stats.attacker[idx], "Rounds - Victory/Defeat", tableID + "_colH", funcVictory, funcDefeat)
+                setupHorizontalDiagram(div, simulation.stats.attacker[idx], tsosim.lang.ui.rounds + " - " + tsosim.lang.ui.victory + "/" + tsosim.lang.ui.defeat, tableID + "_colH", funcVictory, funcDefeat)
             ];
             //div.appendChild(diags[0]);
             div.appendChild(diags[2]);
@@ -959,7 +970,7 @@ function setupStatisticsTable(simulation) {
         node = document.getElementById("waveVictory_w" + (idx + 1));
         if (node) {
             prob = simulation.getVictoryProbability(idx);
-            node.innerHTML = "Victory  -  " + (prob * 100).toFixed(2) + "%";
+            node.innerHTML = tsosim.lang.ui.victory + "  -  " + (prob * 100).toFixed(2) + "%";
         }
     }
 }
@@ -1129,7 +1140,7 @@ function setupLanguage() {
     base = document.getElementById("simLang");
     
     var label = document.createElement("label");
-    label.innerHTML = "Language";
+    label.innerHTML = lang.en.ui.language;
     label.setAttribute("class", "langItem");
     
     var sel = document.createElement("select");
@@ -1154,6 +1165,20 @@ function setupLanguage() {
                 }
             }
         }
+        label.innerHTML = tsosim.lang.ui.language;
+        
+        var bstat = document.getElementById("buttonStatistics");
+        var bclog = document.getElementById("buttonCombatLog");
+        var restr = document.getElementById("resStr");
+        var iterstr = document.getElementById("iterStr");
+        var startSim = document.getElementById("startSim");
+        var reset = document.getElementById("resetInput");
+        bstat.innerHTML = tsosim.lang.ui.statistic;
+        bclog.innerHTML = tsosim.lang.ui.combatLog;
+        restr.innerHTML = tsosim.lang.ui.results;
+        iterstr.innerHTML = tsosim.lang.ui.iterations;
+        startSim.innerHTML = tsosim.lang.ui.startSim;
+        reset.innerHTML = tsosim.lang.ui.reset;
     }
 
     
@@ -1166,9 +1191,15 @@ function setupLanguage() {
     }
 }
 
+function setupStrings() {
+    var node, node2;
+    node = document.getElementById("simTitle");
+    node.innerHTML = tsosim.lang.ui.title;       
+}
+
 function initializeUI(lang) {
     setupTsoSim(tso.defaultVersion, lang);
-    
+
     setupSimVersionButtons();
     setupGeneralTabs();
 
@@ -1178,6 +1209,7 @@ function initializeUI(lang) {
 
 function initializeUnitsAndUI(simVersion, lang) {
     setupTsoSim(simVersion, lang);
+    setupStrings();
     //setupSimVersionButtons();
     //setupGeneralTabs();
     setupPlayerInputFields(tsosim.units, 500);

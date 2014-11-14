@@ -254,7 +254,7 @@ function setupHDiagram(histo, total, title, diagID, numRounds) {
     t.innerHTML = title;
     node.appendChild(t);
     
-    node.appendChild(setupDiagramLegend("Victory", "Defeat", "Total"));
+    node.appendChild(setupDiagramLegend(tsosim.lang.ui.victory, tsosim.lang.ui.defeat, "Total"));
     
     var columns = document.createElement("div");
     columns.setAttribute("class", "diagColumns");

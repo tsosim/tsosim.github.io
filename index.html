@@ -17,7 +17,7 @@
 
 <body>
     <header>
-        <h1>The Settlers Online - Combat Simulator</h1>
+        <h1 id="simTitle"></h1>
         <div id="simHead">
             <div id="simVersions"></div>
             <div id="simLang"></div>
@@ -27,7 +27,7 @@
     <div id="center">
         <div id="centerInput">
             <div id="player">
-                <h3>Player Units</h3>
+                <h3 id="puStr">Player -- Units</h3>
                 <div>
                     <div id="generals">
                         <span id="pgen1" class="genTab inputTabActive">General 1</span>
@@ -39,12 +39,12 @@
                 </div>
             </div>
             <div id="computer">
-                <h3>Computer Units</h3>
+                <h3 id="cuStr">Computer Units</h3>
                 <div>
                     <div id="advmaps">
                         <span id="tabPlayerIsland" class="compTab inputTabActive">Player Island</span>
                         <span id="tabAdvSelect" class="compTab inputTab">
-                            <span>Adventure</span>
+                            <span id="advStr"></span>
                             <span><select id="selAdv"></select></span>
                         </span>
                     </div>
@@ -58,7 +58,7 @@
                     <button id="startSim" type="button">Start Simulation</button>
                 </span>
                 <span>
-                    <label>Iterations</label> 
+                    <label id="iterStr">Iterations</label> 
                     <input id="inpNumIter" type="number" min="0" step="1" value="500"/>
                 </span>
                 <span>
@@ -71,7 +71,7 @@
             </div>
         </div>
         <div id="centerResults">
-            <h2>Results</h2>
+            <h2 id="resStr">Results</h2>
             <div id="waveResults"></div>
         </div>
     </div>

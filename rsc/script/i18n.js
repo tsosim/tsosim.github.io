@@ -175,6 +175,16 @@ var lang = {
             statMin           : "Minimum",
             statAverage       : "Average",
             statMax           : "Maximum",
+            victory           : "Victory",
+            defeat            : "Defeat",
+            rounds            : "Rounds",
+            hitpoints         : "Hitpoints",
+            damage            : "Damage",
+            accuracy          : "Accuracy",
+            initiative        : "Initiative",
+            startSim          : "Start Simulation",
+            iterations        : "Iterations",
+            reset             : "Reset"
         }
     },
 	de : {
@@ -345,11 +355,22 @@ var lang = {
             towerBonus        : "Turmbonus",
             results           : "Ergebnisse",
             statistic         : "Statistik",
-            combatLog         : "Combat Log",
-            wave              : "Welle",
+            combatLog         : "Protokoll",
+            wave              : "Angriffswelle",
             statUnits         : "Einheiten/Runden",
             statMin           : "Minimum",
             statAverage       : "Durchschnitt",
             statMax           : "Maximum",
-        }    }
+            victory           : "Sieg",
+            defeat            : "Niederlage",
+            rounds            : "Runden",
+            hitpoints         : "Lebenspunkte",
+            damage            : "Schaden",
+            accuracy          : "Treffsicherheit",
+            initiative        : "Initiative",
+            startSim          : "Starte Simulation",
+            iterations        : "Wiederholungen",
+            reset             : "Löschen"
+        }    
+    }
 };
