@@ -654,50 +654,6 @@ function defineAdventureMaps(units, adv_maps) {
             }
         }
     }
-    
-    adv_maps.names  = {
-        //"playerIsland"              : adv_maps.playerIsland,
-        "Bandit Nest"               : adv_maps.banditnest,
-        "Garrun the Trapper"        : adv_maps.garrunTheTrapper,
-        "Gunpowder"                 : adv_maps.gunpowder,
-        "Horseback"                 : adv_maps.horseback,
-        "Island of the Pirates"     : adv_maps.islandOfPirates,
-        "Lakeside Treasure"         : adv_maps.lakesideTreasure,
-        "More secluded experiments" : adv_maps.moreSecExp,
-        "Mother Love"               : adv_maps.motherLove,
-        "Old friends"               : adv_maps.oldFriends,
-        "Old Ruins"                 : adv_maps.oldRuins,
-        "Outlaws"                   : adv_maps.outlaws,
-        "Pirate Life"               : adv_maps.pirateLife,
-        "Raiding the Raiders"       : adv_maps.raidingTheRaiders,
-        "Return To The Bandit Nest" : adv_maps.retToBanditNest,
-        "Roaring Bull"              : adv_maps.roaringBull,
-        "Secluded Experiments"      : adv_maps.secludedExp,
-        "Sleeping Volcano"          : adv_maps.sleepingVolcano,
-        "Sleepy Reef"               : adv_maps.sleepyReef,
-        "Sons of the Veldt"         : adv_maps.sonsOfTheVeldt,
-        "Stealing from the rich"    : adv_maps.stealingFromRich,
-        "Surprise Attack"           : adv_maps.surpriseAtack,
-        "The betrayed little Taylor": adv_maps.tBetrLittTaylor,
-        "The Black Knights"         : adv_maps.tBlackKnights,
-        "The Buccaneer Roundup"     : adv_maps.tBuccaneerRoundup,
-        "The clever little Taylor"  : adv_maps.tCleverLittTaylor,
-        "The Dark Brotherhood"      : adv_maps.tDarkBrotherhood,
-        "The Dark Priests"          : adv_maps.tDarkPriest,
-        "The heroic little Tailor"  : adv_maps.tHeroicLittTaylor,
-        "The Losk Skull"            : adv_maps.tLostSkull,
-        "The Nords"                 : adv_maps.tNords,
-        //"The Siege"                 : tsosim2.adv_maps.
-        "The sons of the little Taylor": adv_maps.tSonsOTLittTaylor,
-        "The Valiant Little Taylor" : adv_maps.tValiantLittTaylor,
-        "The Whirlwind"             : adv_maps.tWhirlwind,
-        "Tomb Raiders"              : adv_maps.tombRaiders,
-        "Traitors"                  : adv_maps.traitors,
-        "Tropical Sun"              : adv_maps.tropicalSun,
-        "Victor the Vicious"        : adv_maps.victorTVicious,
-        "Wild Mary"                 : adv_maps.wildMary,
-        "Witch of the Swamp"        : adv_maps.witchOTSwamp
-    };
 }
 
 
@@ -709,6 +665,16 @@ function defineAdventureMaps(units, adv_maps) {
 }());
 
 
+function setupAdvNames(advList) {
+    var nameList = {};
+    for(var idx in advList) {
+        if(advList.hasOwnProperty(idx)) {
+            nameList[advList[idx]] = idx;
+        }
+    }
+    return nameList;
+}
+
 var tsosim = {};//tsosim2;
 
 function setupTsoSim(versionId, langObj) {
@@ -718,6 +684,7 @@ function setupTsoSim(versionId, langObj) {
     } else {
         tsosim.lang = langObj;
     }
+    tsosim.advNames = setupAdvNames(tsosim.lang.adv);
     if(tsosim.version != versionId) {
         console.log("Setup simulation '" + versionId + "'");
         tsosim.version  = versionId;

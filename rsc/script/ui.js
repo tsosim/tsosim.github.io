@@ -383,8 +383,8 @@ function setupAdventureTabs() {
         var sel, key;
         sel = document.getElementById("selAdv");
         key = sel.value;
-        if (tsosim.adv_maps.names.hasOwnProperty(key)) {
-            setupComputerInputFields(tsosim.adv_maps.names[key].sort(function (u1, u2) { return u1.attackId - u2.attackId; }));
+        if (tsosim.advNames.hasOwnProperty(key)) {
+            setupComputerInputFields(tsosim.adv_maps[tsosim.advNames[key]].sort(function (u1, u2) { return u1.attackId - u2.attackId; }));
             setComputerGarrisonValues(key, garrisonData.computer[key].garrison);
         } else {
             console.log("no adventure with name: " + key);
@@ -397,7 +397,7 @@ function setupAdventureTabs() {
         if (advtab.getAttribute("class") === "compTab inputTabActive") {
             // adventure was active -> store it
             var advName = seladv.value;
-            storeComputerGarrisonValues(advName, tsosim.adv_maps.names[advName]);
+            storeComputerGarrisonValues(advName, tsosim.adv_maps[tsosim.advNames[advName]]);
             advtab.setAttribute("class", "compTab inputTab");
         }
         
@@ -422,11 +422,11 @@ function setupAdventureTabs() {
 
         if (advtab.getAttribute("class") === "compTab inputTabActive") {
             // adventure tab already active -> store current values for selected adventure
-            storeComputerGarrisonValues(advName, tsosim.adv_maps.names[advName]);
+            storeComputerGarrisonValues(advName, tsosim.adv_maps[tsosim.advNames[advName]]);
         } else {
             // adventure tab was not active -> init input fields and read values from storage
-            if (tsosim.adv_maps.names.hasOwnProperty(advName)) {
-                setupComputerInputFields(tsosim.adv_maps.names[advName].sort(function (u1, u2) { return u1.attackId - u2.attackId; }));
+            if (tsosim.advNames.hasOwnProperty(advName)) {
+                setupComputerInputFields(tsosim.adv_maps[tsosim.advNames[advName]].sort(function (u1, u2) { return u1.attackId - u2.attackId; }));
                 setComputerGarrisonValues(advName, garrisonData.computer[advName].garrison);
             } else {
                 console.log("no adventure with name: " + advName);
@@ -588,15 +588,22 @@ function setupComputerInputFields(units, capacity) {
 
 // setup combobox (select) with all available adventures
 function setupAdventures() {
-    var compadv, idx, opt;
+    var compadv, idx, opt, advSorted;
     compadv = document.getElementById("selAdv");
-    for (idx in tsosim.adv_maps.names) {
-        if (tsosim.adv_maps.names.hasOwnProperty(idx)) {
-            opt = document.createElement("option");
-            opt.text = idx;
-            compadv.add(opt);
-            garrisonData.addNewMap(idx);
-        }
+    while(compadv.options.length > 0) {
+        compadv.options.remove(0);
+    }
+    advSorted = []; 
+    for (idx in tsosim.advNames) {
+        advSorted.push(idx);
+    }
+    advSorted.sort();
+    for (idx = 0; idx < advSorted.length; idx += 1) {
+        opt = document.createElement("option");
+        opt.text = advSorted[idx];
+        compadv.add(opt);
+        //garrisonData.addNewMap(idx);
+        garrisonData.addNewMap(advSorted[idx]);
     }
     garrisonData.addNewMap("playerIsland");
 }
@@ -612,7 +619,7 @@ function storeAdventureValues() {
             } else {
                 select = document.getElementById("selAdv");
                 advName = select.value;
-                storeComputerGarrisonValues(advName, tsosim.adv_maps.names[advName]);
+                storeComputerGarrisonValues(advName, tsosim.adv_maps[tsosim.advNames[advName]]);
             }
             break;
         }
@@ -629,7 +636,7 @@ function resetAdventureValues() {
             } else {
                 select = document.getElementById("selAdv");
                 advName = select.value;
-                units = tsosim.adv_maps.names[advName];
+                units = tsosim.adv_maps[tsosim.advNames[advName]];
             }
             
             for (idx in units) {
@@ -1175,6 +1182,7 @@ function initializeUnitsAndUI(simVersion, lang) {
     //setupGeneralTabs();
     setupPlayerInputFields(tsosim.units, 500);
 
+    setupAdventures();
     setupAdventureTabs();
 }
 
