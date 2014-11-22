@@ -237,6 +237,7 @@ footer {
 
 .tooltipDataLabel {
     padding-right: 10px;
+    white-space:nowrap;
 }
 
 /* right part of the input area */
@@ -907,3 +908,66 @@ footer {
     background: rgba(196,255,196,0);
 }
 
+.stackRow {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-around;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.stackColumn {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 25%;
+}
+.stackColumn.colLeft {
+    align-items: flex-end;
+    width: 20%;
+}
+.stackColumn.colRight {
+    align-items: flex-start;
+    width: 20%;
+}
+
+#expResults {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+#expResInfo {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+#expLog {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+#expResTables {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+.extTabRes {
+    border-collapse: collapse;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+    width: 30%;
+}
+.expStackTab {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 5px;
+}
+.expIcon {
+    margin-top: 6px;
+}

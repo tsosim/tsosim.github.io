@@ -4,7 +4,7 @@ var lang = {
 	en : {
         name : "English",
 		unit : {
-			recruit           : "Recruit",
+            recruit           : "Recruit",
 			militia           : "Militia",
 			soldier           : "Soldier",
 			eliteSoldier      : "Elite Soldier",
@@ -114,7 +114,33 @@ var lang = {
 			campWatchTower    : "Watchtower",
 			campReinfTower    : "Reinforced Tower",
 			campStoneTower    : "Stone Tower",
-			campWitchTower    : "Witch Tower"
+			campWitchTower    : "Witch Tower",
+                        
+            // exp
+            
+            expAttackInf      : "Infantry",
+            expAttackArch     : "Archer",
+            expAttackCav      : "Cavalry",
+            expHeavyInf       : "Heavy Infantry",
+            expHeavyArch      : "Heavy Archer",
+            expHeavyCav       : "Heavy Cavalry",
+            expGuardsman      : "Guardsman",
+            
+            expRecruit        : "Bandit Recruit",
+            expThug           : "Thug",
+            expRoughneck      : "Roughneck", 
+            expBowman         : "Bandit Bowman",
+            expCavalry        : "Bandit Cavalry",
+            expMercDuelist    : "Mercenary Duelist",
+            expMercShooter    : "Mercenary Sharpshooter",
+            expMercCharger    : "Mercenary Charger",
+            expMercInfantry   : "Mercenary Infantry",
+            expMercArcher     : "Mercenary Archer",
+            expMercCavalry    : "Mercenary Cavalry",
+            expSkunk          : "Skunk",
+            expBert           : "One-Eyed Bert",
+            expMetalTooth     : "Metal Tooth",
+
         },
         adv : {
         //"playerIsland"              : adv_maps.playerIsland,
@@ -162,6 +188,8 @@ var lang = {
         ui : {
             title             : "The Settlers Online - Combat Simulator",
             language          : "Language",
+            unit              : "Unit",
+            units             : "Units",
             playerUnits       : "Player Units",
             computerUnits     : "Computer Units",
             playerIsland      : "Player Island",
@@ -178,13 +206,17 @@ var lang = {
             victory           : "Victory",
             defeat            : "Defeat",
             rounds            : "Rounds",
+            losses            : "Losses",
             hitpoints         : "Hitpoints",
+            hp                : "HP",
             damage            : "Damage",
             accuracy          : "Accuracy",
             initiative        : "Initiative",
             startSim          : "Start Simulation",
             iterations        : "Iterations",
-            reset             : "Reset"
+            reset             : "Reset",
+            
+            bonus             : "Bonus"
         }
     },
 	de : {
@@ -300,7 +332,33 @@ var lang = {
 			campWatchTower    : "Wachturm",
 			campReinfTower    : "Verstärkter Wachturm",
 			campStoneTower    : "Steinturm",
-			campWitchTower    : "Hexenturm"
+			campWitchTower    : "Hexenturm",
+
+            // exp
+            
+            expAttackInf      : "Infantry",
+            expAttackArch     : "Archer",
+            expAttackCav      : "Cavalry",
+            expHeavyInf       : "Heavy Infantry",
+            expHeavyArch      : "Heavy Archer",
+            expHeavyCav       : "Heavy Cavalry",
+            expGuardsman      : "Guardsman",
+            
+            expRecruit        : "Bandit Recruit",
+            expThug           : "Thug",
+            expRoughneck      : "Roughneck", 
+            expBowman         : "Bandit Bowman",
+            expCavalry        : "Bandit Cavalry",
+            expMercDuelist    : "Mercenary Duelist",
+            expMercShooter    : "Mercenary Sharpshooter",
+            expMercCharger    : "Mercenary Charger",
+            expMercInfantry   : "Mercenary Infantry",
+            expMercArcher     : "Mercenary Archer",
+            expMercCavalry    : "Mercenary Cavalry",
+            expSkunk          : "Skunk",
+            expBert           : "One-Eyed Bert",
+            expMetalTooth     : "Metal Tooth",
+
         },
         adv : {
         //"playerIsland"              : adv_maps.playerIsland,
@@ -348,6 +406,8 @@ var lang = {
         ui : {
             title             : "Die Siedler Online - Kampfsimulator",
             language          : "Sprache",
+            unit              : "Einheit",
+            units             : "Einheiten",
             playerUnits       : "Spielereinheiten",
             computerUnits     : "Computereinheiten",
             playerIsland      : "Heimatinsel",
@@ -364,13 +424,17 @@ var lang = {
             victory           : "Sieg",
             defeat            : "Niederlage",
             rounds            : "Runden",
+            losses            : "Verluste",
             hitpoints         : "Lebenspunkte",
+            hp                : "LP",
             damage            : "Schaden",
             accuracy          : "Treffsicherheit",
             initiative        : "Initiative",
             startSim          : "Starte Simulation",
             iterations        : "Wiederholungen",
-            reset             : "Löschen"
+            reset             : "Löschen",
+
+            bonus             : "Bonus"
         }    
     }
 };

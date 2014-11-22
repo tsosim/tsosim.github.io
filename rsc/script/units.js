@@ -18,7 +18,8 @@ function VersionData() {
 var tso = {
     versions: [
         {name: "live", tt: "Liveserver"},
-        {name: "test", tt: "Testserver, 30.09.2014"}
+        {name: "test", tt: "Testserver, 30.09.2014"},
+        {name: "Exp",  tt: "Expeditions"}
     ],
     defaultVersion: "live",
     data : {}
@@ -449,158 +450,107 @@ tso.data.test.functions.defineUnits = function () {
     }
 };
 
-/*
-function definePlayerUnits() {
+tso.data.Exp.functions.defineUnits = function () {
     
-    tsosim2.units.recruit       = new Unit("Recruit",        30, [1,  20],  70, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE], true);
-    tsosim2.units.militia       = new Unit("Militia",        70, [1,  30],  80, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE]);
-    tsosim2.units.soldier       = new Unit("Soldier",       110, [1,  40],  85, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE]);
-    tsosim2.units.elite_soldier = new Unit("Elite Soldier", 150, [1,  50],  90, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE]);
-    tsosim2.units.bowman        = new Unit("Bowman",         10, [1,  40],  70, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE, Skills.WEAK, Skills.TOWER_BONUS]);
-    tsosim2.units.longbowman    = new Unit("Longbowman",     20, [1,  80],  80, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE, Skills.WEAK, Skills.TOWER_BONUS]);
-    tsosim2.units.crossbowman   = new Unit("Crossbowman",    30, [1, 120],  85, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE]);
-    tsosim2.units.cannoneer     = new Unit("Cannoneer",      40, [1, 160],  90, Initiative.LAST,   getAID(), [Skills.SPLASH_DAMAGE, Skills.TOWER_BONUS, Skills.ARMOR_PENETRATION]);
-    tsosim2.units.cavalry       = new Unit("Cavalry",         5, [1,  10], 100, Initiative.FIRST,  getAID(), [Skills.SPLASH_DAMAGE, Skills.WEAK, Skills.ATTACK_WEAKEST]);
+    var vData, pu, cu, au, idx, camp;
+    vData = tso.data.Exp;
+    pu = vData.playerUnits;
+    cu = vData.computerUnits;
+//    camp = vData.camps;
+    au = vData.allUnits;
     
-    setUnitIDs(tsosim2.units);
-    setUnitClass(tsosim2.units, EnemyType.PLAYER);
-    
-    tsosim2.units.militia.setBonusDamage      (EnemyType.BANDITS, 20);
-    tsosim2.units.soldier.setBonusDamage      (EnemyType.KINGDOM, 30);
-    tsosim2.units.elite_soldier.setBonusDamage(EnemyType.RAIDERS, 30);
-    tsosim2.units.elite_soldier.setBonusDamage(EnemyType.NORDS, 20);
-    tsosim2.units.elite_soldier.setBonusDamage(EnemyType.PIRATES, 30);
-    tsosim2.units.crossbowman.setBonusDamage  (EnemyType.CULTISTS, 20);
-    tsosim2.units.crossbowman.setBonusDamage  (EnemyType.WILDLIFE, 20);
-    tsosim2.units.cannoneer.setBonusDamage    (EnemyType.EPIC, 30);
-    
-}
+    pu.expAttackInf  = new ExpUnit("Infantry",        180, 30, ExpUnitType.MELEE,   "rsc/img/expAttackInfantry.png");
+	pu.expAttackArch = new ExpUnit("Archer",          180, 30, ExpUnitType.RANGED,  "rsc/img/expAttackArcher.png");
+	pu.expAttackCav  = new ExpUnit("Cavalry",         180, 30, ExpUnitType.CAVALRY, "rsc/img/expAttackCavalry.png");
+	pu.expHeavyInf   = new ExpUnit("Heavy Infantry",  400,  5, ExpUnitType.MELEE  | ExpUnitType.HEAVY, "rsc/img/expHeavyInfantry.png");
+	pu.expHeavyArch  = new ExpUnit("Heavy Archer",    400,  5, ExpUnitType.RANGED | ExpUnitType.HEAVY, "rsc/img/expHeavyArcher.png");
+	pu.expHeavyCav   = new ExpUnit("Heavy Cavalry",   400,  5, ExpUnitType.CAVALRY| ExpUnitType.HEAVY, "rsc/img/expHeavyCavalry.png");
+	pu.expGuardsman  = new ExpUnit("Guardsman",       400, 10, ExpUnitType.ELITE  | ExpUnitType.HEAVY, "rsc/img/expGuard.png");
 
-function definePlayerGenerals() {
-    tsosim2.generals.general    = new Unit("General",                 1, [120, 120], 80, Initiative.THIRD, getAID(), [Skills.GENERAL, Skills.SPLASH_DAMAGE]);
-    tsosim2.generals.mma        = new Unit("Martial Arts General", 1000, [450, 500], 80, Initiative.FIRST, getAID(), [Skills.GENERAL, Skills.SPLASH_DAMAGE, Skills.ATTACK_WEAKEST]);
-    tsosim2.generals.leg_vet    = new Unit("Legendary Veteran",    1500, [  1, 200], 80, Initiative.THIRD, getAID(), [Skills.GENERAL, Skills.SPLASH_DAMAGE]);
+    pu.expAttackInf.addBonus(ExpUnitType.CAVALRY, 35);
+	pu.expAttackArch.addBonus(ExpUnitType.MELEE, 35);
+	pu.expAttackCav.addBonus(ExpUnitType.RANGED, 35);
+
+    setUnitIDs(pu);
     
-    setUnitIDs(tsosim2.generals);
-    setUnitClass(tsosim2.generals, EnemyType.PLAYER);
-}
-*/
-function defineComputerUnits() {
+	///////////////////////////////////////////////////
+
+    cu.expRecruit       = new ExpUnit("Bandit Recruit",         130, 25, ExpUnitType.MELEE, "rsc/img/expBanditRecruit.png");
+	cu.expRecruit.addBonus(ExpUnitType.CAVALRY, 25);
+
+    cu.expThug          = new ExpUnit("Thug",                   150, 30, ExpUnitType.MELEE, "rsc/img/expThug.png");
+    cu.expThug.addBonus(ExpUnitType.CAVALRY, 35);
+
+    cu.expRoughneck     = new ExpUnit("Roughneck",              220, 25, ExpUnitType.MELEE, "rsc/img/expRoughneck.png");
+	cu.expRoughneck.addBonus(ExpUnitType.CAVALRY, 35);
+
+    // ----
     
-    /* bandits *
-    tsosim2.computerUnits.scavenger     = new Unit("Scavenger",        20, [   1,   20], 60, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE]);
-    tsosim2.computerUnits.thug          = new Unit("Thug",             60, [   1,   30], 65, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE]);
-    tsosim2.computerUnits.roughneck     = new Unit("Roughneck",        90, [   1,   40], 70, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE, Skills.TOWER_BONUS]);
-    tsosim2.computerUnits.stone_thrower = new Unit("Stone Thrower",    10, [   1,   40], 60, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE, Skills.WEAK, Skills.TOWER_BONUS]);
-    tsosim2.computerUnits.ranger        = new Unit("Ranger",           10, [   1,   60], 60, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE, Skills.WEAK, Skills.ATTACK_WEAKEST, Skills.TOWER_BONUS]);
-    tsosim2.computerUnits.guard_dog     = new Unit("Guard Dog",         5, [   1,   10], 60, Initiative.FIRST,  getAID(), [Skills.SPLASH_DAMAGE, Skills.WEAK, Skills.ATTACK_WEAKEST]);
-    tsosim2.computerUnits.skunk         = new Unit("Skunk",          5000, [  50,  100], 80, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE]);
-    tsosim2.computerUnits.one_eyed_bert = new Unit("One-Eyed Bert",  6000, [ 250,  500], 80, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE]);
-    tsosim2.computerUnits.metal_toothed = new Unit("Metal Toothed", 11000, [ 250,  500], 90, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE, Skills.TOWER_BONUS]);
-    tsosim2.computerUnits.chuck         = new Unit("Chuck",          9000, [1250, 2500], 80, Initiative.LAST,   getAID(), [Skills.SPLASH_DAMAGE, Skills.ATTACK_WEAKEST]);
-    tsosim2.computerUnits.wild_mary     = new Unit("Wild Mary",     60000, [ 400,  800], 80, Initiative.FIRST,  getAID(), [Skills.SPLASH_DAMAGE, Skills.TOWER_BONUS]);
+    cu.expBowman        = new ExpUnit("Bandit Bowman",          130, 35, ExpUnitType.RANGED, "rsc/img/expBanditBowman.png");
+	cu.expBowman.addBonus(ExpUnitType.MELEE, 35);
+
+    // ----
+
+	cu.expCavalry       = new ExpUnit("Bandit Cavalry",         150, 30, ExpUnitType.CAVALRY, "rsc/img/expBanditCavalry.png");
+	cu.expCavalry.addBonus(ExpUnitType.RANGED, 35);
+
+    // ----
+
+    cu.expMercDuelist   = new ExpUnit("Mercenary Duelist",      180, 25, ExpUnitType.MELEE, "rsc/img/expMercDuelist.png");
+    cu.expMercDuelist.addBonus(ExpUnitType.CAVALRY, 75);
+
+	cu.expMercShooter   = new ExpUnit("Mercenary Sharpshooter", 180, 25, ExpUnitType.RANGED, "rsc/img/expMercSharpshooter.png");
+    cu.expMercShooter.addBonus(ExpUnitType.MELEE, 75);
+
+	cu.expMercCharger   = new ExpUnit("Mercenary Charger",      180, 25, ExpUnitType.CAVALRY, "rsc/img/expMercCharger.png");
+    cu.expMercCharger.addBonus(ExpUnitType.RANGED, 75);
+
+	cu.expMercInfantry  = new ExpUnit("Mercenary Infantry",     180, 35, ExpUnitType.MELEE, "rsc/img/expMercInfantry.png");
+	cu.expMercArcher    = new ExpUnit("Mercenary Archer",       180, 35, ExpUnitType.RANGED, "rsc/img/expMercArcher.png");
+    cu.expMercCavalry   = new ExpUnit("Mercenary Cavalry",      180, 35, ExpUnitType.CAVALRY, "rsc/img/expMercCavalry.png");
     
-    // pirates *
-    tsosim2.computerUnits.deckscrubber  = new Unit("Deckscrubber",     15, [  1,  15], 60, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE]);
-    tsosim2.computerUnits.sabrerattler  = new Unit("Sabrerattler",     50, [  1,  20], 65, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE]);
-    tsosim2.computerUnits.petty_officer = new Unit("Petty officer 2nd class", 200, [1, 150], 90, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE, Skills.ATTACK_WEAKEST]);
-    tsosim2.computerUnits.knifethrower  = new Unit("Knifethrower",     10, [  1,  20], 60, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE, Skills.WEAK]);
-    tsosim2.computerUnits.gunman        = new Unit("Gunman",           20, [  1,  40], 70, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE, Skills.WEAK, Skills.ATTACK_WEAKEST, Skills.TOWER_BONUS]);
-    tsosim2.computerUnits.caltrop       = new Unit("Caltrop",          20, [  1,  10], 90, Initiative.FIRST,  getAID(), [Skills.SPLASH_DAMAGE, Skills.WEAK, Skills.ATTACK_WEAKEST, Skills.TOWER_BONUS]);
-    tsosim2.computerUnits.crazy_cook    = new Unit("Crazy Cook",     5000, [150, 300], 66, Initiative.FIRST,  getAID(), [Skills.SPLASH_DAMAGE]);
+    // ----
+
+	cu.expSkunk         = new ExpUnit("Skunk",                 4000,300, ExpUnitType.MELEE  | ExpUnitType.BOSS, "rsc/img/expSkunk.png");
+	cu.expSkunk.addBonus(ExpUnitType.CAVALRY, 40);
+
+	cu.expBert          = new ExpUnit("One-Eyed Bert",         4000,300, ExpUnitType.RANGED  | ExpUnitType.BOSS, "rsc/img/expBert.png");
+	cu.expBert.addBonus(ExpUnitType.MELEE, 40);
+
+    cu.expMetalTooth    = new ExpUnit("Metal Tooth",           4000,300, ExpUnitType.CAVALRY | ExpUnitType.BOSS, "rsc/img/expMetalTooth.png");
+	cu.expMetalTooth.addBonus(ExpUnitType.RANGED, 40);
 
     
-    // traitors *
-    //                                        name           hp     dmg      acc    initiative     attack_id    skills
-    tsosim2.computerUnits.des_recruit   = new Unit("Des. Recruit",   30, [  1,  20],  70, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE]);
-    tsosim2.computerUnits.des_militia   = new Unit("Des. Militia",   70, [  1,  30],  80, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE, Skills.TOWER_BONUS]);
-    tsosim2.computerUnits.des_soldier   = new Unit("Des. Soldier",  110, [  1,  40],  85, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE, Skills.ATTACK_WEAKEST, Skills.TOWER_BONUS]);
-    tsosim2.computerUnits.des_elite_soldier = new Unit("Des. Elite Soldier", 150, [1, 50], 90, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE, Skills.TOWER_BONUS,  Skills.ATTACK_WEAKEST]);
-    tsosim2.computerUnits.des_bowman    = new Unit("Des. Bowman",    10, [  1,  40],  70, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE, Skills.WEAK, Skills.TOWER_BONUS]);
-    tsosim2.computerUnits.des_longbow   = new Unit("Des. Longbow",   20, [  1,  80],  80, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE, Skills.WEAK, Skills.TOWER_BONUS]);
-    tsosim2.computerUnits.des_crossbow  = new Unit("Des. Crossbow",  30, [  1, 100],  85, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE, Skills.ATTACK_WEAKEST, Skills.TOWER_BONUS]);
-    tsosim2.computerUnits.des_cannoneer = new Unit("Des. Cannoneer", 40, [  1, 140],  90, Initiative.LAST,   getAID(), [Skills.SPLASH_DAMAGE]);
-    tsosim2.computerUnits.des_cavalry   = new Unit("Des. Cavalry",    5, [  1,  10], 100, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE, Skills.WEAK, Skills.ATTACK_WEAKEST]);
-    tsosim2.computerUnits.sir_robin     = new Unit("Sir Robin",   12000, [300, 600],  90, Initiative.FIRST,  getAID(), [Skills.SPLASH_DAMAGE, Skills.ATTACK_WEAKEST]);
-    tsosim2.computerUnits.big_bertha    = new Unit("Big Bertha",  40000, [ 75, 150],  90, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE, Skills.ATTACK_WEAKEST]);
+    /*
+    cu.expScavenger    = new ExpUnit("Scavenger",     150, 30, ExpUnitType.MELEE);
+	cu.expGuardDog     = new ExpUnit("Guard Dog",     150, 30, ExpUnitType.CAVALRY);
+	cu.expStoneThrower = new ExpUnit("Stone Thrower", 150, 30, ExpUnitType.RANGED);
 
-    // cultists *
-    tsosim2.computerUnits.cultist          = new Unit("Cultist",             40, [  1,   30],  80, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE]);
-    tsosim2.computerUnits.fanatic          = new Unit("Fanatic",             20, [  1,   60],  90, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE, Skills.WEAK, Skills.TOWER_BONUS]);
-    tsosim2.computerUnits.dark_priest      = new Unit("Dark Priest",         20, [  1,  100],  90, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE, Skills.WEAK, Skills.ATTACK_WEAKEST, Skills.TOWER_BONUS]);
-    tsosim2.computerUnits.firedancer       = new Unit("Firedancer",          30, [  1,  150],  90, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE, Skills.WEAK, Skills.TOWER_BONUS]);
-    tsosim2.computerUnits.dancing_dervish  = new Unit("Dancing Dervish",     70, [  1,  200], 100, Initiative.LAST,   getAID(), [Skills.SPLASH_DAMAGE]);
-    tsosim2.computerUnits.shadowstalker    = new Unit("Shadowsneaker",        5, [  1,    5],  90, Initiative.FIRST,  getAID(), [Skills.SPLASH_DAMAGE, Skills.WEAK, Skills.ATTACK_WEAKEST]);
-    tsosim2.computerUnits.swamp_witch      = new Unit("Swamp Witch",      25000, [300,  600],  75, Initiative.FIRST,  getAID(), [Skills.SPLASH_DAMAGE, Skills.ATTACK_WEAKEST]);
-    tsosim2.computerUnits.dark_high_priest = new Unit("Dark High Priest", 15000, [500, 1000],  75, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE]);
-    tsosim2.computerUnits.night_spawn      = new Unit("Night Spawn",      40000, [500, 1000],  75, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE, Skills.TOWER_BONUS]);
+	cu.expDrakBear     = new ExpUnit("Drak(bear)",   5000, 360, ExpUnitType.MELEE   | ExpUnitType.BOSS);
 
-    // raiders *
-    tsosim2.computerUnits.nomad            = new Unit("Nomad",             80, [ 1,  20],  80, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE]);
-    tsosim2.computerUnits.comp_bow         = new Unit("Composite Bow",     10, [ 1,  30],  90, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE, Skills.WEAK, Skills.ATTACK_WEAKEST]);
-    tsosim2.computerUnits.lance_rider      = new Unit("Lance Rider",       10, [ 1,  10],  90, Initiative.FIRST,  getAID(), [Skills.SPLASH_DAMAGE, Skills.WEAK]);
-    tsosim2.computerUnits.riding_bowman    = new Unit("Riding Bowman",     20, [ 1,  40],  90, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE, Skills.WEAK, Skills.ATTACK_WEAKEST]);
-    tsosim2.computerUnits.riding_amazon    = new Unit("Riding Amazonian",  20, [ 1,  60],  90, Initiative.FIRST,  getAID(), [Skills.SPLASH_DAMAGE, Skills.WEAK, Skills.ATTACK_WEAKEST, Skills.TOWER_BONUS]);
-    tsosim2.computerUnits.cataphract       = new Unit("Cataphract",        20, [ 1,  90], 100, Initiative.FIRST,  getAID(), [Skills.SPLASH_DAMAGE, Skills.WEAK, Skills.ATTACK_WEAKEST, Skills.TOWER_BONUS]);
-    tsosim2.computerUnits.uproar_bull      = new Unit("Uproarious Bull", 2000, [60, 120], 100, Initiative.FIRST,  getAID(), [Skills.SPLASH_DAMAGE, Skills.TOWER_BONUS]);
+    cu.expScavenger.addBonus(ExpUnitType.CAVALRY, 35);
+	cu.expGuardDog.addBonus(ExpUnitType.RANGED, 35);
+	cu.expStoneThrower.addBonus(ExpUnitType.MELEE, 35);
 
-    // nords *
-    tsosim2.computerUnits.thrall     = new Unit("Thrall",      60, [1,  30], 85, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE]);
-    tsosim2.computerUnits.karl       = new Unit("Karl",        80, [1,  50], 90, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE]);
-    tsosim2.computerUnits.housekarl  = new Unit("Housecarl",  140, [1,  70], 90, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE, Skills.ATTACK_WEAKEST]);
-    tsosim2.computerUnits.jomsviking = new Unit("Jomsviking", 180, [1,  80], 95, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE, Skills.TOWER_BONUS]);
-    tsosim2.computerUnits.valkyrie   = new Unit("Valkyrie",    30, [1,  60], 60, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE, Skills.WEAK, Skills.ATTACK_WEAKEST]);
-    tsosim2.computerUnits.berserk    = new Unit("Berserk",     90, [1, 200], 70, Initiative.LAST,   getAID(), [Skills.SPLASH_DAMAGE, Skills.ATTACK_WEAKEST, Skills.TOWER_BONUS]);
-    
-    
-    // wildlife *
-    tsosim2.computerUnits.boar             = new Unit("Boar",            50, [1,  80], 85, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE, Skills.TOWER_BONUS]);
-    tsosim2.computerUnits.bear             = new Unit("Bear",            90, [1, 120], 95, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE, Skills.TOWER_BONUS]);
-    tsosim2.computerUnits.epic_wolf        = new Unit("Epic Wolf",       30, [1, 150], 85, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE, Skills.WEAK]);
-    tsosim2.computerUnits.packleader_wolf  = new Unit("Packleader Wolf", 50, [1, 180], 95, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE, Skills.WEAK, Skills.ATTACK_WEAKEST]);
-    tsosim2.computerUnits.fox              = new Unit("Fox",             30, [1, 100], 95, Initiative.FIRST,  getAID(), [Skills.SPLASH_DAMAGE, Skills.WEAK, Skills.ATTACK_WEAKEST]);
-    tsosim2.computerUnits.epic_giant       = new Unit("Giant (Ep.)",    100, [1, 220], 95, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE, Skills.TOWER_BONUS]);
-  
-    // epic *
-    tsosim2.computerUnits.royal_recruit    = new Unit("Royal Recruit",   100, [30, 60], 85, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE]);
-    tsosim2.computerUnits.royal_militia    = new Unit("Royal Militia",   160, [1,  90], 85, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE, Skills.ATTACK_WEAKEST, Skills.TOWER_BONUS]);
-    tsosim2.computerUnits.royal_bowman     = new Unit("Royal Bowman",     40, [1,  80], 85, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE, Skills.WEAK]);
-    tsosim2.computerUnits.royal_longbowman = new Unit("Royal Longbowman", 60, [1, 140], 95, Initiative.FIRST,  getAID(), [Skills.SPLASH_DAMAGE, Skills.WEAK, Skills.ATTACK_WEAKEST]);
-    tsosim2.computerUnits.royal_cavalry    = new Unit("Royal Cavalry",    40, [1,  40], 95, Initiative.FIRST,  getAID(), [Skills.SPLASH_DAMAGE, Skills.WEAK, Skills.ATTACK_WEAKEST, Skills.TOWER_BONUS]);
-    tsosim2.computerUnits.royal_cannoneer  = new Unit("Royal Cannoneer", 160, [1, 160], 95,  Initiative.THIRD, getAID(), [Skills.SPLASH_DAMAGE, Skills.ATTACK_WEAKEST, Skills.TOWER_BONUS]);
-
-    // * epic bosses *
-    tsosim2.computerUnits.giant_leader1    = new Unit("Giant Leader 1",   90000, [ 150,   300], 60, Initiative.LAST,      getAID(), [Skills.SPLASH_DAMAGE]);
-    tsosim2.computerUnits.giant_leader2    = new Unit("Giant Leader 2",   70000, [ 125,   250], 80, Initiative.LAST,      getAID(), [Skills.SPLASH_DAMAGE]);
-    tsosim2.computerUnits.unicorn          = new Unit("Unicorn",          30000, [ 200,   400], 90, Initiative.THIRD,     getAID(), [Skills.SPLASH_DAMAGE]);
-    tsosim2.computerUnits.giant_boar       = new Unit("Giant Boar",       50000, [ 150,   300], 90, Initiative.THIRD,     getAID(), [Skills.SPLASH_DAMAGE, Skills.TOWER_BONUS]);
-    tsosim2.computerUnits.evil_king        = new Unit("Evil King",        30000, [ 150,   300], 80, Initiative.SECOND,    getAID(), [Skills.SPLASH_DAMAGE]);
-    tsosim2.computerUnits.iron_fist        = new Unit("Iron Fist",        45000, [ 125,   250], 85, Initiative.SECOND,    getAID(), [Skills.SPLASH_DAMAGE]);
-    tsosim2.computerUnits.giant_bear       = new Unit("Giant Bear",       55000, [ 375,   750], 60, Initiative.LAST,      getAID(), [Skills.SPLASH_DAMAGE]);
-    tsosim2.computerUnits.rival_dressmaker = new Unit("Rival Dressmaker", 40000, [ 125,   250], 75, Initiative.LAST,      getAID(), [Skills.SPLASH_DAMAGE, Skills.ATTACK_WEAKEST]);
-    tsosim2.computerUnits.black_bull       = new Unit("Black Bull",       60000, [ 150,   300], 90, Initiative.FIRST,     getAID(), [Skills.SPLASH_DAMAGE, Skills.TOWER_BONUS]);
-    tsosim2.computerUnits.dark_wizard      = new Unit("Dark Wizard",      30000, [1250,  2500], 80, Initiative.THIRD,     getAID(), [Skills.SPLASH_DAMAGE]);
-    tsosim2.computerUnits.lying_goat       = new Unit("Lying Goat",       25000, [  75,   150], 85, Initiative.SECOND,    getAID(), [Skills.SPLASH_DAMAGE, Skills.ATTACK_WEAKEST]);
-    tsosim2.computerUnits.thug_leader      = new Unit("Ep. Thug Leader - tbd", 40000, [150, 300],  80, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE]);
-    tsosim2.computerUnits.assassine        = new Unit("Assassine",        30000, [ 150,   300], 80, Initiative.SECOND,    getAID(), [Skills.SPLASH_DAMAGE]);
-    tsosim2.computerUnits.greedy_innkeeper = new Unit("Greedy Innkeeper", 50000, [ 1000, 2000], 80, Initiative.LAST,      getAID(), [Skills.SPLASH_DAMAGE, Skills.ATTACK_WEAKEST, Skills.TOWER_BONUS]);
-    
-    
-    tsosim2.computerUnits.wolf = new Unit("Wolf", 30, [1, 150], 85, Initiative.SECOND, 62000, [Skills.SPLASH_DAMAGE, Skills.WEAK]);
-    
-    setUnitIDs(tsosim2.computerUnits);
+	cu.expDrakBear.addBonus(ExpUnitType.CAVALRY, 50);
     */
+    
+    setUnitIDs(cu);
 }
-/*
-(function defineUnits() {
-    definePlayerUnits();
-    defineComputerUnits();
-    definePlayerGenerals();
-}());
-*/
+
+
+
 
 function defineAdventureMaps(units, adv_maps) {
     var cu = units;
+    
+    if(tsosim.version === tso.versions[2].name) {
+        adv_maps.expeditionIsland = [cu.expRecruit, cu.expThug, cu.expRoughneck, cu.expBowman, cu.expCavalry, cu.expMercDuelist, cu.expMercShooter, cu.expMercCharger, cu.expMercInfantry, cu.expMercArcher, cu.expMercCavalry, cu.expSkunk, cu.expBert, cu.expMetalTooth];
+        
+        
+        return;
+    }
+    
     //var cu = tso.data.live.allUnits;
     adv_maps.playerIsland      = [cu.bWildMary, cu.bChuck, cu.bMetalToothed, cu.bScavenger, cu.bThug, cu.bGuardDog, cu.bRoughneck, cu.bStoneThrower, cu.bRanger, cu.bSkunk, cu.bOneEyedBert];
     adv_maps.garrunTheTrapper  = [];
@@ -684,7 +634,9 @@ function setupTsoSim(versionId, langObj) {
     } else {
         tsosim.lang = langObj;
     }
-    tsosim.advNames = setupAdvNames(tsosim.lang.adv);
+    if(versionId !== tso.versions[2].name) {
+        tsosim.advNames = setupAdvNames(tsosim.lang.adv);
+    }
     if(tsosim.version != versionId) {
         console.log("Setup simulation '" + versionId + "'");
         tsosim.version  = versionId;
@@ -694,7 +646,9 @@ function setupTsoSim(versionId, langObj) {
         tsosim.camps    = tso.data[versionId].camps;
         tsosim.adv_maps = {};
         //tsosim.lang = lang.de;
-        defineAdventureMaps(tsosim.computerUnits, tsosim.adv_maps);
+        //if(versionId !== tso.versions[2].name) {
+            defineAdventureMaps(tsosim.computerUnits, tsosim.adv_maps);
+        //}
     }
 }
 

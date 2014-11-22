@@ -219,3 +219,22 @@ footer {
 }
 
 */
+
+
+.expStackLogDefeat {
+    background: rgba(255,0,0,0.125);
+}
+
+.expStackLogVictory {
+    background: rgba(0,0,255,0.125);
+}
+
+#expResults {
+    background: rgba(215, 235, 145,0.5);
+}
+#expLog {
+    background: rgba(215, 235, 145,0.5);
+}
+.extTabHead {
+    background: rgba(128, 128, 128, 0.75);
+}

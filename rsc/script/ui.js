@@ -22,6 +22,7 @@ function createUnitTooltipLine(label, text) {
     tr.appendChild(td);
     
     td = document.createElement("td");
+    td.setAttribute("class", "tooltipDataLabel");
     td.innerHTML = text;
     tr.appendChild(td);
     
@@ -43,11 +44,21 @@ function createUnitTooltip(unit) {
     tr.appendChild(th);
     tab.appendChild(tr);
     
-    tab.appendChild(createUnitTooltipLine(tsosim.lang.ui.hitpoints, unit.hitpoints));
-    tab.appendChild(createUnitTooltipLine(tsosim.lang.ui.damage, unit.damage.min + " - " + unit.damage.max));
-    tab.appendChild(createUnitTooltipLine(tsosim.lang.ui.accuracy, unit.accuracy + "%"));
-    tab.appendChild(createUnitTooltipLine(tsosim.lang.ui.initiative, unit.initiative));
-    
+    if(tsosim.version !== tso.versions[2].name) {
+        tab.appendChild(createUnitTooltipLine(tsosim.lang.ui.hitpoints, unit.hitpoints));
+        tab.appendChild(createUnitTooltipLine(tsosim.lang.ui.damage, unit.damage.min + " - " + unit.damage.max));
+        tab.appendChild(createUnitTooltipLine(tsosim.lang.ui.accuracy, unit.accuracy + "%"));
+        tab.appendChild(createUnitTooltipLine(tsosim.lang.ui.initiative, unit.initiative));
+    } else {
+        tab.appendChild(createUnitTooltipLine(tsosim.lang.ui.hitpoints, unit.hitpoints));
+        tab.appendChild(createUnitTooltipLine(tsosim.lang.ui.damage, unit.damage));
+        tab.appendChild(createUnitTooltipLine("type", ExpUnitTypeName(unit)));
+        for(var b in unit.bonus) {
+            if(unit.bonus.hasOwnProperty(b)) {
+                tab.appendChild(createUnitTooltipLine(tsosim.lang.ui.bonus, "vs. "+ ExpTypeNames[b] + " " + unit.bonus[b] + "%"));
+            }
+        }
+    }
     div.appendChild(tab);
     
     return div;
@@ -73,6 +84,10 @@ function setupUnitInputField(unit, capacity) {
     tr  = document.createElement("tr");
     tr.setAttribute("class", "unittablerow");
 
+    if(unit === undefined) {
+        console.log("test");
+    }
+    
     label = document.createElement("td");
     label.setAttribute("class", "unitlabel" + (unit.checked ? "" : " unitUnchecked"));
     label.setAttribute("for", "inp_" + unit.id);
@@ -184,7 +199,11 @@ function setupGeneralSelectionOption(value, text, att_id, att_class) {
     // if tab is clicked, then previously selected tab will be disabled (via css class) and the selected on enabled
     span.onclick = function () {
         var options, node, opt, attr;
-        options = ["genSel200", "genSel220", "genSel250", "genSel270", "genSelMMA"];
+        if(tsosim.version !== tso.versions[2].name) {
+            options = ["genSel200", "genSel220", "genSel250", "genSel270", "genSelMMA"];
+        } else {
+            options = ["genSel100"];
+        }
         for (opt = 0; opt < options.length; opt += 1) {
             node = document.getElementById(options[opt]);
             attr = node.getAttribute("class");
@@ -210,11 +229,15 @@ function setupGeneralSelectionArea() {
     label.innerHTML = "General: ";
     base.appendChild(label);
     
-    base.appendChild(setupGeneralSelectionOption(200, "200", "genSel200", "genSel selOptActive"));
-    base.appendChild(setupGeneralSelectionOption(220, "220", "genSel220", "genSel selOpt"));
-    base.appendChild(setupGeneralSelectionOption(250, "250", "genSel250", "genSel selOpt"));
-    base.appendChild(setupGeneralSelectionOption(270, "270", "genSel270", "genSel selOpt"));
-    base.appendChild(setupGeneralSelectionOption(220, "MMA", "genSelMMA", "genSel selOpt"));
+    if(tsosim.version !== tso.versions[2].name) {
+        base.appendChild(setupGeneralSelectionOption(200, "200", "genSel200", "genSel selOptActive"));
+        base.appendChild(setupGeneralSelectionOption(220, "220", "genSel220", "genSel selOpt"));
+        base.appendChild(setupGeneralSelectionOption(250, "250", "genSel250", "genSel selOpt"));
+        base.appendChild(setupGeneralSelectionOption(270, "270", "genSel270", "genSel selOpt"));
+        base.appendChild(setupGeneralSelectionOption(220, "MMA", "genSelMMA", "genSel selOpt"));
+    } else {
+        base.appendChild(setupGeneralSelectionOption(200, "100", "genSel100", "genSel selOptActive"));
+    }
     
     return base;
 }
@@ -234,6 +257,8 @@ function setupPlayerInputFields(units, capacity) {
     // create general tabs (here, because the input fields are only created once)
     if (base.children.length === 0) {
         base.appendChild(setupGeneralSelectionArea());
+    } else {
+        base.replaceChild(setupGeneralSelectionArea(), base.firstChild);
     }
     
     table = document.createElement("table");
@@ -260,9 +285,11 @@ function storeGarrisonValues() {
     for (i = 0; i < tabs.length; i += 1) {
         if (tabs[i].getAttribute("class") === "genTab inputTabActive") {
             storePlayerGarrisonValues(tabs[i].getAttribute("id"), tsosim.units);
-            break;
+            
+            return "pgen" + (i+1);
         }
     }
+    return "";
 }
 
 function resetGarrisonValues() {
@@ -292,17 +319,25 @@ function resetGarrisonValues() {
 //     units  : read values for units from this attay
 function storePlayerGarrisonValues(gen_id, units) {
     var garrison, idx, node, value, genIds, g;
-    garrison = garrisonData.player[gen_id].garrison;
-    garrison.clear();
+    
+    if(tsosim.version === tso.versions[2].name) {
+        garrison = expData.getExpData(gen_id).garrison;
+        garrison.clear();
+    } else {
+        garrison = garrisonData.player[gen_id].garrison;
+        garrison.clear();
+    }
     
     // read units from input fields
+    var setStart = false;
     for (idx in units) {
         if (units.hasOwnProperty(idx)) {
             node = document.getElementById("inp_" + idx);
             if (node !== null) {
                 value = parseInt(node.value, 10);
                 if (value > 0) {
-                    garrison.addUnits(units[idx], value);
+                    garrison.addUnits(units[idx], value, !setStart);
+                    setStart = true;
                 }
             } else {
                 console.log("reading units from input fields, but node is null!");
@@ -311,17 +346,21 @@ function storePlayerGarrisonValues(gen_id, units) {
     }
     
     // store general
-    genIds = ["genSel200", "genSel220", "genSel250", "genSel270", "genSelMMA"];
-    for (g = 0; g < genIds.length; g += 1) {
-        node = document.getElementById(genIds[g]);
-        if (node.getAttribute("class") === "genSel selOptActive") {
-            if (genIds[g] === "genSelMMA") {
-                garrison.addUnits(tsosim.generals.mma, 1);
-            } else {
-                garrison.addUnits(tsosim.generals.general, 1);
+    if(tsosim.version !== tso.versions[2].name) {
+        genIds = ["genSel200", "genSel220", "genSel250", "genSel270", "genSelMMA"];
+        for (g = 0; g < genIds.length; g += 1) {
+            node = document.getElementById(genIds[g]);
+            if (node.getAttribute("class") === "genSel selOptActive") {
+                if (genIds[g] === "genSelMMA") {
+                    garrison.addUnits(tsosim.generals.mma, 1);
+                } else {
+                    garrison.addUnits(tsosim.generals.general, 1);
+                }
+                garrison.setCapacity(parseInt(node.getAttribute("value"), 10));
             }
-            garrison.setCapacity(parseInt(node.getAttribute("value"), 10));
         }
+    } else {
+        genIds = ["genSel100"];
     }
 }
 
@@ -413,7 +452,11 @@ function setupAdventureTabs() {
         }
         
         pisland.setAttribute("class", "compTab inputTabActive");
-        setupComputerInputFields(tsosim.adv_maps.playerIsland.sort(function (u1, u2) { return u1.attackId - u2.attackId; }));
+        if(tsosim.version !== tso.versions[2].name) {
+            setupComputerInputFields(tsosim.adv_maps.playerIsland.sort(function (u1, u2) { return u1.attackId - u2.attackId; }));
+        } else {
+            setupComputerInputFields(tsosim.adv_maps.expeditionIsland);//.sort(function (u1, u2) { return u1.attackId - u2.attackId; }));
+        }        
         setComputerGarrisonValues("playerIsland", garrisonData.computer.playerIsland.garrison);
     };
     // initialize computer units area with units from the player's island
@@ -566,35 +609,41 @@ function setupComputerInputFields(units, capacity) {
   
     if (base.children.length > 1) {
         //base.replaceChild(table, base.lastChild);
-        base.replaceChild(table, base.children[base.children.length - 2]);
+        //base.replaceChild(table, base.children[base.children.length - 2]);
+        base.replaceChild(table, base.children[1]);
     } else {
         base.appendChild(table);
     }
     
-    campSpan = document.createElement("span");
-    campSpan.setAttribute("class", "computerCamp");
-    label = document.createElement("label");
-    label.setAttribute("class", "camplabel");
-    label.innerHTML = "Camp";
-    campSpan.appendChild(label);
-    
-    campSelect = document.createElement("select");
-    campSelect.setAttribute("id", "computerCamp");
-    for (idx in tsosim.camps) {
-        if (tsosim.camps.hasOwnProperty(idx) && tsosim.camps[idx].hasSkill(Skills.CAMP)) {
-            option = document.createElement("option");
-            option.text = tsosim.lang.unit[tsosim.camps[idx].id];
-            campSelect.add(option);
+    if(tsosim.version !== tso.versions[2].name) {
+        campSpan = document.createElement("span");
+        campSpan.setAttribute("class", "computerCamp");
+        label = document.createElement("label");
+        label.setAttribute("class", "camplabel");
+        label.innerHTML = "Camp";
+        campSpan.appendChild(label);
+
+        campSelect = document.createElement("select");
+        campSelect.setAttribute("id", "computerCamp");
+        for (idx in tsosim.camps) {
+            if (tsosim.camps.hasOwnProperty(idx) && tsosim.camps[idx].hasSkill(Skills.CAMP)) {
+                option = document.createElement("option");
+                option.text = tsosim.lang.unit[tsosim.camps[idx].id];
+                campSelect.add(option);
+            }
+        }
+        campSpan.appendChild(campSelect);
+
+        if (base.children.length > 2) {
+            base.replaceChild(campSpan, base.lastChild);
+        } else {
+            base.appendChild(campSpan);
+        }
+    } else {
+        if (base.children.length > 2) {
+            base.removeChild(base.lastChild);
         }
     }
-    campSpan.appendChild(campSelect);
-    
-    if (base.children.length > 2) {
-        base.replaceChild(campSpan, base.lastChild);
-    } else {
-        base.appendChild(campSpan);
-    }
-    
 }
 
 // setup combobox (select) with all available adventures
@@ -622,17 +671,29 @@ function setupAdventures() {
 
 function storeAdventureValues() {
     var tabs, i, select, advName;
-    tabs = [document.getElementById("tabPlayerIsland"), document.getElementById("tabAdvSelect")];
-    for (i = 0; i < tabs.length; i += 1) {
-        if (tabs[i].getAttribute("class") === "compTab inputTabActive") {
-            if (i === 0) {
-                storeComputerGarrisonValues("playerIsland", tsosim.adv_maps.playerIsland);
-            } else {
-                select = document.getElementById("selAdv");
-                advName = select.value;
-                storeComputerGarrisonValues(advName, tsosim.adv_maps[tsosim.advNames[advName]]);
+    if(tsosim.version === tso.versions[2].name) {
+        tabs = ["pgen1","pgen2","pgen3","pgen4"];
+        for (i = 0; i < tabs.length; i += 1) {
+            var node = document.getElementById(tabs[i]);
+            if (node && node.getAttribute("class") === "genTab inputTabActive") {
+                storeComputerGarrisonValues(tabs[i], tsosim.adv_maps.expeditionIsland);
+                break;
             }
-            break;
+        }
+        
+    } else {
+        tabs = [document.getElementById("tabPlayerIsland"), document.getElementById("tabAdvSelect")];
+        for (i = 0; i < tabs.length; i += 1) {
+            if (tabs[i].getAttribute("class") === "compTab inputTabActive") {
+                if (i === 0) {
+                    storeComputerGarrisonValues("playerIsland", tsosim.adv_maps.playerIsland);
+                } else {
+                    select = document.getElementById("selAdv");
+                    advName = select.value;
+                    storeComputerGarrisonValues(advName, tsosim.adv_maps[tsosim.advNames[advName]]);
+                }
+                break;
+            }
         }
     }
 }
@@ -672,9 +733,15 @@ function storeComputerGarrisonValues(map_id, units) {
     var garrison, idx, node, value, t, towerIds;
     console.log("store values into garrison : " + map_id);
     
-    garrison = garrisonData.computer[map_id].garrison;
-    garrison.clear();
+    if(tsosim.version === tso.versions[2].name) {
+        garrison = expData.getExpData(map_id).expedition;
+        garrison.clear();
+    } else {
+        garrison = garrisonData.computer[map_id].garrison;
+        garrison.clear();
+    }
   
+    var start = false;
     // read units from input fields
     for (idx in units) {
         if (units.hasOwnProperty(idx)) {
@@ -682,7 +749,8 @@ function storeComputerGarrisonValues(map_id, units) {
             if (node !== null) {
                 value = parseInt(node.value, 10);
                 if (value > 0) {
-                    garrison.addUnits(units[idx], value);
+                    garrison.addUnits(units[idx], value, !start);
+                    start = true;
                 }
             } else {
                 console.log("reading units from input fields, but node is null! : " + idx);
@@ -690,27 +758,29 @@ function storeComputerGarrisonValues(map_id, units) {
         }
     }
     
-    // store camp
-    node = document.getElementById("computerCamp");
-    for (idx in tsosim.camps) {
-        if (tsosim.camps.hasOwnProperty(idx)) {
-            if (tsosim.lang.unit[tsosim.camps[idx].id] === node.value) {
-                garrison.addUnits(tsosim.camps[idx], 1);
+    if(tsosim.version !== tso.versions[2].name) {
+        // store camp
+        node = document.getElementById("computerCamp");
+        for (idx in tsosim.camps) {
+            if (tsosim.camps.hasOwnProperty(idx)) {
+                if (tsosim.lang.unit[tsosim.camps[idx].id] === node.value) {
+                    garrison.addUnits(tsosim.camps[idx], 1);
+                }
             }
         }
-    }
     
-    // store tower bonus
-    if (tsosim.version === tso.versions[0].name) {
-        towerIds = ["towerBonus0", "towerBonus50", "towerBonus75", "towerBonus90"];
-    } else {
-        towerIds = ["towerBonus0", "towerBonus10", "towerBonus20", "towerBonus30", "towerBonus40", "towerBonus50"];
-    }
-    for (t = 0; t < towerIds.length; t += 1) {
-        node = document.getElementById(towerIds[t]);
-        if (node.getAttribute("class").search("selOptActive") >= 0) {
-            value = node.getAttribute("value");
-            garrison.setTowerBonus(parseInt(value, 10));
+        // store tower bonus
+        if (tsosim.version === tso.versions[0].name) {
+            towerIds = ["towerBonus0", "towerBonus50", "towerBonus75", "towerBonus90"];
+        } else {
+            towerIds = ["towerBonus0", "towerBonus10", "towerBonus20", "towerBonus30", "towerBonus40", "towerBonus50"];
+        }
+        for (t = 0; t < towerIds.length; t += 1) {
+            node = document.getElementById(towerIds[t]);
+            if (node.getAttribute("class").search("selOptActive") >= 0) {
+                value = node.getAttribute("value");
+                garrison.setTowerBonus(parseInt(value, 10));
+            }
         }
     }
 }
@@ -999,6 +1069,37 @@ function getActiveAdventure() {
 
 function computeSimulation() {
     var sim, player, computer, genIds, repeats, i, computeStats, computeLogs, logs;
+    
+    if(tsosim.version === tso.versions[2].name) {
+        
+        //testExpedition();
+
+        var genId = storeGarrisonValues();
+        storeAdventureValues();
+
+/*        
+        var gPlay, gComp;
+
+        gPlay = new ExpGarrison();
+        gPlay.add_units(expUnitsPlayer.attackInf, 40, true);
+
+        gComp = new ExpGarrison();
+        gComp.add_units(expUnitsComputer.guardDog, 40, true);
+        gComp.add_units(expUnitsComputer.thug, 10);
+
+        expData[0] = new ExpStackData(gPlay, gComp);
+*/
+        var data = expData.getExpData(genId);
+        data.data[0] = new ExpStackData(data.garrison, data.expedition);
+        fight_combat(genId, 0);
+        
+        ///
+        
+        displayExpResults(genId, 0);
+        return;
+    }
+
+    
     sim = new Simulator();
     
     repeats = document.getElementById("inpNumIter");
@@ -1216,6 +1317,12 @@ function initializeUnitsAndUI(simVersion, lang) {
 
     setupAdventures();
     setupAdventureTabs();
+    
+    // clear results
+    var res = document.getElementById("waveResults");
+    while(res && res.children.length > 0) {
+        res.removeChild(res.lastChild);
+    }
 }
 
 function resetInput() {
@@ -1249,6 +1356,8 @@ window.onload = function () {
     if(lang[userLang]) {
         setLanguage(userLang);
     }
+    
+    //delete setupExpUnits();
     
     /*
      * setup callbacks
