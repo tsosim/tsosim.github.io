@@ -216,7 +216,8 @@ var lang = {
             iterations        : "Iterations",
             reset             : "Reset",
             
-            bonus             : "Bonus"
+            bonus             : "Bonus",
+            unitsTotal        : "Total"
         }
     },
 	de : {
@@ -434,7 +435,8 @@ var lang = {
             iterations        : "Wiederholungen",
             reset             : "Löschen",
 
-            bonus             : "Bonus"
+            bonus             : "Bonus",
+            unitsTotal        : "Summe"
         }    
     }
 };

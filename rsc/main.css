@@ -133,6 +133,9 @@ footer {
     width : 50px;
     text-align: right;
 }
+.unitSum {
+    height: 1em;
+}
 
 .unittable {
     display: flex;

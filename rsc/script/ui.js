@@ -98,16 +98,20 @@ function setupUnitInputField(unit, capacity) {
     }
     
     label = document.createElement("td");
-    label.setAttribute("class", "unitlabel" + (unit.checked ? "" : " unitUnchecked"));
-    label.setAttribute("for", "inp_" + unit.id);
+    label.setAttribute("class", "unitlabel");
+    if(unit) {
+        label.setAttribute("for", "inp_" + unit.id);
+    }
   
-    text = document.createTextNode(tsosim.lang.unit[unit.id]);
+    text = document.createTextNode(unit ? tsosim.lang.unit[unit.id] : tsosim.lang.ui.unitsTotal);
     label.appendChild(text);
     
     tr.appendChild(label);
 
     //base.appendChild(createUnitTooltip(unit));
-    label.appendChild(createUnitTooltip(unit));
+    if(unit) {
+        label.appendChild(createUnitTooltip(unit));
+    }
 
     if (capacity === undefined) {
         capacity = 200;
@@ -115,13 +119,16 @@ function setupUnitInputField(unit, capacity) {
   
     tdinp = document.createElement("td");
     inp = document.createElement("input");
-    inp.setAttribute("id", "inp_" + unit.id);
+    inp.setAttribute("id", "inp_" + (unit ? unit.id : "unitsTotal"));
     inp.setAttribute("type", "number");
     inp.setAttribute("value", 0);
     inp.setAttribute("step", 1);
     inp.setAttribute("max", capacity);
     inp.setAttribute("min", 0);
     inp.setAttribute("class", "unitnumber");
+    if(!unit) {
+        inp.setAttribute("readonly","");
+    }
     tdinp.appendChild(inp);
     tr.appendChild(tdinp);
     
@@ -130,15 +137,41 @@ function setupUnitInputField(unit, capacity) {
     /*inp = document.createElement("input");*/
     tr.appendChild(tdinp2);
     
+    if(unit) {
+        label.addEventListener("mouseover", function () { showTooltip("tt_" + unit.id); }, false);
+        label.addEventListener("mouseout", function () { removeTooltip("tt_" + unit.id); }, false);
+
+        inp.onclick = function() {
+            inp.select();
+        };
+        inp.onblur = function () {
+            if(!inp.value) {
+                inp.value = 0;
+            }
+        }
+        inp.onkeyup = function() {
+            updateSumInput();
+        };
+    }
     
-    label.addEventListener("mouseover", function () { showTooltip("tt_" + unit.id); }, false);
-    label.addEventListener("mouseout", function () { removeTooltip("tt_" + unit.id); }, false);
-
-
     return tr;
 }
 
-
+function updateSumInput() {
+    var sum = 0;
+    var sumNode = document.getElementById("inp_unitsTotal");
+    if(sumNode) {
+        for(var idx in tsosim.units) {
+            if(tsosim.units.hasOwnProperty(idx)) {
+                var node = document.getElementById("inp_" + tsosim.units[idx].id);
+                if(node) {
+                    sum += parseInt(node.value,10);
+                }
+            }
+        }
+        sumNode.value = sum;
+    }
+}
 
 /*
  * Player
@@ -279,6 +312,13 @@ function setupPlayerInputFields(units, capacity) {
             table.appendChild(p);
         }
     }
+    
+    var trSum = document.createElement("tr");
+    trSum.setAttribute("class", "unitSum");
+    table.appendChild(trSum);
+
+    var sum = setupUnitInputField(null, capacity);
+    table.appendChild(sum);
     
     if (base.children.length > 1) {
         base.replaceChild(table, base.lastChild);
