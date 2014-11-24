@@ -49,6 +49,15 @@ function createUnitTooltip(unit) {
         tab.appendChild(createUnitTooltipLine(tsosim.lang.ui.damage, unit.damage.min + " - " + unit.damage.max));
         tab.appendChild(createUnitTooltipLine(tsosim.lang.ui.accuracy, unit.accuracy + "%"));
         tab.appendChild(createUnitTooltipLine(tsosim.lang.ui.initiative, unit.initiative));
+
+        var skills = [Skills.SPLASH_DAMAGE, Skills.ATTACK_WEAKEST, Skills.TOWER_BONUS, Skills.ARMOR_PENETRATION];
+        var skStr = false;
+        for(var i = 0; i < skills.length; i+=1) {
+            if(Skills.hasSkill(unit.skill, skills[i])) {
+                tab.appendChild(createUnitTooltipLine(!skStr ? "Skills" : "", Skills.name(skills[i])));
+                skStr = true;
+            }
+        }
     } else {
         tab.appendChild(createUnitTooltipLine(tsosim.lang.ui.hitpoints, unit.hitpoints));
         tab.appendChild(createUnitTooltipLine(tsosim.lang.ui.damage, unit.damage));

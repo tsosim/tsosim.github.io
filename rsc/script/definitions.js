@@ -19,6 +19,13 @@ var Skills = {
   
     addSkill: function (num, skill) {
         return (num | skill);
+    },
+    
+    name: function(s) {
+        return s===this.SPLASH_DAMAGE ? "Splash Damage" :
+               s===this.ATTACK_WEAKEST ? "Attack weakest" :
+               s===this.TOWER_BONUS    ? "Tower Bonus" : 
+               s===this.ARMOR_PENETRATION ? "Armour Penetration" :"";
     }
 };
 
