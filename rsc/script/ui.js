@@ -1224,10 +1224,12 @@ function setupSimVersionButtons() {
             } else {
                 elemID = elem.getAttribute("id");
                 for (i = 0; i < tso.versions.length; i += 1) {
-                    elem2 = document.getElementById("vb_" + tso.versions[i].name);
-                    elem2.setAttribute("class", "versionButton");
-                    if (elemID === ("vb_" + tso.versions[i].name)) {
-                        clickedID = tso.versions[i].name;
+                    if(tso.versions[i].name !== "test") {
+                        elem2 = document.getElementById("vb_" + tso.versions[i].name);
+                        elem2.setAttribute("class", "versionButton");
+                        if (elemID === ("vb_" + tso.versions[i].name)) {
+                            clickedID = tso.versions[i].name;
+                        }
                     }
                 }
                 elem.setAttribute("class", "versionButton vbClicked");
@@ -1254,19 +1256,21 @@ function setupSimVersionButtons() {
     
     for (idx = 0; idx < tso.versions.length; idx += 1) {
         v = tso.versions[idx];
-        div = document.createElement("div");
-        div.setAttribute("class", "versionButton");
-        div.setAttribute("id", "vb_" + v.name);
-        div.setAttribute("title", v.tt);
-        div.innerHTML   = v.name;
-        div.onclick     = setOnclick("vb_" + v.name);
-        div.onmouseover = setOnmouseover("vb_" + v.name);
-        div.onmouseout  = setOnmouseout("vb_" + v.name);
+        if(v.name !== "test") {
+            div = document.createElement("div");
+            div.setAttribute("class", "versionButton");
+            div.setAttribute("id", "vb_" + v.name);
+            div.setAttribute("title", v.tt);
+            div.innerHTML   = v.name;
+            div.onclick     = setOnclick("vb_" + v.name);
+            div.onmouseover = setOnmouseover("vb_" + v.name);
+            div.onmouseout  = setOnmouseout("vb_" + v.name);
         
-        if (base.childNodes[idx]) {
-            base.replaceChild(div, base.childNodes[idx]);
-        } else {
-            base.appendChild(div);
+            if (base.childNodes[idx]) {
+                base.replaceChild(div, base.childNodes[idx]);
+            } else {
+                base.appendChild(div);
+            }
         }
     }
 }
