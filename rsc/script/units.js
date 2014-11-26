@@ -574,7 +574,7 @@ function defineAdventureMaps(units, adv_maps) {
     adv_maps.sonsOfTheVeldt    = [cu.bChuck, cu.bMetalToothed, cu.bScavenger, cu.bThug, cu.bGuardDog, cu.bRoughneck, cu.bStoneThrower, cu.bRanger,  cu.bSkunk, cu.bOneEyedBert];
     adv_maps.stealingFromRich  = [cu.desRecruit, cu.desMilitia, cu.desCavalry, cu.desSoldier, cu.desEliteSoldier, cu.desBowman, cu.desLongbow, cu.desCrossbow, cu.desCannoneer, cu.desSirRobin, cu.desBigBertha, cu.wolf];
     adv_maps.surpriseAtack     = [cu.nJomsviking, cu.nHousekarl, cu.nKarl, cu.nValkyrie, cu.nBerserk, cu.wolf];
-    adv_maps.tBetrLittTaylor   = [cu.bMetalToothed, cu.bThug, cu.bGuardDog, cu.bRoughneck, cu.bRanger, cu.epBoar, cu.epPackleaderWolf, cu.epFox, cu.epGiant, cu.epGiantBoar, cu.epGiantBear, cu.epAssassine, cu.epGreedyInnkeeper];
+    adv_maps.tBetrLittTaylor   = [cu.bMetalToothed, cu.bThug, cu.bGuardDog, cu.bRoughneck, cu.bRanger, cu.epBear, cu.epBoar, cu.epPackleaderWolf, cu.epFox, cu.epGiant, cu.epGiantBoar, cu.epGiantBear, cu.epAssassine, cu.epGreedyInnkeeper];
     adv_maps.tBlackKnights     = [cu.desMilitia, cu.desCavalry, cu.desSoldier, cu.desEliteSoldier, cu.desBowman, cu.desLongbow, cu.desCrossbow, cu.desCannoneer, cu.desSirRobin, cu.desBigBertha];
     adv_maps.tBuccaneerRoundup = [];
     adv_maps.tCleverLittTaylor = [cu.bChuck, cu.bMetalToothed, cu.bGuardDog, cu.bRoughneck, cu.bRanger, cu.epBoar, cu.epBear, cu.epWolf, cu.epPackleaderWolf, cu.epFox, cu.epGiant, cu.epIronFist, cu.epGiantBear, cu.epRivalDressmaker];
