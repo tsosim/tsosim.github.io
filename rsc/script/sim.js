@@ -147,11 +147,14 @@ function Simulator() {
         
         rounds = 0;
         done = false;
+        var abortRound = false;
         while (!done) {
             initiatives = [Initiative.FIRST, Initiative.SECOND, Initiative.THIRD, Initiative.LAST];
       
             rounds += 1;
             if (LOG) { LOG.startRound(); }
+            
+            abortRound = false;
       
             // iterate over all initiatives; if there units for a specific initiative in the garrisons, then compute combat
             for (init = 0; init < initiatives.length; init += 1) {
@@ -169,18 +172,25 @@ function Simulator() {
                     current_group = attack_groups[att];
                     if (current_group.number >= 1) {
                         // do stuff
-                        this.computeAttackOnGarrison(current_group, defender_g, LOG);
                         attack_happened = true;
+                        if(!this.computeAttackOnGarrison(current_group, defender_g, LOG)) {
+                            abortRound = true;
+                            break;
+                        }
                     }
                 }
         
+                
                 // defense
                 for (def = 0; def < defense_groups.length; def += 1) {
                     current_group = defense_groups[def];
                     if (current_group.number >= 1) {
                         // do stuff
-                        this.computeAttackOnGarrison(current_group, attacker_g, LOG);
                         attack_happened = true;
+                        if(!this.computeAttackOnGarrison(current_group, attacker_g, LOG)) {
+                            abortRound = true;
+                            break;
+                        }
                     }
                 }
                 
@@ -198,6 +208,10 @@ function Simulator() {
         
                 if (defender_g.hasUnitsWithHitpoints() === 0) {
                     done = true;
+                    break;
+                }
+                if(abortRound) {
+                    // ignore other initiatives; should be ok, because if we reached a building, then all other units must be dead and cannot attack anyway
                     break;
                 }
             }
@@ -226,10 +240,18 @@ function Simulator() {
             defIsCamp       : false
         };
             
+        var isFirst = true;
         for (idx = 0; idx < def_groups.length; idx += 1) {
             current_def_group = def_groups[idx];
             if (current_def_group.number_after_attack >= 1 && attacking_group.number_left_to_attack > 0) {
                 extraParams.defIsCamp = current_def_group.type.hasSkill(Skills.CAMP);
+                if(!isFirst && extraParams.defIsCamp) {
+                    if(current_def_group.type !== tsosim.camps.campNone) {
+                        // abort round
+                        return false;
+                    }
+                }
+                isFirst = false;
                 current_def_group.number_after_attack = this.computeAttackOnUnitgroup(attacking_group, current_def_group, extraParams, LOG);
 
                 //if (current_def_group.number_after_attack > 0) {
@@ -239,6 +261,7 @@ function Simulator() {
                 }
             }
         }
+        return true;
     };
   
     this.computeAttackOnUnitgroup = function (attacking_group, defending_group, extraParams, LOG) {
@@ -270,7 +293,7 @@ function Simulator() {
         while (current_att > 0) {
             if (current_def < 0) {
                 // attacker wins, no defenders left
-                if (LOG) { LOG.currentInitiative.currentGroup.finishGroupAttack(numAttacked, attacking_group.number - attacking_group.number_left_to_attack + 1, defNum - 1); }
+                if (LOG) { LOG.currentInitiative.currentGroup.finishGroupAttack(numAttacked-1, attacking_group.number - attacking_group.number_left_to_attack + 1, defNum - 1); }
                 return 0;
             }
       
