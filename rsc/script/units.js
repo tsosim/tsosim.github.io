@@ -239,7 +239,7 @@ tso.data.live.functions.defineUnits = function () {
     cu.royalBowman       = new Unit("Royal Bowman",     40, [60, 120], 85, Initiative.SECOND, getAID(), []);                        //
     cu.royalLongbowman   = new Unit("Royal Longbowman", 60, [80, 140], 95, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE]);    //
     cu.royalCavalry      = new Unit("Royal Cavalry",    40, [10,  60], 95, Initiative.FIRST,  getAID(), [Skills.ATTACK_WEAKEST]);   //
-    cu.royalCannoneer    = new Unit("Royal Cannoneer", 200, [60,  90], 95, Initiative.THIRD,  getAID(), []);                        //
+    cu.royalCannoneer    = new Unit("Royal Cannoneer", 200, [60,  90], 95, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE]);    //
 
     /* epic bosses */
     cu.epGiantLeader1    = new Unit("Giant Leader 1",   90000, [ 100,   300], 60, Initiative.THIRD,     getAID(), [Skills.SPLASH_DAMAGE]);                          //
