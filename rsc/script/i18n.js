@@ -337,13 +337,13 @@ var lang = {
 
             // exp
             
-            expAttackInf      : "Infantry",
-            expAttackArch     : "Archer",
-            expAttackCav      : "Cavalry",
-            expHeavyInf       : "Heavy Infantry",
-            expHeavyArch      : "Heavy Archer",
-            expHeavyCav       : "Heavy Cavalry",
-            expGuardsman      : "Guardsman",
+            expAttackInf      : "Angriffsinfanterie",
+            expAttackArch     : "Angriffsbogenschütze",
+            expAttackCav      : "Angriffsreiterei",
+            expHeavyInf       : "Schwere Infanterie",
+            expHeavyArch      : "Schwerer Bogenschütze",
+            expHeavyCav       : "Schwere Reiterei",
+            expGuardsman      : "Wachman",
             
             expRecruit        : "Bandit Recruit",
             expThug           : "Thug",

@@ -503,7 +503,7 @@ function displayExpResultTable(genId, isPlayer) {
             tr.setAttribute("class", cl);
             
             createTd(tr, garrison.units[un].n);
-            createTd(tr, un);
+            createTd(tr, tsosim.lang.unit[garrison.units[un].unit.id]);
 
             if(isPlayer) {
                 createTd(tr, combat_data.data[combat_data.data.length-1].garrisonAttack.units[un].n - garrison.units[un].n);
@@ -524,7 +524,7 @@ function createExpSelColumn(col, garrison, genId, i, isPlayer) {
 
     if(garrison.units[garrison.currentUnit.name].n > 0) {
         opt = document.createElement("option");
-        opt.innerHTML = garrison.currentUnit.name + " [" + garrison.units[garrison.currentUnit.name].n + "]";
+        opt.innerHTML = tsosim.lang.unit[garrison.currentUnit.id] + " [" + garrison.units[garrison.currentUnit.name].n + "]";
         sel.appendChild(opt);
     }
 
@@ -533,7 +533,7 @@ function createExpSelColumn(col, garrison, genId, i, isPlayer) {
             if(garrison.units[idx].unit !== garrison.currentUnit && garrison.units[idx].n > 0) {
                 opt = document.createElement("option");
                 opt.setAttribute("val", garrison.units[idx].unit.id);
-                opt.innerHTML = garrison.units[idx].unit.name + "[" + garrison.units[idx].n + "]";
+                opt.innerHTML = tsosim.lang.unit[garrison.units[idx].unit.id] + " [" + garrison.units[idx].n + "]";
                 sel.appendChild(opt);
             }
         }
@@ -543,10 +543,10 @@ function createExpSelColumn(col, garrison, genId, i, isPlayer) {
 
     icon = document.createElement("span");
     if (garrison.currentUnit.icon) {
-        icon.innerHTML = '<img src="' + garrison.currentUnit.icon + '" title="' + garrison.currentUnit.name + '">';
+        icon.innerHTML = '<img src="' + garrison.currentUnit.icon + '" title="' + tsosim.lang.unit[garrison.currentUnit.id] + '">';
         icon.setAttribute("class","expIcon");
     } else {
-        icon.innerHTML = garrison.currentUnit.name;
+        icon.innerHTML = tsosim.lang.unit[garrison.currentUnit.id];
     }
     col.appendChild(icon);
 }
