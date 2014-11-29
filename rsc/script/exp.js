@@ -4,15 +4,15 @@
 var ExpUnitType  = { INVALID : 0, CAVALRY : 1, MELEE : 2, RANGED : 4, BOSS : 8, HEAVY : 16, ELITE : 32 };
 
 var ExpTypeNames = {};
-(function _etn() {
+function _etn() {
     var et = ExpTypeNames;
-    et[ExpUnitType.CAVALRY] = "Cavalry";
-    et[ExpUnitType.MELEE] = "Melee";
-    et[ExpUnitType.RANGED] = "Ranged";
-    et[ExpUnitType.ELITE] = "Elite";
+    et[ExpUnitType.CAVALRY] = tsosim.lang.ui.cavalry;
+    et[ExpUnitType.MELEE]   = tsosim.lang.ui.melee;
+    et[ExpUnitType.RANGED]  = tsosim.lang.ui.ranged;
+    et[ExpUnitType.ELITE]   = tsosim.lang.ui.elite;
     et[ExpUnitType.BOSS] = "Boss";
     et[ExpUnitType.HEAVY] = "Heavy";
-})();
+};
 
 
 function ExpUnit(name, hp, dmg, type, icon) {
@@ -54,13 +54,13 @@ function ExpUnit(name, hp, dmg, type, icon) {
 
 function ExpUnitTypeName(unit) {
     if(unit.isMelee()) {
-        return "Melee";
+        return tsosim.lang.ui.melee;
     } else if(unit.isRanged() ) {
-        return "Ranged";
+        return tsosim.lang.ui.ranged;
     } else if(unit.isCavalry() ) {
-        return "Cavalry";
+        return tsosim.lang.ui.cavalry;
     } else if(unit.isElite() ) {
-        return "Elite";
+        return tsosim.lang.ui.elite;
     } else {
         return "###";
     }

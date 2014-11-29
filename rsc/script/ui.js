@@ -61,10 +61,10 @@ function createUnitTooltip(unit) {
     } else {
         tab.appendChild(createUnitTooltipLine(tsosim.lang.ui.hitpoints, unit.hitpoints));
         tab.appendChild(createUnitTooltipLine(tsosim.lang.ui.damage, unit.damage));
-        tab.appendChild(createUnitTooltipLine("type", ExpUnitTypeName(unit)));
+        tab.appendChild(createUnitTooltipLine(tsosim.lang.ui.type, ExpUnitTypeName(unit)));
         for(var b in unit.bonus) {
             if(unit.bonus.hasOwnProperty(b)) {
-                tab.appendChild(createUnitTooltipLine(tsosim.lang.ui.bonus, "vs. "+ ExpTypeNames[b] + " " + unit.bonus[b] + "%"));
+                tab.appendChild(createUnitTooltipLine(tsosim.lang.ui.bonus, tsosim.lang.ui.vs + " " + ExpTypeNames[b] + " " + unit.bonus[b] + "%"));
             }
         }
     }
@@ -1364,6 +1364,8 @@ function initializeUI(lang) {
 function initializeUnitsAndUI(simVersion, lang) {
     setupTsoSim(simVersion, lang);
     setupStrings();
+    _etn();
+
     //setupSimVersionButtons();
     //setupGeneralTabs();
     setupPlayerInputFields(tsosim.units, 500);

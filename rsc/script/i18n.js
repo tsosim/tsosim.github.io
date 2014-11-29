@@ -137,6 +137,7 @@ var lang = {
             expMercInfantry   : "Mercenary Infantry",
             expMercArcher     : "Mercenary Archer",
             expMercCavalry    : "Mercenary Cavalry",
+            expWildMary       : "Wild Mary",
             expSkunk          : "Skunk",
             expBert           : "One-Eyed Bert",
             expMetalTooth     : "Metal Tooth",
@@ -215,9 +216,14 @@ var lang = {
             startSim          : "Start Simulation",
             iterations        : "Iterations",
             reset             : "Reset",
-            
             bonus             : "Bonus",
-            unitsTotal        : "Total"
+            unitsTotal        : "Total",
+            type              : "Type",
+            melee             : "Melee",
+            ranged            : "Ranged",
+            cavalry           : "Cavalry",
+            elite             : "Elite",
+            vs                : "vs."
         }
     },
 	de : {
@@ -356,6 +362,7 @@ var lang = {
             expMercInfantry   : "Mercenary Infantry",
             expMercArcher     : "Mercenary Archer",
             expMercCavalry    : "Mercenary Cavalry",
+            expWildMary       : "Die Wilde Waltraut",
             expSkunk          : "Stinktier",
             expBert           : "Einäugiger Bert",
             expMetalTooth     : "Metallzahn",
@@ -434,9 +441,14 @@ var lang = {
             startSim          : "Starte Simulation",
             iterations        : "Wiederholungen",
             reset             : "Löschen",
-
             bonus             : "Bonus",
-            unitsTotal        : "Summe"
+            unitsTotal        : "Summe",
+            type              : "Kategorie",
+            melee             : "Nahkampf",
+            ranged            : "Fernkampf",
+            cavalry           : "Reiterei",
+            elite             : "Elite",
+            vs                : "g."
         }    
     }
 };

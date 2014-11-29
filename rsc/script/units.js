@@ -496,6 +496,20 @@ tso.data.Exp.functions.defineUnits = function () {
 
     // ----
 
+	cu.expWildMary      = new ExpUnit("Wild Mary",             2500,200, ExpUnitType.MELEE  | ExpUnitType.BOSS, "rsc/img/expWildMary.png");
+	cu.expWildMary.addBonus(ExpUnitType.CAVALRY, 35);
+
+    cu.expSkunk         = new ExpUnit("Skunk",                 4000,300, ExpUnitType.MELEE  | ExpUnitType.BOSS, "rsc/img/expSkunk.png");
+	cu.expSkunk.addBonus(ExpUnitType.CAVALRY, 40);
+
+	cu.expBert          = new ExpUnit("One-Eyed Bert",         4000,300, ExpUnitType.RANGED  | ExpUnitType.BOSS, "rsc/img/expBert.png");
+	cu.expBert.addBonus(ExpUnitType.MELEE, 40);
+
+    cu.expMetalTooth    = new ExpUnit("Metal Tooth",           4000,300, ExpUnitType.CAVALRY | ExpUnitType.BOSS, "rsc/img/expMetalTooth.png");
+	cu.expMetalTooth.addBonus(ExpUnitType.RANGED, 40);
+
+    // ----
+
     cu.expMercDuelist   = new ExpUnit("Mercenary Duelist",      180, 25, ExpUnitType.MELEE, "rsc/img/expMercDuelist.png");
     cu.expMercDuelist.addBonus(ExpUnitType.CAVALRY, 75);
 
@@ -509,17 +523,6 @@ tso.data.Exp.functions.defineUnits = function () {
 	cu.expMercArcher    = new ExpUnit("Mercenary Archer",       180, 35, ExpUnitType.RANGED, "rsc/img/expMercArcher.png");
     cu.expMercCavalry   = new ExpUnit("Mercenary Cavalry",      180, 35, ExpUnitType.CAVALRY, "rsc/img/expMercCavalry.png");
     
-    // ----
-
-	cu.expSkunk         = new ExpUnit("Skunk",                 4000,300, ExpUnitType.MELEE  | ExpUnitType.BOSS, "rsc/img/expSkunk.png");
-	cu.expSkunk.addBonus(ExpUnitType.CAVALRY, 40);
-
-	cu.expBert          = new ExpUnit("One-Eyed Bert",         4000,300, ExpUnitType.RANGED  | ExpUnitType.BOSS, "rsc/img/expBert.png");
-	cu.expBert.addBonus(ExpUnitType.MELEE, 40);
-
-    cu.expMetalTooth    = new ExpUnit("Metal Tooth",           4000,300, ExpUnitType.CAVALRY | ExpUnitType.BOSS, "rsc/img/expMetalTooth.png");
-	cu.expMetalTooth.addBonus(ExpUnitType.RANGED, 40);
-
     
     /*
     cu.expScavenger    = new ExpUnit("Scavenger",     150, 30, ExpUnitType.MELEE);
@@ -545,7 +548,9 @@ function defineAdventureMaps(units, adv_maps) {
     var cu = units;
     
     if(tsosim.version === tso.versions[2].name) {
-        adv_maps.expeditionIsland = [cu.expRecruit, cu.expThug, cu.expRoughneck, cu.expBowman, cu.expCavalry, cu.expMercDuelist, cu.expMercShooter, cu.expMercCharger, cu.expMercInfantry, cu.expMercArcher, cu.expMercCavalry, cu.expSkunk, cu.expBert, cu.expMetalTooth];
+        adv_maps.expeditionIsland = [cu.expRecruit, cu.expThug, cu.expRoughneck, cu.expBowman, cu.expCavalry,
+                                     cu.expWildMary, cu.expSkunk, cu.expBert, cu.expMetalTooth,
+                                     cu.expMercDuelist, cu.expMercShooter, cu.expMercCharger, cu.expMercInfantry, cu.expMercArcher, cu.expMercCavalry];
         
         
         return;
