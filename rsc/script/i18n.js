@@ -224,7 +224,24 @@ var lang = {
             ranged            : "Ranged",
             cavalry           : "Cavalry",
             elite             : "Elite",
-            vs                : "vs."
+            vs                : "vs.",
+            // 
+            resources         : "Resources",
+            amount            : "Amount",
+            settler           : "Settler",
+            brew              : "Brew",
+            pike              : "Attack Pike",
+            ebow              : "Attack Bow",
+            sabre             : "Attack Sabre",
+            mace              : "Heavy Mace",
+            exbow             : "Heavy Crossbow",
+            lance             : "Heavy Lance",
+            coal              : "Coal",
+            hardwood          : "Hardwood",
+            iron              : "Iron",
+            steel             : "Steel",
+            horse             : "Horse",
+            valor             : "Valor Points"
         }
     },
 	de : {
@@ -450,7 +467,24 @@ var lang = {
             ranged            : "Fernkampf",
             cavalry           : "Reiterei",
             elite             : "Elite",
-            vs                : "g."
+            vs                : "g.",
+            //
+            resources         : "Rohstoffe",
+            amount            : "Menge",
+            settler           : "Siedler",
+            brew              : "Malzbier",
+            pike              : "Angriffspike",
+            ebow              : "Angriffsbogen",
+            sabre             : "Angriffssäbel",
+            mace              : "Schwerer Streitkolben",
+            exbow             : "Schwere Armbrust",
+            lance             : "Schwere Lanze",
+            coal              : "Kohle",
+            hardwood          : "Laubholz",
+            iron              : "Eisen",
+            steel             : "Stahl",
+            horse             : "Pferde",
+            valor             : "Mutpunkte"
         }    
     }
 };

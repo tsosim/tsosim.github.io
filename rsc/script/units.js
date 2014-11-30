@@ -470,6 +470,14 @@ tso.data.Exp.functions.defineUnits = function () {
     pu.expAttackInf.addBonus(ExpUnitType.CAVALRY, 35);
 	pu.expAttackArch.addBonus(ExpUnitType.MELEE, 35);
 	pu.expAttackCav.addBonus(ExpUnitType.RANGED, 35);
+    
+    pu.expAttackInf.setCosts(Costs.Settler,1).setCosts(Costs.Brew,10).setCosts(Costs.Pike,6);
+	pu.expAttackArch.setCosts(Costs.Settler,1).setCosts(Costs.Brew,10).setCosts(Costs.Bow,6);
+	pu.expAttackCav.setCosts(Costs.Settler,1).setCosts(Costs.Horse,5).setCosts(Costs.Sabre,6);
+	pu.expHeavyInf.setCosts(Costs.Settler,1).setCosts(Costs.Brew,10).setCosts(Costs.Mace,3);
+	pu.expHeavyArch.setCosts(Costs.Settler,1).setCosts(Costs.Brew,10).setCosts(Costs.Crossbow,3);
+	pu.expHeavyCav.setCosts(Costs.Settler,1).setCosts(Costs.Horse,5).setCosts(Costs.Lance,3);
+	pu.expGuardsman.setCosts(Costs.Settler,1).setCosts(Costs.Valor,4);
 
     setUnitIDs(pu);
     

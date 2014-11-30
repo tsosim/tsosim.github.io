@@ -237,4 +237,5 @@ footer {
 }
 .extTabHead {
     background: rgba(128, 128, 128, 0.75);
+    border-bottom: 2px solid black;
 }

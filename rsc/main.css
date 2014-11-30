@@ -974,3 +974,6 @@ footer {
 .expIcon {
     margin-top: 6px;
 }
+.tabTopLine {
+    border-top: 1px solid black;
+}

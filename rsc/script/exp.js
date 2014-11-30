@@ -2,17 +2,61 @@
 
 
 var ExpUnitType  = { INVALID : 0, CAVALRY : 1, MELEE : 2, RANGED : 4, BOSS : 8, HEAVY : 16, ELITE : 32 };
-
 var ExpTypeNames = {};
+
+var Costs = {
+    Settler:0, Brew:1, Pike:2, Bow:3, Horse:4, Sabre:5, Mace:6, Crossbow:7, Lance:8, Valor:9, Hardwood:10, Coal:11, Steel:12, Iron:13,
+};
+var CostNames = {};
+
+var SecondaryCosts = {};
+(function _setSC() {
+    SecondaryCosts[Costs.Pike] = {};
+    SecondaryCosts[Costs.Pike][Costs.Steel] = 1;
+    SecondaryCosts[Costs.Pike][Costs.Coal] = 4;
+    SecondaryCosts[Costs.Mace] = {};
+    SecondaryCosts[Costs.Mace][Costs.Steel] = 1;
+    SecondaryCosts[Costs.Mace][Costs.Coal] = 4;
+    SecondaryCosts[Costs.Bow] = {};
+    SecondaryCosts[Costs.Bow][Costs.Hardwood] = 10;
+    SecondaryCosts[Costs.Bow][Costs.Iron] = 10;
+    SecondaryCosts[Costs.Crossbow] = {};
+    SecondaryCosts[Costs.Crossbow][Costs.Hardwood] = 10;
+    SecondaryCosts[Costs.Crossbow][Costs.Iron] = 10;
+    SecondaryCosts[Costs.Sabre] = {};
+    SecondaryCosts[Costs.Sabre][Costs.Coal] = 10;
+    SecondaryCosts[Costs.Sabre][Costs.Iron] = 12;
+    SecondaryCosts[Costs.Lance] = {};
+    SecondaryCosts[Costs.Lance][Costs.Coal] = 10;
+    SecondaryCosts[Costs.Lance][Costs.Iron] = 12;
+})();
+
 function _etn() {
+    var lang = tsosim.lang.ui;
     var et = ExpTypeNames;
-    et[ExpUnitType.CAVALRY] = tsosim.lang.ui.cavalry;
-    et[ExpUnitType.MELEE]   = tsosim.lang.ui.melee;
-    et[ExpUnitType.RANGED]  = tsosim.lang.ui.ranged;
-    et[ExpUnitType.ELITE]   = tsosim.lang.ui.elite;
+    et[ExpUnitType.CAVALRY] = lang.cavalry;
+    et[ExpUnitType.MELEE]   = lang.melee;
+    et[ExpUnitType.RANGED]  = lang.ranged;
+    et[ExpUnitType.ELITE]   = lang.elite;
     et[ExpUnitType.BOSS] = "Boss";
     et[ExpUnitType.HEAVY] = "Heavy";
+    var c = CostNames;
+    c[Costs.Settler] = lang.settler;
+    c[Costs.Brew] = lang.brew;
+    c[Costs.Pike] = lang.pike;
+    c[Costs.Bow] = lang.ebow;
+    c[Costs.Horse] = lang.horse;
+    c[Costs.Sabre] = lang.sabre;
+    c[Costs.Mace] = lang.mace;
+    c[Costs.Crossbow] = lang.exbow;
+    c[Costs.Lance] = lang.lance;
+    c[Costs.Valor] = lang.valor;
+    c[Costs.Hardwood] = lang.hardwood;
+    c[Costs.Coal] = lang.coal;
+    c[Costs.Iron] = lang.iron;
+    c[Costs.Steel] = lang.steel;
 };
+
 
 
 function ExpUnit(name, hp, dmg, type, icon) {
@@ -24,10 +68,15 @@ function ExpUnit(name, hp, dmg, type, icon) {
 	this.bonus = {};
     this.icon = icon;
     this.id = name;
-	//this.priority;
+	this.costs = {};
 
     this.addBonus = function (type, value) {
         this.bonus[type] = value;
+    };
+    
+    this.setCosts = function(type,amount) {
+        this.costs[type] = amount;
+        return this;
     };
     
     this.isMelee = function() {
@@ -73,56 +122,6 @@ function FightingUnit(unit) {
 	this.hitpoints = unit ? unit.hitpoints : 0;
 }
 
-var expUnitsPlayer   = {};//typedef std::list<Unit> UnitList_t;
-var expUnitsComputer = {};//typedef std::list<Unit> UnitList_t;
-
-function setupExpUnits() { //UnitList_t& player_units, UnitList_t& computer_units)
-
-    expUnitsPlayer.attackInf  = new ExpUnit("Infantry",        180, 30, ExpUnitType.MELEE,   "rsc/img/icon_AttackInfantry.png");
-	expUnitsPlayer.attackArch = new ExpUnit("Archer",          180, 30, ExpUnitType.RANGED,  "rsc/img/icon_AttackArcher.png");
-	expUnitsPlayer.attackCav  = new ExpUnit("Cavalry",         180, 30, ExpUnitType.CAVALRY, "rsc/img/icon_AttackCavalry.png");
-	expUnitsPlayer.heavyInf   = new ExpUnit("Heavy Infantry",  350,  5, ExpUnitType.MELEE  | ExpUnitType.HEAVY, "rsc/img/icon_HeavyInfantry.png");
-	expUnitsPlayer.heavyArch  = new ExpUnit("Heavy Archer",    350,  5, ExpUnitType.RANGED | ExpUnitType.HEAVY, "rsc/img/icon_HeavyArcher.png");
-	expUnitsPlayer.heavyCav   = new ExpUnit("Heavy Cavalry",   350,  5, ExpUnitType.CAVALRY| ExpUnitType.HEAVY, "rsc/img/icon_HeavyCavalry.png");
-	expUnitsPlayer.guardsman  = new ExpUnit("Guardsman",       450, 10, ExpUnitType.U_ELITE| ExpUnitType.HEAVY, "rsc/img/icon_guardsman.png");
-
-    expUnitsPlayer.attackInf.addBonus(ExpUnitType.CAVALRY, 35);
-	expUnitsPlayer.attackArch.addBonus(ExpUnitType.MELEE, 35);
-	expUnitsPlayer.attackCav.addBonus(ExpUnitType.RANGED, 35);
-
-    
-	///////////////////////////////////////////////////
-
-	expUnitsComputer.scavenger    = new ExpUnit("sSavenger",     150, 30, ExpUnitType.MELEE);
-	expUnitsComputer.guardDog     = new ExpUnit("Guard Dog",     150, 30, ExpUnitType.CAVALRY);
-	expUnitsComputer.stoneThrower = new ExpUnit("Stone Thrower", 150, 30, ExpUnitType.RANGED);
-	expUnitsComputer.thug         = new ExpUnit("Thug",          150, 30, ExpUnitType.MELEE);
-
-	expUnitsComputer.metalTooth   = new ExpUnit("Metaltooth",  4000, 300, ExpUnitType.CAVALRY | ExpUnitType.BOSS);
-	expUnitsComputer.bert         = new ExpUnit("Bert",         1500,  70, ExpUnitType.RANGED  | ExpUnitType.BOSS);
-	expUnitsComputer.drakBear     = new ExpUnit("Drak(bear)",    5000, 360, ExpUnitType.MELEE   | ExpUnitType.BOSS);
-
-    
-	expUnitsComputer.scavenger.addBonus(ExpUnitType.CAVALRY, 35);
-	expUnitsComputer.guardDog.addBonus(ExpUnitType.RANGED, 35);
-	expUnitsComputer.stoneThrower.addBonus(ExpUnitType.MELEE, 35);
-	expUnitsComputer.thug.addBonus(ExpUnitType.RANGED, 25);
-    expUnitsComputer.thug.addBonus(ExpUnitType.CAVALRY, 25);
-
-	expUnitsComputer.metalTooth.addBonus(ExpUnitType.RANGED, 40);
-	expUnitsComputer.bert.addBonus(ExpUnitType.MELEE, 40);
-	expUnitsComputer.drakBear.addBonus(ExpUnitType.CAVALRY, 50);
-    
-    
-	/*******************************************************/
-
-	// computer_units.push_back(Unit("merc_inf_bonus",   /*hp*/ 180, /*dmg*/ 30, /*type*/ Unit::U_MELEE,   /*bonus*/ Unit::U_CAVALRY, 135));
-	// computer_units.push_back(Unit("merc_archer_bonus",/*hp*/ 180, /*dmg*/ 30, /*type*/ Unit::U_RANGED,  /*bonus*/ Unit::U_MELEE,   135));
-	// computer_units.push_back(Unit("merc_cav_bonus",   /*hp*/ 180, /*dmg*/ 30, /*type*/ Unit::U_CAVALRY, /*bonus*/ Unit::U_RANGED,  135));
-	// computer_units.push_back(Unit("merc_inf",         /*hp*/ 180, /*dmg*/ 35, /*type*/ Unit::U_MELEE));
-	// computer_units.push_back(Unit("merc_archer",      /*hp*/ 180, /*dmg*/ 35, /*type*/ Unit::U_RANGED));
-	// computer_units.push_back(Unit("merc_cav",         /*hp*/ 180, /*dmg*/ 35, /*type*/ Unit::U_CAVALRY));
-}
 
 function FightingStack() {
 	
@@ -280,7 +279,6 @@ function ExpGarrison() {
     };
     
     this.addUnits = function (unittype, num, start) {
-        console.log(unittype);
         if (this.units[unittype.name] === undefined) {
             this.units[unittype.name]  = { n: num, unit: unittype };
         } else {
@@ -352,17 +350,8 @@ function ExpGarrisonData() {
 var expData = new ExpGarrisonData();
 
 
-
-
-
-//function fight_combat(attack_type, attack_num, defend_type, defend_num) {
 function fight_combat(genId, combatNum) {
     var attacker, defender, num_rounds, gAttack, gDefend, nextAttack, nextDefend, anum, dnum, attack_num, defend_num, stack_size;
-//	attacker = new FightingStack();
-//  defender = new FightingStack();
-
-    //gAttack = expData[combatNum].garrisonAttack.clone();
-    //gDefend = expData[combatNum].garrisonDefend.clone();
     
     var data = expData.getExpData(genId);
     
@@ -405,41 +394,26 @@ function fight_combat(genId, combatNum) {
     
         stack_size = nextAttack.isHeavy() ? 10 : 20;
 
-        
-        //while (attack_num > 0 && defend_num > 0) {
-            attack_num = fillup_stack(nextAttack, attacker, attack_num, stack_size);
-            defend_num = fillup_stack(nextDefend, defender, defend_num, nextDefend.isBoss() ?  1 : stack_size);
+        attack_num = fillup_stack(nextAttack, attacker, attack_num, stack_size);
+        defend_num = fillup_stack(nextDefend, defender, defend_num, nextDefend.isBoss() ?  1 : stack_size);
 
-            num_rounds += fight_stack(attacker, defender, data.data[combatNum].log);
+        num_rounds += fight_stack(attacker, defender, data.data[combatNum].log);
 
-            ////// 
-            
-            gAttack.total -= gAttack.units[nextAttack.name].n - (attack_num + attacker.units.length);
-            gAttack.units[nextAttack.name].n = attacker.units.length + attack_num;
-            //gAttack.units[nextAttack.name].n = attack_num;
-            
-            gDefend.total -= gDefend.units[nextDefend.name].n - (defend_num + defender.units.length);
-            gDefend.units[nextDefend.name].n = defender.units.length + defend_num;
-            //gDefend.units[nextDefend.name].n = defend_num;
+        ////// 
 
-            getNextUnittype(gAttack);
-            getNextUnittype(gDefend);
+        gAttack.total -= gAttack.units[nextAttack.name].n - (attack_num + attacker.units.length);
+        gAttack.units[nextAttack.name].n = attacker.units.length + attack_num;
+        //gAttack.units[nextAttack.name].n = attack_num;
 
-            combatNum += 1;
-            data.data[combatNum] = new ExpStackData(gAttack, gDefend); // cloning
-        //}
-/*
-        var attack_left = attack_num + attacker.info.number;
-        var attack_lost = anum - attack_left;
+        gDefend.total -= gDefend.units[nextDefend.name].n - (defend_num + defender.units.length);
+        gDefend.units[nextDefend.name].n = defender.units.length + defend_num;
+        //gDefend.units[nextDefend.name].n = defend_num;
 
-        var defend_left = (defend_num + defender.info.number);
-        var defend_lost = dnum - defend_left;
+        getNextUnittype(gAttack);
+        getNextUnittype(gDefend);
 
-        //	console.log("attack[" + attack_type.name + "] " + anum + " -> " + attack_left + "    ");
-        //	console.log("defend[" + defend_type.name + "] " + dnum + " -> " + defend_left + "    ");
-
-        var ratio = attack_lost/defend_lost;
-	    console.log("ratio = " + ratio + ",   rounds = " + num_rounds);*/
+        combatNum += 1;
+        data.data[combatNum] = new ExpStackData(gAttack, gDefend); // cloning
     }
 }
 
@@ -514,6 +488,86 @@ function displayExpResultTable(genId, isPlayer) {
             table.appendChild(tr);
         }
     }
+    
+    return table;
+}
+
+function displayCostsTable(genId) {
+    var combat_data, garrison, table, tr, un, it, sc;
+    
+    combat_data = expData.getExpData(genId);
+    garrison = combat_data.garrison;
+
+    table = document.createElement("table");
+    table.setAttribute("class", "extTabRes");
+    
+    tr = document.createElement("tr");
+    tr.setAttribute("class","extTabHead");
+    //createTd(tr, "", true);
+    createTd(tr, tsosim.lang.ui.resources, true);
+    createTd(tr, tsosim.lang.ui.amount, true);
+    table.appendChild(tr);
+    
+    var unitsLeft = 0;
+    unitsLeft = combat_data.data[combat_data.data.length-1].garrisonAttack.total;
+    var cl = unitsLeft === 0 ? "expStackLogDefeat" : "expStackLogVictory";
+    
+    var accCosts = {};
+
+    // accumulate costs
+    for (un in garrison.units) {
+        if (garrison.units.hasOwnProperty(un)) {
+            var num = garrison.units[un].n - combat_data.data[combat_data.data.length-1].garrisonAttack.units[un].n;
+            
+            if(num > 0) {
+                for(it in garrison.units[un].unit.costs) {
+                    if(garrison.units[un].unit.costs.hasOwnProperty(it)) {
+                        var tmp = num * garrison.units[un].unit.costs[it];
+                        if(accCosts[it]) {
+                            accCosts[it] += tmp;
+                        } else {
+                            accCosts[it] = tmp;
+                        }
+                    
+                        for(sc in SecondaryCosts[it]) {
+                            if(SecondaryCosts[it].hasOwnProperty(sc)) {
+                                tmp = num * SecondaryCosts[it][sc];
+                                if(accCosts[sc]) {
+                                    accCosts[sc] += tmp;
+                                } else {
+                                    accCosts[sc] = tmp;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    // create table
+    var line = false;
+    for (un in accCosts) {
+        if (accCosts.hasOwnProperty(un)) {
+            tr = document.createElement("tr");
+            if(!line && un > Costs.Valor) {
+                line = true;
+                tr.setAttribute("class", cl + " tabTopLine");
+            } else {
+                tr.setAttribute("class", cl);
+            }
+            
+            createTd(tr, CostNames[un]);
+            if(parseInt(un) !== Costs.Iron) {
+                createTd(tr, accCosts[un]);
+            } else {
+                var extraIron = accCosts[Costs.Steel] ? accCosts[Costs.Steel]*2 : 0;
+                createTd(tr, accCosts[un] + (extraIron ? " [" + (accCosts[un]+extraIron) + "]" : ""));
+            }
+            
+            table.appendChild(tr);
+        }
+    }
+
     
     return table;
 }
@@ -611,8 +665,6 @@ function createExpLogColumn(node, log, isPlayer, tabId) {
 }
 
 function createExpResults(node, genId) {
-    //var tabDiv = document.getElementById("expResults");
-    
     var tabDiv = document.getElementById("expResults");
     if(tabDiv) {
         while(tabDiv.children.length > 0) {
@@ -666,6 +718,7 @@ function createExpResults(node, genId) {
     
     expResTables.appendChild(displayExpResultTable(genId, true));
     expResTables.appendChild(displayExpResultTable(genId, false));
+    expResTables.appendChild(displayCostsTable(genId));
     tabDiv.appendChild(expResTables);    
 }
 
