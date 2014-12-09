@@ -513,12 +513,27 @@ tso.data.Exp.functions.defineUnits = function () {
     cu.expSkunk         = new ExpUnit("Skunk",                 4000,300, ExpUnitType.MELEE  | ExpUnitType.BOSS, "rsc/img/expSkunk.png");
 	cu.expSkunk.addBonus(ExpUnitType.CAVALRY, 40);
 
+    cu.expGreybeard     = new ExpUnit("Greybeard",             8500,250, ExpUnitType.MELEE  | ExpUnitType.BOSS, "rsc/img/expGreybeard.png");
+	cu.expGreybeard.addBonus(ExpUnitType.CAVALRY, 50);
+    
+    // -- //
+
 	cu.expBert          = new ExpUnit("One-Eyed Bert",         4000,300, ExpUnitType.RANGED  | ExpUnitType.BOSS, "rsc/img/expBert.png");
 	cu.expBert.addBonus(ExpUnitType.MELEE, 40);
+
+    cu.expShadow        = new ExpUnit("The Shadow",            3600,650, ExpUnitType.RANGED | ExpUnitType.BOSS, "rsc/img/expShadow.png");
+	cu.expShadow.addBonus(ExpUnitType.MELEE, 50);
+
+    // -- //
 
     cu.expMetalTooth    = new ExpUnit("Metal Tooth",           4000,300, ExpUnitType.CAVALRY | ExpUnitType.BOSS, "rsc/img/expMetalTooth.png");
 	cu.expMetalTooth.addBonus(ExpUnitType.RANGED, 40);
 
+    cu.expScarr         = new ExpUnit("Scarr",                 5000,360, ExpUnitType.CAVALRY | ExpUnitType.BOSS, "rsc/img/expMetalTooth.png");
+	cu.expScarr.addBonus(ExpUnitType.RANGED, 50);
+
+
+    
     // ----
 
     cu.expMercDuelist   = new ExpUnit("Mercenary Duelist",      180, 25, ExpUnitType.MELEE, "rsc/img/expMercDuelist.png");
@@ -560,7 +575,7 @@ function defineAdventureMaps(units, adv_maps) {
     
     if(tsosim.version === tso.versions[2].name) {
         adv_maps.expeditionIsland = [cu.expRecruit, cu.expThug, cu.expRoughneck, cu.expBowman, cu.expCavalry,
-                                     cu.expChuck, cu.expWildMary, cu.expSkunk, cu.expBert, cu.expMetalTooth,
+                                     cu.expChuck, cu.expWildMary, cu.expSkunk, cu.expGreybeard, cu.expBert, cu.expShadow, cu.expMetalTooth, cu.expScarr,
                                      cu.expMercDuelist, cu.expMercShooter, cu.expMercCharger, cu.expMercInfantry, cu.expMercArcher, cu.expMercCavalry];
         
         

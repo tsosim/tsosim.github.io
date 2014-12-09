@@ -140,9 +140,11 @@ var lang = {
             expChuck          : "Chuck",
             expWildMary       : "Wild Mary",
             expSkunk          : "Skunk",
+            expGreybeard      : "Greybeard",
             expBert           : "One-Eyed Bert",
+            expShadow         : "Shadow",
             expMetalTooth     : "Metal Tooth",
-
+            expScarr          : "Scarr"
         },
         adv : {
         //"playerIsland"              : adv_maps.playerIsland,
@@ -282,7 +284,7 @@ var lang = {
 			/* traitors */
 			desRecruit        : "Desert. Rekrut",
 			desMilitia        : "Desert. Miliz",
-			desCavalry        : "Desert. Reiteri",
+			desCavalry        : "Desert. Reiterei",
 			desSoldier        : "Desert. Soldat",
 			desEliteSoldier   : "Desert. Elitesoldat",
 			desBowman         : "Desert. Bogenschütze",
@@ -329,7 +331,7 @@ var lang = {
 			royalBowman       : "Königl. Bogenschütze",
 			royalLongbowman   : "Königl. Langbogenschütze",
 			royalCavalry      : "Königl. Reiterei",
-			royalCannoneer    : "Königl. kanonier",
+			royalCannoneer    : "Königl. Kanonier",
 			/* epic bosses */
 			epGiantLeader1    : "Riese Bogor",
 			epGiantLeader2    : "Riese Gogor",
@@ -337,7 +339,7 @@ var lang = {
 			epGiantBoar       : "Rasendes Wildschwein",
 			epEvilKing        : "Böser König",
 			epIronFist        : "Eisenfaust",
-			epGiantBear       : "Riesieger Bär",
+			epGiantBear       : "Riesiger Bär",
 			epRivalDressmaker : "Rivalisierender Schneider",
 			epBlackBull       : "Schwarzer Stier",
 			epDarkWizard      : "Dunkler Zauberer",
@@ -383,9 +385,11 @@ var lang = {
             expChuck          : "Chuck",
             expWildMary       : "Die Wilde Waltraut",
             expSkunk          : "Stinktier",
+            expGreybeard      : "Graubart",
             expBert           : "Einäugiger Bert",
+            expShadow         : "Schatten",
             expMetalTooth     : "Metallzahn",
-
+            expScarr          : "Scarr"
         },
         adv : {
         //"playerIsland"              : adv_maps.playerIsland,
@@ -411,7 +415,7 @@ var lang = {
             stealingFromRich  : "Beutelschneider",
             surpriseAtack     : "Der Überraschungsangriff",
             tBetrLittTaylor   : "Das betrogene Schneiderlein",
-            tBlackKnights     : "Die schwarzen Ritter",
+            tBlackKnights     : "Die Schwarzen Ritter",
             tBuccaneerRoundup : "Die Freibeuter-Razzia",
             tCleverLittTaylor : "Das kluge Schneiderlein",
             tDarkBrotherhood  : "Die Dunkle Bruderschaft",
