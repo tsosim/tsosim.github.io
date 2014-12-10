@@ -17,18 +17,23 @@ function VersionData() {
 
 var tso = {
     versions: [
-        {name: "live", tt: "Liveserver"},
-        {name: "test", tt: "Testserver, 30.09.2014"},
-        {name: "Exp",  tt: "Expeditions"}
+        {id: "live", name : "", tt: "Liveserver"},
+        {id: "test", name : "", tt: "Testserver, 30.09.2014"},
+        {id: "Exp",  name : "", tt: "Expeditions"}
     ],
     defaultVersion: "live",
-    data : {}
+    data : {},
+    updateLangNames : function() {
+        this.versions[0].name = tsosim.lang.ui.adventures;
+        this.versions[1].name = "test";
+        this.versions[2].name = tsosim.lang.ui.expeditions;
+    }
 };
 
 (function initializeTsoData() {
     var idx;
     for (idx = 0; idx < tso.versions.length; idx += 1) {
-        tso.data[tso.versions[idx].name] = new VersionData();
+        tso.data[tso.versions[idx].id] = new VersionData();
     }
 }());
 
@@ -573,7 +578,7 @@ tso.data.Exp.functions.defineUnits = function () {
 function defineAdventureMaps(units, adv_maps) {
     var cu = units;
     
-    if(tsosim.version === tso.versions[2].name) {
+    if(tsosim.version === tso.versions[2].id) {
         adv_maps.expeditionIsland = [cu.expRecruit, cu.expThug, cu.expRoughneck, cu.expBowman, cu.expCavalry,
                                      cu.expChuck, cu.expWildMary, cu.expSkunk, cu.expGreybeard, cu.expBert, cu.expShadow, cu.expMetalTooth, cu.expScarr,
                                      cu.expMercDuelist, cu.expMercShooter, cu.expMercCharger, cu.expMercInfantry, cu.expMercArcher, cu.expMercCavalry];
@@ -641,7 +646,7 @@ function defineAdventureMaps(units, adv_maps) {
 (function defineUnitsInTsoData() {
     var idx;
     for (idx = 0; idx < tso.versions.length; idx += 1) {
-        tso.data[tso.versions[idx].name].functions.defineUnits();// = new VersionData();
+        tso.data[tso.versions[idx].id].functions.defineUnits();// = new VersionData();
     }
 }());
 
@@ -665,7 +670,7 @@ function setupTsoSim(versionId, langObj) {
     } else {
         tsosim.lang = langObj;
     }
-    if(versionId !== tso.versions[2].name) {
+    if(versionId !== tso.versions[2].id) {
         tsosim.advNames = setupAdvNames(tsosim.lang.adv);
     }
     if(tsosim.version != versionId) {
@@ -677,7 +682,7 @@ function setupTsoSim(versionId, langObj) {
         tsosim.camps    = tso.data[versionId].camps;
         tsosim.adv_maps = {};
         //tsosim.lang = lang.de;
-        //if(versionId !== tso.versions[2].name) {
+        //if(versionId !== tso.versions[2].id) {
             defineAdventureMaps(tsosim.computerUnits, tsosim.adv_maps);
         //}
     }

@@ -28,7 +28,7 @@ header {
 }
 .versionButton {
     margin: 10px;
-    width:12%;
+    width:25%;
     border: 3px double black;
     cursor: pointer;
 }
