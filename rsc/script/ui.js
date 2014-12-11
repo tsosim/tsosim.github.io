@@ -276,7 +276,7 @@ function setupGeneralSelectionArea() {
     base.setAttribute("class", "unitsOptionBlock");
     label = document.createElement("label");
     label.setAttribute("id", "genSelLabel");
-    label.innerHTML = "General: ";
+    label.innerHTML = tsosim.lang.unit.general +": ";
     base.appendChild(label);
     
     if(tsosim.version !== tso.versions[2].id) {
