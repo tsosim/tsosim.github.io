@@ -1,4 +1,6 @@
-
+/*
+ * Dutch translation by Wim Janssen.
+ */
 
 var lang = {
 	en : {
@@ -130,6 +132,7 @@ var lang = {
             expThug           : "Thug",
             expRoughneck      : "Roughneck", 
             expBowman         : "Bandit Bowman",
+            expRanger         : "Bandit Ranger",
             expCavalry        : "Bandit Cavalry",
             expMercDuelist    : "Mercenary Duelist",
             expMercShooter    : "Mercenary Sharpshooter",
@@ -377,13 +380,14 @@ var lang = {
             expThug           : "Schläger",
             expRoughneck      : "Raufbold", 
             expBowman         : "Räuberbogenschütze",
+            expRanger         : "Räuberlangbogenschütze",
             expCavalry        : "Räuberreiterei",
-            expMercDuelist    : "Mercenary Duelist",
-            expMercShooter    : "Mercenary Sharpshooter",
-            expMercCharger    : "Mercenary Charger",
-            expMercInfantry   : "Mercenary Infantry",
-            expMercArcher     : "Mercenary Archer",
-            expMercCavalry    : "Mercenary Cavalry",
+            expMercDuelist    : "Söldnerduellant",
+            expMercShooter    : "Söldnerscharfschütze",
+            expMercCharger    : "Söldnerstreitross",
+            expMercInfantry   : "Söldnerinfanterie",
+            expMercArcher     : "Söldnerbogenschütze",
+            expMercCavalry    : "Söldnerreiterei",
             expChuck          : "Chuck",
             expWildMary       : "Die Wilde Waltraut",
             expSkunk          : "Stinktier",
@@ -624,7 +628,8 @@ var lang = {
             expThug           : "Schurk",
             expRoughneck      : "Rouwdouwer", 
             expBowman         : "Bandiet-Boogschutter",
-            expCavalry        : "Bandiet-Cavalerist",
+            expRanger         : "Bandiet-Groteboogschutter",
+			expCavalry        : "Bandiet-Cavalerist",
             expMercDuelist    : "Huurling-Duelist",
             expMercShooter    : "Huurling-Scherpschutter",
             expMercCharger    : "Huurling-Aanvaller",
@@ -639,7 +644,6 @@ var lang = {
             expBert           : "Bert Eenoog",
             expMetalTooth     : "Metaaltand",
             expScarr          : "Scarr"
-
         },
         adv : {
         //"playerIsland"              : adv_maps.playerIsland,
