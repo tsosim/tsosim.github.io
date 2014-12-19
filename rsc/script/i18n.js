@@ -1,4 +1,6 @@
-
+/*
+ * Dutch translation by Wim Janssen.
+ */
 
 var lang = {
 	en : {
@@ -130,6 +132,7 @@ var lang = {
             expThug           : "Thug",
             expRoughneck      : "Roughneck", 
             expBowman         : "Bandit Bowman",
+            expRanger         : "Bandit Ranger",
             expCavalry        : "Bandit Cavalry",
             expMercDuelist    : "Mercenary Duelist",
             expMercShooter    : "Mercenary Sharpshooter",
@@ -377,13 +380,14 @@ var lang = {
             expThug           : "Schläger",
             expRoughneck      : "Raufbold", 
             expBowman         : "Räuberbogenschütze",
+            expRanger         : "Räuberlangbogenschütze",
             expCavalry        : "Räuberreiterei",
-            expMercDuelist    : "Mercenary Duelist",
-            expMercShooter    : "Mercenary Sharpshooter",
-            expMercCharger    : "Mercenary Charger",
-            expMercInfantry   : "Mercenary Infantry",
-            expMercArcher     : "Mercenary Archer",
-            expMercCavalry    : "Mercenary Cavalry",
+            expMercDuelist    : "Söldnerduellant",
+            expMercShooter    : "Söldnerscharfschütze",
+            expMercCharger    : "Söldnerstreitross",
+            expMercInfantry   : "Söldnerinfanterie",
+            expMercArcher     : "Söldnerbogenschütze",
+            expMercCavalry    : "Söldnerreiterei",
             expChuck          : "Chuck",
             expWildMary       : "Die Wilde Waltraut",
             expSkunk          : "Stinktier",
@@ -624,6 +628,7 @@ var lang = {
             expThug           : "Schurk",
             expRoughneck      : "Rouwdouwer", 
             expBowman         : "Bandiet-boogschutter",
+            expRanger         : "Bandiet-Groteboogschutter",
             expCavalry        : "Bandiet-Cavalerie",
             expMercDuelist    : "Huurling-Duelist",
             expMercShooter    : "Huurling-scherpschutter",
@@ -632,11 +637,13 @@ var lang = {
             expMercArcher     : "Huurling-boogschutter",
             expMercCavalry    : "Huurling-cavalerie",
             expChuck          : "Chuck",
+            expGreybeard      : "Greybeard",
             expWildMary       : "Wilde Mary",
             expSkunk          : "Stinkert",
             expBert           : "One-Eyed Bert",
+            expShadow         : "Shadow",
             expMetalTooth     : "Metal Tooth",
-
+            expScarr          : "Scarr"
         },
         adv : {
         //"playerIsland"              : adv_maps.playerIsland,
