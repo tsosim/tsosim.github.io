@@ -510,6 +510,8 @@ tso.data.Exp.functions.defineUnits = function () {
 	cu.expCavalry       = new ExpUnit("Bandit Cavalry",         150, 30, ExpUnitType.CAVALRY, "rsc/img/expBanditCavalry.png");
 	cu.expCavalry.addBonus(ExpUnitType.RANGED, 35);
 
+	cu.expWarDog        = new ExpUnit("War Dog",                 10,160, ExpUnitType.ELITE|ExpUnitType.HEAVY, "rsc/img/expWarDog.png");
+
     // ----
 
 	cu.expChuck         = new ExpUnit("Chuck",                 2000,150, ExpUnitType.MELEE  | ExpUnitType.BOSS, "rsc/img/expChuck.png");
@@ -582,7 +584,7 @@ function defineAdventureMaps(units, adv_maps) {
     var cu = units;
     
     if(tsosim.version === tso.versions[2].id) {
-        adv_maps.expeditionIsland = [cu.expRecruit, cu.expThug, cu.expRoughneck, cu.expBowman, cu.expRanger, cu.expCavalry,
+        adv_maps.expeditionIsland = [cu.expRecruit, cu.expThug, cu.expRoughneck, cu.expBowman, cu.expRanger, cu.expCavalry, cu.expWarDog,
                                      cu.expChuck, cu.expWildMary, cu.expSkunk, cu.expGreybeard, cu.expBert, cu.expShadow, cu.expMetalTooth, cu.expScarr,
                                      cu.expMercDuelist, cu.expMercShooter, cu.expMercCharger, cu.expMercInfantry, cu.expMercArcher, cu.expMercCavalry];
         
