@@ -393,9 +393,9 @@ function fight_combat(genId, combatNum) {
         defend_num = dnum - defender.units.length;
     
         stack_size = nextAttack.isHeavy() ? 10 : 20;
-        if(nextDefend.isHeavy()) {
-            stack_size = 10;
-        }            
+        //if(nextDefend.isHeavy()) {
+        //    stack_size = 10;
+        //}            
 
         attack_num = fillup_stack(nextAttack, attacker, attack_num, stack_size);
         defend_num = fillup_stack(nextDefend, defender, defend_num, nextDefend.isBoss() ?  1 : stack_size);
