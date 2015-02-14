@@ -157,7 +157,7 @@ tso.data.live.functions.defineUnits = function () {
     // -------------- //
     vData.generals.general    = new Unit("General",                1, [120, 120], 80, Initiative.SECOND, getAID(), [Skills.GENERAL]);
     vData.generals.mma        = new Unit("Martial Arts General",   1, [450, 500], 80, Initiative.FIRST, getAID(), [Skills.GENERAL, Skills.SPLASH_DAMAGE, Skills.ATTACK_WEAKEST]);
-    //vData.generals.leg_vet    = new Unit("Legendary Veteran", 1500, [  1, 200], 80, Initiative.THIRD, getAID(), [Skills.GENERAL, Skills.SPLASH_DAMAGE]);
+    vData.generals.leg        = new Unit("Legendary Veteran",   1000, [ 25,  50], 80, Initiative.SECOND, getAID(), [Skills.GENERAL, Skills.ATTACK_WEAKEST]);
     
     setUnitIDs(vData.generals);
     setUnitClass(vData.generals, EnemyType.PLAYER);
@@ -267,6 +267,11 @@ tso.data.live.functions.defineUnits = function () {
     cu.croaker           = new Unit("Croaker",         10000, [500, 700], 50, Initiative.THIRD,  getAID(), [Skills.ATTACK_WEAKEST]);  //
     cu.mystShaman        = new Unit("Mystical Shaman",  9000, [200, 500], 70, Initiative.SECOND, getAID(), [Skills.ATTACK_WEAKEST, Skills.SPLASH_DAMAGE]);  //
     
+    cu.lowlyPoacher      = new Unit("",   40, [ 15,  30], 60, Initiative.SECOND, getAID(), []);
+    cu.rabbitHunter      = new Unit("",   10, [ 20,  40], 60, Initiative.SECOND, getAID(), [Skills.TOWER_BONUS]);
+    cu.hound             = new Unit("",    5, [  5,  10], 60, Initiative.FIRST,  getAID(), [Skills.ATTACK_WEAKEST]);
+    cu.garrunTrapper     = new Unit("", 6000, [300, 500], 50, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE]);
+    
     
     // camps
     camp.campNone          = new Unit("No Camp",             0, [0,0], 0, Initiative.THIRD,  getAID(), [Skills.CAMP, Skills.GENERAL]);
@@ -323,7 +328,7 @@ tso.data.test.functions.defineUnits = function () {
     // -------------- //
     vData.generals.general    = new Unit("General",                 1, [120, 120], 80, Initiative.THIRD, getAID(), [Skills.GENERAL, Skills.SPLASH_DAMAGE]);
     vData.generals.mma        = new Unit("Martial Arts General", 1000, [450, 500], 80, Initiative.FIRST, getAID(), [Skills.GENERAL, Skills.SPLASH_DAMAGE, Skills.ATTACK_WEAKEST]);
-    vData.generals.leg_vet    = new Unit("Legendary Veteran",    1500, [  1, 200], 80, Initiative.THIRD, getAID(), [Skills.GENERAL, Skills.SPLASH_DAMAGE]);
+    vData.generals.leg        = new Unit("Legendary Veteran",    1500, [  1, 200], 80, Initiative.THIRD, getAID(), [Skills.GENERAL, Skills.SPLASH_DAMAGE]);
     
     setUnitIDs(vData.generals);
     setUnitClass(vData.generals, EnemyType.PLAYER);
@@ -594,7 +599,7 @@ function defineAdventureMaps(units, adv_maps) {
     
     //var cu = tso.data.live.allUnits;
     adv_maps.playerIsland      = [cu.bWildMary, cu.bChuck, cu.bMetalToothed, cu.bScavenger, cu.bThug, cu.bGuardDog, cu.bRoughneck, cu.bStoneThrower, cu.bRanger, cu.bSkunk, cu.bOneEyedBert];
-    adv_maps.garrunTheTrapper  = [];
+    adv_maps.garrunTheTrapper  = [cu.lowlyPoacher, cu.rabbitHunter, cu.hound, cu.garrunTrapper];
     adv_maps.banditnest        = [cu.bChuck, cu.bMetalToothed, cu.bScavenger, cu.bThug, cu.bGuardDog, cu.bRoughneck, cu.bRanger, cu.bOneEyedBert];
     adv_maps.gunpowder         = [cu.desMilitia, cu.desCavalry, cu.desSoldier, cu.desEliteSoldier, cu.desBowman, cu.desLongbow, cu.desCrossbow, cu.desCannoneer, cu.desBigBertha];
     adv_maps.horseback         = [cu.rNomad, cu.rLanceRider, cu.rRidingBowman, cu.rRidingAmazon, cu.rCataphract, cu.rUproarBull, cu.rCompBow];

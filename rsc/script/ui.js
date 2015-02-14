@@ -250,7 +250,7 @@ function setupGeneralSelectionOption(value, text, att_id, att_class) {
     span.onclick = function () {
         var options, node, opt, attr;
         if(tsosim.version !== tso.versions[2].id) {
-            options = ["genSel200", "genSel220", "genSel250", "genSel270", "genSelMMA"];
+            options = ["genSel200", "genSel220", "genSel250", "genSel270", "genSelMMA", "genSelLEG"];
         } else {
             options = ["genSel100"];
         }
@@ -285,6 +285,7 @@ function setupGeneralSelectionArea() {
         base.appendChild(setupGeneralSelectionOption(250, "250", "genSel250", "genSel selOpt"));
         base.appendChild(setupGeneralSelectionOption(270, "270", "genSel270", "genSel selOpt"));
         base.appendChild(setupGeneralSelectionOption(220, "MMA", "genSelMMA", "genSel selOpt"));
+        base.appendChild(setupGeneralSelectionOption(200, "LEG", "genSelLEG", "genSel selOpt"));
     } else {
         base.appendChild(setupGeneralSelectionOption(200, "100", "genSel100", "genSel selOptActive"));
     }
@@ -404,13 +405,16 @@ function storePlayerGarrisonValues(gen_id, units) {
     
     // store general
     if(tsosim.version !== tso.versions[2].id) {
-        genIds = ["genSel200", "genSel220", "genSel250", "genSel270", "genSelMMA"];
+        genIds = ["genSel200", "genSel220", "genSel250", "genSel270", "genSelMMA", "genSelLEG"];
         for (g = 0; g < genIds.length; g += 1) {
             node = document.getElementById(genIds[g]);
             if (node.getAttribute("class") === "genSel selOptActive") {
                 if (genIds[g] === "genSelMMA") {
                     garrison.addUnits(tsosim.generals.mma, 1);
-                } else {
+                } else if (genIds[g] === "genSelLEG"){
+                    garrison.addUnits(tsosim.generals.leg, 1);
+                }
+                else {
                     garrison.addUnits(tsosim.generals.general, 1);
                 }
                 garrison.setCapacity(parseInt(node.getAttribute("value"), 10));
@@ -443,6 +447,9 @@ function setPlayerGarrisonValues(gen_id) {
             if (group.type.hasSkill(Skills.GENERAL)) {
                 if (group.type.id === tsosim.generals.mma.id) {
                     node = document.getElementById("genSelMMA");
+                    node.onclick();
+                } else if (group.type.id === tsosim.generals.leg.id) {
+                    node = document.getElementById("genSelLEG");
                     node.onclick();
                 } else {
                     node = document.getElementById("genSel" + garrison.capacity);

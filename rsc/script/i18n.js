@@ -18,6 +18,7 @@ var lang = {
     
 			general           : "General",
 			mma               : "Master of Martial Arts",
+            leg               : "Legendary Veteran",
 			/* bandits */
 			bWildMary         : "Wild Mary",
 			bChuck            : "Chuck",
@@ -104,6 +105,11 @@ var lang = {
 			epThugLeader      : "Cudgel Claus",
 			epAssassine       : "Assassin",
 			epGreedyInnkeeper : "Greedy Inn-Keeper",
+            
+            lowlyPoacher      : "Lowly Poacher",
+            rabbitHunter      : "Rabbit Hunter",
+            hound             : "Hound",
+            garrunTrapper     : "Garrun the Trapper", 
     
 			wolf              : "Wolf",
 			croaker           : "Croaker",
@@ -267,6 +273,7 @@ var lang = {
     
 			general           : "General",
 			mma               : "Meister der Kampfkunst",
+            leg               : "Legendärer Veteran",
 			/* bandits */
 			bWildMary         : "Waltraud",
 			bChuck            : "Chuck",
@@ -353,7 +360,12 @@ var lang = {
 			epThugLeader      : "Knüppel-Klaus",
 			epAssassine       : "Assassine",
 			epGreedyInnkeeper : "Gieriger Gastwirt",
-    
+
+            lowlyPoacher      : "Einfacher Wilderer",
+            rabbitHunter      : "Hasenjäger",
+            hound             : "Jagdhund",
+            garrunTrapper     : "Garrun der Fallensteller", 
+
 			wolf              : "Wolf",
 			croaker           : "Croaker",
 			mystShaman         : "Mystical Shaman",
@@ -516,6 +528,7 @@ var lang = {
             
             general           : "Generaal",
             mma               : "Meester in Gevechtskunst",
+            leg               : "Legendary Veteran",
             /* bandits */
             bWildMary         : "Wilde Mary",
             bChuck            : "Chuck",
@@ -603,6 +616,11 @@ var lang = {
             epAssassine       : "Sluipmoordenaar",
             epGreedyInnkeeper : "Gierige Herbergier",
             
+            lowlyPoacher      : "Lowly Poacher",
+            rabbitHunter      : "Rabbit Hunter",
+            hound             : "Hound",
+            garrunTrapper     : "Garrun the Trapper", 
+
             wolf              : "Wolf",
             croaker           : "Croaker",
             mystShaman        : "Mysterieuze Shamaan",
