@@ -197,7 +197,9 @@ var lang = {
             tropicalSun       : "Tropical Sun",
             victorTVicious    : "Victor the Vicious",
             wildMary          : "Wild Mary",
-            witchOTSwamp      : "Witch of the Swamp"
+            witchOTSwamp      : "Witch of the Swamp",
+            bastilleIsland    : "Bastille Island",
+            arcticExplosion   : "[undefined text]"
         },
         ui : {
             title             : "The Settlers Online - Combat Simulator",
@@ -452,7 +454,9 @@ var lang = {
             tropicalSun       : "Tropensonne",
             victorTVicious    : "Viktor der Verschlagene",
             wildMary          : "Die Wilde Waldtraut",
-            witchOTSwamp      : "Sumpfhexe"
+            witchOTSwamp      : "Sumpfhexe",
+            bastilleIsland    : "Bastille Island",
+            arcticExplosion   : "[undefined text]"
         },
         ui : {
             title             : "Die Siedler Online - Kampfsimulator",
@@ -707,7 +711,9 @@ var lang = {
             tropicalSun       : "Tropische zon",
             victorTVicious    : "Viktor de verschrikkelijke",
             wildMary          : "Wilde Mary",
-            witchOTSwamp      : "Moerasheks"
+            witchOTSwamp      : "Moerasheks",
+            bastilleIsland    : "Bastille Island",
+            arcticExplosion   : "[undefined text]"
         },
         ui : {
             title             : "The Settlers Online - Gevechtssimulator",
