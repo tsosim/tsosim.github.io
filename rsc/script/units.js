@@ -157,7 +157,7 @@ tso.data.live.functions.defineUnits = function () {
     // -------------- //
     vData.generals.general    = new Unit("General",                1, [120, 120], 80, Initiative.SECOND, getAID(), [Skills.GENERAL]);
     vData.generals.mma        = new Unit("Martial Arts General",   1, [450, 500], 80, Initiative.FIRST, getAID(), [Skills.GENERAL, Skills.SPLASH_DAMAGE, Skills.ATTACK_WEAKEST]);
-    vData.generals.leg        = new Unit("Legendary Veteran",   1000, [ 25,  50], 80, Initiative.SECOND, getAID(), [Skills.GENERAL, Skills.ATTACK_WEAKEST]);
+    vData.generals.leg        = new Unit("Legendary Veteran",   5000, [ 25,  50], 80, Initiative.SECOND, getAID(), [Skills.GENERAL, Skills.SPLASH_DAMAGE, Skills.ATTACK_WEAKEST]);
     
     setUnitIDs(vData.generals);
     setUnitClass(vData.generals, EnemyType.PLAYER);
@@ -328,7 +328,7 @@ tso.data.test.functions.defineUnits = function () {
     // -------------- //
     vData.generals.general    = new Unit("General",                 1, [120, 120], 80, Initiative.THIRD, getAID(), [Skills.GENERAL, Skills.SPLASH_DAMAGE]);
     vData.generals.mma        = new Unit("Martial Arts General", 1000, [450, 500], 80, Initiative.FIRST, getAID(), [Skills.GENERAL, Skills.SPLASH_DAMAGE, Skills.ATTACK_WEAKEST]);
-    vData.generals.leg        = new Unit("Legendary Veteran",    1500, [  1, 200], 80, Initiative.THIRD, getAID(), [Skills.GENERAL, Skills.SPLASH_DAMAGE]);
+    vData.generals.leg        = new Unit("Legendary Veteran",    5000, [ 25,  50], 80, Initiative.SECOND, getAID(), [Skills.GENERAL, Skills.SPLASH_DAMAGE, Skills.SPLASH_DAMAGE]);
     
     setUnitIDs(vData.generals);
     setUnitClass(vData.generals, EnemyType.PLAYER);
