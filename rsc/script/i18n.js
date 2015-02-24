@@ -199,7 +199,7 @@ var lang = {
             wildMary          : "Wild Mary",
             witchOTSwamp      : "Witch of the Swamp",
             bastilleIsland    : "Bastille Island",
-            arcticExplosion   : "[undefined text]"
+            arcticExplosion   : "Arctic Explosion"
         },
         ui : {
             title             : "The Settlers Online - Combat Simulator",
@@ -456,7 +456,7 @@ var lang = {
             wildMary          : "Die Wilde Waldtraut",
             witchOTSwamp      : "Sumpfhexe",
             bastilleIsland    : "Bastille Island",
-            arcticExplosion   : "[undefined text]"
+            arcticExplosion   : "Arctic Explosion"
         },
         ui : {
             title             : "Die Siedler Online - Kampfsimulator",
@@ -713,7 +713,7 @@ var lang = {
             wildMary          : "Wilde Mary",
             witchOTSwamp      : "Moerasheks",
             bastilleIsland    : "Bastille Island",
-            arcticExplosion   : "[undefined text]"
+            arcticExplosion   : "Arctic Explosion"
         },
         ui : {
             title             : "The Settlers Online - Gevechtssimulator",
