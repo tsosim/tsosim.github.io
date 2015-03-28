@@ -263,53 +263,53 @@ function CombatLog() {
 
                     if(currentInit.groupData.length > 0) {
                         inode = createInitBase(rnode, waveNum, rnd + 1, inits[init]);
-                    }
                     
-                    var table = document.createElement("table");
-                    table.setAttribute("class", "groupTable gtHide");
-                    table.setAttribute("id", "gt_w"+waveNum+"r"+(rnd+1)+"i"+inits[init]);
-                    for (gr = 0; gr < currentInit.groupData.length; gr += 1) {
-                        hasData = true;
+                        var table = document.createElement("table");
+                        table.setAttribute("class", "groupTable gtHide");
+                        table.setAttribute("id", "gt_w"+waveNum+"r"+(rnd+1)+"i"+inits[init]);
+                        for (gr = 0; gr < currentInit.groupData.length; gr += 1) {
+                            hasData = true;
 
-                        group = currentInit.groupData[gr];
+                            group = currentInit.groupData[gr];
 
-                        grow = createGroupRow(group, waveNum, rnd+1, inits[init], gr);
-                        table.appendChild(grow);
+                            grow = createGroupRow(group, waveNum, rnd+1, inits[init], gr);
+                            table.appendChild(grow);
                         
-                        var tabrow = document.createElement("tr");
-                        tabrow.setAttribute("id", "ga"+waveNum+"r"+(rnd+1)+"i"+inits[init]+"g"+gr);
-                        tabrow.setAttribute("class", "gaHide");
+                            var tabrow = document.createElement("tr");
+                            tabrow.setAttribute("id", "ga"+waveNum+"r"+(rnd+1)+"i"+inits[init]+"g"+gr);
+                            tabrow.setAttribute("class", "gaHide");
 
 /*
-                        table = document.createElement("table");
-                        table.setAttribute("class", "logUnitAttack " + (playerUnit ? "logPlayer" : "logComputer"));
+                            table = document.createElement("table");
+                            table.setAttribute("class", "logUnitAttack " + (playerUnit ? "logPlayer" : "logComputer"));
 
-                        table.appendChild(createLogTableHead());
+                            table.appendChild(createLogTableHead());
 
-                        for (at = 0; at < group.attacks.length; at += 1) {
-                            tr = createLogTableRow(group.attacks[at], group.attackerGroup, group.defenderGroup);
-                            table.appendChild(tr);
-                        }
+                            for (at = 0; at < group.attacks.length; at += 1) {
+                                tr = createLogTableRow(group.attacks[at], group.attackerGroup, group.defenderGroup);
+                                table.appendChild(tr);
+                            }
 */
-                        //var div = document.createElement("div");
-                        //div.setAttribute("class", "");
+                            //var div = document.createElement("div");
+                            //div.setAttribute("class", "");
 
-                        var td = document.createElement("td");
-                        td.setAttribute("colspan", 25);
-                        td.setAttribute("class","gaTab");
-                        var tab = createGroupAttackTable(group);
-                        tab.setAttribute("id", "gat"+waveNum+"r"+(rnd+1)+"i"+inits[init]+"g"+gr)
-                        tab.onclick     = hideGroupTable("ga"+waveNum+"r"+(rnd+1)+"i"+inits[init]+"g"+gr);
-                        tab.onmouseover = highlightGroupTable("gat"+waveNum+"r"+(rnd+1)+"i"+inits[init]+"g"+gr, true);
-                        tab.onmouseout  = highlightGroupTable("gat"+waveNum+"r"+(rnd+1)+"i"+inits[init]+"g"+gr, false);
-                        td.appendChild(tab);
+                            var td = document.createElement("td");
+                            td.setAttribute("colspan", 25);
+                            td.setAttribute("class","gaTab");
+                            var tab = createGroupAttackTable(group);
+                            tab.setAttribute("id", "gat"+waveNum+"r"+(rnd+1)+"i"+inits[init]+"g"+gr)
+                            tab.onclick     = hideGroupTable("ga"+waveNum+"r"+(rnd+1)+"i"+inits[init]+"g"+gr);
+                            tab.onmouseover = highlightGroupTable("gat"+waveNum+"r"+(rnd+1)+"i"+inits[init]+"g"+gr, true);
+                            tab.onmouseout  = highlightGroupTable("gat"+waveNum+"r"+(rnd+1)+"i"+inits[init]+"g"+gr, false);
+                            td.appendChild(tab);
                         
-                        tabrow.appendChild(td);
-                        table.appendChild(tabrow);
-                        //grow.appendChild(tabbase);
-                        //inode.appendChild(gnode);
+                            tabrow.appendChild(td);
+                            table.appendChild(tabrow);
+                            //grow.appendChild(tabbase);
+                            //inode.appendChild(gnode);
+                        }
+                        inode.appendChild(table);
                     }
-                    inode.appendChild(table);
                 }
             }
             if(!hasData) {
