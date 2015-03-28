@@ -290,6 +290,10 @@ function Simulator() {
         defNum = 1;
         appliedDamage = 0;
         maxDamage = 0;
+
+        if(extraParams.defIsCamp) {
+            current_att = 1; // attack only with one unit if fighting against a building
+        }
         
         while (current_att > 0) {
             if (current_def < 0) {

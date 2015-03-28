@@ -405,7 +405,7 @@ function createGroupRow(group, waveNum, rnd, init, gr) {
     tr.appendChild(toSpan(group.attAttacked, "gaMin gaNum")); // "gaAttNum gaMin"));
     tr.appendChild(toSpan(tsosim.lang.unit[group.attackerGroup.type.id], "gaName gaMin"));
     tr.appendChild(toSpan("[","gaMin"));
-    tr.appendChild(toSpan(group.attAttackedT,"gaMin gaNum"));
+    tr.appendChild(toSpan(group.attAttacked,"gaMin gaNum"));
     tr.appendChild(toSpan("/", "gaMin"));
     tr.appendChild(toSpan(group.numAttackers, "gaMin gaNum"));
     tr.appendChild(toSpan("]","gaMin")); //, "gaAttTotal"));
