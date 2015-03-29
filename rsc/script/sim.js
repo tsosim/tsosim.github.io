@@ -157,6 +157,7 @@ function Simulator() {
             if (LOG) { LOG.startRound(); }
             
             abortRound = false;
+            var attackedNonCampUnits = false;
       
             // iterate over all initiatives; if there units for a specific initiative in the garrisons, then compute combat
             for (init = 0; init < initiatives.length; init += 1) {
@@ -175,11 +176,13 @@ function Simulator() {
                     if (current_group.number >= 1) {
                         // do stuff
                         attack_happened = true;
-                        tmpAttack = this.computeAttackOnGarrison(current_group, defender_g, LOG);
+                        tmpAttack = this.computeAttackOnGarrison(current_group, defender_g, attackedNonCampUnits, LOG);
                         if (tmpAttack.attacked === false) {
                             abortRound = true;
                             current_group.dmg_left = 0; // reset damage, in order to not apply it on the units in the following round
                             break;
+                        } else if(!tmpAttack.onCamp) {
+                            attackedNonCampUnits = true;
                         }
                     }
                 }
@@ -233,7 +236,7 @@ function Simulator() {
         return { numR : rounds, numC : campRounds };
     };
   
-    this.computeAttackOnGarrison = function (attacking_group, defending_garrison, LOG) {
+    this.computeAttackOnGarrison = function (attacking_group, defending_garrison, attackedNonCampUnits, LOG) {
         // determine defender's group ordering
         var def_groups, idx, current_def_group, defense_bonus, defense_pen_value, extraParams, isFirst;
         
@@ -252,19 +255,20 @@ function Simulator() {
             defIsCamp       : false
         };
             
-        isFirst = true;
         for (idx = 0; idx < def_groups.length; idx += 1) {
             current_def_group = def_groups[idx];
             if (current_def_group.number_after_attack >= 1 && attacking_group.number_left_to_attack > 0) {
                 extraParams.defIsCamp = current_def_group.type.hasSkill(Skills.CAMP) && current_def_group.type !== tsosim.camps.campNone;
-                if (!isFirst && extraParams.defIsCamp) {
+                if (attackedNonCampUnits && extraParams.defIsCamp) {
                     // abort round if we are about to attack a building while having attacked other units in the same round
                     // -> need to attack building in a new round
                     return { attacked: false, onCamp: extraParams.defIsCamp };
                 }
 
-                isFirst = false;
                 current_def_group.number_after_attack = this.computeAttackOnUnitgroup(attacking_group, current_def_group, extraParams, LOG);
+
+                // set to true for the case the remaining units will attack another group
+                attackedNonCampUnits = true;//!(extraParams.defIsCamp ||current_def_group.type === tsosim.camps.campNone);
 
                 //if (current_def_group.number_after_attack > 0) {
                 if (current_def_group.number_after_attack > 0 /*|| attacking_group.dmg_left == 0*/) {
