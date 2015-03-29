@@ -1,11 +1,25 @@
 'use strict';
-
+/*global tsosim*/
+/*global StackItem*/
 
 var ExpUnitType  = { INVALID : 0, CAVALRY : 1, MELEE : 2, RANGED : 4, BOSS : 8, HEAVY : 16, ELITE : 32 };
 var ExpTypeNames = {};
 
 var Costs = {
-    Settler:0, Brew:1, Pike:2, Bow:3, Horse:4, Sabre:5, Mace:6, Crossbow:7, Lance:8, Valor:9, Hardwood:10, Coal:11, Steel:12, Iron:13,
+    Settler: 0,
+    Brew: 1,
+    Pike: 2,
+    Bow: 3,
+    Horse: 4,
+    Sabre: 5,
+    Mace: 6,
+    Crossbow: 7,
+    Lance: 8,
+    Valor: 9,
+    Hardwood: 10,
+    Coal: 11,
+    Steel: 12,
+    Iron: 13
 };
 var CostNames = {};
 
@@ -32,15 +46,18 @@ var SecondaryCosts = {};
 })();
 
 function _etn() {
-    var lang = tsosim.lang.ui;
-    var et = ExpTypeNames;
+    var lang, et, c;
+    lang = tsosim.lang.ui;
+
+    et = ExpTypeNames;
     et[ExpUnitType.CAVALRY] = lang.cavalry;
     et[ExpUnitType.MELEE]   = lang.melee;
     et[ExpUnitType.RANGED]  = lang.ranged;
     et[ExpUnitType.ELITE]   = lang.elite;
     et[ExpUnitType.BOSS] = "Boss";
     et[ExpUnitType.HEAVY] = "Heavy";
-    var c = CostNames;
+
+    c = CostNames;
     c[Costs.Settler] = lang.settler;
     c[Costs.Brew] = lang.brew;
     c[Costs.Pike] = lang.pike;
@@ -55,7 +72,7 @@ function _etn() {
     c[Costs.Coal] = lang.coal;
     c[Costs.Iron] = lang.iron;
     c[Costs.Steel] = lang.steel;
-};
+}
 
 
 
@@ -74,23 +91,23 @@ function ExpUnit(name, hp, dmg, type, icon) {
         this.bonus[type] = value;
     };
     
-    this.setCosts = function(type,amount) {
+    this.setCosts = function (type, amount) {
         this.costs[type] = amount;
         return this;
     };
     
-    this.isMelee = function() {
+    this.isMelee = function () {
         return this.type & ExpUnitType.MELEE;
-    }
-    this.isRanged = function() {
+    };
+    this.isRanged = function () {
         return this.type & ExpUnitType.RANGED;
-    }
-    this.isCavalry = function() {
+    };
+    this.isCavalry = function () {
         return this.type & ExpUnitType.CAVALRY;
-    }
-    this.isElite = function() {
+    };
+    this.isElite = function () {
         return this.type & ExpUnitType.ELITE;
-    }
+    };
     
 	this.isBoss = function () {
         return this.type & ExpUnitType.BOSS;
@@ -102,13 +119,13 @@ function ExpUnit(name, hp, dmg, type, icon) {
 }
 
 function ExpUnitTypeName(unit) {
-    if(unit.isMelee()) {
+    if (unit.isMelee()) {
         return tsosim.lang.ui.melee;
-    } else if(unit.isRanged() ) {
+    } else if (unit.isRanged()) {
         return tsosim.lang.ui.ranged;
-    } else if(unit.isCavalry() ) {
+    } else if (unit.isCavalry()) {
         return tsosim.lang.ui.cavalry;
-    } else if(unit.isElite() ) {
+    } else if (unit.isElite()) {
         return tsosim.lang.ui.elite;
     } else {
         return "###";
@@ -139,6 +156,7 @@ function FightingStack() {
 	};
 
 	this.add_units = function (type, num) {
+        var i;
         if (this.units.length !== 0 && this.units[0].unit_info !== type) {
             return false;
         }
@@ -151,7 +169,7 @@ function FightingStack() {
         }
         
         // FIX?! - apparently units get full hitpoints after a stack refill
-        for(var i = 0; i < this.units.length; i += 1) {
+        for (i = 0; i < this.units.length; i += 1) {
             this.units[i].hitpoints = type.hitpoints;
         }
         
@@ -159,13 +177,13 @@ function FightingStack() {
 	};
 
 	this.getDamage = function (opponent) {
-        var is_bonus_type, damage_bonus, damage;
+        var is_bonus_type, damage_bonus, damage, i, test;
         
         damage_bonus = 1;
-        for(var i in this.unit_type.bonus) {
-            if(this.unit_type.bonus.hasOwnProperty(i)) {
-                var test = i & opponent.type;
-                if( test !== 0) {
+        for (i in this.unit_type.bonus) {
+            if (this.unit_type.bonus.hasOwnProperty(i)) {
+                test = i & opponent.type;
+                if (test !== 0) {
                     damage_bonus  = (100 + this.unit_type.bonus[i]) / 100.0;
                     break;
                 }
@@ -209,7 +227,7 @@ function FightingStack() {
  * returns: number of rounds
  */
 function fight_stack(stack1, stack2, log) {
-    var rounds, damage1, damage2, hitpoints_left1, hitpoints_left2, units_left1, units_left2;
+    var rounds, damage1, damage2, hitpoints_left1, hitpoints_left2, units_left1, units_left2, uA, uD;
     //console.log("######################################");
 	rounds = 0;
 	while (stack1.units.length !== 0 && stack2.units.length !== 0) {
@@ -220,8 +238,8 @@ function fight_stack(stack1, stack2, log) {
 		hitpoints_left1 = stack1.get_hitpoints();
 		hitpoints_left2 = stack2.get_hitpoints();
 
-        var uA = stack1.units.length;
-        var uD = stack2.units.length;
+        uA = stack1.units.length;
+        uD = stack2.units.length;
         
 		// apply damage
 		units_left1 = stack1.applyDamage(damage2);
@@ -258,11 +276,11 @@ function ExpGarrison() {
     this.total = 0;
     this.currentUnit = null;
     
-    this.clear = function() {
+    this.clear = function () {
         this.units = {};
         this.total = 0;
         this.currentUnit = null;
-    }
+    };
     
     this.clone = function () {
         var garr, u;
@@ -334,16 +352,16 @@ function ExpStackData(gAttack, gDefend) {
 function ExpGarrisonData() {
     this.garrisonData = {};
     
-    this.getExpData = function(id) {
-        if(this.garrisonData[id] === undefined) {
-            this.garrisonData[id] = { 
-                garrison: new ExpGarrison(), 
+    this.getExpData = function (id) {
+        if (this.garrisonData[id] === undefined) {
+            this.garrisonData[id] = {
+                garrison: new ExpGarrison(),
                 expedition : new ExpGarrison(),
-                data : [] 
+                data : []
             };
         }
         return this.garrisonData[id];
-    }
+    };
     
 }
 
@@ -351,9 +369,9 @@ var expData = new ExpGarrisonData();
 
 
 function fight_combat(genId, combatNum) {
-    var attacker, defender, num_rounds, gAttack, gDefend, nextAttack, nextDefend, anum, dnum, attack_num, defend_num, stack_size;
+    var data, stacks, attacker, defender, num_rounds, gAttack, gDefend, nextAttack, nextDefend, anum, dnum, attack_num, defend_num, stack_size;
     
-    var data = expData.getExpData(genId);
+    data = expData.getExpData(genId);
     
     gAttack = data.data[combatNum].garrisonAttack.clone();
     gDefend = data.data[combatNum].garrisonDefend.clone();
@@ -363,24 +381,24 @@ function fight_combat(genId, combatNum) {
         data.data[delNum] = {};
         delNum += 1;
     }*/
-    data.data.length = combatNum+1;
+    data.data.length = combatNum + 1;
     data.data[combatNum].log = [];
     
     num_rounds = 0;
 
-    var stacks = {};
+    stacks = {};
     
     while (gAttack.total > 0 && gDefend.total > 0) {
 
         nextAttack = gAttack.currentUnit;
         nextDefend = gDefend.currentUnit;
 
-        if(stacks[nextAttack.id] === undefined) {
+        if (stacks[nextAttack.id] === undefined) {
             stacks[nextAttack.id] = new FightingStack();
         }
         attacker = stacks[nextAttack.id];
 
-        if(stacks[nextDefend.id] === undefined) {
+        if (stacks[nextDefend.id] === undefined) {
             stacks[nextDefend.id] = new FightingStack();
         }
         defender = stacks[nextDefend.id];
@@ -422,20 +440,21 @@ function fight_combat(genId, combatNum) {
 
 
 function setRestartFunction(genId, sel, stackNum, player) {
-    return function() {
-        var x = sel.options[sel.selectedIndex].value;
+    return function () {
+        var x, unitId, data, garrison, gUnits, i;
+        x = sel.options[sel.selectedIndex].value;
         
-        var unitId = sel.options[sel.selectedIndex].getAttribute("val");
+        unitId = sel.options[sel.selectedIndex].getAttribute("val");
         
         console.log(x);
-        var data = expData.getExpData(genId);
-        var garrison = player ? data.data[stackNum].garrisonAttack : data.data[stackNum].garrisonDefend;
-        var gUnits = garrison.units;
+        data = expData.getExpData(genId);
+        garrison = player ? data.data[stackNum].garrisonAttack : data.data[stackNum].garrisonDefend;
+        gUnits = garrison.units;
         
-        for (var i in gUnits) {
-            if(gUnits.hasOwnProperty(i)) {
+        for (i in gUnits) {
+            if (gUnits.hasOwnProperty(i)) {
 
-                if(gUnits[i].unit.id === unitId) {
+                if (gUnits[i].unit.id === unitId) {
                 
                 //if(x.search(gUnits[i].unit.name) >= 0) {
                     garrison.currentUnit = gUnits[i].unit;
@@ -450,7 +469,7 @@ function setRestartFunction(genId, sel, stackNum, player) {
 
 function displayExpResultTable(genId, isPlayer) {
 
-    var combat_data, garrison, table, tr, un;
+    var combat_data, garrison, table, tr, un, unitsLeft, cl;
     
     combat_data = expData.getExpData(genId);
 
@@ -460,19 +479,19 @@ function displayExpResultTable(genId, isPlayer) {
     table.setAttribute("class", "extTabRes");
     
     tr = document.createElement("tr");
-    tr.setAttribute("class","extTabHead");
+    tr.setAttribute("class", "extTabHead");
     createTd(tr, "", true);
     createTd(tr, tsosim.lang.ui.units, true);
     createTd(tr, tsosim.lang.ui.losses, true);
     table.appendChild(tr);
     
-    var unitsLeft = 0;
-    if(isPlayer) {
-        unitsLeft = combat_data.data[combat_data.data.length-1].garrisonAttack.total;
+    unitsLeft = 0;
+    if (isPlayer) {
+        unitsLeft = combat_data.data[combat_data.data.length - 1].garrisonAttack.total;
     } else {
-        unitsLeft = combat_data.data[combat_data.data.length-1].garrisonDefend.total;
+        unitsLeft = combat_data.data[combat_data.data.length - 1].garrisonDefend.total;
     }
-    var cl = unitsLeft === 0 ? "expStackLogDefeat" : "expStackLogVictory";
+    cl = unitsLeft === 0 ? "expStackLogDefeat" : "expStackLogVictory";
     
     for (un in garrison.units) {
         if (garrison.units.hasOwnProperty(un)) {
@@ -482,10 +501,10 @@ function displayExpResultTable(genId, isPlayer) {
             createTd(tr, garrison.units[un].n);
             createTd(tr, tsosim.lang.unit[garrison.units[un].unit.id]);
 
-            if(isPlayer) {
-                createTd(tr, combat_data.data[combat_data.data.length-1].garrisonAttack.units[un].n - garrison.units[un].n);
+            if (isPlayer) {
+                createTd(tr, combat_data.data[combat_data.data.length - 1].garrisonAttack.units[un].n - garrison.units[un].n);
             } else {
-                createTd(tr, combat_data.data[combat_data.data.length-1].garrisonDefend.units[un].n - garrison.units[un].n);
+                createTd(tr, combat_data.data[combat_data.data.length - 1].garrisonDefend.units[un].n - garrison.units[un].n);
             }
             
             table.appendChild(tr);
@@ -496,7 +515,7 @@ function displayExpResultTable(genId, isPlayer) {
 }
 
 function displayCostsTable(genId) {
-    var combat_data, garrison, table, tr, un, it, sc;
+    var combat_data, garrison, table, tr, un, it, sc, line, extraIron, tmp, accCosts, cl, num, unitsLeft;
     
     combat_data = expData.getExpData(genId);
     garrison = combat_data.garrison;
@@ -505,37 +524,37 @@ function displayCostsTable(genId) {
     table.setAttribute("class", "extTabRes");
     
     tr = document.createElement("tr");
-    tr.setAttribute("class","extTabHead");
+    tr.setAttribute("class", "extTabHead");
     //createTd(tr, "", true);
     createTd(tr, tsosim.lang.ui.resources, true);
     createTd(tr, tsosim.lang.ui.amount, true);
     table.appendChild(tr);
     
-    var unitsLeft = 0;
-    unitsLeft = combat_data.data[combat_data.data.length-1].garrisonAttack.total;
-    var cl = unitsLeft === 0 ? "expStackLogDefeat" : "expStackLogVictory";
+    unitsLeft = 0;
+    unitsLeft = combat_data.data[combat_data.data.length - 1].garrisonAttack.total;
+    cl = unitsLeft === 0 ? "expStackLogDefeat" : "expStackLogVictory";
     
-    var accCosts = {};
+    accCosts = {};
 
     // accumulate costs
     for (un in garrison.units) {
         if (garrison.units.hasOwnProperty(un)) {
-            var num = garrison.units[un].n - combat_data.data[combat_data.data.length-1].garrisonAttack.units[un].n;
+            num = garrison.units[un].n - combat_data.data[combat_data.data.length - 1].garrisonAttack.units[un].n;
             
-            if(num > 0) {
-                for(it in garrison.units[un].unit.costs) {
-                    if(garrison.units[un].unit.costs.hasOwnProperty(it)) {
-                        var tmp = num * garrison.units[un].unit.costs[it];
-                        if(accCosts[it]) {
+            if (num > 0) {
+                for (it in garrison.units[un].unit.costs) {
+                    if (garrison.units[un].unit.costs.hasOwnProperty(it)) {
+                        tmp = num * garrison.units[un].unit.costs[it];
+                        if (accCosts[it]) {
                             accCosts[it] += tmp;
                         } else {
                             accCosts[it] = tmp;
                         }
                     
-                        for(sc in SecondaryCosts[it]) {
-                            if(SecondaryCosts[it].hasOwnProperty(sc)) {
+                        for (sc in SecondaryCosts[it]) {
+                            if (SecondaryCosts[it].hasOwnProperty(sc)) {
                                 tmp = num * SecondaryCosts[it][sc];
-                                if(accCosts[sc]) {
+                                if (accCosts[sc]) {
                                     accCosts[sc] += tmp;
                                 } else {
                                     accCosts[sc] = tmp;
@@ -548,11 +567,11 @@ function displayCostsTable(genId) {
         }
     }
     // create table
-    var line = false;
+    line = false;
     for (un in accCosts) {
         if (accCosts.hasOwnProperty(un)) {
             tr = document.createElement("tr");
-            if(!line && un > Costs.Valor) {
+            if (!line && un > Costs.Valor) {
                 line = true;
                 tr.setAttribute("class", cl + " tabTopLine");
             } else {
@@ -560,11 +579,11 @@ function displayCostsTable(genId) {
             }
             
             createTd(tr, CostNames[un]);
-            if(parseInt(un) !== Costs.Iron) {
+            if (parseInt(un) !== Costs.Iron) {
                 createTd(tr, accCosts[un]);
             } else {
-                var extraIron = accCosts[Costs.Steel] ? accCosts[Costs.Steel]*2 : 0;
-                createTd(tr, accCosts[un] + (extraIron ? " [" + (accCosts[un]+extraIron) + "]" : ""));
+                extraIron = accCosts[Costs.Steel] ? accCosts[Costs.Steel] * 2 : 0;
+                createTd(tr, accCosts[un] + (extraIron ? " [" + (accCosts[un] + extraIron) + "]" : ""));
             }
             
             table.appendChild(tr);
@@ -579,7 +598,7 @@ function createExpSelColumn(col, garrison, genId, i, isPlayer) {
     var sel, icon, idx, opt;
     sel = document.createElement("select");
 
-    if(garrison.units[garrison.currentUnit.name].n > 0) {
+    if (garrison.units[garrison.currentUnit.name].n > 0) {
         opt = document.createElement("option");
         opt.innerHTML = tsosim.lang.unit[garrison.currentUnit.id] + " [" + garrison.units[garrison.currentUnit.name].n + "]";
         sel.appendChild(opt);
@@ -587,7 +606,7 @@ function createExpSelColumn(col, garrison, genId, i, isPlayer) {
 
     for (idx in garrison.units) {
         if (garrison.units.hasOwnProperty(idx)) {
-            if(garrison.units[idx].unit !== garrison.currentUnit && garrison.units[idx].n > 0) {
+            if (garrison.units[idx].unit !== garrison.currentUnit && garrison.units[idx].n > 0) {
                 opt = document.createElement("option");
                 opt.setAttribute("val", garrison.units[idx].unit.id);
                 opt.innerHTML = tsosim.lang.unit[garrison.units[idx].unit.id] + " [" + garrison.units[idx].n + "]";
@@ -601,50 +620,49 @@ function createExpSelColumn(col, garrison, genId, i, isPlayer) {
     icon = document.createElement("span");
     if (garrison.currentUnit.icon) {
         icon.innerHTML = '<img src="' + garrison.currentUnit.icon + '" title="' + tsosim.lang.unit[garrison.currentUnit.id] + '">';
-        icon.setAttribute("class","expIcon");
+        icon.setAttribute("class", "expIcon");
     } else {
         icon.innerHTML = tsosim.lang.unit[garrison.currentUnit.id];
     }
     col.appendChild(icon);
 }
 
-function createTd(tr,text, head) {
-    var td = document.createElement(head ? "th": "td");
+function createTd(tr, text, head) {
+    var td = document.createElement(head ? "th" : "td");
     td.innerHTML = text;
     tr.appendChild(td);
-};
+}
 
 function createExpLogColumn(node, log, isPlayer, tabId) {
-    var tab, tr, j, si, last,
+    var tab, tr, j, si, last, cl, isDef, totalLoss, stackInfo;
         
     tab = document.createElement("table");
     tab.setAttribute("id", tabId);
-    tab.setAttribute("class","expStackTab");
+    tab.setAttribute("class", "expStackTab");
 
     tr = document.createElement("tr");
-    tr.setAttribute("class","extTabHead");
+    tr.setAttribute("class", "extTabHead");
     createTd(tr, "#"/*tsosim.lang.ui.units*/, true);
     createTd(tr, /*"Hp"*/ tsosim.lang.ui.hp, true);
     createTd(tr, /*"Dmg"*/ tsosim.lang.ui.damage, true);
     createTd(tr, /*"lost"*/ tsosim.lang.ui.losses, true);
     tab.appendChild(tr);
 
-    last = log[log.length-1];
-    var cl, isDef;
-    if(isPlayer) {
-        isDef = (last.uA+last.lostA === 0);
+    last = log[log.length - 1];
+    if (isPlayer) {
+        isDef = (last.uA + last.lostA === 0);
     } else {
-        isDef = (last.uD+last.lostD === 0);
+        isDef = (last.uD + last.lostD === 0);
     }
     
-    var totalLoss = 0;
+    totalLoss = 0;
     for (j = 0; j < log.length; j += 1) {
         si = log[j]; // StackItem
 
         tr = document.createElement("tr");
         tr.setAttribute("class", isDef ? "expStackLogDefeat" : "expStackLogVictory");
 
-        if(isPlayer) {
+        if (isPlayer) {
             createTd(tr, si.uA);// units
             createTd(tr, Math.floor(si.hpA));// hp
             createTd(tr, Math.floor(si.dmgA));// dmg
@@ -660,7 +678,7 @@ function createExpLogColumn(node, log, isPlayer, tabId) {
         tab.appendChild(tr);
     }
 
-    var stackInfo = document.createElement("div");
+    stackInfo = document.createElement("div");
     stackInfo.innerHTML = log.length + " " + tsosim.lang.ui.rounds + ", " + totalLoss + " " + tsosim.lang.ui.units;
     node.appendChild(stackInfo);
 
@@ -668,9 +686,10 @@ function createExpLogColumn(node, log, isPlayer, tabId) {
 }
 
 function createExpResults(node, genId) {
-    var tabDiv = document.getElementById("expResults");
-    if(tabDiv) {
-        while(tabDiv.children.length > 0) {
+    var tabDiv, combat_data, expResInfo, lastPlayerUnits, countUn, un, totalRounds, i, infoLine, sDefVic, sRound, expResTables;
+    tabDiv = document.getElementById("expResults");
+    if (tabDiv) {
+        while (tabDiv.children.length > 0) {
             tabDiv.removeChild(tabDiv.lastChild);
         }
     } else {
@@ -679,34 +698,34 @@ function createExpResults(node, genId) {
         node.appendChild(tabDiv);
     }
     
-    var combat_data = expData.getExpData(genId);
+    combat_data = expData.getExpData(genId);
     
     //-----
     
-    var expResInfo = document.createElement("div");
-    expResInfo.setAttribute("id","expResInfo");
+    expResInfo = document.createElement("div");
+    expResInfo.setAttribute("id", "expResInfo");
     
-    var lastPlayerUnits = combat_data.data[combat_data.data.length-1].garrisonAttack.units;
-    var countUn = 0;
-    for(var un in lastPlayerUnits) {
-        if(lastPlayerUnits.hasOwnProperty(un)) {
+    lastPlayerUnits = combat_data.data[combat_data.data.length - 1].garrisonAttack.units;
+    countUn = 0;
+    for (un in lastPlayerUnits) {
+        if (lastPlayerUnits.hasOwnProperty(un)) {
             countUn += lastPlayerUnits[un].n;
         }
     }
     
-    var totalRounds = 0;
-    for(var i = 0; i < combat_data.data.length; i+=1) {
+    totalRounds = 0;
+    for (i = 0; i < combat_data.data.length; i += 1) {
         totalRounds += combat_data.data[i].log.length;
     }
     
-    var infoLine = document.createElement("div");
-    var sDefVic = document.createElement("span")
-    sDefVic.innerHTML = (countUn > 0 ? tsosim.lang.ui.victory : tsosim.lang.ui.defeat)
-    sDefVic.setAttribute("class","waveResultInfo");
+    infoLine = document.createElement("div");
+    sDefVic = document.createElement("span");
+    sDefVic.innerHTML = (countUn > 0 ? tsosim.lang.ui.victory : tsosim.lang.ui.defeat);
+    sDefVic.setAttribute("class", "waveResultInfo");
     
-    var sRound = document.createElement("span");
+    sRound = document.createElement("span");
     sRound.innerHTML = totalRounds + " " + tsosim.lang.ui.rounds;
-    sRound.setAttribute("class","waveVictoryInfo");
+    sRound.setAttribute("class", "waveVictoryInfo");
     
     infoLine.appendChild(sDefVic);
     infoLine.appendChild(sRound);
@@ -716,32 +735,32 @@ function createExpResults(node, genId) {
     
     //-----
 
-    var expResTables = document.createElement("div");
-    expResTables.setAttribute("id","expResTables");
+    expResTables = document.createElement("div");
+    expResTables.setAttribute("id", "expResTables");
     
     expResTables.appendChild(displayExpResultTable(genId, true));
     expResTables.appendChild(displayExpResultTable(genId, false));
     expResTables.appendChild(displayCostsTable(genId));
-    tabDiv.appendChild(expResTables);    
+    tabDiv.appendChild(expResTables);
 }
 
 function displayExpResults(genId, num) {
-    var node, i, j, data, dn, colA, colD, iconA, iconD, infoA, infoD, selA, selD, opt, si, a, d, idx;
+    var node, i, j, data, dn, colA, colD, iconA, iconD, infoA, infoD, selA, selD, opt, si, a, d, idx, combat_data, logDiv;
     node = document.getElementById("waveResults");
     
     createExpResults(node, genId);
     
-    var logDiv = document.getElementById("expLog");
-    if(!logDiv) {
+    logDiv = document.getElementById("expLog");
+    if (!logDiv) {
         logDiv = document.createElement("div");
         logDiv.setAttribute("id", "expLog");
         node.appendChild(logDiv);
-    } 
-    while(logDiv.children.length > num) {
+    }
+    while (logDiv.children.length > num) {
         logDiv.removeChild(logDiv.lastChild);
     }
     
-    var combat_data = expData.getExpData(genId);
+    combat_data = expData.getExpData(genId);
     
     for (i = num; i < combat_data.data.length; i += 1) {
         data = combat_data.data[i]; // ExpStackData
@@ -751,8 +770,8 @@ function displayExpResults(genId, num) {
         }
 
         dn = document.getElementById("expResult" + i);
-        if(dn) {
-            while(dn.children.length > 0) {
+        if (dn) {
+            while (dn.children.length > 0) {
                 dn.removeChild(dn.firstChild);
             }
         } else {
@@ -778,8 +797,8 @@ function displayExpResults(genId, num) {
         createExpSelColumn(colD, data.garrisonDefend, genId, i, false);
         
     
-        createExpLogColumn(infoA, data.log, true, "expLogA"+i);
-        createExpLogColumn(infoD, data.log, false, "expLogD"+i);
+        createExpLogColumn(infoA, data.log, true, "expLogA" + i);
+        createExpLogColumn(infoD, data.log, false, "expLogD" + i);
         
         dn.appendChild(colA);
         dn.appendChild(infoA);

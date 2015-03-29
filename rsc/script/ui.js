@@ -947,20 +947,25 @@ function createTableRowForUnit(unitData, lastUnitData) {
     return tr;
 }
 
-function createTableRowForRounds(roundsData) {
+function createTableRowForRounds(roundsData, campRoundsData) {
     var tr, data, data2, i, tdl, tdr;
     tr = document.createElement("tr");
     data  = [
-        { "value": tsosim.lang.ui.rounds, "class": "tabDataRounds", "sep": 4 },
-        { "value": roundsData.statistics.stat_min, "class": "tabDataRounds", "sep": 6 },
-        { "value": roundsData.statistics.stat_average.toFixed(2), "class": "tabDataRounds", "sep": 6 },
-        { "value": roundsData.statistics.stat_max, "class": "tabDataRounds", "sep": 6 }
+        { "value": tsosim.lang.ui.rounds, 
+            "class": "tabDataRounds", "sep": 4 },
+        { "value": roundsData.statistics.stat_min                + (campRoundsData.statistics.stat_max > 0 ? (" [" + campRoundsData.statistics.stat_min +"]") : ""), 
+            "class": "tabDataRounds", "sep": 6 },
+        { "value": roundsData.statistics.stat_average.toFixed(2) + (campRoundsData.statistics.stat_max > 0 ? (" [" + campRoundsData.statistics.stat_average.toFixed(2) + "]") : ""), 
+            "class": "tabDataRounds", "sep": 6 },
+        { "value": roundsData.statistics.stat_max                + (campRoundsData.statistics.stat_max > 0 ? (" [" + campRoundsData.statistics.stat_max +"]") : ""), 
+            "class": "tabDataRounds", "sep": 6 }
     ];
   
     for (i = 0; i < data.length; i += 1) {
         tdl = document.createElement("td");
         tdl.setAttribute("class", data[i]["class"]);
         tdl.setAttribute("colspan", data[i].sep);
+        tdl.setAttribute("title", "a [b] : 'a' total Rounds, including 'b' Rounds for Destruction of the Camp");
         tdl.innerHTML = data[i].value;
     /*
         tdr = document.createElement("td");
@@ -978,7 +983,7 @@ function createStatisticsTable(stats, lastStats) {
     table = document.createElement("table");
     table.setAttribute("class", "resultTable");
     table.appendChild(createTableHeadings());
-    table.appendChild(createTableRowForRounds(stats.rounds));
+    table.appendChild(createTableRowForRounds(stats.rounds, stats.campRounds));
     for (i in stats.data) {
         if (stats.data.hasOwnProperty(i)) {
             isBuilding = stats.data[i].unittype.hasSkill(Skills.CAMP);

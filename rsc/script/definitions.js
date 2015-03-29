@@ -1,6 +1,8 @@
 'use strict';
 
 /*global console*/
+/*global tsosim*/
+/*global tso*/
 
 var Skills = {
     NONE: 0,
@@ -21,11 +23,11 @@ var Skills = {
         return (num | skill);
     },
     
-    name: function(s) {
-        return s===this.SPLASH_DAMAGE ? "Splash Damage" :
-               s===this.ATTACK_WEAKEST ? "Attack weakest" :
-               s===this.TOWER_BONUS    ? "Tower Bonus" : 
-               s===this.ARMOR_PENETRATION ? "Armour Penetration" :"";
+    name: function (s) {
+        return  s === this.SPLASH_DAMAGE ? "Splash Damage" :
+                s === this.ATTACK_WEAKEST ? "Attack weakest" :
+                s === this.TOWER_BONUS ? "Tower Bonus" :
+                s === this.ARMOR_PENETRATION ? "Armour Penetration" : "";
     }
 };
 

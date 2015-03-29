@@ -4,6 +4,7 @@
 /*global Initiative*/
 /*global Skills*/
 /*global EnemyType*/
+/*global tsosim*/
 
 
 function VersionData() {
@@ -23,7 +24,7 @@ var tso = {
     ],
     defaultVersion: "live",
     data : {},
-    updateLangNames : function() {
+    updateLangNames : function () {
         this.versions[0].name = tsosim.lang.ui.adventures;
         this.versions[1].name = "test";
         this.versions[2].name = tsosim.lang.ui.expeditions;
@@ -193,7 +194,7 @@ tso.data.live.functions.defineUnits = function () {
     cu.desMilitia        = new Unit("Militia Deserter",   60, [ 20,  40],  60, Initiative.SECOND, getAID(), []);                            //
     cu.desCavalry        = new Unit("Cavalry Deserter",    5, [  5,  10],  60, Initiative.FIRST,  getAID(), [Skills.ATTACK_WEAKEST]);       //
     cu.desSoldier        = new Unit("Soldier Deserter",   90, [ 20,  40],  65, Initiative.SECOND, getAID(), []);                            //
-    cu.desEliteSoldier   = new Unit("Elite Soldier Deserter",120, [20, 40],70, Initiative.SECOND, getAID(), []);                            //
+    cu.desEliteSoldier   = new Unit("Elite Soldier Deserter", 120, [20, 40], 70, Initiative.SECOND, getAID(), []);                            //
     cu.desBowman         = new Unit("Bowman Deserter",    10, [ 20,  40],  60, Initiative.SECOND, getAID(), [Skills.TOWER_BONUS]);          //
     cu.desLongbow        = new Unit("Longbow Deserter",   10, [ 30,  60],  60, Initiative.SECOND, getAID(), [Skills.TOWER_BONUS]);          //
     cu.desCrossbow       = new Unit("Crossbow Deserter ", 10, [ 45,  90],  60, Initiative.SECOND, getAID(), [Skills.TOWER_BONUS]);          //
@@ -274,14 +275,14 @@ tso.data.live.functions.defineUnits = function () {
     
     
     // camps
-    camp.campNone          = new Unit("No Camp",             0, [0,0], 0, Initiative.THIRD,  getAID(), [Skills.CAMP, Skills.GENERAL]);
-    camp.campRegular       = new Unit("Regular Camp",      250, [0,0], 0, Initiative.THIRD,  getAID(), [Skills.CAMP, Skills.GENERAL]);
-    camp.campBlackCastle   = new Unit("Black Castle",     2000, [0,0], 0, Initiative.THIRD,  getAID(), [Skills.CAMP, Skills.GENERAL]);
-    camp.campBoneChurch    = new Unit("Bone Church",      2000, [0,0], 0, Initiative.THIRD,  getAID(), [Skills.CAMP, Skills.GENERAL]);
-    camp.campWatchTower    = new Unit("Watchtower",       1000, [0,0], 0, Initiative.THIRD,  getAID(), [Skills.CAMP, Skills.GENERAL]);
-    camp.campReinfTower    = new Unit("Reinforced Tower", 1500, [0,0], 0, Initiative.THIRD,  getAID(), [Skills.CAMP, Skills.GENERAL]);
-    camp.campStoneTower    = new Unit("Stone Tower",      2000, [0,0], 0, Initiative.THIRD,  getAID(), [Skills.CAMP, Skills.GENERAL]);
-    camp.campWitchTower    = new Unit("Witch Tower",      2000, [0,0], 0, Initiative.THIRD,  getAID(), [Skills.CAMP, Skills.GENERAL]);
+    camp.campNone          = new Unit("No Camp",             0, [0, 0], 0, Initiative.THIRD,  getAID(), [Skills.CAMP, Skills.GENERAL]);
+    camp.campRegular       = new Unit("Regular Camp",      250, [0, 0], 0, Initiative.THIRD,  getAID(), [Skills.CAMP, Skills.GENERAL]);
+    camp.campBlackCastle   = new Unit("Black Castle",     2000, [0, 0], 0, Initiative.THIRD,  getAID(), [Skills.CAMP, Skills.GENERAL]);
+    camp.campBoneChurch    = new Unit("Bone Church",      2000, [0, 0], 0, Initiative.THIRD,  getAID(), [Skills.CAMP, Skills.GENERAL]);
+    camp.campWatchTower    = new Unit("Watchtower",       1000, [0, 0], 0, Initiative.THIRD,  getAID(), [Skills.CAMP, Skills.GENERAL]);
+    camp.campReinfTower    = new Unit("Reinforced Tower", 1500, [0, 0], 0, Initiative.THIRD,  getAID(), [Skills.CAMP, Skills.GENERAL]);
+    camp.campStoneTower    = new Unit("Stone Tower",      2000, [0, 0], 0, Initiative.THIRD,  getAID(), [Skills.CAMP, Skills.GENERAL]);
+    camp.campWitchTower    = new Unit("Witch Tower",      2000, [0, 0], 0, Initiative.THIRD,  getAID(), [Skills.CAMP, Skills.GENERAL]);
     setUnitIDs(camp);
     for (idx in camp) {
         if (camp.hasOwnProperty(idx)) {
@@ -436,14 +437,14 @@ tso.data.test.functions.defineUnits = function () {
     cu.wolf = new Unit("Wolf", 30, [1, 150], 85, Initiative.SECOND, 62000, [Skills.SPLASH_DAMAGE, Skills.WEAK]);
     
     // camps
-    camp.campNone          = new Unit("No Camp",             0, [0,0], 0, Initiative.THIRD,  getAID(), [Skills.CAMP, Skills.GENERAL]);
-    camp.campRegular       = new Unit("Regular Camp",      250, [0,0], 0, Initiative.THIRD,  getAID(), [Skills.CAMP, Skills.GENERAL]);
-    camp.campBlackCastle   = new Unit("Black Castle",     2000, [0,0], 0, Initiative.THIRD,  getAID(), [Skills.CAMP, Skills.GENERAL]);
-    camp.campBoneChurch    = new Unit("Bone Church",      2000, [0,0], 0, Initiative.THIRD,  getAID(), [Skills.CAMP, Skills.GENERAL]);
-    camp.campWatchTower    = new Unit("Watchtower",       1000, [0,0], 0, Initiative.THIRD,  getAID(), [Skills.CAMP, Skills.GENERAL]);
-    camp.campReinfTower    = new Unit("Reinforced Tower", 1500, [0,0], 0, Initiative.THIRD,  getAID(), [Skills.CAMP, Skills.GENERAL]);
-    camp.campStoneTower    = new Unit("Stone Tower",      2000, [0,0], 0, Initiative.THIRD,  getAID(), [Skills.CAMP, Skills.GENERAL]);
-    camp.campWitchTower    = new Unit("Witch Tower",      2000, [0,0], 0, Initiative.THIRD,  getAID(), [Skills.CAMP, Skills.GENERAL]);
+    camp.campNone          = new Unit("No Camp",             0, [0, 0], 0, Initiative.THIRD,  getAID(), [Skills.CAMP, Skills.GENERAL]);
+    camp.campRegular       = new Unit("Regular Camp",      250, [0, 0], 0, Initiative.THIRD,  getAID(), [Skills.CAMP, Skills.GENERAL]);
+    camp.campBlackCastle   = new Unit("Black Castle",     2000, [0, 0], 0, Initiative.THIRD,  getAID(), [Skills.CAMP, Skills.GENERAL]);
+    camp.campBoneChurch    = new Unit("Bone Church",      2000, [0, 0], 0, Initiative.THIRD,  getAID(), [Skills.CAMP, Skills.GENERAL]);
+    camp.campWatchTower    = new Unit("Watchtower",       1000, [0, 0], 0, Initiative.THIRD,  getAID(), [Skills.CAMP, Skills.GENERAL]);
+    camp.campReinfTower    = new Unit("Reinforced Tower", 1500, [0, 0], 0, Initiative.THIRD,  getAID(), [Skills.CAMP, Skills.GENERAL]);
+    camp.campStoneTower    = new Unit("Stone Tower",      2000, [0, 0], 0, Initiative.THIRD,  getAID(), [Skills.CAMP, Skills.GENERAL]);
+    camp.campWitchTower    = new Unit("Witch Tower",      2000, [0, 0], 0, Initiative.THIRD,  getAID(), [Skills.CAMP, Skills.GENERAL]);
     setUnitIDs(camp);
     for (idx in camp) {
         if (camp.hasOwnProperty(idx)) {
@@ -481,13 +482,13 @@ tso.data.Exp.functions.defineUnits = function () {
 	pu.expAttackArch.addBonus(ExpUnitType.MELEE, 35);
 	pu.expAttackCav.addBonus(ExpUnitType.RANGED, 35);
     
-    pu.expAttackInf.setCosts(Costs.Settler,1).setCosts(Costs.Brew,10).setCosts(Costs.Pike,6);
-	pu.expAttackArch.setCosts(Costs.Settler,1).setCosts(Costs.Brew,10).setCosts(Costs.Bow,6);
-	pu.expAttackCav.setCosts(Costs.Settler,1).setCosts(Costs.Horse,5).setCosts(Costs.Sabre,6);
-	pu.expHeavyInf.setCosts(Costs.Settler,1).setCosts(Costs.Brew,10).setCosts(Costs.Mace,3);
-	pu.expHeavyArch.setCosts(Costs.Settler,1).setCosts(Costs.Brew,10).setCosts(Costs.Crossbow,3);
-	pu.expHeavyCav.setCosts(Costs.Settler,1).setCosts(Costs.Horse,5).setCosts(Costs.Lance,3);
-	pu.expGuardsman.setCosts(Costs.Settler,1).setCosts(Costs.Valor,4);
+    pu.expAttackInf.setCosts(Costs.Settler, 1).setCosts(Costs.Brew, 10).setCosts(Costs.Pike, 6);
+	pu.expAttackArch.setCosts(Costs.Settler, 1).setCosts(Costs.Brew, 10).setCosts(Costs.Bow, 6);
+	pu.expAttackCav.setCosts(Costs.Settler, 1).setCosts(Costs.Horse, 5).setCosts(Costs.Sabre, 6);
+	pu.expHeavyInf.setCosts(Costs.Settler, 1).setCosts(Costs.Brew, 10).setCosts(Costs.Mace, 3);
+	pu.expHeavyArch.setCosts(Costs.Settler, 1).setCosts(Costs.Brew, 10).setCosts(Costs.Crossbow, 3);
+	pu.expHeavyCav.setCosts(Costs.Settler, 1).setCosts(Costs.Horse, 5).setCosts(Costs.Lance, 3);
+	pu.expGuardsman.setCosts(Costs.Settler, 1).setCosts(Costs.Valor, 4);
 
     setUnitIDs(pu);
     
@@ -515,36 +516,36 @@ tso.data.Exp.functions.defineUnits = function () {
 	cu.expCavalry       = new ExpUnit("Bandit Cavalry",         150, 30, ExpUnitType.CAVALRY, "rsc/img/expBanditCavalry.png");
 	cu.expCavalry.addBonus(ExpUnitType.RANGED, 35);
 
-	cu.expWarDog        = new ExpUnit("War Dog",                 10,160, ExpUnitType.ELITE|ExpUnitType.HEAVY, "rsc/img/expWarDog.png");
+	cu.expWarDog        = new ExpUnit("War Dog",                 10, 160, ExpUnitType.ELITE|ExpUnitType.HEAVY, "rsc/img/expWarDog.png");
 
     // ----
 
-	cu.expChuck         = new ExpUnit("Chuck",                 2000,150, ExpUnitType.MELEE  | ExpUnitType.BOSS, "rsc/img/expChuck.png");
+	cu.expChuck         = new ExpUnit("Chuck",                 2000, 150, ExpUnitType.MELEE  | ExpUnitType.BOSS, "rsc/img/expChuck.png");
 	cu.expChuck.addBonus(ExpUnitType.RANGED, 35);
 
-	cu.expWildMary      = new ExpUnit("Wild Mary",             2500,200, ExpUnitType.MELEE  | ExpUnitType.BOSS, "rsc/img/expWildMary.png");
+	cu.expWildMary      = new ExpUnit("Wild Mary",             2500, 200, ExpUnitType.MELEE  | ExpUnitType.BOSS, "rsc/img/expWildMary.png");
 	cu.expWildMary.addBonus(ExpUnitType.CAVALRY, 35);
 
-    cu.expSkunk         = new ExpUnit("Skunk",                 4000,300, ExpUnitType.MELEE  | ExpUnitType.BOSS, "rsc/img/expSkunk.png");
+    cu.expSkunk         = new ExpUnit("Skunk",                 4000, 300, ExpUnitType.MELEE  | ExpUnitType.BOSS, "rsc/img/expSkunk.png");
 	cu.expSkunk.addBonus(ExpUnitType.CAVALRY, 40);
 
-    cu.expGreybeard     = new ExpUnit("Greybeard",             8500,250, ExpUnitType.MELEE  | ExpUnitType.BOSS, "rsc/img/expGreybeard.png");
+    cu.expGreybeard     = new ExpUnit("Greybeard",             8500, 250, ExpUnitType.MELEE  | ExpUnitType.BOSS, "rsc/img/expGreybeard.png");
 	cu.expGreybeard.addBonus(ExpUnitType.CAVALRY, 50);
     
     // -- //
 
-	cu.expBert          = new ExpUnit("One-Eyed Bert",         4000,300, ExpUnitType.RANGED  | ExpUnitType.BOSS, "rsc/img/expBert.png");
+	cu.expBert          = new ExpUnit("One-Eyed Bert",         4000, 300, ExpUnitType.RANGED  | ExpUnitType.BOSS, "rsc/img/expBert.png");
 	cu.expBert.addBonus(ExpUnitType.MELEE, 40);
 
-    cu.expShadow        = new ExpUnit("The Shadow",            3600,650, ExpUnitType.RANGED | ExpUnitType.BOSS, "rsc/img/expShadow.png");
+    cu.expShadow        = new ExpUnit("The Shadow",            3600, 650, ExpUnitType.RANGED | ExpUnitType.BOSS, "rsc/img/expShadow.png");
 	cu.expShadow.addBonus(ExpUnitType.MELEE, 50);
 
     // -- //
 
-    cu.expMetalTooth    = new ExpUnit("Metal Tooth",           4000,300, ExpUnitType.CAVALRY | ExpUnitType.BOSS, "rsc/img/expMetalTooth.png");
+    cu.expMetalTooth    = new ExpUnit("Metal Tooth",           4000, 300, ExpUnitType.CAVALRY | ExpUnitType.BOSS, "rsc/img/expMetalTooth.png");
 	cu.expMetalTooth.addBonus(ExpUnitType.RANGED, 40);
 
-    cu.expScarr         = new ExpUnit("Scarr",                 5000,360, ExpUnitType.CAVALRY | ExpUnitType.BOSS, "rsc/img/expMetalTooth.png");
+    cu.expScarr         = new ExpUnit("Scarr",                 5000, 360, ExpUnitType.CAVALRY | ExpUnitType.BOSS, "rsc/img/expMetalTooth.png");
 	cu.expScarr.addBonus(ExpUnitType.RANGED, 50);
 
 
@@ -580,15 +581,16 @@ tso.data.Exp.functions.defineUnits = function () {
     */
     
     setUnitIDs(cu);
-}
+};
 
 
 
 
 function defineAdventureMaps(units, adv_maps) {
-    var cu = units;
+    var cu, idx, i;
+    cu = units;
     
-    if(tsosim.version === tso.versions[2].id) {
+    if (tsosim.version === tso.versions[2].id) {
         adv_maps.expeditionIsland = [cu.expRecruit, cu.expThug, cu.expRoughneck, cu.expBowman, cu.expRanger, cu.expCavalry, cu.expWarDog,
                                      cu.expChuck, cu.expWildMary, cu.expSkunk, cu.expGreybeard, cu.expBert, cu.expShadow, cu.expMetalTooth, cu.expScarr,
                                      cu.expMercDuelist, cu.expMercShooter, cu.expMercCharger, cu.expMercInfantry, cu.expMercArcher, cu.expMercCavalry];
@@ -640,13 +642,13 @@ function defineAdventureMaps(units, adv_maps) {
     adv_maps.victorTVicious    = [cu.bWildMary, cu.bMetalToothed, cu.bScavenger, cu.bThug, cu.bGuardDog, cu.bRoughneck, cu.bRanger, cu.bSkunk, cu.bOneEyedBert, cu.wolf];
     adv_maps.wildMary          = [cu.bWildMary, cu.bThug, cu.bGuardDog, cu.bRoughneck, cu.bStoneThrower, cu.bRanger];
     adv_maps.witchOTSwamp      = [cu.cCultist, cu.cSwampWitch, cu.cShadowstalker, cu.cFanatic, cu.cDarkPriest, cu.cDarkHighPriest];
-    adv_maps.bastilleIsland    = [cu.rNomad, cu.rLanceRider, cu.rCataphract, cu.rUproarBull, cu.pDeckscrubber, cu.pCaltrop, cu.pGunman, cu.pSabrerattler, cu.pCrazyCook, cu.cShadowstalker, cu.cFanatic, cu.cDancingDervish, cu.cSwampWitch, cu.nValkyrie, cu.nJomsviking, cu.nKarl, cu.nBerserk]
+    adv_maps.bastilleIsland    = [cu.rNomad, cu.rLanceRider, cu.rCataphract, cu.rUproarBull, cu.pDeckscrubber, cu.pCaltrop, cu.pGunman, cu.pSabrerattler, cu.pCrazyCook, cu.cShadowstalker, cu.cFanatic, cu.cDancingDervish, cu.cSwampWitch, cu.nValkyrie, cu.nJomsviking, cu.nKarl, cu.nBerserk];
     adv_maps.arcticExplosion   = [cu.nHousekarl, cu.nValkyrie, cu.nKarl, cu.nJomsviking, cu.nBerserk];
     
-    for(var idx in adv_maps) {
-        if(adv_maps.hasOwnProperty(idx)) {
-            for(var i = 0; i < adv_maps[idx].length; i += 1) {
-                if(adv_maps[idx][i] === undefined) {
+    for (idx in adv_maps) {
+        if (adv_maps.hasOwnProperty(idx)) {
+            for (i = 0; i < adv_maps[idx].length; i += 1) {
+                if (adv_maps[idx][i] === undefined) {
                     console.log("undefined unit");
                 }
             }
@@ -664,9 +666,10 @@ function defineAdventureMaps(units, adv_maps) {
 
 
 function setupAdvNames(advList) {
-    var nameList = {};
-    for(var idx in advList) {
-        if(advList.hasOwnProperty(idx)) {
+    var nameList, idx;
+    nameList = {};
+    for (idx in advList) {
+        if (advList.hasOwnProperty(idx)) {
             nameList[advList[idx]] = idx;
         }
     }
@@ -677,15 +680,15 @@ var tsosim = {};//tsosim2;
 
 function setupTsoSim(versionId, langObj) {
 
-    if(langObj === undefined) {
+    if (langObj === undefined) {
         tsosim.lang = lang.en;
     } else {
         tsosim.lang = langObj;
     }
-    if(versionId !== tso.versions[2].id) {
+    if (versionId !== tso.versions[2].id) {
         tsosim.advNames = setupAdvNames(tsosim.lang.adv);
     }
-    if(tsosim.version != versionId) {
+    if (tsosim.version !== versionId) {
         console.log("Setup simulation '" + versionId + "'");
         tsosim.version  = versionId;
         tsosim.units    = tso.data[versionId].playerUnits;

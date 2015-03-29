@@ -133,6 +133,9 @@ footer {
 .logRound {
     #border: 5px solid rgba(205, 225, 135,0.5);
 }
+.logRound.CampRound {
+    background: rgba(195, 215, 125,0.5);
+}
 
 .initLeft {
     #background: rgba(225, 245, 155,0.75);

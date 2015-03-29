@@ -2,6 +2,7 @@
 
 /*global Initiative*/
 /*global console*/
+/*global tsosim*/
 
 /*
  * class StatsData: stores ...
@@ -23,6 +24,7 @@ function Statistics() {
      */
     this.data = {};
     this.rounds = new StatsData(); // reuse class StatsData to store rounds information
+    this.campRounds = new StatsData(); // reuse class StatsData to store rounds information
   
     this.clear = function () {
         this.data = {};
@@ -70,7 +72,10 @@ function Statistics() {
         }
         
         this.rounds.numIterations += 1;
-        this.rounds.iterationResults.push(rounds);
+        this.rounds.iterationResults.push(rounds.numR);
+        
+        this.campRounds.numIterations += 1;
+        this.campRounds.iterationResults.push(rounds.numC);
     };
   
     this.computeStatistics = function () {
@@ -114,6 +119,24 @@ function Statistics() {
         }
         if (this.rounds.numIterations !== 0) {
             this.rounds.statistics.stat_average /= this.rounds.numIterations;
+        } else {
+            console.log("average: number of iteration is 0");
+        }
+        
+        // camp rounds
+        this.campRounds.statistics.stat_average = 0;
+        this.campRounds.statistics.stat_min = this.campRounds.iterationResults.length > 0 ? this.campRounds.iterationResults[0] : 0;
+        this.campRounds.statistics.stat_max = 0;
+
+        for (i = 0; i < this.campRounds.numIterations; i += 1) {
+            current = this.campRounds.iterationResults[i];
+            this.campRounds.statistics.stat_average += parseInt(current, 10);
+
+            if (current > this.campRounds.statistics.stat_max) { this.campRounds.statistics.stat_max = current; }
+            if (current < this.campRounds.statistics.stat_min) { this.campRounds.statistics.stat_min = current; }
+        }
+        if (this.campRounds.numIterations !== 0) {
+            this.campRounds.statistics.stat_average /= this.campRounds.numIterations;
         } else {
             console.log("average: number of iteration is 0");
         }
@@ -164,7 +187,7 @@ function GroupData(attacker, defender, numAttack, numDefend, attackBonus, defend
         this.attAttacked  = attAttacked;
         this.attAttackedT = attTotal;
         this.defKilled    = defKilled;
-    }
+    };
 }
 
 function InitData() {
@@ -239,8 +262,8 @@ function CombatLog() {
     };
     
     this.createLogTable = function (waveNum, log_id, log_class) {
-        var base, rnd, inits, init, currentRound, currentInit,
-            rnode, inode, grow, table, rtext, itext, group, gr, gtext, at, tr, td;
+        var base, rnd, inits, init, currentRound, currentInit, hasData, isCamp,
+            rnode, inode, grow, table, rtext, itext, group, gr, gtext, at, tr, td, tab, tabrow;
         base = document.createElement("div");
         base.setAttribute("id", log_id);
         base.setAttribute("class", log_class);
@@ -249,34 +272,39 @@ function CombatLog() {
         
         inits = [Initiative.FIRST, Initiative.SECOND, Initiative.THIRD, Initiative.LAST];
         
+        
         //console.log("rounds (" + this.roundData.length + ")");
         for (rnd = 0; rnd < this.roundData.length; rnd += 1) {
             currentRound = this.roundData[rnd];
 
             rnode = createRoundBase(base, waveNum, rnd + 1);
 
-            var hasData = false;
+            isCamp = false;
+            hasData = false;
             for (init = 0; init < inits.length; init += 1) {
                 
                 if (currentRound.initData.hasOwnProperty(inits[init])) {
                     currentInit = currentRound.initData[inits[init]];
 
-                    if(currentInit.groupData.length > 0) {
+                    if (currentInit.groupData.length > 0) {
                         inode = createInitBase(rnode, waveNum, rnd + 1, inits[init]);
                     
-                        var table = document.createElement("table");
+                        table = document.createElement("table");
                         table.setAttribute("class", "groupTable gtHide");
-                        table.setAttribute("id", "gt_w"+waveNum+"r"+(rnd+1)+"i"+inits[init]);
+                        table.setAttribute("id", "gt_w" + waveNum + "r" + (rnd + 1) + "i" + inits[init]);
                         for (gr = 0; gr < currentInit.groupData.length; gr += 1) {
                             hasData = true;
 
                             group = currentInit.groupData[gr];
 
-                            grow = createGroupRow(group, waveNum, rnd+1, inits[init], gr);
+                            // check if attack is against camp and if yes, then set extra class label ("CampRound") to modify display
+                            isCamp = group.defenderGroup.type.hasSkill(Skills.CAMP);
+                            
+                            grow = createGroupRow(group, waveNum, rnd + 1, inits[init], gr);
                             table.appendChild(grow);
                         
-                            var tabrow = document.createElement("tr");
-                            tabrow.setAttribute("id", "ga"+waveNum+"r"+(rnd+1)+"i"+inits[init]+"g"+gr);
+                            tabrow = document.createElement("tr");
+                            tabrow.setAttribute("id", "ga" + waveNum + "r" + (rnd + 1) + "i" + inits[init] + "g" + gr);
                             tabrow.setAttribute("class", "gaHide");
 
 /*
@@ -293,14 +321,14 @@ function CombatLog() {
                             //var div = document.createElement("div");
                             //div.setAttribute("class", "");
 
-                            var td = document.createElement("td");
+                            td = document.createElement("td");
                             td.setAttribute("colspan", 25);
-                            td.setAttribute("class","gaTab");
-                            var tab = createGroupAttackTable(group);
-                            tab.setAttribute("id", "gat"+waveNum+"r"+(rnd+1)+"i"+inits[init]+"g"+gr)
-                            tab.onclick     = hideGroupTable("ga"+waveNum+"r"+(rnd+1)+"i"+inits[init]+"g"+gr);
-                            tab.onmouseover = highlightGroupTable("gat"+waveNum+"r"+(rnd+1)+"i"+inits[init]+"g"+gr, true);
-                            tab.onmouseout  = highlightGroupTable("gat"+waveNum+"r"+(rnd+1)+"i"+inits[init]+"g"+gr, false);
+                            td.setAttribute("class", "gaTab");
+                            tab = createGroupAttackTable(group);
+                            tab.setAttribute("id", "gat" + waveNum + "r" + (rnd + 1) + "i" + inits[init] + "g" + gr);
+                            tab.onclick     = hideGroupTable("ga" + waveNum + "r" + (rnd + 1) + "i" + inits[init] + "g" + gr);
+                            tab.onmouseover = highlightGroupTable("gat" + waveNum + "r" + (rnd + 1) + "i" + inits[init] + "g" + gr, true);
+                            tab.onmouseout  = highlightGroupTable("gat" + waveNum + "r" + (rnd + 1) + "i" + inits[init] + "g" + gr, false);
                             td.appendChild(tab);
                         
                             tabrow.appendChild(td);
@@ -312,8 +340,13 @@ function CombatLog() {
                     }
                 }
             }
-            if(!hasData) {
+            if (!hasData) {
                 base.removeChild(base.lastChild);
+            }
+            
+            if (isCamp && rnode) {
+                var baseClass = rnode.getAttribute("class");
+                rnode.setAttribute("class", baseClass + " CampRound");
             }
         }
         return base;
@@ -321,27 +354,27 @@ function CombatLog() {
 }
 
 function highlightGroupTable(id, highlight) {
-    if(highlight) {
-        return function() {
+    if (highlight) {
+        return function () {
             var node, attr, isPlayer;
             node = document.getElementById(id);
             attr = node.getAttribute("class");
             isPlayer = attr.search("logPlayer") >= 0;
             node.setAttribute("class", "logUnitAttack " + (isPlayer ? "logPlayer" : "logComputer")  + " gatHighlight");
-        }
+        };
     } else {
-        return function() {
+        return function () {
             var node, attr, isPlayer;
             node = document.getElementById(id);
             attr = node.getAttribute("class");
             isPlayer = attr.search("logPlayer") >= 0;
             node.setAttribute("class", "logUnitAttack " + (isPlayer ? "logPlayer" : "logComputer"));
-        }
+        };
     }
 }
 
 function hideGroupTable(id) {
-    return function() {
+    return function () {
         var node = document.getElementById(id);
         node.setAttribute("class", "gaHide");
     };
@@ -365,26 +398,28 @@ function createGroupAttackTable(group) {
 }
 
 function createGroupRow(group, waveNum, rnd, init, gr) {
-    var tr = document.createElement("tr");
-    var playerUnit = group.attackerGroup.type.unitClass === EnemyType.PLAYER ? true : false;
+    var tr, playerUnit, toSpan;
+    tr = document.createElement("tr");
+    playerUnit = group.attackerGroup.type.unitClass === EnemyType.PLAYER ? true : false;
     tr.setAttribute("class", "groupBase " + (playerUnit ? "logPlayer" : "logComputer"));
-    tr.onclick = function() {
-        var id = "ga"+waveNum+"r"+rnd+"i"+init+"g"+gr;
-        var node = document.getElementById(id);
-        if(node.getAttribute("class").search("gaShow") >= 0) {
+    tr.onclick = function () {
+        var id, node;
+        id = "ga" + waveNum + "r" + rnd + "i" + init + "g" + gr;
+        node = document.getElementById(id);
+        if (node.getAttribute("class").search("gaShow") >= 0) {
             node.setAttribute("class", "gaHide");
         } else {
             node.setAttribute("class", "gaShow");
         }
-    }
-    tr.onmouseover = highlightGroupTable("gat"+waveNum+"r"+rnd+"i"+init+"g"+gr, true); /*function () {
+    };
+    tr.onmouseover = highlightGroupTable("gat" + waveNum + "r" + rnd + "i" + init + "g" + gr, true); /*function () {
         var id = "ga"+waveNum+"r"+rnd+"i"+init+"g"+gr;
         var node = document.getElementById(id);
         if(node.getAttribute("class").search("gaShow") >= 0) {
             node.setAttribute("class", "gaShow gaHighlight");
         }
     }*/
-    tr.onmouseout = highlightGroupTable("gat"+waveNum+"r"+rnd+"i"+init+"g"+gr, false); /*function () {
+    tr.onmouseout = highlightGroupTable("gat" + waveNum + "r" + rnd + "i" + init + "g" + gr, false); /*function () {
         var id = "ga"+waveNum+"r"+rnd+"i"+init+"g"+gr;
         var node = document.getElementById(id);
         if(node.getAttribute("class").search("gaShow gaHighlight") >= 0) {
@@ -392,23 +427,23 @@ function createGroupRow(group, waveNum, rnd, init, gr) {
         }
     }*/
     
-    var toSpan = function(value, classAttr) {
+    toSpan = function (value, classAttr) {
         var span = document.createElement("td");
         span.innerHTML = value;
-        if(classAttr) {
+        if (classAttr) {
             span.setAttribute("class", classAttr);
         }
         return span;
-    }
+    };
     
     tr.appendChild(toSpan("", "gaSpacer"));
     tr.appendChild(toSpan(group.attAttacked, "gaMin gaNum")); // "gaAttNum gaMin"));
     tr.appendChild(toSpan(tsosim.lang.unit[group.attackerGroup.type.id], "gaName gaMin"));
-    tr.appendChild(toSpan("[","gaMin"));
-    tr.appendChild(toSpan(group.attAttacked,"gaMin gaNum"));
+    tr.appendChild(toSpan("[", "gaMin"));
+    tr.appendChild(toSpan(group.attAttacked, "gaMin gaNum"));
     tr.appendChild(toSpan("/", "gaMin"));
     tr.appendChild(toSpan(group.numAttackers, "gaMin gaNum"));
-    tr.appendChild(toSpan("]","gaMin")); //, "gaAttTotal"));
+    tr.appendChild(toSpan("]", "gaMin")); //, "gaAttTotal"));
     tr.appendChild(toSpan("", "gaSpacer"));
 
     tr.appendChild(toSpan("", "gaSpacer"));
@@ -416,17 +451,17 @@ function createGroupRow(group, waveNum, rnd, init, gr) {
     tr.appendChild(toSpan("", "gaSpacer"));
 
     tr.appendChild(toSpan("", "gaSpacer"));
-    tr.appendChild(toSpan("-"+group.defKilled, "gaMin gaNum"));// + " killed", "gaDefNum"));
+    tr.appendChild(toSpan("-" + group.defKilled, "gaMin gaNum"));// + " killed", "gaDefNum"));
     tr.appendChild(toSpan(tsosim.lang.unit[group.defenderGroup.type.id], "gaName gaMin"));
     tr.appendChild(toSpan("[", "gaMin"));
-    tr.appendChild(toSpan(group.numDefenders-group.defKilled, "gaMin gaNum"));
+    tr.appendChild(toSpan(group.numDefenders - group.defKilled, "gaMin gaNum"));
     tr.appendChild(toSpan("/", "gaMin"));
     tr.appendChild(toSpan(group.numDefenders, "gaMin gaNum"));
     tr.appendChild(toSpan("]", "gaMin")); //, "gaDefTotal"));
     tr.appendChild(toSpan("", "gaSpacer"));
 
     tr.appendChild(toSpan("", "gaSpacer"));
-    tr.appendChild(toSpan(group.totalDamage, "gaNum gaMin" ));
+    tr.appendChild(toSpan(group.totalDamage, "gaNum gaMin"));
     tr.appendChild(toSpan("Damage", "gaName gaNum"));
     tr.appendChild(toSpan("", "gaSpacer"));
 
@@ -436,7 +471,7 @@ function createGroupRow(group, waveNum, rnd, init, gr) {
 function createInitBase(parent, waveNum, rnd, init) {
     var ibase, inb_s1, inb_s2, inode, itext;
     ibase = document.createElement("span");
-    ibase.setAttribute("class", "initBaseNoShow init_w" +waveNum + "r" + rnd);
+    ibase.setAttribute("class", "initBaseNoShow init_w" + waveNum + "r" + rnd);
     
     inb_s1 = document.createElement("span");
     inb_s1.setAttribute("class", "initLeft");
@@ -444,15 +479,15 @@ function createInitBase(parent, waveNum, rnd, init) {
     inb_s1.innerHTML = "+";
     
     inb_s1.onclick = function () {
-        var thisid, nameOn, nameOff, listOn, listOff, i, j;
+        var thisid, nameOn, nameOff, listOn, listOff, i, j, tab;
         //console.log("init.click()");
         thisid  = this.getAttribute("id");
         //console.log("thisid(init) : " + thisid);
-        var tab = document.getElementById("gt_"+thisid);
-        if(tab.getAttribute("class") === "groupTable gtHide") {
-            tab.setAttribute("class","groupTable gtShow");
+        tab = document.getElementById("gt_" + thisid);
+        if (tab.getAttribute("class") === "groupTable gtHide") {
+            tab.setAttribute("class", "groupTable gtShow");
         } else {
-            tab.setAttribute("class","groupTable gtHide");
+            tab.setAttribute("class", "groupTable gtHide");
         }
         
 /*        nameOn  = ".logGroup.group_" + thisid;
@@ -547,68 +582,68 @@ function createRoundBase(parent, waveNum, rnd) {
 }
 
 function createLogTableHead() {
-    var trh, th;
+    var trh, th, setTh;
     trh = document.createElement("tr");
     
-    var setTh = function(value, span) {
+    setTh = function (value, span) {
         var th = document.createElement("th");
         th.innerHTML = value;
         th.setAttribute("colspan", span);
         th.setAttribute("class", "logAtHead");
         return th;
-    }
+    };
     
     trh.appendChild(setTh("", 1));
-    trh.appendChild(setTh("No.",1));
+    trh.appendChild(setTh("No.", 1));
     trh.appendChild(setTh("Name", 1));
     trh.appendChild(setTh("", 1));
     trh.appendChild(setTh("Damage", 3));
     trh.appendChild(setTh("", 5));
     trh.appendChild(setTh("No.", 1));
-    trh.appendChild(setTh("Name",1));
+    trh.appendChild(setTh("Name", 1));
     trh.appendChild(setTh("", 1));
-    trh.appendChild(setTh("Hitpoints",3));
+    trh.appendChild(setTh("Hitpoints", 3));
     trh.appendChild(setTh("", 1));
     
     return trh;
 }
 
 function createLogTableRow(attack, attGroup, defGroup) {
-    var td, tr;
+    var td, tr, setTd;
     tr = document.createElement("tr");
     
-    var setTd = function(value, attrClass) {
+    setTd = function (value, attrClass) {
         var td = document.createElement("td");
         td.setAttribute("class", attrClass);
         td.innerHTML = value;
         return td;
     };
 
-    tr.appendChild(setTd("","attSpacer"));
+    tr.appendChild(setTd("", "attSpacer"));
     tr.appendChild(setTd(attack.attackerNumber + ".", "attNum attMin"));
     tr.appendChild(setTd(tsosim.lang.unit[attGroup.type.id], "attName attMin"));
     
-    tr.appendChild(setTd("","attSpacer"));
+    tr.appendChild(setTd("", "attSpacer"));
 
     tr.appendChild(setTd(attack.damageDealt, "attNum attMin"));
-    tr.appendChild(setTd("/","attMin")); 
+    tr.appendChild(setTd("/", "attMin"));
     tr.appendChild(setTd(attack.damageLeft, "attNum attMin"));
-    tr.appendChild(setTd("","attSpacer"));
+    tr.appendChild(setTd("", "attSpacer"));
 
-    tr.appendChild(setTd("","attSpacer"));
+    tr.appendChild(setTd("", "attSpacer"));
     tr.appendChild(setTd("&#10142;", "attArrow attTabElement"));
-    tr.appendChild(setTd("","attSpacer"));
+    tr.appendChild(setTd("", "attSpacer"));
 
-    tr.appendChild(setTd("","attSpacer"));
+    tr.appendChild(setTd("", "attSpacer"));
     tr.appendChild(setTd(attack.defenderNumber + ". ", "attNum attMin"));
     tr.appendChild(setTd(tsosim.lang.unit[defGroup.type.id], "attName attMin"));
 
-    tr.appendChild(setTd("","attSpacer"));
+    tr.appendChild(setTd("", "attSpacer"));
 
     tr.appendChild(setTd(attack.hitpointsLeft, "attNum attMin"));
     tr.appendChild(setTd("/", "attMin"));
     tr.appendChild(setTd(defGroup.type.hitpoints, "attNum attMin"));
-    tr.appendChild(setTd("","attSpacer"));
+    tr.appendChild(setTd("", "attSpacer"));
 
     return tr;
 }

@@ -6,6 +6,8 @@
 /*global console*/
 /*global Garrison*/
 /*global CombatLog*/
+/*global tsosim*/
+/*global tso*/
 
 /*
  * class : Simulator
@@ -143,15 +145,15 @@ function Simulator() {
             current_init, attack_happened,
             attack_groups, att, current_group,
             defense_groups, def,
-            rounds;
+            abortRound, rounds, campRounds, tmpAttack, tmpDefend;
         
         rounds = 0;
+        campRounds = 0;
         done = false;
-        var abortRound = false;
+        abortRound = false;
         while (!done) {
             initiatives = [Initiative.FIRST, Initiative.SECOND, Initiative.THIRD, Initiative.LAST];
       
-            rounds += 1;
             if (LOG) { LOG.startRound(); }
             
             abortRound = false;
@@ -173,7 +175,8 @@ function Simulator() {
                     if (current_group.number >= 1) {
                         // do stuff
                         attack_happened = true;
-                        if(!this.computeAttackOnGarrison(current_group, defender_g, LOG)) {
+                        tmpAttack = this.computeAttackOnGarrison(current_group, defender_g, LOG);
+                        if (tmpAttack.attacked === false) {
                             abortRound = true;
                             break;
                         }
@@ -187,7 +190,8 @@ function Simulator() {
                     if (current_group.number >= 1) {
                         // do stuff
                         attack_happened = true;
-                        if(!this.computeAttackOnGarrison(current_group, attacker_g, LOG)) {
+                        tmpDefend = this.computeAttackOnGarrison(current_group, attacker_g, LOG);
+                        if (tmpDefend.attacked === false) {
                             abortRound = true;
                             break;
                         }
@@ -210,23 +214,29 @@ function Simulator() {
                     done = true;
                     break;
                 }
-                if(abortRound) {
+                if (abortRound) {
                     // ignore other initiatives; should be ok, because if we reached a building, then all other units must be dead and cannot attack anyway
                     break;
                 }
             }
             
+            rounds += 1;
+            // count numer of rounds used to attack a building
+            if (tmpAttack.attacked && tmpAttack.onCamp) {
+                campRounds += 1;
+            }
+            
             if (LOG) { LOG.finishRound(); }
         }
-        return rounds;
+        return { numR : rounds, numC : campRounds };
     };
   
     this.computeAttackOnGarrison = function (attacking_group, defending_garrison, LOG) {
         // determine defender's group ordering
-        var def_groups, idx, current_def_group, defense_bonus, defense_pen_value, extraParams;
+        var def_groups, idx, current_def_group, defense_bonus, defense_pen_value, extraParams, isFirst;
         
         if (attacking_group.type.hasSkill(Skills.CAMP)) {
-            return;
+            return { attacked: false, onCamp: false };
         }
         
         //def_groups = attacking_group.type.hasSkill(Skills.ATTACK_WEAKEST) ? defending_garrison.getDefendListByWeakness()  : defending_garrison.getDefendList();
@@ -240,18 +250,17 @@ function Simulator() {
             defIsCamp       : false
         };
             
-        var isFirst = true;
+        isFirst = true;
         for (idx = 0; idx < def_groups.length; idx += 1) {
             current_def_group = def_groups[idx];
             if (current_def_group.number_after_attack >= 1 && attacking_group.number_left_to_attack > 0) {
-                extraParams.defIsCamp = current_def_group.type.hasSkill(Skills.CAMP);
-                if(!isFirst && extraParams.defIsCamp) {
-                    if(current_def_group.type !== tsosim.camps.campNone) {
-                        // abort round if we are about to attack a building while having attacked other units in the same round
-                        // -> need to attack building in a new round
-                        return false;
-                    }
+                extraParams.defIsCamp = current_def_group.type.hasSkill(Skills.CAMP) && current_def_group.type !== tsosim.camps.campNone;
+                if (!isFirst && extraParams.defIsCamp) {
+                    // abort round if we are about to attack a building while having attacked other units in the same round
+                    // -> need to attack building in a new round
+                    return { attacked: false, onCamp: extraParams.defIsCamp };
                 }
+
                 isFirst = false;
                 current_def_group.number_after_attack = this.computeAttackOnUnitgroup(attacking_group, current_def_group, extraParams, LOG);
 
@@ -262,7 +271,7 @@ function Simulator() {
                 }
             }
         }
-        return true;
+        return { attacked: true, onCamp: extraParams.defIsCamp };
     };
   
     this.computeAttackOnUnitgroup = function (attacking_group, defending_group, extraParams, LOG) {
@@ -274,7 +283,12 @@ function Simulator() {
         
         if (extraParams.defIsCamp && defending_group.type.hitpoints === 0) {
             return 0;
-        }            
+        }
+        if (defending_group.type === tsosim.camps.campNone) {
+            // "defIsCamp" is not a camp for "campNone" for counting reasons (count number of rounds attacking a bulding)
+            // need to return anyway to avoid displaying this fight in the log
+            return 0;
+        }
         
         //if (LOG) { LOG.currentInitiative.addGroupAttack(attacking_group, defending_group, attacking_group.number_left_to_attack, defending_group.number, 0, 0); }
         if (LOG) { LOG.currentInitiative.addGroupAttack(attacking_group, defending_group, attacking_group.number, defending_group.number, 0, 0); }
@@ -291,14 +305,14 @@ function Simulator() {
         appliedDamage = 0;
         maxDamage = 0;
 
-        if(extraParams.defIsCamp) {
+        if (extraParams.defIsCamp) {
             current_att = 1; // attack only with one unit if fighting against a building
         }
         
         while (current_att > 0) {
             if (current_def < 0) {
                 // attacker wins, no defenders left
-                if (LOG) { LOG.currentInitiative.currentGroup.finishGroupAttack(numAttacked-1, attacking_group.number - attacking_group.number_left_to_attack + 1, defNum - 1); }
+                if (LOG) { LOG.currentInitiative.currentGroup.finishGroupAttack(numAttacked - 1, attacking_group.number - attacking_group.number_left_to_attack + 1, defNum - 1); }
                 return 0;
             }
       
@@ -333,7 +347,7 @@ function Simulator() {
                 //damage = Math.ceil(damage * (100 - def_bonus) / 100.0);
             }
       
-            if(extraParams.defIsCamp && extraParams.hasCampDmgBonus) {
+            if (extraParams.defIsCamp && extraParams.hasCampDmgBonus) {
                 damage *= 2; // cannoneers have 100% damage bonus against buildings
             }
             
