@@ -178,6 +178,7 @@ function Simulator() {
                         tmpAttack = this.computeAttackOnGarrison(current_group, defender_g, LOG);
                         if (tmpAttack.attacked === false) {
                             abortRound = true;
+                            current_group.dmg_left = 0; // reset damage, in order to not apply it on the units in the following round
                             break;
                         }
                     }
@@ -193,6 +194,7 @@ function Simulator() {
                         tmpDefend = this.computeAttackOnGarrison(current_group, attacker_g, LOG);
                         if (tmpDefend.attacked === false) {
                             abortRound = true;
+                            current_group.dmg_left = 0; // reset damage, in order to not apply it on the units in the following round
                             break;
                         }
                     }
