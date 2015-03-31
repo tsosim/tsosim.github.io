@@ -810,7 +810,7 @@ footer {
 }
 .diagColTotal {
     /*background: rgb(196,255,196);*/
-    background: rgb(255,255,255);
+    background: rgba(255,255,255,0);
     position: relative;
     
     display: flex;
