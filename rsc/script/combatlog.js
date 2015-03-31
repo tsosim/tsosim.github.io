@@ -12,7 +12,7 @@ function StatsData() {
     this.startNumber = 0;      // how many units if given type are in a garrison
     this.numIterations = 0;    // number of iterations
     this.iterationResults = []; // number of remaining units in each iteration
-    this.statistics = { stat_min: 0, stat_max: 0, stat_average: 0.0 };
+    this.statistics = { stat_min: 0, stat_max: 0, stat_average: 0.0, sd: 0 };
   
     //this.clear()
   
@@ -123,6 +123,17 @@ function Statistics() {
             console.log("average: number of iteration is 0");
         }
         
+        // standard deviation
+        for (i = 0; i < this.rounds.numIterations; i += 1) {
+            current = this.rounds.iterationResults[i];
+            current -= this.rounds.statistics.stat_average;
+            current *= current;
+            this.rounds.statistics.sd += current;
+        }
+        if (this.rounds.numIterations !== 0) {
+            this.rounds.statistics.sd = Math.sqrt(this.rounds.statistics.sd/this.rounds.numIterations);
+        }
+        
         // camp rounds
         this.campRounds.statistics.stat_average = 0;
         this.campRounds.statistics.stat_min = this.campRounds.iterationResults.length > 0 ? this.campRounds.iterationResults[0] : 0;
@@ -140,6 +151,18 @@ function Statistics() {
         } else {
             console.log("average: number of iteration is 0");
         }
+        
+        // standard deviation
+        for (i = 0; i < this.campRounds.numIterations; i += 1) {
+            current = this.campRounds.iterationResults[i];
+            current -= this.campRounds.statistics.stat_average;
+            current *= current;
+            this.campRounds.statistics.sd += current;
+        }
+        if (this.campRounds.numIterations !== 0) {
+            this.campRounds.statistics.sd = Math.sqrt(this.campRounds.statistics.sd/this.campRounds.numIterations);
+        }
+
     };
 
     this.printLog = function () {

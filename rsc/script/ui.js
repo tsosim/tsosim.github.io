@@ -947,17 +947,21 @@ function createTableRowForUnit(unitData, lastUnitData) {
     return tr;
 }
 
+function writeAvAndSd(stats) {
+    return stats.stat_average.toFixed(2) + " &plusmn;" + stats.sd.toFixed(2);
+}
+
 function createTableRowForRounds(roundsData, campRoundsData) {
     var tr, data, data2, i, tdl, tdr;
     tr = document.createElement("tr");
     data  = [
         { "value": tsosim.lang.ui.rounds, 
             "class": "tabDataRounds", "sep": 4 },
-        { "value": roundsData.statistics.stat_min                + (campRoundsData.statistics.stat_max > 0 ? (" [" + campRoundsData.statistics.stat_min +"]") : ""), 
+        { "value": roundsData.statistics.stat_min      + (campRoundsData.statistics.stat_max > 0 ? (" [" + campRoundsData.statistics.stat_min +"]") : ""), 
             "class": "tabDataRounds", "sep": 6 },
-        { "value": roundsData.statistics.stat_average.toFixed(2) + (campRoundsData.statistics.stat_max > 0 ? (" [" + campRoundsData.statistics.stat_average.toFixed(2) + "]") : ""), 
+        { "value": writeAvAndSd(roundsData.statistics) + (campRoundsData.statistics.stat_max > 0 ? (" [" + writeAvAndSd(campRoundsData.statistics) + "]") : ""), 
             "class": "tabDataRounds", "sep": 6 },
-        { "value": roundsData.statistics.stat_max                + (campRoundsData.statistics.stat_max > 0 ? (" [" + campRoundsData.statistics.stat_max +"]") : ""), 
+        { "value": roundsData.statistics.stat_max      + (campRoundsData.statistics.stat_max > 0 ? (" [" + campRoundsData.statistics.stat_max +"]") : ""), 
             "class": "tabDataRounds", "sep": 6 }
     ];
   
@@ -974,6 +978,7 @@ function createTableRowForRounds(roundsData, campRoundsData) {
         tr.appendChild(tdl);
       //  tr.appendChild(tdr);
     }
+    
     return tr;
 }
 
