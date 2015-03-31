@@ -145,7 +145,7 @@ function Simulator() {
             current_init, attack_happened,
             attack_groups, att, current_group,
             defense_groups, def,
-            abortRound, rounds, campRounds, tmpAttack, tmpDefend;
+            abortRound, rounds, campRounds, tmpAttack, tmpDefend, attackedNonCampUnits;
         
         rounds = 0;
         campRounds = 0;
@@ -157,7 +157,7 @@ function Simulator() {
             if (LOG) { LOG.startRound(); }
             
             abortRound = false;
-            var attackedNonCampUnits = false;
+            attackedNonCampUnits = false;
       
             // iterate over all initiatives; if there units for a specific initiative in the garrisons, then compute combat
             for (init = 0; init < initiatives.length; init += 1) {
@@ -181,7 +181,7 @@ function Simulator() {
                             abortRound = true;
                             current_group.dmg_left = 0; // reset damage, in order to not apply it on the units in the following round
                             break;
-                        } else if(!tmpAttack.onCamp) {
+                        } else if (!tmpAttack.onCamp) {
                             attackedNonCampUnits = true;
                         }
                     }
@@ -194,7 +194,7 @@ function Simulator() {
                     if (current_group.number >= 1) {
                         // do stuff
                         attack_happened = true;
-                        tmpDefend = this.computeAttackOnGarrison(current_group, attacker_g, LOG);
+                        tmpDefend = this.computeAttackOnGarrison(current_group, attacker_g, false, LOG);
                         if (tmpDefend.attacked === false) {
                             abortRound = true;
                             current_group.dmg_left = 0; // reset damage, in order to not apply it on the units in the following round
