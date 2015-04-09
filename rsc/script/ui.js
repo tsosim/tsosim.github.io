@@ -90,32 +90,75 @@ function removeTooltip(elementId) {
     el.setAttribute("class", "tooltipOff");
 }
 
+function createInputNum(id, value, min, max, className, vis) {
+    var inp;
+    inp = document.createElement("input");
+    inp.setAttribute("id", id);
+    inp.setAttribute("type", "number");
+    inp.setAttribute("value", value);
+    inp.setAttribute("step", 1);
+    inp.setAttribute("max", max);
+    inp.setAttribute("min", min);
+    inp.setAttribute("class", className);
+    inp.setAttribute("style", "visibility:" + (vis ? "visible" : "hidden"));
+    return inp;
+}
 
 // create a list item for the unit's list
 //   unit     : unit object
 //   capacity : capacity of the input field, basically the capacity of the garrison
 function setupUnitInputField(unit, capacity) {
-    var tr, label, text, inp, tdinp, tdinp2;
+    var tr, td, label, text, inp, inp2, inp3, tdinp, tdinp2, tdinp3, cbox, up;
     tr  = document.createElement("tr");
     tr.setAttribute("class", "unittablerow");
 
-    if(unit === undefined) {
+    if (unit === undefined) {
         console.log("test");
+    }
+    // setup checkboxes for solver
+    if (unit && unit.unitClass === EnemyType.PLAYER) {
+        td = document.createElement("td");
+        td.setAttribute("class", "unitcboxes");
+        cbox = document.createElement("input");
+        cbox.setAttribute("type", "checkbox");
+        cbox.setAttribute("id", "cbox_" + (unit ? unit.id : "unitsTotal"));
+        cbox.setAttribute("class", "unitcbox On");
+        cbox.setAttribute("style", "visibility:hidden");
+        cbox.onchange = function () {
+            var node, fun;
+            fun = function (node, on) {
+                if (node) {
+                    if (on) {
+                        node.removeAttribute("disabled");
+                    } else {
+                        node.setAttribute("disabled", "disabled");
+                    }
+                }
+            };
+            fun(document.getElementById("inp_" + unit.id), cbox.checked);
+            fun(document.getElementById("inpmax_" + unit.id), cbox.checked);
+            fun(document.getElementById("inpcost_" + unit.id), cbox.checked);
+        };
+        td.appendChild(cbox);
+        tr.appendChild(td);
+    } else {//if(!unit) {
+        td = document.createElement("td");
+        td.setAttribute("class", "unitcbox");
+        tr.appendChild(td);
     }
     
     label = document.createElement("td");
     label.setAttribute("class", "unitlabel");
-    if(unit) {
+    if (unit) {
         label.setAttribute("for", "inp_" + unit.id);
     }
-  
+
     text = document.createTextNode(unit ? tsosim.lang.unit[unit.id] : tsosim.lang.ui.unitsTotal);
     label.appendChild(text);
     
     tr.appendChild(label);
 
-    //base.appendChild(createUnitTooltip(unit));
-    if(unit) {
+    if (unit) {
         label.appendChild(createUnitTooltip(unit));
     }
 
@@ -124,38 +167,72 @@ function setupUnitInputField(unit, capacity) {
     }
   
     tdinp = document.createElement("td");
-    inp = document.createElement("input");
-    inp.setAttribute("id", "inp_" + (unit ? unit.id : "unitsTotal"));
-    inp.setAttribute("type", "number");
-    inp.setAttribute("value", 0);
-    inp.setAttribute("step", 1);
-    inp.setAttribute("max", capacity);
-    inp.setAttribute("min", 0);
-    inp.setAttribute("class", "unitnumber");
-    if(!unit) {
-        inp.setAttribute("readonly","");
+    tdinp.setAttribute("class", "unitInput");
+    
+    // create unit input fields, used as min numbers for solver
+    inp = createInputNum("inp_" + (unit ? unit.id : "unitsTotal"), 0, 0, capacity, "unitnumber unitMin", true);
+    if (!unit) {
+        inp.setAttribute("readonly", "");
     }
     tdinp.appendChild(inp);
     tr.appendChild(tdinp);
     
-    tdinp2 = document.createElement("td");
-    tdinp2.setAttribute("class", "unitCosts");
-    /*inp = document.createElement("input");*/
-    tr.appendChild(tdinp2);
+    // create button to increase current value  to fill max capacity of garrison
+    if (unit && unit.unitClass === EnemyType.PLAYER) {
+        up = document.createElement("span");
+        up.innerHTML = "+";
+        up.setAttribute("class", "unitUp On");
+        up.onclick = function () {
+            var sumN = document.getElementById("inp_unitsTotal");
+            var sum = sumN.value - inp.value;
+            inp.value = inp.max - sum;
+            updateSumInput();
+        };
+        up.onmouseover = function () {
+            up.setAttribute("class", "unitUp On Over");
+        };
+        up.onmouseout = function () {
+            up.setAttribute("class", "unitUp On");
+        };
+        
+        tdinp.appendChild(up);
+    }
+
+    // setup input fields for max unit numbers for solver
+    if (unit && unit.unitClass === EnemyType.PLAYER) {
+        inp2 = createInputNum("inpmax_" + (unit ? unit.id : "unitsTotal"), capacity, 0, capacity, "unitnumber unitMax", false);
+        tdinp.appendChild(inp2);
+    } else if (!unit) {
+        td = document.createElement("span");
+        td.setAttribute("class", "unitnumber");
+        tdinp.appendChild(td);
+    }
+
+    if (unit && unit.unitClass === EnemyType.PLAYER) {
+        inp3 = createInputNum("inpcost_" + (unit ? unit.id : "unitsTotal"), 1, 0, capacity, "unitnumber unitCost", false);
+        tdinp.appendChild(inp3);
+    } else if (!unit) {
+        td = document.createElement("span");
+        td.setAttribute("class", "unitCost");
+        tdinp.appendChild(td);
+    }
     
-    if(unit) {
+    if (unit) {
         label.addEventListener("mouseover", function () { showTooltip("tt_" + unit.id); }, false);
         label.addEventListener("mouseout", function () { removeTooltip("tt_" + unit.id); }, false);
 
-        inp.onclick = function() {
+        inp.onclick = function () {
             inp.select();
         };
         inp.onblur = function () {
-            if(!inp.value) {
+            if (!inp.value) {
                 inp.value = 0;
             }
-        }
-        inp.onkeyup = function() {
+        };
+        inp.onkeyup = function () {
+            updateSumInput();
+        };
+        inp.onchange = function () {
             updateSumInput();
         };
     }
@@ -239,7 +316,23 @@ function setupGeneralTabs() {
     setStr(pgen4);
 }
 
-
+// set value and capacity for an input field
+function updateInputMaxCap(cap) {
+    var setMaxCap = function (name, val, setCap, setVal) {
+        var nodes, i;
+        nodes = document.getElementsByClassName(name);
+        for (i = 0; i < nodes.length; i += 1) {
+            if (setCap) {
+                nodes[i].setAttribute("max", val);
+            }
+            if (setVal) {
+                nodes[i].setAttribute("value", val);
+            }
+        }
+    };
+    setMaxCap("unitMin", cap, true, false);
+    setMaxCap("unitMax", cap, true, true);
+}
 
 // (2) create general section option
 //     value     : general's capacity
@@ -270,6 +363,14 @@ function setupGeneralSelectionOption(value, text, att_id, att_class) {
             }
         }
         span.setAttribute("class", "genSel selOptActive");
+        val = span.getAttribute("value");
+        // update unit number capacities (min, max)
+        updateInputMaxCap(val);
+        // update max unit number for solver
+        optCap = document.getElementById("optParMaxNum");
+        if (optCap) {
+            optCap.value = val;
+        }
     };
     return span;
 }
@@ -521,7 +622,6 @@ function setupAdventureTabs() {
     
     // the player island tab is selected, then the ...
     pisland.onclick = function () {
-        console.log("pisland.onclick");
         if (advtab.getAttribute("class") === "compTab inputTabActive") {
             // adventure was active -> store it
             var advName = seladv.value;
@@ -580,7 +680,6 @@ function setupTowerBonusSelectionOption(value, text, att_id, att_class, active, 
     
     // if option is clicked, then the currently selection option is disabled and the selected one disabled (via css)
     span.onclick = function () {
-        console.log("clicked TB: " + value);
         var options, opt, node, attr;
         if (tsosim.version === tso.versions[0].id) {
             options = ["towerBonus0", "towerBonus50", "towerBonus75", "towerBonus90"];
@@ -638,8 +737,6 @@ function setupTowerBonusSelectionArea() {
 
 function setComputerGarrisonValues(map_id, garrison) {
     var units, idx, group, inp, node;
-    
-    console.log("set Value from garrison to page : " + map_id);
     
     units = tsosim.adv_maps[map_id];
 
@@ -1076,7 +1173,6 @@ function setupResultStructure(waves) {
 }
 
 function clickOnTable(tableID) {
-    console.log(tableID);
     return function () {
         var diags, i;
         diags = [document.getElementById(tableID + "_diagVT"), document.getElementById(tableID + "_diagDT"), document.getElementById(tableID + "_colH")];
@@ -1189,19 +1285,9 @@ function computeSimulation() {
         return;
     }
 
-    
-    sim = new Simulator();
-    
-    repeats = document.getElementById("inpNumIter");
-    if (repeats) {
-        sim.repeats = parseInt(repeats.value, 10);
-    } else {
-        sim.repeats = 100;
-    }
-
     storeGarrisonValues();
     storeAdventureValues();
-    
+
     player = [];
     genIds = ["pgen1", "pgen2", "pgen3", "pgen4"];
     for (i = 0; i < genIds.length; i += 1) {
@@ -1210,28 +1296,106 @@ function computeSimulation() {
         }
     }
     computer = garrisonData.computer[getActiveAdventure()].garrison;
-    
+
     if (player.capacity < player.numberUnits) {
         console.log("number of units [" + player.numberUnits + "] exceeds the garrison's capacity [" + player.capacity + "]");
         return;
     }
-  
-    sim.setGarrisons(player, computer);
 
-    
-    computeStats = getControlButtonState(document.getElementById("buttonStatistics"));
-    computeLogs  = getControlButtonState(document.getElementById("buttonCombatLog"));
-    
-    if (computeStats || computeLogs) {
-        setupResultStructure(player.length);
-        if (computeStats) {
-            sim.startCombat();
-            setupStatisticsTable(sim);
+    cbox = document.getElementById("enableSolver");
+    if (!cbox.checked) {
+        // create simulator here, because solver creates own objects
+        sim = new Simulator();
+
+        repeats = document.getElementById("inpNumIter");
+        if (repeats) {
+            sim.repeats = parseInt(repeats.value, 10);
+        } else {
+            sim.repeats = 100;
         }
-        if (computeLogs) {
-            logs = sim.startCombatWithLog();
-            setupCombatLog(logs);
+
+        sim.setGarrisons(player, computer);
+
+
+        computeStats = getControlButtonState(document.getElementById("buttonStatistics"));
+        computeLogs  = getControlButtonState(document.getElementById("buttonCombatLog"));
+
+        if (computeStats || computeLogs) {
+            setupResultStructure(player.length);
+            if (computeStats) {
+                sim.startCombat();
+                setupStatisticsTable(sim);
+            }
+            if (computeLogs) {
+                logs = sim.startCombatWithLog();
+                setupCombatLog(logs);
+            }
         }
+    } else {
+        // solver enabled -> read paramters from GUI
+        params = {};
+        
+        par = document.getElementById("optParCostFct");
+        params.costFct = par.selectedIndex;
+
+        par = document.getElementById("optParUnitCosts");
+        params.costFct = par.selectedIndex;
+
+        par = document.getElementById("optParMinimize");
+        params.minimize = par.checked;
+
+        par = document.getElementById("optParUseMax");
+        params.useMaxUnits = par.checked;
+
+        par = document.getElementById("optParMaxNum");
+        params.garrCap = parseInt(par.value, 10);
+
+        par = document.getElementById("optParNumSims");
+        params.numSims = parseInt(par.value, 10);
+
+        par = document.getElementById("optParVicCond");
+        params.vicCond = parseFloat(par.value, 10);
+
+        par = document.getElementById("optParDevFact");
+        params.devFactor = parseFloat(par.value);
+
+        par = document.getElementById("optParMinDep");
+        params.minDepth = parseInt(par.value, 10);
+
+        par = document.getElementById("optParMaxDep");
+        params.maxDepth = parseInt(par.value, 10);
+        
+        params.node = document.getElementById("waveResults");
+        params.compGarrison = computer;
+        params.playGarrison = garrisonData.player[genIds[0]].garrison;
+        
+        params.units = {};
+
+        // read units from input fields
+        setStart = false;
+        units = tsosim.units;
+        for (idx in units) {
+            if (units.hasOwnProperty(idx)) {
+                nodeOn = document.getElementById("cbox_" + idx);
+                if (nodeOn && nodeOn.checked) {
+                    nodeMin = document.getElementById("inp_" + idx);
+                    nodeMax = document.getElementById("inpmax_" + idx);
+                    nodeCost = document.getElementById("inpcost_" + idx);
+                    if (nodeMax && nodeMax && nodeCost) {
+                        valMin = parseInt(nodeMin.value, 10);
+                        valMax = parseInt(nodeMax.value, 10);
+                        valCost = parseFloat(nodeCost.value);
+                        if ((valMin >= 0) && (valMax >= valMin)) {
+                            params.units[idx] = {
+                                type : units[idx], min: valMin, max: (valMax > params.garrCap ? params.garrCap : valMax), cost: valCost
+                            };
+                        }
+                    }
+                }
+            }
+        }
+            
+        startSolver(params);
     }
 }
 
@@ -1331,6 +1495,192 @@ function setupSimVersionButtons(onlyButtons) {
     }
 }
 
+// setup solveer GUI
+function setupSolver() {
+    var node, div, cbox, cboxLabel, enableLine, tab, createSel, createOpt, createNumOpt,
+        tr, td, fcts, ucosts, i, UC, child, findChild;
+
+    node = document.getElementById("units_player");
+    if (!node) {
+        return;
+    }
+    
+    div = document.createElement("div");
+    div.setAttribute("class", "solver_area");
+
+    cbox = document.createElement("INPUT");
+    cbox.setAttribute("type", "checkbox");
+    cbox.setAttribute("id", "enableSolver");
+    cbox.onchange = function () {
+        var setVis = function (classname, on, check, disp) {
+            var nodes, i;
+            nodes = document.getElementsByClassName(classname);
+            for (i = 0; i < nodes.length; i += 1) {
+                if (!disp) {
+                    nodes[i].setAttribute("style", "visibility:" + (on ? "visible" : "hidden"));
+                } else {
+                    nodes[i].setAttribute("class", classname + (on ? " Off" : " On"));
+                }
+                if (check && nodes[i].onchange) {
+                    nodes[i].checked = !on;
+                    nodes[i].onchange();
+                }
+            }
+        };
+        setVis("unitcbox", cbox.checked, true);
+        setVis("unitMax",  cbox.checked, false);
+        setVis("unitCost", cbox.checked, false);
+        setVis("unitUp",   cbox.checked, false, true);
+        setVis("optParams", !cbox.checked, false, true);
+    };
+    
+    cboxLabel = document.createElement("span");
+    cboxLabel.innerHTML = "Compute optimal solution";
+    
+    enableLine = document.createElement("span");
+    enableLine.setAttribute("class", "horizontal");
+    enableLine.appendChild(cbox);
+    enableLine.appendChild(cboxLabel);
+    
+    div.appendChild(enableLine);
+    
+    tab = document.createElement("div");
+    tab.setAttribute("class", "optParams");
+    
+    createSel = function (parID, label, optVals) {
+        var line, span, sel, i, opt;
+        line = document.createElement("div");
+        line.setAttribute("class", "optLine");
+        span = document.createElement("span");
+        span.innerHTML = label;
+        line.appendChild(span);
+        sel = document.createElement("select");
+        sel.setAttribute("id", parID);
+        sel.setAttribute("class", "optSel");
+        for (i = 0; i < optVals.length; i += 1) {
+            opt = document.createElement("option");
+            opt.text = optVals[i];
+            sel.appendChild(opt);
+        }
+        line.appendChild(sel);
+        return line;
+    };
+    createOpt = function (parId, label) {
+        var line, cbox, l;
+        line = document.createElement("div");
+        cbox = document.createElement("input");
+        cbox.setAttribute("id", parId);
+        cbox.setAttribute("type", "checkbox");
+        line.appendChild(cbox);
+        l = document.createElement("span");
+        l.innerHTML = label;
+        line.appendChild(l);
+        return line;
+    };
+    createNumOpt = function (parId, label, value, min, max) {
+        var line, l, inp;
+        line = document.createElement("div");
+        line.setAttribute("class", "optLine");
+        
+        l = document.createElement("span");
+        l.innerHTML = label;
+        line.appendChild(l);
+        
+        inp = document.createElement("input");
+        inp.setAttribute("id", parId);
+        inp.setAttribute("class", "optNum");
+        inp.setAttribute("type", "number");
+        inp.setAttribute("value", value);
+        inp.setAttribute("min", min);
+        if (max) {
+            inp.setAttribute("max", max);
+        }
+        line.appendChild(inp);
+        return line;
+    };
+    
+    fcts = [];
+    for (i = 0; i < CostFunctions.length; i += 1) {
+        fcts[i] = CostFunctions[i].name;
+    }
+    
+    tr = createSel("optParCostFct", "Cost Function", fcts);
+    tab.appendChild(tr);
+
+
+    ucosts = [];
+    for (i = 0; i < UnitCosts.length; i += 1) {
+        ucosts[i] = UnitCosts[i].name;
+    }
+
+    tr = createSel("optParUnitCosts", "Unit Costs", ucosts);
+    UC = tr;
+    UC.onchange = function () {
+        var node, idx, i;
+        node = document.getElementById("optParUnitCosts");
+        idx = node.selectedIndex;
+        for (i in UnitCosts[idx].values) {
+            if (UnitCosts[idx].values.hasOwnProperty(i)) {
+                node = document.getElementById("inpcost_" + i);
+                if (node) {
+                    node.value = UnitCosts[idx].values[i];
+                }
+            }
+        }
+    };
+    tab.appendChild(tr);
+
+    tr = createOpt("optParMinimize", "Minimize Costs");
+    tab.appendChild(tr);
+
+    tr = createOpt("optParUseMax", "Use maximum number of units");
+    tab.appendChild(tr);
+
+    tr = createNumOpt("optParMaxNum", "Maximum number of Units", 200, 0);
+    tab.appendChild(tr);
+
+    tr = createNumOpt("optParNumSims", "Simulations per step", 100, 0);
+    tab.appendChild(tr);
+
+    tr = createNumOpt("optParVicCond", "Victory Condition (%)", 50, 0);
+    tab.appendChild(tr);
+    
+    tr = createNumOpt("optParDevFact", "Deviation Factor (%)", 5, 0);
+    tab.appendChild(tr);
+
+    tr = createNumOpt("optParMinDep", "Minimum Depth", 3, 0);
+    tab.appendChild(tr);
+    
+    tr = createNumOpt("optParMaxDep", "Maximum Depth", 8, 0);
+    tab.appendChild(tr);
+
+    div.appendChild(tab);
+        
+    findChild = function (node, classname) {
+        var i;
+        if (node && node.children) {
+            for (i = 0; i < node.children.length; i += 1) {
+                if (node.children[i].getAttribute("class") === classname) {
+                    return node.children[i];
+                }
+            }
+        }
+        return null;
+    };
+    
+    child = findChild(node, "solver_area");
+    if (child) {
+        node.replaceChild(div, child);
+    } else {
+        node.appendChild(div);
+    }
+    
+    cbox.checked = false;
+    cbox.onchange();
+    
+    UC.onchange();
+}
+
 function setLanguage(language) {
     var sel, idx;
     sel = document.getElementById("langSel");
@@ -1428,14 +1778,24 @@ function initializeUnitsAndUI(simVersion, lang) {
 
     setupSimVersionButtons(true);
     setupGeneralTabs();
-    setupPlayerInputFields(tsosim.units, 500);
+    setupPlayerInputFields(tsosim.units, 200);
+    
+    // don't create solver GUI for expeditions
+    if (tsosim.version !== tso.versions[2].id) {
+        setupSolver();
+    } else {
+        sa = document.getElementsByClassName("solver_area");
+        if (sa && sa.length === 1 && sa[0].parentNode) {
+            sa[0].parentNode.removeChild(sa[0]);
+        }
+    }
 
     setupAdventures();
     setupAdventureTabs();
     
     // clear results
-    var res = document.getElementById("waveResults");
-    while(res && res.children.length > 0) {
+    res = document.getElementById("waveResults");
+    while (res && res.children.length > 0) {
         res.removeChild(res.lastChild);
     }
 }

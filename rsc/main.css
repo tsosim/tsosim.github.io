@@ -123,27 +123,65 @@ footer {
     z-index: +1;
 }
 
-.unitnumber {
-    width : 50px;
-    text-align: right;
+.unitcboxes {
+    width: 20px;
+}
+.unitcbox {
+    width: 20px;
     border-spacing: 0px;
     margin: 0px;
 }
+.unitcbox.On {
+    visibility: visible;
+}
+.unitcbox.Off {
+    visibility: hidden;
+}
+
+.unitInput {
+    width: 45%;
+}
+
+.unitnumber {
+    width : 42px;
+    text-align: right;
+    border-spacing: 0px;
+    margin: 0px;
+    margin-left: 1px;
+    margin-right: 1px;
+}
 
 .unitCosts {
-    width : 50px;
+    width : 45px;
     text-align: right;
+    margin-left: 1px;
+    margin-right: 1px;
 }
 .unitSum {
     height: 1em;
 }
 
+.unitUp {
+    width:10px;
+    cursor: pointer;
+    margin-left: 1px;
+    margin-right: 1px;
+    //border: 1px solid black;
+}
+.unitUp.Off {
+    display: none;
+}
+.unitUp.Over {
+    background: rgba(215, 235, 145,1);
+    font-weight: bold;
+}
+
 .unittable {
     display: flex;
     flex-direction: column;
-    #width: 90%;
+    width: 95%;
     align-self: center;
-    justify-content: center;
+    justify-content: flex-start;
     padding: 5px;
     #border-spacing: 0px;
 }
@@ -977,4 +1015,70 @@ footer {
 }
 .tabTopLine {
     border-top: 1px solid black;
+}
+
+/* ----- */
+
+#enableSolver {
+    width: 22px;
+    margin: 2px;
+}
+
+.slvTab {
+    width: 90%;
+    justify-content: center;
+}
+.slvSpacer {
+    width: auto;
+}
+.slvMin {
+    width: 1%;
+}
+.slvNum {
+    text-align: right;
+    padding-right: 2px;
+    width: 1%;
+}
+.slvUnits {
+    text-align: left;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.solver_area {
+    display: flex;
+    flex-direction: column;
+    width: 93%;
+    align-self: center;
+    justify-content: flex-start;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.optParams {
+    width: 100%;
+    border-top: 1px solid black;
+    padding-top: 5px;
+    margin-top: 5px;
+}
+.optParams.Off {
+    display: none;
+}
+
+.optSel {
+    width: 150px;
+}
+.optNum {
+    display: flex;
+    width: 50px;
+    text-align: right;
+}
+
+.optLine {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 3px;
+    margin-left: 5px;
+    margin-right: 5px;
 }

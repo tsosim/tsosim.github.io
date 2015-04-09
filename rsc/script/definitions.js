@@ -39,7 +39,7 @@ var Initiative = { FIRST: 1, SECOND: 2, THIRD: 3, LAST: 4 };
 /*
  * class : Unit
  */
-function Unit(name, hp, dmg, acc, init, attack_id, skills, checked) {
+function Unit(id, hp, dmg, acc, init, attack_id, skills, checked) {
     var sk, bd;
     //this.name       = name;
     this.hitpoints  = hp;
@@ -47,7 +47,8 @@ function Unit(name, hp, dmg, acc, init, attack_id, skills, checked) {
     this.accuracy   = acc;
     this.initiative = init;
     this.attackId   = attack_id;
-    this.id         = name; // reuse name as id (until it is set to a different value)
+    this.id         = id;
+    this.shortId    = id;
     this.unitClass  = EnemyType.NONE;
     this.checked    = checked ? checked : false;
 
@@ -189,7 +190,8 @@ function Garrison() {
         if (this.groups[tsosim.lang.unit[unitType.id]] === undefined) {
             this.groups[tsosim.lang.unit[unitType.id]] = new UnitGroup(unitType, num);
         } else {
-            this.groups[tsosim.lang.unit[unitType.id]].number += num;
+            // create new unit group with updated values, because just upadting the "number" value is not enough
+            this.groups[tsosim.lang.unit[unitType.id]] = new UnitGroup(unitType, this.groups[tsosim.lang.unit[unitType.id]].number + num);
         }
         if (!unitType.hasSkill(Skills.GENERAL)) {
             // ignore general(s)
