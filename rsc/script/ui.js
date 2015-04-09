@@ -1567,12 +1567,13 @@ function setupSolver() {
         line.appendChild(sel);
         return line;
     };
-    createOpt = function (parId, label) {
+    createOpt = function (parId, label, checked) {
         var line, cbox, l;
         line = document.createElement("div");
         cbox = document.createElement("input");
         cbox.setAttribute("id", parId);
         cbox.setAttribute("type", "checkbox");
+        cbox.checked = checked || false;
         line.appendChild(cbox);
         l = document.createElement("span");
         l.innerHTML = label;
@@ -1635,7 +1636,7 @@ function setupSolver() {
     tr = createOpt("optParMinimize", "Minimize Costs");
     tab.appendChild(tr);
 
-    tr = createOpt("optParUseMax", "Use maximum number of units");
+    tr = createOpt("optParUseMax", "Use maximum number of units", true);
     tab.appendChild(tr);
 
     tr = createNumOpt("optParMaxNum", "Maximum number of Units", 200, 0);
