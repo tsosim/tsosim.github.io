@@ -714,7 +714,7 @@ function computeOptimalResult() {
             // continue 
             //if(currentCost <= currentSample.parentCosts || currentSample.depth <= minDepth) {
             //if(currentCost <= globalCosts /*|| currentSample.depth <= minDepth*/) {
-            if (currentCost <= gCache.globalFactoredCosts) { /*|| currentSample.depth <= minDepth*/
+            if (currentCost <= gCache.globalFactoredCosts || currentSample.depth <= gCache.par.minDepth) {
                 currentSample.refineSample(gCache.samples);
             }
             if (currentCost <= gCache.globalCosts) {
@@ -726,7 +726,7 @@ function computeOptimalResult() {
         } else {
             //if(currentCost >= currentSample.parentCosts || currentSample.depth <= minDepth) {
             //if(currentCost >= globalCosts /*|| currentSample.depth <= minDepth*/) {
-            if (currentCost >= gCache.globalFactoredCosts) { /*|| currentSample.depth <= minDepth*/
+            if (currentCost >= gCache.globalFactoredCosts || currentSample.depth <= gCache.par.minDepth) {
                 currentSample.refineSample(gCache.samples);
             }
             if (currentCost >= gCache.globalCosts) {
