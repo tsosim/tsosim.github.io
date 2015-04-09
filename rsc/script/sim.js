@@ -73,7 +73,7 @@ function Simulator() {
 
         // initialize statistics objects
         for (idx = 0; idx < this.garrison.attacker.length; idx += 1) {
-            console.log("init statistics - " + idx);
+            //console.log("init statistics - " + idx);
             this.stats.attacker[idx] = new Statistics();
             this.stats.attacker[idx].initialize(this.garrison.attacker[idx]);
             
@@ -158,6 +158,9 @@ function Simulator() {
             
             abortRound = false;
             attackedNonCampUnits = false;
+            
+            // without initialization might crash when general was defeated before being able to attack (empty garrison)
+            tmpAttack = null;
       
             // iterate over all initiatives; if there units for a specific initiative in the garrisons, then compute combat
             for (init = 0; init < initiatives.length; init += 1) {
@@ -227,7 +230,7 @@ function Simulator() {
             
             rounds += 1;
             // count numer of rounds used to attack a building
-            if (tmpAttack.attacked && tmpAttack.onCamp) {
+            if (tmpAttack && tmpAttack.attacked && tmpAttack.onCamp) {
                 campRounds += 1;
             }
             
