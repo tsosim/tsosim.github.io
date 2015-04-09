@@ -1338,8 +1338,10 @@ function computeSimulation() {
         par = document.getElementById("optParCostFct");
         params.costFct = par.selectedIndex;
 
+        /* not relevant, because costs are read directly from GUI and are meant to be changed, so there are no "fixed costs"
         par = document.getElementById("optParUnitCosts");
-        params.costFct = par.selectedIndex;
+        params.unitCost = par.selectedIndex;
+        */
 
         par = document.getElementById("optParMinimize");
         params.minimize = par.checked;
