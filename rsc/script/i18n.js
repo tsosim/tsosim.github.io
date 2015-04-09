@@ -109,7 +109,7 @@ var lang = {
             lowlyPoacher      : "Lowly Poacher",
             rabbitHunter      : "Rabbit Hunter",
             hound             : "Hound",
-            garrunTrapper     : "Garrun the Trapper", 
+            garrunTrapper     : "Garrun the Trapper",
     
 			wolf              : "Wolf",
 			croaker           : "Croaker",
@@ -136,7 +136,7 @@ var lang = {
             
             expRecruit        : "Bandit Recruit",
             expThug           : "Thug",
-            expRoughneck      : "Roughneck", 
+            expRoughneck      : "Roughneck",
             expBowman         : "Bandit Bowman",
             expRanger         : "Bandit Ranger",
             expCavalry        : "Bandit Cavalry",
@@ -366,7 +366,7 @@ var lang = {
             lowlyPoacher      : "Einfacher Wilderer",
             rabbitHunter      : "Hasenjäger",
             hound             : "Jagdhund",
-            garrunTrapper     : "Garrun der Fallensteller", 
+            garrunTrapper     : "Garrun der Fallensteller",
 
 			wolf              : "Wolf",
 			croaker           : "Croaker",
@@ -393,7 +393,7 @@ var lang = {
             
             expRecruit        : "Räuberrekrut",
             expThug           : "Schläger",
-            expRoughneck      : "Raufbold", 
+            expRoughneck      : "Raufbold",
             expBowman         : "Räuberbogenschütze",
             expRanger         : "Räuberlangbogenschütze",
             expCavalry        : "Räuberreiterei",
@@ -515,7 +515,7 @@ var lang = {
             steel             : "Stahl",
             horse             : "Pferde",
             valor             : "Mutpunkte"
-        }    
+        }
     },
 	nl : {
         name : "Nederlands",
@@ -623,7 +623,7 @@ var lang = {
             lowlyPoacher      : "Lowly Poacher",
             rabbitHunter      : "Rabbit Hunter",
             hound             : "Hound",
-            garrunTrapper     : "Garrun the Trapper", 
+            garrunTrapper     : "Garrun the Trapper",
 
             wolf              : "Wolf",
             croaker           : "Croaker",
@@ -650,7 +650,7 @@ var lang = {
             
             expRecruit        : "Bandiet-Rekruut",
             expThug           : "Schurk",
-            expRoughneck      : "Rouwdouwer", 
+            expRoughneck      : "Rouwdouwer",
             expBowman         : "Bandiet-Boogschutter",
             expRanger         : "Bandiet-Groteboogschutter",
 			expCavalry        : "Bandiet-Cavalerist",
@@ -664,8 +664,8 @@ var lang = {
             expChuck          : "Chuck",
             expWildMary       : "Wilde Mary",
             expSkunk          : "Stinkert",
-            expGreybeard      : "Grijze baard",	
-            expShadow         : "Schaduwsluiper",	
+            expGreybeard      : "Grijze baard",
+            expShadow         : "Schaduwsluiper",
             expBert           : "Bert Eenoog",
             expMetalTooth     : "Metaaltand",
             expScarr          : "Scarr"
@@ -772,6 +772,6 @@ var lang = {
             steel             : "Staal",
             horse             : "Paarden",
             valor             : "Moedpunten"
-        }    
+        }
     }
 };

@@ -467,6 +467,12 @@ function setRestartFunction(genId, sel, stackNum, player) {
     };
 }
 
+function createTd(tr, text, head) {
+    var td = document.createElement(head ? "th" : "td");
+    td.innerHTML = text;
+    tr.appendChild(td);
+}
+
 function displayExpResultTable(genId, isPlayer) {
 
     var combat_data, garrison, table, tr, un, unitsLeft, cl;
@@ -579,7 +585,7 @@ function displayCostsTable(genId) {
             }
             
             createTd(tr, CostNames[un]);
-            if (parseInt(un) !== Costs.Iron) {
+            if (parseInt(un, 10) !== Costs.Iron) {
                 createTd(tr, accCosts[un]);
             } else {
                 extraIron = accCosts[Costs.Steel] ? accCosts[Costs.Steel] * 2 : 0;
@@ -625,12 +631,6 @@ function createExpSelColumn(col, garrison, genId, i, isPlayer) {
         icon.innerHTML = tsosim.lang.unit[garrison.currentUnit.id];
     }
     col.appendChild(icon);
-}
-
-function createTd(tr, text, head) {
-    var td = document.createElement(head ? "th" : "td");
-    td.innerHTML = text;
-    tr.appendChild(td);
 }
 
 function createExpLogColumn(node, log, isPlayer, tabId) {

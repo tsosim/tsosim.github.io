@@ -7,6 +7,12 @@
 /*global Skills*/
 /*global tso*/
 /*global tsosim*/
+/*global lang*/
+/*global setupTsoSim*/
+/*global startSolver*/
+/*global expData*/
+/*global CostFunctions*/
+/*global UnitCosts*/
 
 /*
  * general
@@ -30,7 +36,7 @@ function createUnitTooltipLine(label, text) {
 }
 
 function createUnitTooltip(unit) {
-    var div, tab, tr, th;
+    var div, tab, tr, th, skills, skStr, i, b;
     div = document.createElement("div");
     div.setAttribute("class", "tooltipOff");
     div.setAttribute("id", "tt_" + unit.id);
@@ -44,16 +50,16 @@ function createUnitTooltip(unit) {
     tr.appendChild(th);
     tab.appendChild(tr);
     
-    if(tsosim.version !== tso.versions[2].id) {
+    if (tsosim.version !== tso.versions[2].id) {
         tab.appendChild(createUnitTooltipLine(tsosim.lang.ui.hitpoints, unit.hitpoints));
         tab.appendChild(createUnitTooltipLine(tsosim.lang.ui.damage, unit.damage.min + " - " + unit.damage.max));
         tab.appendChild(createUnitTooltipLine(tsosim.lang.ui.accuracy, unit.accuracy + "%"));
         tab.appendChild(createUnitTooltipLine(tsosim.lang.ui.initiative, unit.initiative));
 
-        var skills = [Skills.SPLASH_DAMAGE, Skills.ATTACK_WEAKEST, Skills.TOWER_BONUS, Skills.ARMOR_PENETRATION];
-        var skStr = false;
-        for(var i = 0; i < skills.length; i+=1) {
-            if(Skills.hasSkill(unit.skill, skills[i])) {
+        skills = [Skills.SPLASH_DAMAGE, Skills.ATTACK_WEAKEST, Skills.TOWER_BONUS, Skills.ARMOR_PENETRATION];
+        skStr = false;
+        for (i = 0; i < skills.length; i += 1) {
+            if (Skills.hasSkill(unit.skill, skills[i])) {
                 tab.appendChild(createUnitTooltipLine(!skStr ? "Skills" : "", Skills.name(skills[i])));
                 skStr = true;
             }
@@ -62,8 +68,8 @@ function createUnitTooltip(unit) {
         tab.appendChild(createUnitTooltipLine(tsosim.lang.ui.hitpoints, unit.hitpoints));
         tab.appendChild(createUnitTooltipLine(tsosim.lang.ui.damage, unit.damage));
         tab.appendChild(createUnitTooltipLine(tsosim.lang.ui.type, ExpUnitTypeName(unit)));
-        for(var b in unit.bonus) {
-            if(unit.bonus.hasOwnProperty(b)) {
+        for (b in unit.bonus) {
+            if (unit.bonus.hasOwnProperty(b)) {
                 tab.appendChild(createUnitTooltipLine(tsosim.lang.ui.bonus, tsosim.lang.ui.vs + " " + ExpTypeNames[b] + " " + unit.bonus[b] + "%"));
             }
         }
@@ -158,14 +164,15 @@ function setupUnitInputField(unit, capacity) {
 }
 
 function updateSumInput() {
-    var sum = 0;
-    var sumNode = document.getElementById("inp_unitsTotal");
-    if(sumNode) {
-        for(var idx in tsosim.units) {
-            if(tsosim.units.hasOwnProperty(idx)) {
-                var node = document.getElementById("inp_" + tsosim.units[idx].id);
-                if(node) {
-                    sum += parseInt(node.value,10);
+    var sum, sumNode, idx, node;
+    sum = 0;
+    sumNode = document.getElementById("inp_unitsTotal");
+    if (sumNode) {
+        for (idx in tsosim.units) {
+            if (tsosim.units.hasOwnProperty(idx)) {
+                node = document.getElementById("inp_" + tsosim.units[idx].id);
+                if (node) {
+                    sum += parseInt(node.value, 10);
                 }
             }
         }
@@ -205,11 +212,11 @@ function onclickGenTab(node, gen_id) {
 
 // (1) setup general tabs to react on click event - activate and display stored garrison values
 function setupGeneralTabs() {
-    var pgen1, pgen2, pgen3, pgen4;
+    var pgen1, pgen2, pgen3, pgen4, setStr;
     
-    var setStr = function(gen) {
+    setStr = function (gen) {
         gen.innerHTML = tsosim.lang.unit.general;
-    }
+    };
     
     pgen1 = document.getElementById("pgen1");
     pgen1.onclick = function () { onclickGenTab(pgen1, "pgen1"); };
@@ -248,8 +255,8 @@ function setupGeneralSelectionOption(value, text, att_id, att_class) {
     
     // if tab is clicked, then previously selected tab will be disabled (via css class) and the selected on enabled
     span.onclick = function () {
-        var options, node, opt, attr;
-        if(tsosim.version !== tso.versions[2].id) {
+        var options, node, opt, attr, optCap, val;
+        if (tsosim.version !== tso.versions[2].id) {
             options = ["genSel200", "genSel220", "genSel250", "genSel270", "genSelMMA", "genSelLEG"];
         } else {
             options = ["genSel100"];
@@ -276,10 +283,10 @@ function setupGeneralSelectionArea() {
     base.setAttribute("class", "unitsOptionBlock");
     label = document.createElement("label");
     label.setAttribute("id", "genSelLabel");
-    label.innerHTML = tsosim.lang.unit.general +": ";
+    label.innerHTML = tsosim.lang.unit.general + ": ";
     base.appendChild(label);
     
-    if(tsosim.version !== tso.versions[2].id) {
+    if (tsosim.version !== tso.versions[2].id) {
         base.appendChild(setupGeneralSelectionOption(200, "200", "genSel200", "genSel selOptActive"));
         base.appendChild(setupGeneralSelectionOption(220, "220", "genSel220", "genSel selOpt"));
         base.appendChild(setupGeneralSelectionOption(250, "250", "genSel250", "genSel selOpt"));
@@ -298,7 +305,7 @@ function setupGeneralSelectionArea() {
 //     units    : array of units that should be displayed on the page (label + input field)
 //     capacity : capacity of the garrison / general
 function setupPlayerInputFields(units, capacity) {
-    var pustr, base, table, idx, p;
+    var pustr, base, table, idx, p, trSum, sum, rep, i, tmp;
 
     pustr = document.getElementById("puStr");
     pustr.innerHTML = tsosim.lang.ui.playerUnits;
@@ -322,15 +329,23 @@ function setupPlayerInputFields(units, capacity) {
         }
     }
     
-    var trSum = document.createElement("tr");
+    trSum = document.createElement("tr");
     trSum.setAttribute("class", "unitSum");
     table.appendChild(trSum);
 
-    var sum = setupUnitInputField(null, capacity);
+    sum = setupUnitInputField(null, capacity);
     table.appendChild(sum);
     
-    if (base.children.length > 1) {
-        base.replaceChild(table, base.lastChild);
+    // find unit table, because not (necessarily) last child anymore
+    for (i = 0; i < base.children.length; i += 1) {
+        tmp = base.children[i].getAttribute("class");
+        if (tmp === "unittable") {
+            rep = base.children[i];
+        }
+    }
+    
+    if (rep) {
+        base.replaceChild(table, rep);
     } else {
         base.appendChild(table);
     }
@@ -344,7 +359,7 @@ function storeGarrisonValues() {
         if (tabs[i].getAttribute("class") === "genTab inputTabActive") {
             storePlayerGarrisonValues(tabs[i].getAttribute("id"), tsosim.units);
             
-            return "pgen" + (i+1);
+            return "pgen" + (i + 1);
         }
     }
     return "";
@@ -376,9 +391,9 @@ function resetGarrisonValues() {
 //     gen_id : general tab id
 //     units  : read values for units from this attay
 function storePlayerGarrisonValues(gen_id, units) {
-    var garrison, idx, node, value, genIds, g;
+    var garrison, idx, node, value, genIds, g, setStart;
     
-    if(tsosim.version === tso.versions[2].id) {
+    if (tsosim.version === tso.versions[2].id) {
         garrison = expData.getExpData(gen_id).garrison;
         garrison.clear();
     } else {
@@ -387,7 +402,7 @@ function storePlayerGarrisonValues(gen_id, units) {
     }
     
     // read units from input fields
-    var setStart = false;
+    setStart = false;
     for (idx in units) {
         if (units.hasOwnProperty(idx)) {
             node = document.getElementById("inp_" + idx);
@@ -404,17 +419,16 @@ function storePlayerGarrisonValues(gen_id, units) {
     }
     
     // store general
-    if(tsosim.version !== tso.versions[2].id) {
+    if (tsosim.version !== tso.versions[2].id) {
         genIds = ["genSel200", "genSel220", "genSel250", "genSel270", "genSelMMA", "genSelLEG"];
         for (g = 0; g < genIds.length; g += 1) {
             node = document.getElementById(genIds[g]);
             if (node.getAttribute("class") === "genSel selOptActive") {
                 if (genIds[g] === "genSelMMA") {
                     garrison.addUnits(tsosim.generals.mma, 1);
-                } else if (genIds[g] === "genSelLEG"){
+                } else if (genIds[g] === "genSelLEG") {
                     garrison.addUnits(tsosim.generals.leg, 1);
-                }
-                else {
+                } else {
                     garrison.addUnits(tsosim.generals.general, 1);
                 }
                 garrison.setCapacity(parseInt(node.getAttribute("value"), 10));
@@ -516,11 +530,11 @@ function setupAdventureTabs() {
         }
         
         pisland.setAttribute("class", "compTab inputTabActive");
-        if(tsosim.version !== tso.versions[2].id) {
+        if (tsosim.version !== tso.versions[2].id) {
             setupComputerInputFields(tsosim.adv_maps.playerIsland.sort(function (u1, u2) { return u1.attackId - u2.attackId; }));
         } else {
             setupComputerInputFields(tsosim.adv_maps.expeditionIsland);//.sort(function (u1, u2) { return u1.attackId - u2.attackId; }));
-        }        
+        }
         setComputerGarrisonValues("playerIsland", garrisonData.computer.playerIsland.garrison);
     };
     // initialize computer units area with units from the player's island
@@ -679,7 +693,7 @@ function setupComputerInputFields(units, capacity) {
         base.appendChild(table);
     }
     
-    if(tsosim.version !== tso.versions[2].id) {
+    if (tsosim.version !== tso.versions[2].id) {
         campSpan = document.createElement("span");
         campSpan.setAttribute("class", "computerCamp");
         label = document.createElement("label");
@@ -714,12 +728,14 @@ function setupComputerInputFields(units, capacity) {
 function setupAdventures() {
     var compadv, idx, opt, advSorted;
     compadv = document.getElementById("selAdv");
-    while(compadv.options.length > 0) {
+    while (compadv.options.length > 0) {
         compadv.options.remove(0);
     }
-    advSorted = []; 
+    advSorted = [];
     for (idx in tsosim.advNames) {
-        advSorted.push(idx);
+        if (tsosim.advNames.hasOwnProperty(idx)) {
+            advSorted.push(idx);
+        }
     }
     advSorted.sort();
     for (idx = 0; idx < advSorted.length; idx += 1) {
@@ -734,11 +750,11 @@ function setupAdventures() {
 
 
 function storeAdventureValues() {
-    var tabs, i, select, advName;
-    if(tsosim.version === tso.versions[2].id) {
-        tabs = ["pgen1","pgen2","pgen3","pgen4"];
+    var tabs, i, select, advName, node;
+    if (tsosim.version === tso.versions[2].id) {
+        tabs = ["pgen1", "pgen2", "pgen3", "pgen4"];
         for (i = 0; i < tabs.length; i += 1) {
-            var node = document.getElementById(tabs[i]);
+            node = document.getElementById(tabs[i]);
             if (node && node.getAttribute("class") === "genTab inputTabActive") {
                 storeComputerGarrisonValues(tabs[i], tsosim.adv_maps.expeditionIsland);
                 break;
@@ -794,10 +810,9 @@ function resetAdventureValues() {
 
 // 
 function storeComputerGarrisonValues(map_id, units) {
-    var garrison, idx, node, value, t, towerIds;
-    console.log("store values into garrison : " + map_id);
+    var garrison, idx, node, value, t, towerIds, start;
     
-    if(tsosim.version === tso.versions[2].id) {
+    if (tsosim.version === tso.versions[2].id) {
         garrison = expData.getExpData(map_id).expedition;
         garrison.clear();
     } else {
@@ -805,7 +820,7 @@ function storeComputerGarrisonValues(map_id, units) {
         garrison.clear();
     }
   
-    var start = false;
+    start = false;
     // read units from input fields
     for (idx in units) {
         if (units.hasOwnProperty(idx)) {
@@ -822,7 +837,7 @@ function storeComputerGarrisonValues(map_id, units) {
         }
     }
     
-    if(tsosim.version !== tso.versions[2].id) {
+    if (tsosim.version !== tso.versions[2].id) {
         // store camp
         node = document.getElementById("computerCamp");
         for (idx in tsosim.camps) {
@@ -955,13 +970,13 @@ function createTableRowForRounds(roundsData, campRoundsData) {
     var tr, data, data2, i, tdl, tdr;
     tr = document.createElement("tr");
     data  = [
-        { "value": tsosim.lang.ui.rounds, 
+        { "value": tsosim.lang.ui.rounds,
             "class": "tabDataRounds", "sep": 4 },
-        { "value": roundsData.statistics.stat_min      + (campRoundsData.statistics.stat_max > 0 ? (" [" + campRoundsData.statistics.stat_min +"]") : ""), 
+        { "value": roundsData.statistics.stat_min      + (campRoundsData.statistics.stat_max > 0 ? (" [" + campRoundsData.statistics.stat_min + "]") : ""),
             "class": "tabDataRounds", "sep": 6 },
-        { "value": writeAvAndSd(roundsData.statistics) + (campRoundsData.statistics.stat_max > 0 ? (" [" + writeAvAndSd(campRoundsData.statistics) + "]") : ""), 
+        { "value": writeAvAndSd(roundsData.statistics) + (campRoundsData.statistics.stat_max > 0 ? (" [" + writeAvAndSd(campRoundsData.statistics) + "]") : ""),
             "class": "tabDataRounds", "sep": 6 },
-        { "value": roundsData.statistics.stat_max      + (campRoundsData.statistics.stat_max > 0 ? (" [" + campRoundsData.statistics.stat_max +"]") : ""), 
+        { "value": roundsData.statistics.stat_max      + (campRoundsData.statistics.stat_max > 0 ? (" [" + campRoundsData.statistics.stat_max + "]") : ""),
             "class": "tabDataRounds", "sep": 6 }
     ];
   
@@ -1142,13 +1157,14 @@ function getActiveAdventure() {
 }
 
 function computeSimulation() {
-    var sim, player, computer, genIds, repeats, i, computeStats, computeLogs, logs;
+    var sim, player, computer, genIds, repeats, i, computeStats, computeLogs, logs, data, genId, cbox, par, params;
+    var setStart, units, nodeOn, nodeMin, nodeMax, nodeCost, valMin, valMax, valCost, idx;
     
-    if(tsosim.version === tso.versions[2].id) {
+    if (tsosim.version === tso.versions[2].id) {
         
         //testExpedition();
 
-        var genId = storeGarrisonValues();
+        genId = storeGarrisonValues();
         storeAdventureValues();
 
 /*        
@@ -1163,7 +1179,7 @@ function computeSimulation() {
 
         expData[0] = new ExpStackData(gPlay, gComp);
 */
-        var data = expData.getExpData(genId);
+        data = expData.getExpData(genId);
         data.data[0] = new ExpStackData(data.garrison, data.expedition);
         fight_combat(genId, 0);
         
@@ -1239,12 +1255,12 @@ function setupSimVersionButtons(onlyButtons) {
     var base, idx, div, v, setOnclick, setOnmouseover, setOnmouseout, curIdx;
     base = document.getElementById("simVersions");
     
-    if(onlyButtons === true) {
+    if (onlyButtons === true) {
         for (idx = 0; idx < tso.versions.length; idx += 1) {
             v = tso.versions[idx];
-            if(v.id !== "test") {
+            if (v.id !== "test") {
                 div = document.getElementById("vb_" + v.id);
-                if(div) {
+                if (div) {
                     div.innerHTML   = v.name;
                 }
             }
@@ -1262,7 +1278,7 @@ function setupSimVersionButtons(onlyButtons) {
             } else {
                 elemID = elem.getAttribute("id");
                 for (i = 0; i < tso.versions.length; i += 1) {
-                    if(tso.versions[i].id !== "test") {
+                    if (tso.versions[i].id !== "test") {
                         elem2 = document.getElementById("vb_" + tso.versions[i].id);
                         elem2.setAttribute("class", "versionButton");
                         if (elemID === ("vb_" + tso.versions[i].id)) {
@@ -1295,7 +1311,7 @@ function setupSimVersionButtons(onlyButtons) {
     curIdx = 0;
     for (idx = 0; idx < tso.versions.length; idx += 1) {
         v = tso.versions[idx];
-        if(v.id !== "test") {
+        if (v.id !== "test") {
             div = document.createElement("div");
             div.setAttribute("class", "versionButton");
             div.setAttribute("id", "vb_" + v.id);
@@ -1316,11 +1332,11 @@ function setupSimVersionButtons(onlyButtons) {
 }
 
 function setLanguage(language) {
-    var sel;
+    var sel, idx;
     sel = document.getElementById("langSel");
     
-    for (var idx in sel.options) {
-        if(lang[language].name === sel.options[idx].text) {
+    for (idx in sel.options) {
+        if (lang[language].name === sel.options[idx].text) {
             sel.selectedIndex = idx;
             //sel.options[idx].onclick();
             sel.onchange();
@@ -1330,53 +1346,54 @@ function setLanguage(language) {
 }
 
 function setupLanguage() {
-    var base;//, idx, div, v, setOnclick, setOnmouseover, setOnmouseout;
+    var base, sel, label, idx, i, opt;//div, v, setOnclick, setOnmouseover, setOnmouseout;
     base = document.getElementById("simLang");
     
-    var label = document.createElement("label");
+    label = document.createElement("label");
     label.innerHTML = lang.en.ui.language;
     label.setAttribute("class", "langItem");
     
-    var sel = document.createElement("select");
+    sel = document.createElement("select");
     sel.setAttribute("class", "langItem");
     sel.setAttribute("id", "langSel");
 
-    for(var idx in lang) {
-        if(lang.hasOwnProperty(idx)) {
-            var opt = document.createElement("option");
+    for (idx in lang) {
+        if (lang.hasOwnProperty(idx)) {
+            opt = document.createElement("option");
             opt.text = lang[idx].name;
             sel.appendChild(opt);
         }
     }
     
     // this is for chrome
-    sel.onchange = function() {
+    sel.onchange = function () {
+        var i, bstat, bclog, restr, iterstr, startSim, reset;
         //console.log("onChange: " + sel.selectedIndex);
-        for(var i in lang) {
-            if(lang.hasOwnProperty(i)) {
-                if(lang[i].name === sel.options[sel.selectedIndex].text) {
-                    initializeUnitsAndUI(tsosim.version,lang[i]);
+        for (i in lang) {
+            if (lang.hasOwnProperty(i)) {
+                if (lang[i].name === sel.options[sel.selectedIndex].text) {
+                    initializeUnitsAndUI(tsosim.version, lang[i]);
                 }
             }
         }
         label.innerHTML = tsosim.lang.ui.language;
         
-        var bstat = document.getElementById("buttonStatistics");
-        var bclog = document.getElementById("buttonCombatLog");
-        var restr = document.getElementById("resStr");
-        var iterstr = document.getElementById("iterStr");
-        var startSim = document.getElementById("startSim");
-        var reset = document.getElementById("resetInput");
+        bstat = document.getElementById("buttonStatistics");
+        bclog = document.getElementById("buttonCombatLog");
+        restr = document.getElementById("resStr");
+        iterstr = document.getElementById("iterStr");
+        startSim = document.getElementById("startSim");
+        reset = document.getElementById("resetInput");
         bstat.innerHTML = tsosim.lang.ui.statistic;
         bclog.innerHTML = tsosim.lang.ui.combatLog;
         restr.innerHTML = tsosim.lang.ui.results;
         iterstr.innerHTML = tsosim.lang.ui.iterations;
         startSim.innerHTML = tsosim.lang.ui.startSim;
         reset.innerHTML = tsosim.lang.ui.reset;
-    }
+    };
 
     
-    if(base.children.length === 0) {
+    if (base.children.length === 0) {
         base.appendChild(label);
         base.appendChild(sel);
     } else {
@@ -1388,7 +1405,7 @@ function setupLanguage() {
 function setupStrings() {
     var node, node2;
     node = document.getElementById("simTitle");
-    node.innerHTML = tsosim.lang.ui.title;       
+    node.innerHTML = tsosim.lang.ui.title;
 }
 
 function initializeUI(lang) {
@@ -1403,6 +1420,7 @@ function initializeUI(lang) {
 }
 
 function initializeUnitsAndUI(simVersion, lang) {
+    var sa, res;
     setupTsoSim(simVersion, lang);
     setupStrings();
     _etn();
@@ -1450,7 +1468,7 @@ window.onload = function () {
             }
         }
     }
-    if(lang[userLang]) {
+    if (lang[userLang]) {
         setLanguage(userLang);
     }
     

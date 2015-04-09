@@ -3,6 +3,7 @@
 /*global Initiative*/
 /*global console*/
 /*global tsosim*/
+/*global Skills*/
 
 /*
  * class StatsData: stores ...
@@ -131,7 +132,7 @@ function Statistics() {
             this.rounds.statistics.sd += current;
         }
         if (this.rounds.numIterations !== 0) {
-            this.rounds.statistics.sd = Math.sqrt(this.rounds.statistics.sd/this.rounds.numIterations);
+            this.rounds.statistics.sd = Math.sqrt(this.rounds.statistics.sd / this.rounds.numIterations);
         }
         
         // camp rounds
@@ -160,7 +161,7 @@ function Statistics() {
             this.campRounds.statistics.sd += current;
         }
         if (this.campRounds.numIterations !== 0) {
-            this.campRounds.statistics.sd = Math.sqrt(this.campRounds.statistics.sd/this.campRounds.numIterations);
+            this.campRounds.statistics.sd = Math.sqrt(this.campRounds.statistics.sd / this.campRounds.numIterations);
         }
 
     };
@@ -286,7 +287,7 @@ function CombatLog() {
     
     this.createLogTable = function (waveNum, log_id, log_class) {
         var base, rnd, inits, init, currentRound, currentInit, hasData, isCamp,
-            rnode, inode, grow, table, rtext, itext, group, gr, gtext, at, tr, td, tab, tabrow;
+            rnode, inode, grow, table, rtext, itext, group, gr, gtext, at, tr, td, tab, tabrow, baseClass;
         base = document.createElement("div");
         base.setAttribute("id", log_id);
         base.setAttribute("class", log_class);
@@ -368,7 +369,7 @@ function CombatLog() {
             }
             
             if (isCamp && rnode) {
-                var baseClass = rnode.getAttribute("class");
+                baseClass = rnode.getAttribute("class");
                 rnode.setAttribute("class", baseClass + " CampRound");
             }
         }

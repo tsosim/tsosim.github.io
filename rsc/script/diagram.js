@@ -116,9 +116,11 @@ function setupDiagrams(node, stats, title, diagID, filterFun) {
     
     group = null;
     for (g in tsosim.generals) {
-        if (stats.data.hasOwnProperty(tsosim.lang.unit[tsosim.generals[g].id])) {
-            group = stats.data[tsosim.lang.unit[tsosim.generals[g].id]].iterationResults;
-            break;
+        if (tsosim.generals.hasOwnProperty(g)) {
+            if (stats.data.hasOwnProperty(tsosim.lang.unit[tsosim.generals[g].id])) {
+                group = stats.data[tsosim.lang.unit[tsosim.generals[g].id]].iterationResults;
+                break;
+            }
         }
     }
     
@@ -305,9 +307,11 @@ function setupHorizontalDiagram(node, stats, title, diagID, filter1, filter2) {
     // find general's data to determine victory or defeat rounds
     group = null;
     for (g in tsosim.generals) {
-        if (stats.data.hasOwnProperty(tsosim.lang.unit[tsosim.generals[g].id])) {
-            group = stats.data[tsosim.lang.unit[tsosim.generals[g].id]].iterationResults;
-            break;
+        if (tsosim.generals.hasOwnProperty(g)) {
+            if (stats.data.hasOwnProperty(tsosim.lang.unit[tsosim.generals[g].id])) {
+                group = stats.data[tsosim.lang.unit[tsosim.generals[g].id]].iterationResults;
+                break;
+            }
         }
     }
     
