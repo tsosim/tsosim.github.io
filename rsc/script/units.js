@@ -545,9 +545,12 @@ tso.data.Exp.functions.defineUnits = function () {
     cu.expMetalTooth    = new ExpUnit("Metal Tooth",           4000, 300, ExpUnitType.CAVALRY | ExpUnitType.BOSS, "rsc/img/expMetalTooth.png");
 	cu.expMetalTooth.addBonus(ExpUnitType.RANGED, 40);
 
-    cu.expScarr         = new ExpUnit("Scarr",                 5000, 360, ExpUnitType.CAVALRY | ExpUnitType.BOSS, "rsc/img/expMetalTooth.png");
+    cu.expScarr         = new ExpUnit("Scarr",                 5000, 360, ExpUnitType.CAVALRY | ExpUnitType.BOSS, "rsc/img/expScarr.png");
 	cu.expScarr.addBonus(ExpUnitType.RANGED, 50);
 
+    // -- //
+	
+    cu.expDrak          = new ExpUnit("Drak",                  4000, 720, ExpUnitType.ELITE|ExpUnitType.BOSS, "rsc/img/expDrak.png");
 
     
     // ----
@@ -592,7 +595,7 @@ function defineAdventureMaps(units, adv_maps) {
     
     if (tsosim.version === tso.versions[2].id) {
         adv_maps.expeditionIsland = [cu.expRecruit, cu.expThug, cu.expRoughneck, cu.expBowman, cu.expRanger, cu.expCavalry, cu.expWarDog,
-                                     cu.expChuck, cu.expWildMary, cu.expSkunk, cu.expGreybeard, cu.expBert, cu.expShadow, cu.expMetalTooth, cu.expScarr,
+                                     cu.expChuck, cu.expWildMary, cu.expSkunk, cu.expGreybeard, cu.expBert, cu.expShadow, cu.expMetalTooth, cu.expScarr, cu.expDrak,
                                      cu.expMercDuelist, cu.expMercShooter, cu.expMercCharger, cu.expMercInfantry, cu.expMercArcher, cu.expMercCavalry];
         
         

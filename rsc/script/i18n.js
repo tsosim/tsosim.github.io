@@ -154,7 +154,8 @@ var lang = {
             expBert           : "One-Eyed Bert",
             expShadow         : "Shadow",
             expMetalTooth     : "Metal Tooth",
-            expScarr          : "Scarr"
+            expScarr          : "Scarr",
+            expDrak           : "Drak the Devourer"
         },
         adv : {
         //"playerIsland"              : adv_maps.playerIsland,
@@ -411,7 +412,8 @@ var lang = {
             expBert           : "Einäugiger Bert",
             expShadow         : "Schatten",
             expMetalTooth     : "Metallzahn",
-            expScarr          : "Scarr"
+            expScarr          : "Scarr",
+            expDrak           : "Drak the Devourer"
         },
         adv : {
         //"playerIsland"              : adv_maps.playerIsland,
@@ -668,7 +670,8 @@ var lang = {
             expShadow         : "Schaduwsluiper",
             expBert           : "Bert Eenoog",
             expMetalTooth     : "Metaaltand",
-            expScarr          : "Scarr"
+            expScarr          : "Scarr",
+            expDrak           : "Drak the Devourer"
         },
         adv : {
         //"playerIsland"              : adv_maps.playerIsland,
@@ -925,7 +928,8 @@ var lang = {
             expBert           : "Bert Jednooki",
             expShadow         : "Cień",
             expMetalTooth     : "Metalowy Kieł",
-            expScarr          : "Blizna"
+            expScarr          : "Blizna",
+            expDrak           : "Drak the Devourer"
         },
         adv : {
         //"playerIsland"              : adv_maps.playerIsland,
