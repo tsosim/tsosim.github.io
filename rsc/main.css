@@ -978,3 +978,13 @@ footer {
 .tabTopLine {
     border-top: 1px solid black;
 }
+.icontd {
+    align-content: center;
+    height : 24px;
+}
+.uniticon {
+    width: 24px;
+    height: 24px;
+    margin : -1px;
+    margin-right: 6px;
+}

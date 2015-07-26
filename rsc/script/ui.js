@@ -103,6 +103,13 @@ function setupUnitInputField(unit, capacity) {
         console.log("test");
     }
     
+    var icon = document.createElement("td");
+    if(unit && unit.icon) {
+        icon.innerHTML = '<img src="' + 'rsc/img/icon/m/'+ unit.icon + '" title="' + tsosim.lang.unit[unit.id] + '" class="uniticon">';
+        icon.setAttribute("class", "icontd");
+    }
+    tr.appendChild(icon);
+    
     label = document.createElement("td");
     label.setAttribute("class", "unitlabel");
     if(unit) {

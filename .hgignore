@@ -1,0 +1,4 @@
+syntax: glob
+rsc/img/icon/_a/*
+rsc/img/icon/_c/*
+rsc/img/icon/_s/*

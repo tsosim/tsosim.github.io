@@ -39,7 +39,7 @@ var Initiative = { FIRST: 1, SECOND: 2, THIRD: 3, LAST: 4 };
 /*
  * class : Unit
  */
-function Unit(name, hp, dmg, acc, init, attack_id, skills, checked) {
+function Unit(name, hp, dmg, acc, init, attack_id, skills, icon) {
     var sk, bd;
     //this.name       = name;
     this.hitpoints  = hp;
@@ -49,7 +49,7 @@ function Unit(name, hp, dmg, acc, init, attack_id, skills, checked) {
     this.attackId   = attack_id;
     this.id         = name; // reuse name as id (until it is set to a different value)
     this.unitClass  = EnemyType.NONE;
-    this.checked    = checked ? checked : false;
+    this.icon       = icon;
 
     // ------------ //
     this.skill      = Skills.NONE;

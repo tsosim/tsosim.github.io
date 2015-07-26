@@ -137,15 +137,15 @@ tso.data.live.functions.defineUnits = function () {
     au = vData.allUnits;
 
     // -------------- //
-    pu.recruit       = new Unit("Recruit",        40, [15,  30],  80, Initiative.SECOND, getAID(), []);
-    pu.militia       = new Unit("Militia",        60, [20,  40],  80, Initiative.SECOND, getAID(), []);
-    pu.soldier       = new Unit("Soldier",        90, [20,  40],  85, Initiative.SECOND, getAID(), []);
-    pu.eliteSoldier  = new Unit("Elite Soldier", 120, [20,  40],  90, Initiative.SECOND, getAID(), []);
-    pu.cavalry       = new Unit("Cavalry",         5, [ 5,  10],  80, Initiative.FIRST,  getAID(), [Skills.ATTACK_WEAKEST]);
-    pu.bowman        = new Unit("Bowman",         10, [20,  40],  80, Initiative.SECOND, getAID(), [Skills.TOWER_BONUS]);
-    pu.longbowman    = new Unit("Longbowman",     10, [30,  60],  80, Initiative.SECOND, getAID(), [Skills.TOWER_BONUS]);
-    pu.crossbowman   = new Unit("Crossbowman",    10, [45,  90],  80, Initiative.SECOND, getAID(), [Skills.TOWER_BONUS]);
-    pu.cannoneer     = new Unit("Cannoneer",      60, [60, 120],  90, Initiative.THIRD,  getAID(), [Skills.TOWER_BONUS, Skills.ARMOR_PENETRATION, Skills.CAMP_DMG_BONUS]);
+    pu.recruit       = new Unit("Recruit",        40, [15,  30],  80, Initiative.SECOND, getAID(), [], "icon_military_recruit01.png");
+    pu.militia       = new Unit("Militia",        60, [20,  40],  80, Initiative.SECOND, getAID(), [], "icon_military_militia01.png");
+    pu.soldier       = new Unit("Soldier",        90, [20,  40],  85, Initiative.SECOND, getAID(), [], "icon_military_soldier01.png");
+    pu.eliteSoldier  = new Unit("Elite Soldier", 120, [20,  40],  90, Initiative.SECOND, getAID(), [], "icon_military_elitesoldier01.png");
+    pu.cavalry       = new Unit("Cavalry",         5, [ 5,  10],  80, Initiative.FIRST,  getAID(), [Skills.ATTACK_WEAKEST], "icon_military_cavalry01.png");
+    pu.bowman        = new Unit("Bowman",         10, [20,  40],  80, Initiative.SECOND, getAID(), [Skills.TOWER_BONUS], "icon_military_bowman01.png");
+    pu.longbowman    = new Unit("Longbowman",     10, [30,  60],  80, Initiative.SECOND, getAID(), [Skills.TOWER_BONUS], "icon_military_longbowman01.png");
+    pu.crossbowman   = new Unit("Crossbowman",    10, [45,  90],  80, Initiative.SECOND, getAID(), [Skills.TOWER_BONUS], "icon_military_crossbowman01.png");
+    pu.cannoneer     = new Unit("Cannoneer",      60, [60, 120],  90, Initiative.THIRD,  getAID(), [Skills.TOWER_BONUS, Skills.ARMOR_PENETRATION, Skills.CAMP_DMG_BONUS], "icon_military_cannoneer01.png");
     
     setUnitIDs(pu);
     setUnitClass(pu, EnemyType.PLAYER);
@@ -166,112 +166,112 @@ tso.data.live.functions.defineUnits = function () {
     // -------------- //
     
     /* bandits */
-    cu.bWildMary         = new Unit("Wild Mary",     60000, [ 740,  800], 50, Initiative.FIRST,  getAID(), [Skills.SPLASH_DAMAGE]);     //
-    cu.bChuck            = new Unit("Chuck",          9000, [2000, 2500], 50, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE]);     //
-    cu.bMetalToothed     = new Unit("Metal Toothed", 11000, [ 250,  500], 50, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE]);     //
-    cu.bScavenger        = new Unit("Scavenger",        40, [  15,   30], 60, Initiative.SECOND, getAID(), []);                         //
-    cu.bThug             = new Unit("Thug",             60, [  20,   40], 60, Initiative.SECOND, getAID(), []);                         //
-    cu.bGuardDog         = new Unit("Guard Dog",         5, [   5,   10], 60, Initiative.FIRST,  getAID(), [Skills.ATTACK_WEAKEST]);    //  
-    cu.bRoughneck        = new Unit("Roughneck",        90, [  20,   40], 60, Initiative.SECOND, getAID(), []);                         //
-    cu.bStoneThrower     = new Unit("Stone Thrower",    10, [  20,   40], 60, Initiative.SECOND, getAID(), [Skills.TOWER_BONUS]);       //
-    cu.bRanger           = new Unit("Ranger",           10, [  30,   60], 60, Initiative.SECOND, getAID(), [Skills.TOWER_BONUS]);       //
-    cu.bSkunk            = new Unit("Skunk",          5000, [   1,  100], 50, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE]);     //
-    cu.bOneEyedBert      = new Unit("One-Eyed Bert",  6000, [ 300,  500], 50, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE]);     //
+    cu.bWildMary         = new Unit("Wild Mary",     60000, [ 740,  800], 50, Initiative.FIRST,  getAID(), [Skills.SPLASH_DAMAGE], "icon_bandit_boss5.png");
+    cu.bChuck            = new Unit("Chuck",          9000, [2000, 2500], 50, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE], "icon_bandit_boss4.png");
+    cu.bMetalToothed     = new Unit("Metal Toothed", 11000, [ 250,  500], 50, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE], "icon_bandit_boss3.png");
+    cu.bScavenger        = new Unit("Scavenger",        40, [  15,   30], 60, Initiative.SECOND, getAID(), [], "icon_bandit_recruit.png");
+    cu.bThug             = new Unit("Thug",             60, [  20,   40], 60, Initiative.SECOND, getAID(), [], "icon_bandit_militia.png");
+    cu.bGuardDog         = new Unit("Guard Dog",         5, [   5,   10], 60, Initiative.FIRST,  getAID(), [Skills.ATTACK_WEAKEST], "icon_bandit_wardog.png");
+    cu.bRoughneck        = new Unit("Roughneck",        90, [  20,   40], 60, Initiative.SECOND, getAID(), [], "icon_bandit_soldier.png");
+    cu.bStoneThrower     = new Unit("Stone Thrower",    10, [  20,   40], 60, Initiative.SECOND, getAID(), [Skills.TOWER_BONUS], "icon_bandit_bowman.png");
+    cu.bRanger           = new Unit("Ranger",           10, [  30,   60], 60, Initiative.SECOND, getAID(), [Skills.TOWER_BONUS], "icon_bandit_longbowman.png");
+    cu.bSkunk            = new Unit("Skunk",          5000, [   1,  100], 50, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE], "icon_bandit_boss1.png");
+    cu.bOneEyedBert      = new Unit("One-Eyed Bert",  6000, [ 300,  500], 50, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE], "icon_bandit_boss2.png");
     
     /* pirates */
-    cu.pCaltrop          = new Unit("Caltrop",           4, [  0,  20], 33, Initiative.FIRST,  getAID(), [Skills.ATTACK_WEAKEST]);      //
-    cu.pDeckscrubber     = new Unit("Deckscrubber",     15, [ 10,  15], 50, Initiative.SECOND, getAID(), []);                           //
-    cu.pSabrerattler     = new Unit("Sabrerattler",     30, [ 10,  20], 50, Initiative.SECOND, getAID(), []);                           //
-    cu.pCrazyCook        = new Unit("Crazy Cook",     5000, [200, 300], 66, Initiative.FIRST,  getAID(), [Skills.SPLASH_DAMAGE]);       //
-    cu.pGunman           = new Unit("Gunman",            5, [ 20,  30], 50, Initiative.SECOND, getAID(), [Skills.TOWER_BONUS]);         //
-    cu.pKnifethrower     = new Unit("Knifethrower",      5, [ 10,  20], 50, Initiative.SECOND, getAID(), [Skills.TOWER_BONUS]);         //
-    cu.pPettyOfficer     = new Unit("Petty officer 2nd class", 60, [40, 60], 70, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE, Skills.ATTACK_WEAKEST]);   //
+    cu.pCaltrop          = new Unit("Caltrop",           4, [  0,  20], 33, Initiative.FIRST,  getAID(), [Skills.ATTACK_WEAKEST], "icon_pirate_cavalry.png");
+    cu.pDeckscrubber     = new Unit("Deckscrubber",     15, [ 10,  15], 50, Initiative.SECOND, getAID(), [], "icon_pirate_recruit.png");
+    cu.pSabrerattler     = new Unit("Sabrerattler",     30, [ 10,  20], 50, Initiative.SECOND, getAID(), [], "icon_pirate_militia.png");
+    cu.pCrazyCook        = new Unit("Crazy Cook",     5000, [200, 300], 66, Initiative.FIRST,  getAID(), [Skills.SPLASH_DAMAGE], "icon_pirate_boss1.png");
+    cu.pGunman           = new Unit("Gunman",            5, [ 20,  30], 50, Initiative.SECOND, getAID(), [Skills.TOWER_BONUS], "icon_pirate_bowman.png");
+    cu.pKnifethrower     = new Unit("Knifethrower",      5, [ 10,  20], 50, Initiative.SECOND, getAID(), [Skills.TOWER_BONUS], "icon_pirate_longbowman.png");
+    cu.pPettyOfficer     = new Unit("Petty officer 2nd class", 60, [40, 60], 70, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE, Skills.ATTACK_WEAKEST], "icon_pirate_captain.png");
 
     
     /* traitors */
     //                                        name           hp     dmg      acc    initiative     attack_id    skills
-    cu.desRecruit        = new Unit("Recruit Deserter",   40, [ 15,  30],  60, Initiative.SECOND, getAID(), []);                            //
-    cu.desMilitia        = new Unit("Militia Deserter",   60, [ 20,  40],  60, Initiative.SECOND, getAID(), []);                            //
-    cu.desCavalry        = new Unit("Cavalry Deserter",    5, [  5,  10],  60, Initiative.FIRST,  getAID(), [Skills.ATTACK_WEAKEST]);       //
-    cu.desSoldier        = new Unit("Soldier Deserter",   90, [ 20,  40],  65, Initiative.SECOND, getAID(), []);                            //
-    cu.desEliteSoldier   = new Unit("Elite Soldier Deserter", 120, [20, 40], 70, Initiative.SECOND, getAID(), []);                            //
-    cu.desBowman         = new Unit("Bowman Deserter",    10, [ 20,  40],  60, Initiative.SECOND, getAID(), [Skills.TOWER_BONUS]);          //
-    cu.desLongbow        = new Unit("Longbow Deserter",   10, [ 30,  60],  60, Initiative.SECOND, getAID(), [Skills.TOWER_BONUS]);          //
-    cu.desCrossbow       = new Unit("Crossbow Deserter ", 10, [ 45,  90],  60, Initiative.SECOND, getAID(), [Skills.TOWER_BONUS]);          //
-    cu.desCannoneer      = new Unit("Cannoneer Deserter", 60, [ 60, 120],  70, Initiative.THIRD,  getAID(), [Skills.TOWER_BONUS]);          //
-    cu.desSirRobin       = new Unit("Sir Robin",       12000, [200, 600],  80, Initiative.FIRST,  getAID(), [Skills.SPLASH_DAMAGE, Skills.ATTACK_WEAKEST]);     //
-    cu.desBigBertha      = new Unit("Big Bertha",      40000, [ 50, 150],  75, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE, Skills.ATTACK_WEAKEST]);     //
+    cu.desRecruit        = new Unit("Recruit Deserter",   40, [ 15,  30],  60, Initiative.SECOND, getAID(), [], "icon_military_recruit01.png");
+    cu.desMilitia        = new Unit("Militia Deserter",   60, [ 20,  40],  60, Initiative.SECOND, getAID(), [], "icon_military_militia01.png");
+    cu.desCavalry        = new Unit("Cavalry Deserter",    5, [  5,  10],  60, Initiative.FIRST,  getAID(), [Skills.ATTACK_WEAKEST], "icon_military_cavalry01.png");
+    cu.desSoldier        = new Unit("Soldier Deserter",   90, [ 20,  40],  65, Initiative.SECOND, getAID(), [], "icon_military_soldier01.png");
+    cu.desEliteSoldier   = new Unit("Elite Soldier Deserter", 120, [20, 40], 70, Initiative.SECOND, getAID(), [], "icon_military_elitesoldier01.png");
+    cu.desBowman         = new Unit("Bowman Deserter",    10, [ 20,  40],  60, Initiative.SECOND, getAID(), [Skills.TOWER_BONUS], "icon_military_bowman01.png");
+    cu.desLongbow        = new Unit("Longbow Deserter",   10, [ 30,  60],  60, Initiative.SECOND, getAID(), [Skills.TOWER_BONUS], "icon_military_longbowman01.png");
+    cu.desCrossbow       = new Unit("Crossbow Deserter ", 10, [ 45,  90],  60, Initiative.SECOND, getAID(), [Skills.TOWER_BONUS], "icon_military_crossbowman01.png");
+    cu.desCannoneer      = new Unit("Cannoneer Deserter", 60, [ 60, 120],  70, Initiative.THIRD,  getAID(), [Skills.TOWER_BONUS], "icon_military_cannoneer01.png");
+    cu.desSirRobin       = new Unit("Sir Robin",       12000, [200, 600],  80, Initiative.FIRST,  getAID(), [Skills.SPLASH_DAMAGE, Skills.ATTACK_WEAKEST], "icon_kingdom_boss1.png");
+    cu.desBigBertha      = new Unit("Big Bertha",      40000, [ 50, 150],  75, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE, Skills.ATTACK_WEAKEST], "icon_kingdom_boss2.png");
 
     /* cultists */
-    cu.cNightSpawn       = new Unit("Night Spawn",      35000, [700,  800],  75, Initiative.FIRST,  getAID(), [Skills.SPLASH_DAMAGE, Skills.ATTACK_WEAKEST]);   //
-    cu.cCultist          = new Unit("Cultist",             40, [ 15,   30],  80, Initiative.SECOND, getAID(), []);                              //
-    cu.cSwampWitch       = new Unit("Swamp Witch",      13000, [400,  600],  75, Initiative.FIRST,  getAID(), [Skills.SPLASH_DAMAGE]);          //
-    cu.cShadowstalker    = new Unit("Shadowsneaker",        5, [  0,    5],  60, Initiative.FIRST,  getAID(), [Skills.ATTACK_WEAKEST]);         //
-    cu.cFanatic          = new Unit("Fanatic",             20, [ 30,   60],  90, Initiative.SECOND, getAID(), [Skills.TOWER_BONUS]);            //
-    cu.cDarkPriest       = new Unit("Dark Priest",         20, [ 40,   80], 100, Initiative.SECOND, getAID(), [Skills.TOWER_BONUS]);            //
-    cu.cFiredancer       = new Unit("Firedancer",          30, [ 60,  120], 100, Initiative.SECOND, getAID(), [Skills.TOWER_BONUS]);            //
-    cu.cDancingDervish   = new Unit("Dancing Dervish",     90, [ 60,  120],  90, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE]);          //
-    cu.cDarkHighPriest   = new Unit("Dark High Priest", 15000, [800, 1000],  75, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE]);          //
+    cu.cNightSpawn       = new Unit("Night Spawn",      35000, [700,  800],  75, Initiative.FIRST,  getAID(), [Skills.SPLASH_DAMAGE, Skills.ATTACK_WEAKEST], "icon_cult_boss3.png");
+    cu.cCultist          = new Unit("Cultist",             40, [ 15,   30],  80, Initiative.SECOND, getAID(), [], "icon_cult_recruit.png");
+    cu.cSwampWitch       = new Unit("Swamp Witch",      13000, [400,  600],  75, Initiative.FIRST,  getAID(), [Skills.SPLASH_DAMAGE], "icon_cult_boss1.png");
+    cu.cShadowstalker    = new Unit("Shadowsneaker",        5, [  0,    5],  60, Initiative.FIRST,  getAID(), [Skills.ATTACK_WEAKEST], "icon_cult_cavalry.png");
+    cu.cFanatic          = new Unit("Fanatic",             20, [ 30,   60],  90, Initiative.SECOND, getAID(), [Skills.TOWER_BONUS], "icon_cult_bowman.png");
+    cu.cDarkPriest       = new Unit("Dark Priest",         20, [ 40,   80], 100, Initiative.SECOND, getAID(), [Skills.TOWER_BONUS], "icon_cult_longbowman.png");
+    cu.cFiredancer       = new Unit("Firedancer",          30, [ 60,  120], 100, Initiative.SECOND, getAID(), [Skills.TOWER_BONUS], "icon_cult_crossbowman.png");
+    cu.cDancingDervish   = new Unit("Dancing Dervish",     90, [ 60,  120],  90, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE], "icon_cult_canoneer.png");
+    cu.cDarkHighPriest   = new Unit("Dark High Priest", 15000, [800, 1000],  75, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE], "icon_cult_boss2.png");
 
     /* raiders */
-    cu.rNomad            = new Unit("Nomad",             30, [ 10,  20],  60, Initiative.SECOND, getAID(), []);                             //
-    cu.rLanceRider       = new Unit("Lance Rider",       20, [  5,  20],  90, Initiative.FIRST,  getAID(), [Skills.ATTACK_WEAKEST]);        //
-    cu.rRidingBowman     = new Unit("Riding Bowman",     20, [ 30,  40],  90, Initiative.FIRST,  getAID(), [Skills.ATTACK_WEAKEST]);        //
-    cu.rRidingAmazon     = new Unit("Riding Amazonian",  20, [ 40,  60],  90, Initiative.FIRST,  getAID(), [Skills.ATTACK_WEAKEST]);        //
-    cu.rCataphract       = new Unit("Cataphract",        20, [ 90,  90], 100, Initiative.FIRST,  getAID(), [Skills.ATTACK_WEAKEST]);        //
-    cu.rUproarBull       = new Unit("Uproarious Bull", 2000, [120, 120], 100, Initiative.FIRST,  getAID(), []);                             //
-    cu.rCompBow          = new Unit("Composite Bow",     20, [ 20,  40],  80, Initiative.THIRD,  getAID(), []);                             //
+    cu.rNomad            = new Unit("Nomad",             30, [ 10,  20],  60, Initiative.SECOND, getAID(), [], "icon_raiders_recruit.png");
+    cu.rLanceRider       = new Unit("Lance Rider",       20, [  5,  20],  90, Initiative.FIRST,  getAID(), [Skills.ATTACK_WEAKEST], "icon_raiders_cavalry.png");
+    cu.rRidingBowman     = new Unit("Riding Bowman",     20, [ 30,  40],  90, Initiative.FIRST,  getAID(), [Skills.ATTACK_WEAKEST], "icon_raiders_cavalry_bow.png");
+    cu.rRidingAmazon     = new Unit("Riding Amazonian",  20, [ 40,  60],  90, Initiative.FIRST,  getAID(), [Skills.ATTACK_WEAKEST], "icon_raiders_cavalry_longbow.png");
+    cu.rCataphract       = new Unit("Cataphract",        20, [ 90,  90], 100, Initiative.FIRST,  getAID(), [Skills.ATTACK_WEAKEST], "icon_raiders_cavalry_crossbow.png");
+    cu.rUproarBull       = new Unit("Uproarious Bull", 2000, [120, 120], 100, Initiative.FIRST,  getAID(), [], "icon_raiders_boss1.png");
+    cu.rCompBow          = new Unit("Composite Bow",     20, [ 20,  40],  80, Initiative.THIRD,  getAID(), [], "icon_raiders_bowman.png");
 
     /* nords */
-    cu.nJomsviking       = new Unit("Jomsviking", 140, [60, 80], 95, Initiative.THIRD,  getAID(), []);                          //
-    cu.nHousekarl        = new Unit("Housecarl",  140, [40, 50], 90, Initiative.THIRD,  getAID(), []);                          //
-    cu.nKarl             = new Unit("Karl",        80, [40, 50], 90, Initiative.THIRD,  getAID(), []);                          //
-    cu.nThrall           = new Unit("Thrall",      60, [20, 25], 85, Initiative.THIRD,  getAID(), []);                          //
-    cu.nValkyrie         = new Unit("Valkyrie",    10, [20, 40], 60, Initiative.SECOND, getAID(), []);                          //
-    cu.nBerserk          = new Unit("Berserk",     90, [20, 40], 70, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE]);      //
+    cu.nJomsviking       = new Unit("Jomsviking", 140, [60, 80], 95, Initiative.THIRD,  getAID(), [], "icon_nords_elite_soldier.png");
+    cu.nHousekarl        = new Unit("Housecarl",  140, [40, 50], 90, Initiative.THIRD,  getAID(), [], "icon_nords_soldier.png");
+    cu.nKarl             = new Unit("Karl",        80, [40, 50], 90, Initiative.THIRD,  getAID(), [], "icon_nords_militia.png");
+    cu.nThrall           = new Unit("Thrall",      60, [20, 25], 85, Initiative.THIRD,  getAID(), [], "icon_nords_recruit.png");
+    cu.nValkyrie         = new Unit("Valkyrie",    10, [20, 40], 60, Initiative.SECOND, getAID(), [], "icon_nords_bowman.png");
+    cu.nBerserk          = new Unit("Berserk",     90, [20, 40], 70, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE], "icon_nords_canoneer.png");
     
     
     /* wildlife */
-    cu.epBoar            = new Unit("Boar",           100, [30,  60], 85, Initiative.SECOND, getAID(), []);                         //
-    cu.epBear            = new Unit("Bear",           140, [70,  90], 95, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE]);     //
-    cu.epWolf            = new Unit("Wolf",            40, [60, 100], 85, Initiative.SECOND, getAID(), []);                         //
-    cu.epPackleaderWolf  = new Unit("Wolf Packleader", 60, [80, 120], 95, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE]);     //
-    cu.epFox             = new Unit("Fox",             30, [10,  40], 95, Initiative.FIRST,  getAID(), [Skills.ATTACK_WEAKEST]);    //
-    cu.epGiant           = new Unit("Giant",          160, [60,  90], 95, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE]);     //
+    cu.epBoar            = new Unit("Boar",           100, [30,  60], 85, Initiative.SECOND, getAID(), [], "icon_wildlife_recruit.png");
+    cu.epBear            = new Unit("Bear",           140, [70,  90], 95, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE], "icon_wildlife_militia.png");
+    cu.epWolf            = new Unit("Wolf",            40, [60, 100], 85, Initiative.SECOND, getAID(), [], "icon_wildlife_bowman.png");
+    cu.epPackleaderWolf  = new Unit("Wolf Packleader", 60, [80, 120], 95, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE], "icon_wildlife_longbowman.png");
+    cu.epFox             = new Unit("Fox",             30, [10,  40], 95, Initiative.FIRST,  getAID(), [Skills.ATTACK_WEAKEST], "icon_wildlife_cavalry.png");
+    cu.epGiant           = new Unit("Giant",          160, [60,  90], 95, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE], "icon_wildlife_cannoneer.png");
   
     /* epic */
-    cu.royalRecruit      = new Unit("Royal Recruit",   120, [30,  60], 85, Initiative.SECOND, getAID(), []);                        //
-    cu.royalMilitia      = new Unit("Royal Militia",   160, [70,  90], 95, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE]);    //
-    cu.royalBowman       = new Unit("Royal Bowman",     40, [60, 120], 85, Initiative.SECOND, getAID(), []);                        //
-    cu.royalLongbowman   = new Unit("Royal Longbowman", 60, [80, 140], 95, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE]);    //
-    cu.royalCavalry      = new Unit("Royal Cavalry",    40, [10,  60], 95, Initiative.FIRST,  getAID(), [Skills.ATTACK_WEAKEST]);   //
-    cu.royalCannoneer    = new Unit("Royal Cannoneer", 200, [60,  90], 95, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE]);    //
+    cu.royalRecruit      = new Unit("Royal Recruit",   120, [30,  60], 85, Initiative.SECOND, getAID(), [], "icon_military_recruit01.png");
+    cu.royalMilitia      = new Unit("Royal Militia",   160, [70,  90], 95, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE], "icon_military_militia01.png");
+    cu.royalBowman       = new Unit("Royal Bowman",     40, [60, 120], 85, Initiative.SECOND, getAID(), [], "icon_military_bowman01.png");
+    cu.royalLongbowman   = new Unit("Royal Longbowman", 60, [80, 140], 95, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE], "icon_military_longbowman01.png");
+    cu.royalCavalry      = new Unit("Royal Cavalry",    40, [10,  60], 95, Initiative.FIRST,  getAID(), [Skills.ATTACK_WEAKEST], "icon_military_cavalry01.png");
+    cu.royalCannoneer    = new Unit("Royal Cannoneer", 200, [60,  90], 95, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE], "icon_military_cannoneer01.png");
 
     /* epic bosses */
-    cu.epGiantLeader1    = new Unit("Giant Leader 1",   90000, [ 100,   300], 60, Initiative.THIRD,     getAID(), [Skills.SPLASH_DAMAGE]);                          //
-    cu.epGiantLeader2    = new Unit("Giant Leader 2",   70000, [ 100,   250], 80, Initiative.THIRD,     getAID(), [Skills.SPLASH_DAMAGE]);                          //
-    cu.epUnicorn         = new Unit("Unicorn",          30000, [ 250,   400], 90, Initiative.SECOND,    getAID(), [Skills.SPLASH_DAMAGE]);                          //
-    cu.epGiantBoar       = new Unit("Giant Boar",       50000, [ 200,   300], 90, Initiative.SECOND,    getAID(), [Skills.SPLASH_DAMAGE]);                          //
-    cu.epEvilKing        = new Unit("Evil King",        30000, [ 200,   300], 80, Initiative.SECOND,    getAID(), [Skills.SPLASH_DAMAGE]);                          //
-    cu.epIronFist        = new Unit("Iron Fist",        45000, [ 200,   250], 85, Initiative.FIRST,     getAID(), [Skills.SPLASH_DAMAGE]);   //
-    cu.epGiantBear       = new Unit("Giant Bear",       55000, [ 400,   750], 60, Initiative.THIRD,     getAID(), [Skills.SPLASH_DAMAGE]);                          //
-    cu.epRivalDressmaker = new Unit("Rival Dressmaker", 40000, [ 150,   250], 75, Initiative.THIRD,     getAID(), [Skills.SPLASH_DAMAGE, Skills.ATTACK_WEAKEST]);   //
-    cu.epBlackBull       = new Unit("Black Bull",       60000, [ 250,   300], 90, Initiative.SECOND,    getAID(), [Skills.SPLASH_DAMAGE]);                          //
-    cu.epDarkWizard      = new Unit("Dark Wizard",      30000, [2000,  2500], 80, Initiative.SECOND,    getAID(), [Skills.SPLASH_DAMAGE]);                          //
-    cu.epLyingGoat       = new Unit("Lying Goat",       25000, [ 100,   150], 85, Initiative.SECOND,    getAID(), [Skills.SPLASH_DAMAGE, Skills.ATTACK_WEAKEST]);   //
-    cu.epThugLeader      = new Unit("Thug Leaderd",     40000, [ 200,   300], 80, Initiative.SECOND,    getAID(), [Skills.SPLASH_DAMAGE]);                          //
-    cu.epAssassine       = new Unit("Assassine",        30000, [ 200,   300], 80, Initiative.FIRST,     getAID(), [Skills.SPLASH_DAMAGE, Skills.ATTACK_WEAKEST]);   //
-    cu.epGreedyInnkeeper = new Unit("Greedy Innkeeper", 50000, [ 1500, 2000], 80, Initiative.THIRD,     getAID(), [Skills.SPLASH_DAMAGE, Skills.ATTACK_WEAKEST]);   //
+    cu.epGiantLeader1    = new Unit("Giant Leader 1",   90000, [ 100,   300], 60, Initiative.THIRD,     getAID(), [Skills.SPLASH_DAMAGE], "icon_epicraid_boss1.png");
+    cu.epGiantLeader2    = new Unit("Giant Leader 2",   70000, [ 100,   250], 80, Initiative.THIRD,     getAID(), [Skills.SPLASH_DAMAGE], "icon_epicraid_boss2.png");
+    cu.epUnicorn         = new Unit("Unicorn",          30000, [ 250,   400], 90, Initiative.SECOND,    getAID(), [Skills.SPLASH_DAMAGE], "icon_epicraid_boss3.png");
+    cu.epGiantBoar       = new Unit("Giant Boar",       50000, [ 200,   300], 90, Initiative.SECOND,    getAID(), [Skills.SPLASH_DAMAGE], "icon_epicraid_boss4.png");
+    cu.epEvilKing        = new Unit("Evil King",        30000, [ 200,   300], 80, Initiative.SECOND,    getAID(), [Skills.SPLASH_DAMAGE], "icon_epicraid_boss5.png");
+    cu.epIronFist        = new Unit("Iron Fist",        45000, [ 200,   250], 85, Initiative.FIRST,     getAID(), [Skills.SPLASH_DAMAGE], "icon_epicraid_boss6.png");
+    cu.epGiantBear       = new Unit("Giant Bear",       55000, [ 400,   750], 60, Initiative.THIRD,     getAID(), [Skills.SPLASH_DAMAGE], "icon_epicraid_boss7.png");
+    cu.epRivalDressmaker = new Unit("Rival Dressmaker", 40000, [ 150,   250], 75, Initiative.THIRD,     getAID(), [Skills.SPLASH_DAMAGE, Skills.ATTACK_WEAKEST], "icon_epicraid_boss8.png");
+    cu.epBlackBull       = new Unit("Black Bull",       60000, [ 250,   300], 90, Initiative.SECOND,    getAID(), [Skills.SPLASH_DAMAGE], "icon_epicraid_boss9.png");
+    cu.epDarkWizard      = new Unit("Dark Wizard",      30000, [2000,  2500], 80, Initiative.SECOND,    getAID(), [Skills.SPLASH_DAMAGE], "icon_epicraid_boss10.png");
+    cu.epLyingGoat       = new Unit("Lying Goat",       25000, [ 100,   150], 85, Initiative.SECOND,    getAID(), [Skills.SPLASH_DAMAGE, Skills.ATTACK_WEAKEST], "icon_epicraid_boss11.png");
+    cu.epThugLeader      = new Unit("Thug Leaderd",     40000, [ 200,   300], 80, Initiative.SECOND,    getAID(), [Skills.SPLASH_DAMAGE], "icon_epicraid_boss12.png");
+    cu.epAssassine       = new Unit("Assassine",        30000, [ 200,   300], 80, Initiative.FIRST,     getAID(), [Skills.SPLASH_DAMAGE, Skills.ATTACK_WEAKEST], "icon_epicraid_boss13.png");
+    cu.epGreedyInnkeeper = new Unit("Greedy Innkeeper", 50000, [ 1500, 2000], 80, Initiative.THIRD,     getAID(), [Skills.SPLASH_DAMAGE, Skills.ATTACK_WEAKEST], "icon_epicraid_boss14.png");
     
     
-    cu.wolf              = new Unit("Wolf",               10, [  2,   3], 80, Initiative.FIRST,  getAID(), []);                       //
-    cu.croaker           = new Unit("Croaker",         10000, [500, 700], 50, Initiative.THIRD,  getAID(), [Skills.ATTACK_WEAKEST]);  //
-    cu.mystShaman        = new Unit("Mystical Shaman",  9000, [200, 500], 70, Initiative.SECOND, getAID(), [Skills.ATTACK_WEAKEST, Skills.SPLASH_DAMAGE]);  //
+    cu.wolf              = new Unit("Wolf",               10, [  2,   3], 80, Initiative.FIRST,  getAID(), [], "icon_neutral_cavalry.png");
+    cu.croaker           = new Unit("Croaker",         10000, [500, 700], 50, Initiative.THIRD,  getAID(), [Skills.ATTACK_WEAKEST], "icon_croaker.png");
+    cu.mystShaman        = new Unit("Mystical Shaman",  9000, [200, 500], 70, Initiative.SECOND, getAID(), [Skills.ATTACK_WEAKEST, Skills.SPLASH_DAMAGE]);
     
-    cu.lowlyPoacher      = new Unit("",   40, [ 15,  30], 60, Initiative.SECOND, getAID(), []);
-    cu.rabbitHunter      = new Unit("",   10, [ 20,  40], 60, Initiative.SECOND, getAID(), [Skills.TOWER_BONUS]);
-    cu.hound             = new Unit("",    5, [  5,  10], 60, Initiative.FIRST,  getAID(), [Skills.ATTACK_WEAKEST]);
-    cu.garrunTrapper     = new Unit("", 6000, [300, 500], 50, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE]);
+    cu.lowlyPoacher      = new Unit("",   40, [ 15,  30], 60, Initiative.SECOND, getAID(), [], "icon_bandit_recruit.png");
+    cu.rabbitHunter      = new Unit("",   10, [ 20,  40], 60, Initiative.SECOND, getAID(), [Skills.TOWER_BONUS], "icon_bandit_longbowman.png");
+    cu.hound             = new Unit("",    5, [  5,  10], 60, Initiative.FIRST,  getAID(), [Skills.ATTACK_WEAKEST], "icon_bandit_wardog.png");
+    cu.garrunTrapper     = new Unit("", 6000, [300, 500], 50, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE], "icon_trapper.png");
     
     
     // camps
@@ -470,13 +470,13 @@ tso.data.Exp.functions.defineUnits = function () {
 //    camp = vData.camps;
     au = vData.allUnits;
     
-    pu.expAttackInf  = new ExpUnit("Infantry",        180, 30, ExpUnitType.MELEE,   "rsc/img/expAttackInfantry.png");
-	pu.expAttackArch = new ExpUnit("Archer",          180, 30, ExpUnitType.RANGED,  "rsc/img/expAttackArcher.png");
-	pu.expAttackCav  = new ExpUnit("Cavalry",         180, 30, ExpUnitType.CAVALRY, "rsc/img/expAttackCavalry.png");
-	pu.expHeavyInf   = new ExpUnit("Heavy Infantry",  400,  5, ExpUnitType.MELEE  | ExpUnitType.HEAVY, "rsc/img/expHeavyInfantry.png");
-	pu.expHeavyArch  = new ExpUnit("Heavy Archer",    400,  5, ExpUnitType.RANGED | ExpUnitType.HEAVY, "rsc/img/expHeavyArcher.png");
-	pu.expHeavyCav   = new ExpUnit("Heavy Cavalry",   400,  5, ExpUnitType.CAVALRY| ExpUnitType.HEAVY, "rsc/img/expHeavyCavalry.png");
-	pu.expGuardsman  = new ExpUnit("Guardsman",       400, 10, ExpUnitType.ELITE  | ExpUnitType.HEAVY, "rsc/img/expGuard.png");
+    pu.expAttackInf  = new ExpUnit("Infantry",        180, 30, ExpUnitType.MELEE,   "icon_expedition_pikeman.png");
+	pu.expAttackArch = new ExpUnit("Archer",          180, 30, ExpUnitType.RANGED,  "icon_expedition_archer.png");
+	pu.expAttackCav  = new ExpUnit("Cavalry",         180, 30, ExpUnitType.CAVALRY, "icon_expedition_cuirassier.png");
+	pu.expHeavyInf   = new ExpUnit("Heavy Infantry",  400,  5, ExpUnitType.MELEE  | ExpUnitType.HEAVY, "icon_expedition_swordsman.png");
+	pu.expHeavyArch  = new ExpUnit("Heavy Archer",    400,  5, ExpUnitType.RANGED | ExpUnitType.HEAVY, "icon_expedition_crossbowman.png");
+	pu.expHeavyCav   = new ExpUnit("Heavy Cavalry",   400,  5, ExpUnitType.CAVALRY| ExpUnitType.HEAVY, "icon_expedition_knight.png");
+	pu.expGuardsman  = new ExpUnit("Guardsman",       400, 10, ExpUnitType.ELITE  | ExpUnitType.HEAVY, "icon_expedition_tank.png");
 
     pu.expAttackInf.addBonus(ExpUnitType.CAVALRY, 35);
 	pu.expAttackArch.addBonus(ExpUnitType.MELEE, 35);
@@ -494,94 +494,80 @@ tso.data.Exp.functions.defineUnits = function () {
     
 	///////////////////////////////////////////////////
 
-    cu.expRecruit       = new ExpUnit("Bandit Recruit",         130, 25, ExpUnitType.MELEE, "rsc/img/expBanditRecruit.png");
+    cu.expRecruit       = new ExpUnit("Bandit Recruit",         130, 25, ExpUnitType.MELEE, "icon_bandit_recruit.png");
 	cu.expRecruit.addBonus(ExpUnitType.CAVALRY, 25);
 
-    cu.expThug          = new ExpUnit("Thug",                   150, 30, ExpUnitType.MELEE, "rsc/img/expThug.png");
+    cu.expThug          = new ExpUnit("Thug",                   150, 30, ExpUnitType.MELEE, "icon_bandit_militia.png");
     cu.expThug.addBonus(ExpUnitType.CAVALRY, 35);
 
-    cu.expRoughneck     = new ExpUnit("Roughneck",              220, 25, ExpUnitType.MELEE, "rsc/img/expRoughneck.png");
+    cu.expRoughneck     = new ExpUnit("Roughneck",              220, 25, ExpUnitType.MELEE, "icon_bandit_soldier.png");
 	cu.expRoughneck.addBonus(ExpUnitType.CAVALRY, 35);
 
     // ----
     
-    cu.expBowman        = new ExpUnit("Bandit Bowman",          130, 35, ExpUnitType.RANGED, "rsc/img/expBanditBowman.png");
+    cu.expBowman        = new ExpUnit("Bandit Bowman",          130, 35, ExpUnitType.RANGED, "icon_bandit_bowman.png");
 	cu.expBowman.addBonus(ExpUnitType.MELEE, 35);
 
-    cu.expRanger        = new ExpUnit("Bandit Ranger",          140, 40, ExpUnitType.RANGED, "rsc/img/expBanditRanger.png");
+    cu.expRanger        = new ExpUnit("Bandit Ranger",          140, 40, ExpUnitType.RANGED, "icon_bandit_longbowman.png");
 	cu.expRanger.addBonus(ExpUnitType.MELEE, 50);
 
     // ----
 
-	cu.expCavalry       = new ExpUnit("Bandit Cavalry",         150, 30, ExpUnitType.CAVALRY, "rsc/img/expBanditCavalry.png");
+	cu.expCavalry       = new ExpUnit("Bandit Cavalry",         150, 30, ExpUnitType.CAVALRY, "icon_bandit_cavalry.png");
 	cu.expCavalry.addBonus(ExpUnitType.RANGED, 35);
 
-	cu.expWarDog        = new ExpUnit("War Dog",                 10, 160, ExpUnitType.ELITE|ExpUnitType.HEAVY, "rsc/img/expWarDog.png");
+	cu.expWarDog        = new ExpUnit("War Dog",                 10, 160, ExpUnitType.ELITE|ExpUnitType.HEAVY, "icon_bandit_wardog.png");
 
     // ----
 
-	cu.expChuck         = new ExpUnit("Chuck",                 2000, 150, ExpUnitType.MELEE  | ExpUnitType.BOSS, "rsc/img/expChuck.png");
+	cu.expChuck         = new ExpUnit("Chuck",                 2000, 150, ExpUnitType.MELEE  | ExpUnitType.BOSS, "icon_bandit_boss4.png");
 	cu.expChuck.addBonus(ExpUnitType.RANGED, 35);
 
-	cu.expWildMary      = new ExpUnit("Wild Mary",             2500, 200, ExpUnitType.MELEE  | ExpUnitType.BOSS, "rsc/img/expWildMary.png");
+	cu.expWildMary      = new ExpUnit("Wild Mary",             2500, 200, ExpUnitType.MELEE  | ExpUnitType.BOSS, "icon_bandit_boss5.png");
 	cu.expWildMary.addBonus(ExpUnitType.CAVALRY, 35);
 
-    cu.expSkunk         = new ExpUnit("Skunk",                 4000, 300, ExpUnitType.MELEE  | ExpUnitType.BOSS, "rsc/img/expSkunk.png");
+    cu.expSkunk         = new ExpUnit("Skunk",                 4000, 300, ExpUnitType.MELEE  | ExpUnitType.BOSS, "icon_bandit_boss1.png");
 	cu.expSkunk.addBonus(ExpUnitType.CAVALRY, 40);
 
-    cu.expGreybeard     = new ExpUnit("Greybeard",             8500, 250, ExpUnitType.MELEE  | ExpUnitType.BOSS, "rsc/img/expGreybeard.png");
+    cu.expGreybeard     = new ExpUnit("Greybeard",             8500, 250, ExpUnitType.MELEE  | ExpUnitType.BOSS, "icon_epicraid_boss12.png");
 	cu.expGreybeard.addBonus(ExpUnitType.CAVALRY, 50);
     
     // -- //
 
-	cu.expBert          = new ExpUnit("One-Eyed Bert",         4000, 300, ExpUnitType.RANGED  | ExpUnitType.BOSS, "rsc/img/expBert.png");
+	cu.expBert          = new ExpUnit("One-Eyed Bert",         4000, 300, ExpUnitType.RANGED  | ExpUnitType.BOSS, "icon_bandit_boss2.png");
 	cu.expBert.addBonus(ExpUnitType.MELEE, 40);
 
-    cu.expShadow        = new ExpUnit("The Shadow",            3600, 650, ExpUnitType.RANGED | ExpUnitType.BOSS, "rsc/img/expShadow.png");
+    cu.expShadow        = new ExpUnit("The Shadow",            3600, 650, ExpUnitType.RANGED | ExpUnitType.BOSS, "icon_epicraid_boss13.png");
 	cu.expShadow.addBonus(ExpUnitType.MELEE, 50);
 
     // -- //
 
-    cu.expMetalTooth    = new ExpUnit("Metal Tooth",           4000, 300, ExpUnitType.CAVALRY | ExpUnitType.BOSS, "rsc/img/expMetalTooth.png");
+    cu.expMetalTooth    = new ExpUnit("Metal Tooth",           4000, 300, ExpUnitType.CAVALRY | ExpUnitType.BOSS, "icon_bandit_boss3.png");
 	cu.expMetalTooth.addBonus(ExpUnitType.RANGED, 40);
 
-    cu.expScarr         = new ExpUnit("Scarr",                 5000, 360, ExpUnitType.CAVALRY | ExpUnitType.BOSS, "rsc/img/expScarr.png");
+    cu.expScarr         = new ExpUnit("Scarr",                 5000, 360, ExpUnitType.CAVALRY | ExpUnitType.BOSS, "icon_epicraid_boss6.png");
 	cu.expScarr.addBonus(ExpUnitType.RANGED, 50);
 
     // -- //
 	
-    cu.expDrak          = new ExpUnit("Drak",                  4000, 720, ExpUnitType.ELITE|ExpUnitType.BOSS, "rsc/img/expDrak.png");
+    cu.expDrak          = new ExpUnit("Drak",                  4000, 720, ExpUnitType.ELITE|ExpUnitType.BOSS, "icon_epicraid_boss7.png");
 
     
     // ----
 
-    cu.expMercDuelist   = new ExpUnit("Mercenary Duelist",      180, 25, ExpUnitType.MELEE, "rsc/img/expMercDuelist.png");
+    cu.expMercDuelist   = new ExpUnit("Mercenary Duelist",      180, 25, ExpUnitType.MELEE, "icon_defender_melee2.png");
     cu.expMercDuelist.addBonus(ExpUnitType.CAVALRY, 75);
 
-	cu.expMercShooter   = new ExpUnit("Mercenary Sharpshooter", 180, 25, ExpUnitType.RANGED, "rsc/img/expMercSharpshooter.png");
+	cu.expMercShooter   = new ExpUnit("Mercenary Sharpshooter", 180, 25, ExpUnitType.RANGED, "icon_defender_archer2.png");
     cu.expMercShooter.addBonus(ExpUnitType.MELEE, 75);
 
-	cu.expMercCharger   = new ExpUnit("Mercenary Charger",      180, 25, ExpUnitType.CAVALRY, "rsc/img/expMercCharger.png");
+	cu.expMercCharger   = new ExpUnit("Mercenary Charger",      180, 25, ExpUnitType.CAVALRY, "icon_defender_cavalry2.png");
     cu.expMercCharger.addBonus(ExpUnitType.RANGED, 75);
 
-	cu.expMercInfantry  = new ExpUnit("Mercenary Infantry",     180, 35, ExpUnitType.MELEE, "rsc/img/expMercInfantry.png");
-	cu.expMercArcher    = new ExpUnit("Mercenary Archer",       180, 35, ExpUnitType.RANGED, "rsc/img/expMercArcher.png");
-    cu.expMercCavalry   = new ExpUnit("Mercenary Cavalry",      180, 35, ExpUnitType.CAVALRY, "rsc/img/expMercCavalry.png");
+	cu.expMercInfantry  = new ExpUnit("Mercenary Infantry",     180, 35, ExpUnitType.MELEE, "icon_defender_melee1.png");
+	cu.expMercArcher    = new ExpUnit("Mercenary Archer",       180, 35, ExpUnitType.RANGED, "icon_defender_archer1.png");
+    cu.expMercCavalry   = new ExpUnit("Mercenary Cavalry",      180, 35, ExpUnitType.CAVALRY, "icon_defender_cavalry1.png");
     
-    
-    /*
-    cu.expScavenger    = new ExpUnit("Scavenger",     150, 30, ExpUnitType.MELEE);
-	cu.expGuardDog     = new ExpUnit("Guard Dog",     150, 30, ExpUnitType.CAVALRY);
-	cu.expStoneThrower = new ExpUnit("Stone Thrower", 150, 30, ExpUnitType.RANGED);
-
-	cu.expDrakBear     = new ExpUnit("Drak(bear)",   5000, 360, ExpUnitType.MELEE   | ExpUnitType.BOSS);
-
-    cu.expScavenger.addBonus(ExpUnitType.CAVALRY, 35);
-	cu.expGuardDog.addBonus(ExpUnitType.RANGED, 35);
-	cu.expStoneThrower.addBonus(ExpUnitType.MELEE, 35);
-
-	cu.expDrakBear.addBonus(ExpUnitType.CAVALRY, 50);
-    */
     
     setUnitIDs(cu);
 };
