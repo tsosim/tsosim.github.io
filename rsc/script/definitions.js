@@ -128,6 +128,15 @@ function UnitGroup(unitType, num) {
 	   //console.log("clone group: hp -> " + aclone.hitpoints.join(","));
         return aclone;
     };
+    
+    this.restoreHitpointsOfLivingUnits = function() {
+        var i;
+        for(i = 0; i < this.hitpoints.length; i += 1) {
+            if(this.hitpoints[i] > 0) {
+                this.hitpoints[i] = this.type.hitpoints;
+            }
+        }
+    }
 }
 
 /*
