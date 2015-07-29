@@ -94,8 +94,10 @@ function Simulator() {
 
                 var defList = defender.groups;
                 for(var de in defList) {
-                    if(defList.hasOwnProperty(de))
+                    if(defList.hasOwnProperty(de)) {
                         defList[de].restoreHitpointsOfLivingUnits();
+                        defList[de].dmg_left = 0;
+                    }
                 }
 
                 rounds = this.computeCombat(attacker, defender);
@@ -130,8 +132,10 @@ function Simulator() {
 
             var defList = defender.groups;
             for(var de in defList) {
-                if(defList.hasOwnProperty(de))
+                if(defList.hasOwnProperty(de)) {
                     defList[de].restoreHitpointsOfLivingUnits();
+                    defList[de].dmg_left = 0;
+                }
             }
 
             this.computeCombat(attacker, defender, logs[idx]);
