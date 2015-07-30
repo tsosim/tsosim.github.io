@@ -89,6 +89,9 @@ var lang = {
             erSnootyThief     : "Snooty Thief",
             erGrayedThief     : "Grayed Thief",
             erSillyThief      : "Silly Thief",
+            erGrumpyParrot    : "Grumpy Parrot",
+            erSneakingThief   : "Sneaking Thief",
+            erOasisGuardian   : "Oasis Guardian",
 			/* nords */
 			nJomsviking       : "Jomsviking",
 			nHousekarl        : "Housecarl",
@@ -103,6 +106,7 @@ var lang = {
 			epPackleaderWolf  : "Wolf Packleader",
 			epFox             : "Fox",
 			epGiant           : "Giant",
+            epGiantBat        : "Giant Bat",
 			/* epic */
 			royalRecruit      : "Royal Recruit",
 			royalMilitia      : "Royal Militia",
@@ -222,7 +226,9 @@ var lang = {
             bastilleIsland    : "Bastille Island",
             arcticExplosion   : "Arctic Explosion",
             aliBabaYoungCutter: "Ali Baba, the young woodcuter",
-            aliBabaFirstThief : "Ali Baba and the first thief"
+            aliBabaFirstThief : "Ali Baba and the first thief",
+            aliBabaSecondThief: "Ali Baba and the second thief",
+            aliBabaThirdThief : "Ali Baba and the third thief"
         },
         ui : {
             title             : "The Settlers Online - Combat Simulator",
@@ -369,6 +375,9 @@ var lang = {
             erSnootyThief     : "Snooty Thief",
             erGrayedThief     : "Grayed Thief",
             erSillyThief      : "Silly Thief",
+            erGrumpyParrot    : "Grumpy Parrot",
+            erSneakingThief   : "Sneaking Thief",
+            erOasisGuardian   : "Oasis Guardian",
 			/* nords */
 			nJomsviking       : "Jomsvikinger",
 			nHousekarl        : "Huskarl",
@@ -383,6 +392,7 @@ var lang = {
 			epPackleaderWolf  : "Alphawolf",
 			epFox             : "Fuchs",
 			epGiant           : "Riese",
+            epGiantBat        : "Giant Bat",
 			/* epic */
 			royalRecruit      : "Königl. Rekrut",
 			royalMilitia      : "Königl. Miliz",
@@ -502,7 +512,9 @@ var lang = {
             bastilleIsland    : "Bastille Island",
             arcticExplosion   : "Arctic Explosion",
             aliBabaYoungCutter: "Ali Baba, the young woodcuter",
-            aliBabaFirstThief : "Ali Baba and the first thief"
+            aliBabaFirstThief : "Ali Baba and the first thief",
+            aliBabaSecondThief: "Ali Baba and the second thief",
+            aliBabaThirdThief : "Ali Baba and the third thief"
         },
         ui : {
             title             : "Die Siedler Online - Kampfsimulator",
@@ -649,6 +661,9 @@ var lang = {
             erSnootyThief     : "Snooty Thief",
             erGrayedThief     : "Grayed Thief",
             erSillyThief      : "Silly Thief",
+            erGrumpyParrot    : "Grumpy Parrot",
+            erSneakingThief   : "Sneaking Thief",
+            erOasisGuardian   : "Oasis Guardian",
             /* nords */
             nJomsviking       : "Jomsviking",
             nHousekarl        : "Lijfwacht",
@@ -663,6 +678,7 @@ var lang = {
             epPackleaderWolf  : "Wolf Roedelleider",
             epFox             : "Vos",
             epGiant           : "Reus",
+            epGiantBat        : "Giant Bat",
             /* epic */
             royalRecruit      : "Koningkl. Rekruut",
             royalMilitia      : "Koningkl. Milietie",
@@ -782,7 +798,9 @@ var lang = {
             bastilleIsland    : "Bastille Island",
             arcticExplosion   : "Arctic Explosion",
             aliBabaYoungCutter: "Ali Baba, the young woodcuter",
-            aliBabaFirstThief : "Ali Baba and the first thief"
+            aliBabaFirstThief : "Ali Baba and the first thief",
+            aliBabaSecondThief: "Ali Baba and the second thief",
+            aliBabaThirdThief : "Ali Baba and the third thief"
         },
         ui : {
             title             : "The Settlers Online - Gevechtssimulator",
@@ -929,6 +947,9 @@ var lang = {
             erSnootyThief     : "Snooty Thief",
             erGrayedThief     : "Grayed Thief",
             erSillyThief      : "Silly Thief",
+            erGrumpyParrot    : "Grumpy Parrot",
+            erSneakingThief   : "Sneaking Thief",
+            erOasisGuardian   : "Oasis Guardian",
 			/* nords */
 			nJomsviking       : "Jomsviking",
 			nHousekarl        : "Housecarl",
@@ -943,6 +964,7 @@ var lang = {
 			epPackleaderWolf  : "Wolf Packleader",
 			epFox             : "Fox",
 			epGiant           : "Giant",
+            epGiantBat        : "Giant Bat",
 			/* epic */
 			royalRecruit      : "Royal Recruit",
 			royalMilitia      : "Royal Militia",
@@ -1062,7 +1084,9 @@ var lang = {
             bastilleIsland    : "Bastille Island",
             arcticExplosion   : "Arctic Explosion",
             aliBabaYoungCutter: "Ali Baba, the young woodcuter",
-            aliBabaFirstThief : "Ali Baba and the first thief"
+            aliBabaFirstThief : "Ali Baba and the first thief",
+            aliBabaSecondThief: "Ali Baba and the second thief",
+            aliBabaThirdThief : "Ali Baba and the third thief"
         },
         ui : {
             title             : "The Settlers Online - Combat Simulator",
