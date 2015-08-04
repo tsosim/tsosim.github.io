@@ -622,6 +622,12 @@ var CostFunctions = [
         }
     },
     {
+        name : "Minimum Rounds",
+        fct : function costFct_MinimumRound(sim) {
+            return sim.stats.attacker[0].rounds.statistics.stat_min;
+        }
+    },
+    {
         name : "Unit Costs (Defeated)",
         fct: function costFct_DefUnitCosts(sim) {
             var cost, tmp, i, c;
