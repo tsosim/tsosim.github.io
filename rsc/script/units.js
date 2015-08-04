@@ -673,7 +673,7 @@ function defineAdventureMaps(units, adv_maps) {
     ];    
     adv_maps.aliBabaSecondThief= [
         cu.erStonecannon, cu.erSwordclasher, cu.erDuneMarksman, cu.erHorseman, cu.erSwordWielder, cu.erSwordMaster, cu.erMountedBowman, cu.erDesertMarksman, 
-        cu.erSnootyThief, cu.erMystThief, cu.erTreacherousThief, cu.erShrewdThief, cu.erSneakingThief, cu.erGrayedThief, cu.erGrumpyParrot, cu.erOasisGuardian
+        cu.erSnootyThief, cu.erMystThief, cu.erTreacherousThief, cu.erShrewdThief, cu.erSneakingThief, cu.erGrayedThief, cu.erGrumpyParrot, cu.erOasisGuardian, cu.erGreedyThief
     ];
     adv_maps.aliBabaThirdThief= [
         cu.erStonecannon, cu.erSwordclasher, cu.erDuneMarksman, cu.erHorseman, cu.erSwordWielder, cu.erSwordMaster, cu.erMountedBowman, cu.erDesertMarksman, 
