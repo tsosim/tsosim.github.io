@@ -625,7 +625,7 @@ function createExpSelColumn(col, garrison, genId, i, isPlayer) {
 
     icon = document.createElement("span");
     if (garrison.currentUnit.icon) {
-        icon.innerHTML = '<img src="' + garrison.currentUnit.icon + '" title="' + tsosim.lang.unit[garrison.currentUnit.id] + '">';
+        icon.innerHTML = '<img src="rsc/img/icon/l/' + garrison.currentUnit.icon + '" title="' + tsosim.lang.unit[garrison.currentUnit.id] + '">';
         icon.setAttribute("class", "expIcon");
     } else {
         icon.innerHTML = tsosim.lang.unit[garrison.currentUnit.id];

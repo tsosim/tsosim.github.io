@@ -92,6 +92,14 @@ function Simulator() {
                 
                 attacker = this.garrison.attacker[idx].clone();
 
+                var defList = defender.groups;
+                for(var de in defList) {
+                    if(defList.hasOwnProperty(de)) {
+                        defList[de].restoreHitpointsOfLivingUnits();
+                        defList[de].dmg_left = 0;
+                    }
+                }
+
                 rounds = this.computeCombat(attacker, defender);
 
                 // update statistics information, i.e. how many units died in this attack
@@ -121,6 +129,14 @@ function Simulator() {
         for (idx = 0; idx < this.garrison.attacker.length; idx += 1) {
 
             attacker = this.garrison.attacker[idx].clone();
+
+            var defList = defender.groups;
+            for(var de in defList) {
+                if(defList.hasOwnProperty(de)) {
+                    defList[de].restoreHitpointsOfLivingUnits();
+                    defList[de].dmg_left = 0;
+                }
+            }
 
             this.computeCombat(attacker, defender, logs[idx]);
         }

@@ -151,7 +151,7 @@ function setupInnerColumn(filtered, total, colValue, attrValue, widthClass, scal
     barF = document.createElement("div");
     barF.setAttribute("class", attrValue);
     barF.style.height = (100 * (innerValue) / colValue) + "%";
-    barF.setAttribute("title", (100 * innerValue).toFixed(2) + "% - " + filtered + "/" + total);
+    //barF.setAttribute("title", (100 * innerValue).toFixed(2) + "% - " + filtered + "/" + total);
     
     if (innerValue > 0.0) {
         barFpc = document.createElement("div");
@@ -233,6 +233,12 @@ function setupDiagramColumn(key, value, total, scaling, numRounds) {
     
     barF = setupInnerColumn(value.victory, total, columnValue, "diagColVic", widthClass, columnValue * scaling);
     barV = setupInnerColumn(value.defeat, total, columnValue,  "diagColDef", widthClass, columnValue * scaling);
+    
+    var title = tsosim.lang.ui.victory + ": " + (100 * value.victory/total).toFixed(2) + "% (" + value.victory + "/" + total + "), ";
+    title += tsosim.lang.ui.defeat + ": " + (100 * value.defeat/total).toFixed(2) + "% - " + value.defeat + "/" + total;
+    
+    barF.setAttribute("title", title);
+    barV.setAttribute("title", title);
     
     barT.appendChild(barF);
     barT.appendChild(barV);

@@ -1082,3 +1082,13 @@ footer {
     margin-left: 5px;
     margin-right: 5px;
 }
+.icontd {
+    align-content: center;
+    height : 24px;
+}
+.uniticon {
+    width: 24px;
+    height: 24px;
+    margin : -1px;
+    margin-right: 6px;
+}

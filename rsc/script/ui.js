@@ -147,6 +147,13 @@ function setupUnitInputField(unit, capacity) {
         tr.appendChild(td);
     }
     
+    var icon = document.createElement("td");
+    if(unit && unit.icon) {
+        icon.innerHTML = '<img src="' + 'rsc/img/icon/m/'+ unit.icon + '" title="' + tsosim.lang.unit[unit.id] + '" class="uniticon">';
+        icon.setAttribute("class", "icontd");
+    }
+    tr.appendChild(icon);
+    
     label = document.createElement("td");
     label.setAttribute("class", "unitlabel");
     if (unit) {
@@ -1497,7 +1504,7 @@ function setupSimVersionButtons(onlyButtons) {
     }
 }
 
-// setup solveer GUI
+// setup solver GUI
 function setupSolver() {
     var node, div, cbox, cboxLabel, enableLine, tab, createSel, createOpt, createNumOpt,
         tr, td, fcts, ucosts, i, UC, child, findChild;

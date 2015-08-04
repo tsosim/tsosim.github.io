@@ -39,7 +39,7 @@ var Initiative = { FIRST: 1, SECOND: 2, THIRD: 3, LAST: 4 };
 /*
  * class : Unit
  */
-function Unit(id, hp, dmg, acc, init, attack_id, skills, checked) {
+function Unit(id, hp, dmg, acc, init, attack_id, skills, icon) {
     var sk, bd;
     //this.name       = name;
     this.hitpoints  = hp;
@@ -50,7 +50,7 @@ function Unit(id, hp, dmg, acc, init, attack_id, skills, checked) {
     this.id         = id;
     this.shortId    = id;
     this.unitClass  = EnemyType.NONE;
-    this.checked    = checked ? checked : false;
+    this.icon       = icon;
 
     // ------------ //
     this.skill      = Skills.NONE;
@@ -129,6 +129,15 @@ function UnitGroup(unitType, num) {
 	   //console.log("clone group: hp -> " + aclone.hitpoints.join(","));
         return aclone;
     };
+    
+    this.restoreHitpointsOfLivingUnits = function() {
+        var i;
+        for(i = 0; i < this.hitpoints.length; i += 1) {
+            if(this.hitpoints[i] > 0) {
+                this.hitpoints[i] = this.type.hitpoints;
+            }
+        }
+    }
 }
 
 /*
@@ -190,7 +199,7 @@ function Garrison() {
         if (this.groups[tsosim.lang.unit[unitType.id]] === undefined) {
             this.groups[tsosim.lang.unit[unitType.id]] = new UnitGroup(unitType, num);
         } else {
-            // create new unit group with updated values, because just upadting the "number" value is not enough
+            // create new unit group with updated values, because just updating the "number" value is not enough
             this.groups[tsosim.lang.unit[unitType.id]] = new UnitGroup(unitType, this.groups[tsosim.lang.unit[unitType.id]].number + num);
         }
         if (!unitType.hasSkill(Skills.GENERAL)) {
