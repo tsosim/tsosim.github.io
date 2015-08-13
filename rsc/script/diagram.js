@@ -116,9 +116,11 @@ function setupDiagrams(node, stats, title, diagID, filterFun) {
     
     group = null;
     for (g in tsosim.generals) {
-        if (stats.data.hasOwnProperty(tsosim.lang.unit[tsosim.generals[g].id])) {
-            group = stats.data[tsosim.lang.unit[tsosim.generals[g].id]].iterationResults;
-            break;
+        if (tsosim.generals.hasOwnProperty(g)) {
+            if (stats.data.hasOwnProperty(tsosim.lang.unit[tsosim.generals[g].id])) {
+                group = stats.data[tsosim.lang.unit[tsosim.generals[g].id]].iterationResults;
+                break;
+            }
         }
     }
     
@@ -292,35 +294,49 @@ function setupHDiagram(histo, total, title, diagID, numRounds) {
     return node;
 }
 
-function setupHorizontalDiagram(node, stats, title, diagID, filter1, filter2) {
-    var data, j, group, g, numRounds, total, i;
+function setupHorizontalDiagram(node, simStats, waveIdx, title, diagID, filter1, filter2) {
+    var data, j, group, g, numRounds, total, i, groupData, stats, countRounds, iterResults;
     data = {};
+
+    // define function to count victories/defeats if we look at the defending garrison (if it has a camp)
+    countRounds = function (sdata, iters) {
+        if (iters > 0) {
+            sdata.defeat += 1;
+        } else {
+            sdata.victory += 1;
+        }
+    };
     
+    stats = simStats.defender[waveIdx];
     numRounds = stats.rounds.statistics.stat_max - stats.rounds.statistics.stat_min + 1;
+    
     // initialize
     for (j = stats.rounds.statistics.stat_min; j <= stats.rounds.statistics.stat_max; j += 1) {
         data[j] = {total : 0, victory : 0, defeat : 0};
     }
     
-    // find general's data to determine victory or defeat rounds
-    group = null;
-    for (g in tsosim.generals) {
-        if (stats.data.hasOwnProperty(tsosim.lang.unit[tsosim.generals[g].id])) {
-            group = stats.data[tsosim.lang.unit[tsosim.generals[g].id]].iterationResults;
-            break;
-        }
+    groupData = simStats.defender[waveIdx].getRealCampGroupData();
+    if (groupData === null) {
+        // if there is no camp, then look at the general
+        groupData = simStats.attacker[waveIdx].getGeneralGroupData();
+        stats     = simStats.attacker[waveIdx];
+        // redefine function to count victories/defeats
+        countRounds = function (sdata, iters) {
+            if (iters > 0) {
+                sdata.victory += 1;
+            } else {
+                sdata.defeat += 1;
+            }
+        };
     }
     
+    iterResults = stats.rounds.iterationResults;
     // create histogram
     total = 0;
-    for (i = 0; i < stats.rounds.iterationResults.length; i += 1) {
-        data[stats.rounds.iterationResults[i]].total += 1;
-        if (group !== null) {
-            if (group[i] > 0) {
-                data[stats.rounds.iterationResults[i]].victory += 1;
-            } else {
-                data[stats.rounds.iterationResults[i]].defeat += 1;
-            }
+    for (i = 0; i < iterResults.length; i += 1) {
+        data[iterResults[i]].total += 1;
+        if (groupData !== null) {
+            countRounds(data[iterResults[i]], groupData.iterationResults[i]);
         }
         total += 1;
     }

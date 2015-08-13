@@ -196,6 +196,30 @@ function Garrison() {
             this.numberUnits += parseInt(num, 10);
         }
     };
+    
+    this.getRealCampGroup = function() {
+        var idx;
+        for (idx in this.groups) {
+            if (this.groups.hasOwnProperty(idx)) {
+                if (this.groups[idx].type.hasSkill(Skills.CAMP) && this.groups[idx].type !== tsosim.camps.campNone) {
+                    return this.groups[idx];
+                }
+            }
+        }
+        return null;
+    };
+    
+    this.getGeneralGroup = function() {
+        var idx;
+        for (idx in this.groups) {
+            if (this.groups.hasOwnProperty(idx)) {
+                if (this.groups[idx].type.hasSkill(Skills.GENERAL)) {
+                    return this.groups[idx];
+                }
+            }
+        }
+        return null;
+    };
   
     this.printInfo = function () {
         var gr;

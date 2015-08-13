@@ -46,21 +46,16 @@ function Simulator() {
     this.stats = { attacker: [], defender: [] };
 
     this.getVictoryProbability = function (waveNum) {
-        var prob = -1.0, groups, idx;
+        var prob = -1.0, group;
 
-        // get unit groups from the right garrison
-        groups = this.garrison.attacker[waveNum].groups;
-
-        // iterate over all units in this group
-        for (idx in groups) {
-            if (groups.hasOwnProperty(idx)) {
-                // find general units
-                if (groups[idx].type.hasSkill(Skills.GENERAL)) {
-                    prob = this.stats.attacker[waveNum].data[tsosim.lang.unit[groups[idx].type.id]].statistics.stat_average;
-                    return prob;
-                }
-            }
+        group = this.garrison.defender.getRealCampGroup();
+        if (group !== null) { // defender garrison without a camp
+            prob = 1 - this.stats.defender[waveNum].data[tsosim.lang.unit[group.type.id]].statistics.stat_average;
+        } else {
+            group = this.garrison.attacker[waveNum].getGeneralGroup();
+            prob  = this.stats.attacker[waveNum].data[tsosim.lang.unit[group.type.id]].statistics.stat_average;
         }
+        
         return prob;
     };
 

@@ -1089,9 +1089,9 @@ function setupStatisticsTable(simulation) {
             div.setAttribute("class", "tableDiags");
             
             diags = [
-                setupDiagrams(div, simulation.stats.attacker[idx], "Rounds - Victory/Total", tableID + "_diagVT", funcVictory),
-                setupDiagrams(div, simulation.stats.attacker[idx], "Rounds - Defeat/Total", tableID + "_diagDT", funcDefeat),
-                setupHorizontalDiagram(div, simulation.stats.attacker[idx], tsosim.lang.ui.rounds + " - " + tsosim.lang.ui.victory + "/" + tsosim.lang.ui.defeat, tableID + "_colH", funcVictory, funcDefeat)
+                "", //setupDiagrams(div, simulation.stats.attacker[idx], "Rounds - Victory/Total", tableID + "_diagVT", funcVictory),
+                "", //setupDiagrams(div, simulation.stats.attacker[idx], "Rounds - Defeat/Total", tableID + "_diagDT", funcDefeat),
+                setupHorizontalDiagram(div, simulation.stats, idx, tsosim.lang.ui.rounds + " - " + tsosim.lang.ui.victory + "/" + tsosim.lang.ui.defeat, tableID + "_colH", funcVictory, funcDefeat)
             ];
             //div.appendChild(diags[0]);
             div.appendChild(diags[2]);

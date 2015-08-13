@@ -3,6 +3,7 @@
 /*global Initiative*/
 /*global console*/
 /*global tsosim*/
+/*global Skills*/
 
 /*
  * class StatsData: stores ...
@@ -76,6 +77,31 @@ function Statistics() {
         
         this.campRounds.numIterations += 1;
         this.campRounds.iterationResults.push(rounds.numC);
+    };
+    
+    this.getRealCampGroupData = function () {
+        var g, camp;
+        for (g in tsosim.camps) {
+            if (tsosim.camps.hasOwnProperty(g)) {
+                camp = tsosim.lang.unit[tsosim.camps[g].id];
+                if (this.data.hasOwnProperty(camp) && tsosim.camps[g] !== tsosim.camps.campNone) {
+                    return this.data[camp];
+                }
+            }
+        }
+        return null;
+    };
+    this.getGeneralGroupData = function () {
+        var g, gen;
+        for (g in tsosim.generals) {
+            if (tsosim.generals.hasOwnProperty(g)) {
+                gen = tsosim.lang.unit[tsosim.generals[g].id];
+                if (this.data.hasOwnProperty(gen)) {
+                    return this.data[gen];
+                }
+            }
+        }
+        return null;
     };
   
     this.computeStatistics = function () {
@@ -263,7 +289,7 @@ function CombatLog() {
     
     this.createLogTable = function (waveNum, log_id, log_class) {
         var base, rnd, inits, init, currentRound, currentInit, hasData, isCamp,
-            rnode, inode, grow, table, rtext, itext, group, gr, gtext, at, tr, td, tab, tabrow;
+            rnode, inode, grow, table, rtext, itext, group, gr, gtext, at, tr, td, tab, tabrow, baseClass;
         base = document.createElement("div");
         base.setAttribute("id", log_id);
         base.setAttribute("class", log_class);
@@ -345,7 +371,7 @@ function CombatLog() {
             }
             
             if (isCamp && rnode) {
-                var baseClass = rnode.getAttribute("class");
+                baseClass = rnode.getAttribute("class");
                 rnode.setAttribute("class", baseClass + " CampRound");
             }
         }
