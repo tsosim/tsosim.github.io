@@ -251,11 +251,34 @@ tso.data.live.functions.defineUnits = function () {
     cu.erSmartThief      = new Unit("Smart Thief",      5000, [ 500, 1000],  80, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE], "1001_.png");
     cu.erSnootyThief     = new Unit("Snooty Thief",   150000, [ 500, 1000],  80, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE], "1001_.png");
     cu.erGrayedThief     = new Unit("Grayed Thief",      500, [ 375,  750],  80, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE, Skills.ATTACK_WEAKEST], "1001_.png");
-    cu.erSillyThief      = new Unit("Silly Thief",     30000, [3500, 7000],  80, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE], "1001_.png");
+    cu.erSillyThief      = new Unit("Silly Thief",     50000, [3500, 7000],  80, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE], "1001_.png");
     
     cu.erGrumpyParrot    = new Unit("Grumpy Parrot",   10000, [ 400,  800],  80, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE], "1001_.png");
     cu.erSneakingThief   = new Unit("Sneaking Thief",   1000, [ 250,  500],  80, Initiative.FIRST,  getAID(), [Skills.SPLASH_DAMAGE], "1001_.png");
     cu.erOasisGuardian   = new Unit("Oasis Guardian", 100000, [1500, 3000],  80, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE], "1001_.png");
+    
+    cu.erMossyStoneStatue= new Unit("Mossy Stone Statue",10000, [4000, 8000],  80, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE], "1001_.png");
+
+    
+    cu.erSailor          = new Unit("Sailor",            100, [50, 100],  80, Initiative.SECOND,  getAID(), [Skills.SPLASH_DAMAGE], ".png");
+    cu.erMountedSailor   = new Unit("Mounted Sailor",     50, [35,  70],  80, Initiative.FIRST,  getAID(), [Skills.SPLASH_DAMAGE], ".png");
+    cu.erBoatswain       = new Unit("Boatswain",          40, [25,  50],  80, Initiative.FIRST,  getAID(), [Skills.SPLASH_DAMAGE, Skills.ATTACK_WEAKEST], ".png");
+    cu.erCannonMaster    = new Unit("Cannon Master",     100, [100,200],  80, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE], ".png");
+    cu.erBattleHardSailor= new Unit("BattleHardSailor",  200, [25,  50],  80, Initiative.SECOND,  getAID(), [Skills.SPLASH_DAMAGE], ".png");
+    cu.erPettyOfficer    = new Unit("Petty Officer 2nd",  70, [35,  70],  80, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE, Skills.ATTACK_WEAKEST], ".png");
+    
+    cu.erSteersman       = new Unit("Steersman",     1000000, [250, 500], 80, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE], ".png");
+    cu.erMutineer        = new Unit("Mutineer",         5000, [2500,5000],80, Initiative.FIRST,  getAID(), [Skills.SPLASH_DAMAGE], ".png");
+    cu.erGiantCannon     = new Unit("Giant Cannon",    10000, [4000,8000],80, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE], ".png");
+    cu.erGiantSeaSnake   = new Unit("Giant Sea Snake", 10000, [4000,8000],80, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE], ".png");
+    
+    
+    cu.erAlphaApe        = new Unit("Alpha Ape",         500, [30,  60],  95, Initiative.SECOND,  getAID(), [Skills.SPLASH_DAMAGE], ".png");
+    cu.erNervousApe      = new Unit("Nervous Ape",        50, [70, 140],  95, Initiative.FIRST,   getAID(), [Skills.SPLASH_DAMAGE], ".png");
+    cu.erStickApe        = new Unit("Stick-wielding Ape", 80, [90, 180],  95, Initiative.SECOND,  getAID(), [Skills.SPLASH_DAMAGE], ".png");
+    cu.erStoneApe        = new Unit("Stone-throwing Ape", 30, [100,200],  95, Initiative.SECOND,  getAID(), [Skills.SPLASH_DAMAGE, Skills.ATTACK_WEAKEST], ".png");
+    
+    
     
     /* nords */
     cu.nJomsviking       = new Unit("Jomsviking", 140, [60, 80], 95, Initiative.THIRD,  getAID(), [], "icon_nords_elite_soldier.png");
@@ -274,7 +297,7 @@ tso.data.live.functions.defineUnits = function () {
     cu.epFox             = new Unit("Fox",             30, [10,  40], 95, Initiative.FIRST,  getAID(), [Skills.ATTACK_WEAKEST], "icon_wildlife_cavalry.png");
     cu.epGiant           = new Unit("Giant",          160, [60,  90], 95, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE], "icon_wildlife_cannoneer.png");
 
-    cu.epGiantBat        = new Unit("Giant Bat",    40000, [1500, 3000], 80, Initiative.THIRD, getAID(), [Skills.SPLASH_DAMAGE], "icon_epic_bat.png");
+    cu.epGiantBat        = new Unit("Giant Bat",   100000, [1500, 3000], 80, Initiative.THIRD, getAID(), [Skills.SPLASH_DAMAGE], "icon_epic_bat.png");
     
     /* epic */
     cu.royalRecruit      = new Unit("Royal Recruit",   120, [30,  60], 85, Initiative.SECOND, getAID(), [], "icon_military_recruit01.png");
@@ -679,16 +702,43 @@ function defineAdventureMaps(units, adv_maps) {
         cu.erStonecannon, cu.erSwordclasher, cu.erDuneMarksman, cu.erHorseman, cu.erSwordWielder, cu.erSwordMaster, cu.erMountedBowman, cu.erDesertMarksman, 
         cu.erScarredThief, cu.erSmartThief, cu.erSnootyThief, cu.erGrayedThief, cu.erSillyThief
     ];    
-    adv_maps.aliBabaSecondThief= [
+    adv_maps.aliBabaSecondThief = [
         cu.erStonecannon, cu.erSwordclasher, cu.erDuneMarksman, cu.erHorseman, cu.erSwordWielder, cu.erSwordMaster, cu.erMountedBowman, cu.erDesertMarksman, 
         cu.erSnootyThief, cu.erMystThief, cu.erTreacherousThief, cu.erShrewdThief, cu.erSneakingThief, cu.erGrayedThief, cu.erGrumpyParrot, cu.erOasisGuardian, cu.erGreedyThief
     ];
-    adv_maps.aliBabaThirdThief= [
+    adv_maps.aliBabaThirdThief = [
         cu.erStonecannon, cu.erSwordclasher, cu.erDuneMarksman, cu.erHorseman, cu.erSwordWielder, cu.erSwordMaster, cu.erMountedBowman, cu.erDesertMarksman, 
         cu.epBoar, cu.epBear, cu.epWolf, cu.epPackleaderWolf, cu.epFox, cu.epGiant, cu.epGiantBat,
         cu.erMystThief, cu.erGreedyThief, cu.erSillyThief, cu.erScarredThief, cu.erSnootyThief, cu.erShrewdThief 
     ];
-
+    adv_maps.aliBabaTreasureKnowledge = [
+        cu.erStonecannon, cu.erSwordclasher, cu.erDuneMarksman, cu.erHorseman, cu.erSwordWielder, cu.erSwordMaster, cu.erMountedBowman, cu.erDesertMarksman, 
+        cu.erTreacherousThief, cu.erScarredThief, cu.erSmartThief, cu.erShrewdThief, cu.erMystThief, cu.erGreedyThief, cu.erGrayedThief, cu.erSillyThief
+    ];
+    adv_maps.aliBabaTreasureWisdom = [
+        cu.erStonecannon, cu.erSwordclasher, cu.erDuneMarksman, cu.erHorseman, cu.erSwordWielder, cu.erSwordMaster, cu.erMountedBowman, cu.erDesertMarksman, 
+        cu.erSmartThief, cu.erSnootyThief, cu.erSillyThief, cu.erScarredThief, cu.erGrayedThief, cu.erSneakingThief, cu.erTreacherousThief, cu.erMystThief, cu.erMossyStoneStatue
+    ];
+    adv_maps.alladinOilLamp = [
+        cu.erSailor, cu.erMountedSailor, cu.erBoatswain, cu.erCannonMaster, cu.erBattleHardSailor, cu.erPettyOfficer,     
+        cu.erCaptain, cu.erSteersman, cu.erMutineer, cu.erGiantCannon
+    ];
+    adv_maps.alladinBeatifulPrincess = [
+        cu.erSailor, cu.erMountedSailor, cu.erBoatswain, cu.erCannonMaster, cu.erBattleHardSailor, cu.erPettyOfficer,     
+        cu.erSteersman, cu.erMutineer, cu.erCaptain, 
+    ];
+    adv_maps.sindbadBesiegedCity = [
+        cu.erStonecannon, cu.erSwordclasher, cu.erDuneMarksman, cu.erHorseman, cu.erSwordWielder, cu.erSwordMaster, cu.erMountedBowman, cu.erDesertMarksman, 
+        cu.erSailor, cu.erMountedSailor, cu.erBoatswain, cu.erCannonMaster, cu.erBattleHardSailor, cu.erPettyOfficer,     
+        cu.erSteersman, cu.erMutineer, cu.erCaptain, 
+        cu.erAlphaApe, cu.erNervousApe, cu.erStickApe, cu.erStoneApe
+    ];
+    adv_maps.sindbadSeaSnake = [
+        cu.erStonecannon, cu.erSwordclasher, cu.erDuneMarksman, cu.erHorseman, cu.erSwordWielder, cu.erSwordMaster, cu.erMountedBowman, cu.erDesertMarksman, 
+        cu.erSailor, cu.erMountedSailor, cu.erBoatswain, cu.erCannonMaster, cu.erBattleHardSailor, cu.erPettyOfficer,     
+        cu.erSteersman, cu.erMutineer, cu.erCaptain, cu.erGiantSeaSnake
+    ];
+    
     for (idx in adv_maps) {
         if (adv_maps.hasOwnProperty(idx)) {
             for (i = 0; i < adv_maps[idx].length; i += 1) {
