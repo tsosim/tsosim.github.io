@@ -147,6 +147,14 @@ tso.data.live.functions.defineUnits = function () {
     pu.crossbowman   = new Unit("Crossbowman",    10, [45,  90],  80, Initiative.SECOND, getAID(), [Skills.TOWER_BONUS], "icon_military_crossbowman01.png");
     pu.cannoneer     = new Unit("Cannoneer",      60, [60, 120],  90, Initiative.THIRD,  getAID(), [Skills.TOWER_BONUS, Skills.ARMOR_PENETRATION, Skills.CAMP_DMG_BONUS], "icon_military_cannoneer01.png");
     
+    pu.swordsman     = new Unit("Swordsman",     150, [40,  80],  90, Initiative.SECOND, getAID(), [], "");
+    pu.mountedSMan   = new Unit("Mounted SMan",  250, [25,  50],  90, Initiative.SECOND, getAID(), [], "");
+    pu.knight        = new Unit("Knight",         80, [35,  70],  90, Initiative.FIRST,  getAID(), [], "");
+    pu.marksman      = new Unit("Marksman",       50, [50, 100],  90, Initiative.SECOND, getAID(), [], "");
+    pu.armoredMMan   = new Unit("Armored MMan",   50, [100,200],  90, Initiative.SECOND, getAID(), [], "");
+    pu.mountedMMan   = new Unit("Mounted MMan",   50, [50, 100],  90, Initiative.FIRST,  getAID(), [Skills.SPLASH_DAMAGE], "");
+    pu.besieger      = new Unit("Besieger",       80, [100,200],  90, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE], "");
+
     setUnitIDs(pu);
     setUnitClass(pu, EnemyType.PLAYER);
     for (idx in pu) {
