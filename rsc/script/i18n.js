@@ -6,7 +6,7 @@ var lang = {
 	en : {
         name : "English",
 		unit : {
-            recruit           : "Recruit",
+			recruit           : "Recruit",
 			militia           : "Militia",
 			soldier           : "Soldier",
 			eliteSoldier      : "Elite Soldier",
@@ -15,7 +15,14 @@ var lang = {
 			longbowman        : "Longbowman",
 			crossbowman       : "Crossbowman",
 			cannoneer         : "Cannoneer",
-    
+			swordsman         : "Swordsman",
+			mountedSMan       : "Mounted Swordsman",
+			knight            : "Knight",
+			mountedMMan       : "Mounted Marksman",
+			armoredMMan       : "Armored Marksman",
+			marksman          : "Marksman",
+			besieger          : "Besieger",
+
 			general           : "General",
 			mma               : "Master of Martial Arts",
             leg               : "Legendary Veteran",
@@ -92,6 +99,21 @@ var lang = {
             erGrumpyParrot    : "Grumpy Parrot",
             erSneakingThief   : "Sneaking Thief",
             erOasisGuardian   : "Oasis Guardian",
+            erMossyStoneStatue: "Mossy Stone Statue",
+            erSailor          : "Sailor",
+            erMountedSailor   : "Mounted Sailor",
+            erBoatswain       : "Boatswain",
+            erCannonMaster    : "Cannon Master",
+            erBattleHardSailor: "Battle Hardened Sailor",
+            erPettyOfficer    : "Petty Officer 2nd Class",
+            erSteersman       : "Steersman",
+            erMutineer        : "Mutineer",
+            erGiantCannon     : "Giant Cannon",
+            erGiantSeaSnake   : "Giant Sea Snake",
+            erAlphaApe        : "Alpha Ape",
+            erNervousApe      : "Nervous Ape",
+            erStickApe        : "Stick-wielding Ape",
+            erStoneApe        : "Stone-throwing Ape",
 			/* nords */
 			nJomsviking       : "Jomsviking",
 			nHousekarl        : "Housecarl",
@@ -129,12 +151,12 @@ var lang = {
 			epThugLeader      : "Cudgel Claus",
 			epAssassine       : "Assassin",
 			epGreedyInnkeeper : "Greedy Inn-Keeper",
-            
+
             lowlyPoacher      : "Lowly Poacher",
             rabbitHunter      : "Rabbit Hunter",
             hound             : "Hound",
             garrunTrapper     : "Garrun the Trapper",
-    
+
 			wolf              : "Wolf",
 			croaker           : "Croaker",
 			ystShaman         : "Mystical Shaman",
@@ -147,9 +169,9 @@ var lang = {
 			campReinfTower    : "Reinforced Tower",
 			campStoneTower    : "Stone Tower",
 			campWitchTower    : "Witch Tower",
-                        
+
             // exp
-            
+
             expAttackInf      : "Infantry",
             expAttackArch     : "Archer",
             expAttackCav      : "Cavalry",
@@ -157,7 +179,7 @@ var lang = {
             expHeavyArch      : "Heavy Archer",
             expHeavyCav       : "Heavy Cavalry",
             expGuardsman      : "Guardsman",
-            
+
             expRecruit        : "Bandit Recruit",
             expThug           : "Thug",
             expRoughneck      : "Roughneck",
@@ -228,8 +250,14 @@ var lang = {
             aliBabaYoungCutter: "Ali Baba, the young woodcuter",
             aliBabaFirstThief : "Ali Baba and the first thief",
             aliBabaSecondThief: "Ali Baba and the second thief",
-            aliBabaThirdThief : "Ali Baba and the third thief"
-        },
+            aliBabaThirdThief : "Ali Baba and the third thief",
+            aliBabaTreasureKnowledge : "Ali Baba and the Treasure of Knowledge",
+            aliBabaTreasureWisdom    : "Ali Baba and the Treasure of Wisdom",
+            alladinOilLamp           : "Alladin and the Oil Lamp",
+            alladinBeatifulPrincess  : "Alladin and the Beautiful Princess",
+            sindbadBesiegedCity      : "Sindbad and the Besieged City",
+            sindbadSeaSnake          : "Sindbad and the Sea Snake"
+            },
         ui : {
             title             : "The Settlers Online - Combat Simulator",
             language          : "Language",
@@ -270,7 +298,7 @@ var lang = {
             cavalry           : "Cavalry",
             elite             : "Elite",
             vs                : "vs.",
-            // 
+            //
             resources         : "Resources",
             amount            : "Amount",
             settler           : "Settler",
@@ -301,7 +329,14 @@ var lang = {
 			longbowman        : "Langbogenschütze",
 			crossbowman       : "Armbrustschütze",
 			cannoneer         : "Kanonier",
-    
+			swordsman         : "Swordsman",
+			mountedSMan       : "Mounted Swordsman",
+			knight            : "Knight",
+			mountedMMan       : "Mounted Marksman",
+			armoredMMan       : "Armored Marksman",
+			marksman          : "Marksman",
+			besieger          : "Besieger",
+
 			general           : "General",
 			mma               : "Meister der Kampfkunst",
             leg               : "Legendärer Veteran",
@@ -378,6 +413,21 @@ var lang = {
             erGrumpyParrot    : "Grumpy Parrot",
             erSneakingThief   : "Sneaking Thief",
             erOasisGuardian   : "Oasis Guardian",
+            erMossyStoneStatue: "Mossy Stone Statue",
+            erSailor          : "Sailor",
+            erMountedSailor   : "Mounted Sailor",
+            erBoatswain       : "Boatswain",
+            erCannonMaster    : "Cannon Master",
+            erBattleHardSailor: "Battle Hardened Sailor",
+            erPettyOfficer    : "Petty Officer 2nd Class",
+            erSteersman       : "Steersman",
+            erMutineer        : "Mutineer",
+            erGiantCannon     : "Giant Cannon",
+            erGiantSeaSnake   : "Giant Sea Snake",
+            erAlphaApe        : "Alpha Ape",
+            erNervousApe      : "Nervous Ape",
+            erStickApe        : "Stick-wielding Ape",
+            erStoneApe        : "Stone-throwing Ape",
 			/* nords */
 			nJomsviking       : "Jomsvikinger",
 			nHousekarl        : "Huskarl",
@@ -435,7 +485,7 @@ var lang = {
 			campWitchTower    : "Hexenturm",
 
             // exp
-            
+
             expAttackInf      : "Angriffsinfanterie",
             expAttackArch     : "Angriffsbogenschütze",
             expAttackCav      : "Angriffsreiterei",
@@ -443,7 +493,7 @@ var lang = {
             expHeavyArch      : "Schwerer Bogenschütze",
             expHeavyCav       : "Schwere Reiterei",
             expGuardsman      : "Wachman",
-            
+
             expRecruit        : "Räuberrekrut",
             expThug           : "Schläger",
             expRoughneck      : "Raufbold",
@@ -514,7 +564,13 @@ var lang = {
             aliBabaYoungCutter: "Ali Baba, the young woodcuter",
             aliBabaFirstThief : "Ali Baba and the first thief",
             aliBabaSecondThief: "Ali Baba and the second thief",
-            aliBabaThirdThief : "Ali Baba and the third thief"
+            aliBabaThirdThief : "Ali Baba and the third thief",
+            aliBabaTreasureKnowledge : "Ali Baba and the Treasure of Knowledge",
+            aliBabaTreasureWisdom    : "Ali Baba and the Treasure of Wisdom",
+            alladinOilLamp           : "Alladin and the Oil Lamp",
+            alladinBeatifulPrincess  : "Alladin and the Beautiful Princess",
+            sindbadBesiegedCity      : "Sindbad and the Besieged City",
+            sindbadSeaSnake          : "Sindbad and the Sea Snake"
         },
         ui : {
             title             : "Die Siedler Online - Kampfsimulator",
@@ -587,7 +643,14 @@ var lang = {
             longbowman        : "Groteboogschutter",
             crossbowman       : "Kruisboogschutter",
             cannoneer         : "Kanonier",
-            
+            swordsman         : "Swordsman",
+            mountedSMan       : "Mounted Swordsman",
+            knight            : "Knight",
+            mountedMMan       : "Mounted Marksman",
+            armoredMMan       : "Armored Marksman",
+            marksman          : "Marksman",
+            besieger          : "Besieger",
+
             general           : "Generaal",
             mma               : "Meester in Gevechtskunst",
             leg               : "Legendary Veteran",
@@ -664,6 +727,21 @@ var lang = {
             erGrumpyParrot    : "Grumpy Parrot",
             erSneakingThief   : "Sneaking Thief",
             erOasisGuardian   : "Oasis Guardian",
+            erMossyStoneStatue: "Mossy Stone Statue",
+            erSailor          : "Sailor",
+            erMountedSailor   : "Mounted Sailor",
+            erBoatswain       : "Boatswain",
+            erCannonMaster    : "Cannon Master",
+            erBattleHardSailor: "Battle Hardened Sailor",
+            erPettyOfficer    : "Petty Officer 2nd Class",
+            erSteersman       : "Steersman",
+            erMutineer        : "Mutineer",
+            erGiantCannon     : "Giant Cannon",
+            erGiantSeaSnake   : "Giant Sea Snake",
+            erAlphaApe        : "Alpha Ape",
+            erNervousApe      : "Nervous Ape",
+            erStickApe        : "Stick-wielding Ape",
+            erStoneApe        : "Stone-throwing Ape",
             /* nords */
             nJomsviking       : "Jomsviking",
             nHousekarl        : "Lijfwacht",
@@ -701,7 +779,7 @@ var lang = {
             epThugLeader      : "Knuppelaar",
             epAssassine       : "Sluipmoordenaar",
             epGreedyInnkeeper : "Gierige Herbergier",
-            
+
             lowlyPoacher      : "Lowly Poacher",
             rabbitHunter      : "Rabbit Hunter",
             hound             : "Hound",
@@ -721,7 +799,7 @@ var lang = {
             campWitchTower    : "Heksentoren",
 
             // Kolonies
-            
+
             expAttackInf      : "Aanvalsinfanterie",
             expAttackArch     : "Aanvalsboogschutter",
             expAttackCav      : "Aanvalscavalerie",
@@ -729,7 +807,7 @@ var lang = {
             expHeavyArch      : "Zware Boogschutter",
             expHeavyCav       : "Zware Cavalerie",
             expGuardsman      : "Gardist",
-            
+
             expRecruit        : "Bandiet-Rekruut",
             expThug           : "Schurk",
             expRoughneck      : "Rouwdouwer",
@@ -800,7 +878,13 @@ var lang = {
             aliBabaYoungCutter: "Ali Baba, the young woodcuter",
             aliBabaFirstThief : "Ali Baba and the first thief",
             aliBabaSecondThief: "Ali Baba and the second thief",
-            aliBabaThirdThief : "Ali Baba and the third thief"
+            aliBabaThirdThief : "Ali Baba and the third thief",
+            aliBabaTreasureKnowledge : "Ali Baba and the Treasure of Knowledge",
+            aliBabaTreasureWisdom    : "Ali Baba and the Treasure of Wisdom",
+            alladinOilLamp           : "Alladin and the Oil Lamp",
+            alladinBeatifulPrincess  : "Alladin and the Beautiful Princess",
+            sindbadBesiegedCity      : "Sindbad and the Besieged City",
+            sindbadSeaSnake          : "Sindbad and the Sea Snake"
         },
         ui : {
             title             : "The Settlers Online - Gevechtssimulator",
@@ -873,7 +957,14 @@ var lang = {
 			longbowman        : "Longbowman",
 			crossbowman       : "Crossbowman",
 			cannoneer         : "Cannoneer",
-    
+            swordsman         : "Swordsman",
+            mountedSMan       : "Mounted Swordsman",
+            knight            : "Knight",
+            mountedMMan       : "Mounted Marksman",
+            armoredMMan       : "Armored Marksman",
+            marksman          : "Marksman",
+            besieger          : "Besieger",
+
 			general           : "Marszałek",
 			mma               : "Master of Martial Arts",
 			leg               : "Legendary Veteran",
@@ -950,6 +1041,21 @@ var lang = {
             erGrumpyParrot    : "Grumpy Parrot",
             erSneakingThief   : "Sneaking Thief",
             erOasisGuardian   : "Oasis Guardian",
+            erMossyStoneStatue: "Mossy Stone Statue",
+            erSailor          : "Sailor",
+            erMountedSailor   : "Mounted Sailor",
+            erBoatswain       : "Boatswain",
+            erCannonMaster    : "Cannon Master",
+            erBattleHardSailor: "Battle Hardened Sailor",
+            erPettyOfficer    : "Petty Officer 2nd Class",
+            erSteersman       : "Steersman",
+            erMutineer        : "Mutineer",
+            erGiantCannon     : "Giant Cannon",
+            erGiantSeaSnake   : "Giant Sea Snake",
+            erAlphaApe        : "Alpha Ape",
+            erNervousApe      : "Nervous Ape",
+            erStickApe        : "Stick-wielding Ape",
+            erStoneApe        : "Stone-throwing Ape",
 			/* nords */
 			nJomsviking       : "Jomsviking",
 			nHousekarl        : "Housecarl",
@@ -987,12 +1093,12 @@ var lang = {
 			epThugLeader      : "Cudgel Claus",
 			epAssassine       : "Assassin",
 			epGreedyInnkeeper : "Greedy Inn-Keeper",
-            
+
             lowlyPoacher      : "Lowly Poacher",
             rabbitHunter      : "Rabbit Hunter",
             hound             : "Hound",
             garrunTrapper     : "Garrun the Trapper",
-    
+
 			wolf              : "Wolf",
 			croaker           : "Croaker",
 			ystShaman         : "Mystical Shaman",
@@ -1005,9 +1111,9 @@ var lang = {
 			campReinfTower    : "Reinforced Tower",
 			campStoneTower    : "Stone Tower",
 			campWitchTower    : "Witch Tower",
-                        
+
             // exp
-            
+
             expAttackInf      : "Piechota",
             expAttackArch     : "Łucznik",
             expAttackCav      : "Konnica",
@@ -1015,7 +1121,7 @@ var lang = {
             expHeavyArch      : "Ciężki łucznik",
             expHeavyCav       : "Ciężka konnica",
             expGuardsman      : "Strażnik",
-            
+
             expRecruit        : "Rekrut bandyta",
             expThug           : "Zbir",
             expRoughneck      : "Twardziel",
@@ -1086,7 +1192,13 @@ var lang = {
             aliBabaYoungCutter: "Ali Baba, the young woodcuter",
             aliBabaFirstThief : "Ali Baba and the first thief",
             aliBabaSecondThief: "Ali Baba and the second thief",
-            aliBabaThirdThief : "Ali Baba and the third thief"
+            aliBabaThirdThief : "Ali Baba and the third thief",
+            aliBabaTreasureKnowledge : "Ali Baba and the Treasure of Knowledge",
+            aliBabaTreasureWisdom    : "Ali Baba and the Treasure of Wisdom",
+            alladinOilLamp           : "Alladin and the Oil Lamp",
+            alladinBeatifulPrincess  : "Alladin and the Beautiful Princess",
+            sindbadBesiegedCity      : "Sindbad and the Besieged City",
+            sindbadSeaSnake          : "Sindbad and the Sea Snake"
         },
         ui : {
             title             : "The Settlers Online - Combat Simulator",
@@ -1128,7 +1240,7 @@ var lang = {
             cavalry           : "Cavalry",
             elite             : "Elite",
             vs                : "vs.",
-            // 
+            //
             resources         : "Resources",
             amount            : "Amount",
             settler           : "Settler",
