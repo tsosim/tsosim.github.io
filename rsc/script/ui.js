@@ -67,7 +67,7 @@ function createUnitTooltip(unit) {
     } else {
         tab.appendChild(createUnitTooltipLine(tsosim.lang.ui.hitpoints, unit.hitpoints));
         tab.appendChild(createUnitTooltipLine(tsosim.lang.ui.damage, unit.damage));
-        tab.appendChild(createUnitTooltipLine(tsosim.lang.ui.type, ExpUnitTypeName(unit)));
+        tab.appendChild(createUnitTooltipLine(tsosim.lang.ui.type, new ExpUnitTypeName(unit)));
         for (b in unit.bonus) {
             if (unit.bonus.hasOwnProperty(b)) {
                 tab.appendChild(createUnitTooltipLine(tsosim.lang.ui.bonus, tsosim.lang.ui.vs + " " + ExpTypeNames[b] + " " + unit.bonus[b] + "%"));
@@ -95,24 +95,24 @@ function removeTooltip(elementId) {
 //   unit     : unit object
 //   capacity : capacity of the input field, basically the capacity of the garrison
 function setupUnitInputField(unit, capacity) {
-    var tr, label, text, inp, tdinp, tdinp2;
+    var tr, label, text, inp, tdinp, tdinp2, icon;
     tr  = document.createElement("tr");
     tr.setAttribute("class", "unittablerow");
 
-    if(unit === undefined) {
+    if (unit === undefined) {
         console.log("test");
     }
     
-    var icon = document.createElement("td");
-    if(unit && unit.icon) {
-        icon.innerHTML = '<img src="' + 'rsc/img/icon/m/'+ unit.icon + '" title="' + tsosim.lang.unit[unit.id] + '" class="uniticon">';
+    icon = document.createElement("td");
+    if (unit && unit.icon) {
+        icon.innerHTML = '<img src="' + 'rsc/img/icon/m/' + unit.icon + '" title="' + tsosim.lang.unit[unit.id] + '" class="uniticon">';
         icon.setAttribute("class", "icontd");
     }
     tr.appendChild(icon);
     
     label = document.createElement("td");
     label.setAttribute("class", "unitlabel");
-    if(unit) {
+    if (unit) {
         label.setAttribute("for", "inp_" + unit.id);
     }
   
@@ -122,7 +122,7 @@ function setupUnitInputField(unit, capacity) {
     tr.appendChild(label);
 
     //base.appendChild(createUnitTooltip(unit));
-    if(unit) {
+    if (unit) {
         label.appendChild(createUnitTooltip(unit));
     }
 
@@ -139,8 +139,8 @@ function setupUnitInputField(unit, capacity) {
     inp.setAttribute("max", capacity);
     inp.setAttribute("min", 0);
     inp.setAttribute("class", "unitnumber");
-    if(!unit) {
-        inp.setAttribute("readonly","");
+    if (!unit) {
+        inp.setAttribute("readonly", "");
     }
     tdinp.appendChild(inp);
     tr.appendChild(tdinp);
@@ -150,19 +150,19 @@ function setupUnitInputField(unit, capacity) {
     /*inp = document.createElement("input");*/
     tr.appendChild(tdinp2);
     
-    if(unit) {
+    if (unit) {
         label.addEventListener("mouseover", function () { showTooltip("tt_" + unit.id); }, false);
         label.addEventListener("mouseout", function () { removeTooltip("tt_" + unit.id); }, false);
 
-        inp.onclick = function() {
+        inp.onclick = function () {
             inp.select();
         };
         inp.onblur = function () {
-            if(!inp.value) {
+            if (!inp.value) {
                 inp.value = 0;
             }
-        }
-        inp.onkeyup = function() {
+        };
+        inp.onkeyup = function () {
             updateSumInput();
         };
     }
@@ -1164,8 +1164,8 @@ function getActiveAdventure() {
 }
 
 function computeSimulation() {
-    var sim, player, computer, genIds, repeats, i, computeStats, computeLogs, logs, data, genId, cbox, par, params;
-    var setStart, units, nodeOn, nodeMin, nodeMax, nodeCost, valMin, valMax, valCost, idx;
+    var sim, player, computer, genIds, repeats, i, computeStats, computeLogs, logs, data, genId, cbox, par, params,
+        setStart, units, nodeOn, nodeMin, nodeMax, nodeCost, valMin, valMax, valCost, idx;
     
     if (tsosim.version === tso.versions[2].id) {
         
@@ -1441,8 +1441,8 @@ function initializeUnitsAndUI(simVersion, lang) {
     setupAdventureTabs();
     
     // clear results
-    var res = document.getElementById("waveResults");
-    while(res && res.children.length > 0) {
+    res = document.getElementById("waveResults");
+    while (res && res.children.length > 0) {
         res.removeChild(res.lastChild);
     }
 }

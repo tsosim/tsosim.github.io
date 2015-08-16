@@ -129,14 +129,14 @@ function UnitGroup(unitType, num) {
         return aclone;
     };
     
-    this.restoreHitpointsOfLivingUnits = function() {
+    this.restoreHitpointsOfLivingUnits = function () {
         var i;
-        for(i = 0; i < this.hitpoints.length; i += 1) {
-            if(this.hitpoints[i] > 0) {
+        for (i = 0; i < this.hitpoints.length; i += 1) {
+            if (this.hitpoints[i] > 0) {
                 this.hitpoints[i] = this.type.hitpoints;
             }
         }
-    }
+    };
 }
 
 /*
@@ -206,7 +206,7 @@ function Garrison() {
         }
     };
     
-    this.getRealCampGroup = function() {
+    this.getRealCampGroup = function () {
         var idx;
         for (idx in this.groups) {
             if (this.groups.hasOwnProperty(idx)) {
@@ -218,7 +218,7 @@ function Garrison() {
         return null;
     };
     
-    this.getGeneralGroup = function() {
+    this.getGeneralGroup = function () {
         var idx;
         for (idx in this.groups) {
             if (this.groups.hasOwnProperty(idx)) {

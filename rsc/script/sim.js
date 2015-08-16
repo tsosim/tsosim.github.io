@@ -60,7 +60,7 @@ function Simulator() {
     };
 
     this.startCombat = function () {
-        var i, idx, idy, attacker, defender, LOG, rounds;
+        var i, idx, idy, attacker, defender, LOG, rounds, de, defList;
         if (this.garrison.attacker === null || this.garrison.defender === null) {
             console.log("Simulator.startCombat(): garrisons are still undefined, aborting simulation!");
             return;
@@ -87,9 +87,9 @@ function Simulator() {
 
                 attacker = this.garrison.attacker[idx].clone();
 
-                var defList = defender.groups;
-                for(var de in defList) {
-                    if(defList.hasOwnProperty(de)) {
+                defList = defender.groups;
+                for (de in defList) {
+                    if (defList.hasOwnProperty(de)) {
                         defList[de].restoreHitpointsOfLivingUnits();
                         defList[de].dmg_left = 0;
                     }
@@ -110,7 +110,7 @@ function Simulator() {
     };
 
     this.startCombatWithLog = function () {
-        var idx, attacker, defender, logs;
+        var idx, attacker, defender, logs, defList, de;
 
         // start each iteration with a new copy of the defender garrison
         defender = this.garrison.defender.clone();
@@ -125,9 +125,9 @@ function Simulator() {
 
             attacker = this.garrison.attacker[idx].clone();
 
-            var defList = defender.groups;
-            for(var de in defList) {
-                if(defList.hasOwnProperty(de)) {
+            defList = defender.groups;
+            for (de in defList) {
+                if (defList.hasOwnProperty(de)) {
                     defList[de].restoreHitpointsOfLivingUnits();
                     defList[de].dmg_left = 0;
                 }
