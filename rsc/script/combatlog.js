@@ -78,6 +78,31 @@ function Statistics() {
         this.campRounds.numIterations += 1;
         this.campRounds.iterationResults.push(rounds.numC);
     };
+    
+    this.getRealCampGroupData = function () {
+        var g, camp;
+        for (g in tsosim.camps) {
+            if (tsosim.camps.hasOwnProperty(g)) {
+                camp = tsosim.lang.unit[tsosim.camps[g].id];
+                if (this.data.hasOwnProperty(camp) && tsosim.camps[g] !== tsosim.camps.campNone) {
+                    return this.data[camp];
+                }
+            }
+        }
+        return null;
+    };
+    this.getGeneralGroupData = function () {
+        var g, gen;
+        for (g in tsosim.generals) {
+            if (tsosim.generals.hasOwnProperty(g)) {
+                gen = tsosim.lang.unit[tsosim.generals[g].id];
+                if (this.data.hasOwnProperty(gen)) {
+                    return this.data[gen];
+                }
+            }
+        }
+        return null;
+    };
   
     this.computeStatistics = function () {
         var idx, cdata, i, current;
