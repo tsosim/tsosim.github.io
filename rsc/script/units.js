@@ -242,20 +242,20 @@ tso.data.live.functions.defineUnits = function () {
 
     cu.erLord            = new Unit("Lord",            10000, [ 400,  800],  80, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE], "1001_004.png");
     cu.erGreedyThief     = new Unit("Greedy Thief",    10000, [2500, 5000],  80, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE, Skills.ATTACK_WEAKEST], "1001_008.png");
-    cu.erCaptain         = new Unit("Captain",         10000, [4000, 8000],  80, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE], "icon_birthday2013_boss01.png");
+    cu.erCaptain         = new Unit("Captain",         10000, [4000, 8000],  80, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE], "1001_014.png");
     cu.erShrewdThief     = new Unit("Shrewd Thief",     1000, [ 250,  500],  80, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE], "1001_011.png");
     cu.erMystThief       = new Unit("Mysterious Thief",20000, [1000, 2000],  80, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE], "1001_002.png");
     cu.erTreacherousThief= new Unit("Treacherous Thief",50000,[ 250,  500],  80, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE], "1001_003.png");
     
-    cu.erScarredThief    = new Unit("Scarred Thief",     500, [ 150,  300],  80, Initiative.FIRST,  getAID(), [Skills.SPLASH_DAMAGE, Skills.ATTACK_WEAKEST], "1001_.png");
-    cu.erSmartThief      = new Unit("Smart Thief",      5000, [ 500, 1000],  80, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE], "1001_.png");
-    cu.erSnootyThief     = new Unit("Snooty Thief",   150000, [ 500, 1000],  80, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE], "1001_.png");
-    cu.erGrayedThief     = new Unit("Grayed Thief",      500, [ 375,  750],  80, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE, Skills.ATTACK_WEAKEST], "1001_.png");
-    cu.erSillyThief      = new Unit("Silly Thief",     50000, [3500, 7000],  80, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE], "1001_.png");
+    cu.erScarredThief    = new Unit("Scarred Thief",     500, [ 150,  300],  80, Initiative.FIRST,  getAID(), [Skills.SPLASH_DAMAGE, Skills.ATTACK_WEAKEST], "1001_017.png");
+    cu.erSmartThief      = new Unit("Smart Thief",      5000, [ 500, 1000],  80, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE], "1001_018.png");
+    cu.erSnootyThief     = new Unit("Snooty Thief",   150000, [ 500, 1000],  80, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE], "1001_020.png");
+    cu.erGrayedThief     = new Unit("Grayed Thief",      500, [ 375,  750],  80, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE, Skills.ATTACK_WEAKEST], "1001_015.png");
+    cu.erSillyThief      = new Unit("Silly Thief",     50000, [3500, 7000],  80, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE], "1001_021.png");
     
     cu.erGrumpyParrot    = new Unit("Grumpy Parrot",   10000, [ 400,  800],  80, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE], "1001_.png");
-    cu.erSneakingThief   = new Unit("Sneaking Thief",   1000, [ 250,  500],  80, Initiative.FIRST,  getAID(), [Skills.SPLASH_DAMAGE], "1001_.png");
-    cu.erOasisGuardian   = new Unit("Oasis Guardian", 100000, [1500, 3000],  80, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE], "1001_.png");
+    cu.erSneakingThief   = new Unit("Sneaking Thief",   1000, [ 250,  500],  80, Initiative.FIRST,  getAID(), [Skills.SPLASH_DAMAGE], "1001_019.png");
+    cu.erOasisGuardian   = new Unit("Oasis Guardian", 100000, [1500, 3000],  80, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE], "1001_016.png");
     
     cu.erMossyStoneStatue= new Unit("Mossy Stone Statue",10000, [4000, 8000],  80, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE], "1001_.png");
 
