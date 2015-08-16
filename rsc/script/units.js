@@ -235,9 +235,9 @@ tso.data.live.functions.defineUnits = function () {
     cu.erSwordWielder    = new Unit("Swordwielder",      300, [  25,   50],  80, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE], "1001_005.png");
     cu.erSwordMaster     = new Unit("Swordmaster",       500, [  25,   50],  80, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE], "1001_007.png");
     cu.erHorseman        = new Unit("Horseman",           50, [  50,  100],  80, Initiative.FIRST,  getAID(), [Skills.SPLASH_DAMAGE], "1001_013.png");
+    cu.erDesertMarksman  = new Unit("Desert Marksmen",    80, [  50,  100],  80, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE, Skills.ATTACK_WEAKEST], "1001_009.png");
     cu.erMountedBowman   = new Unit("Mouted Bowman",      70, [  35,   70],  80, Initiative.FIRST,  getAID(), [Skills.SPLASH_DAMAGE, Skills.ATTACK_WEAKEST], "1001_010.png");
     cu.erDuneMarksman    = new Unit("DuneMarksman",       30, [ 100,  200],  80, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE], "1001_006.png");
-    cu.erDesertMarksman  = new Unit("Desert Marksmen",    80, [  50,  100],  80, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE, Skills.ATTACK_WEAKEST], "1001_009.png");
     cu.erStonecannon     = new Unit("Stonecannon",       100, [ 150,  300],  80, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE], "1001_001.png");
 
     cu.erLord            = new Unit("Lord",            10000, [ 400,  800],  80, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE], "1001_004.png");
