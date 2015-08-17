@@ -644,7 +644,7 @@ function setupTowerBonusSelectionArea() {
 //}
 
 function setComputerGarrisonValues(map_id, garrison) {
-    var units, idx, group, inp, node;
+    var units, idx, group, inp, node, sel;
     
     console.log("set Value from garrison to page : " + map_id);
     
@@ -654,11 +654,19 @@ function setComputerGarrisonValues(map_id, garrison) {
     for (idx in garrison.groups) {
         if (garrison.groups.hasOwnProperty(idx)) {
             group = garrison.groups[idx];
-            inp = document.getElementById("inp_" + group.type.id);
-            if (inp) {
-                inp.value = group.number;
+            
+            if (group.type.hasSkill(Skills.CAMP)) {
+                sel = document.getElementById("computerCamp");
+                if (sel) {
+                    sel.value = tsosim.lang.unit[group.type.id];
+                }
             } else {
-                console.log("could not find input field for unit : " + group.type.id);
+                inp = document.getElementById("inp_" + group.type.id);
+                if (inp) {
+                    inp.value = group.number;
+                } else {
+                    console.log("could not find input field for unit : " + group.type.id);
+                }
             }
         }
     }
@@ -1163,6 +1171,30 @@ function getActiveAdventure() {
     }
 }
 
+function setSimLink(linkStr) {
+    var simLink, label, link;
+    simLink = document.getElementById("simLink");
+    if (simLink) {
+        if (simLink.children.length === 0) {
+            label = document.createElement("text");
+            label.innerHTML = "Link: ";
+            
+            link = document.createElement("input");
+            link.id = "linkInput";
+            link.readOnly = true;
+            link.onclick = function () {
+                link.select();
+            };
+            simLink.appendChild(label);
+            simLink.appendChild(link);
+        } else {
+            link = simLink.children[1];
+        }
+        link.title = link.value = linkStr;
+    }
+
+}
+
 function computeSimulation() {
     var sim, player, computer, genIds, repeats, i, computeStats, computeLogs, logs, data, genId, cbox, par, params,
         setStart, units, nodeOn, nodeMin, nodeMax, nodeCost, valMin, valMax, valCost, idx;
@@ -1223,6 +1255,9 @@ function computeSimulation() {
         return;
     }
   
+    
+    setSimLink(createUrlFromGarrisons(player, computer));
+
     sim.setGarrisons(player, computer);
 
     
@@ -1427,7 +1462,7 @@ function initializeUI(lang) {
 }
 
 function initializeUnitsAndUI(simVersion, lang) {
-    var sa, res;
+    var sa, res, link;
     setupTsoSim(simVersion, lang);
     setupStrings();
     _etn();
@@ -1440,6 +1475,11 @@ function initializeUnitsAndUI(simVersion, lang) {
     setupAdventures();
     setupAdventureTabs();
     
+    link = document.getElementById("simLink");
+    while (link && link.children.length > 0) {
+        link.removeChild(link.lastChild);
+    }
+    
     // clear results
     res = document.getElementById("waveResults");
     while (res && res.children.length > 0) {
@@ -1450,6 +1490,197 @@ function initializeUnitsAndUI(simVersion, lang) {
 function resetInput() {
     resetGarrisonValues();
     resetAdventureValues();
+}
+
+function processUrlData(data) {
+    var i, pgen, garrison, current, unit, num, map_id, advtab, seladv;
+    for (i = 0; i < data.attacker.length; i += 1) {
+        
+        pgen = "pgen" + (i + 1);
+        garrison = garrisonData.player[pgen].garrison;
+        garrison.clear();
+        
+        current = data.attacker[i];
+        for (unit in current) {
+            if (current.hasOwnProperty(unit)) {
+                num = current[unit];
+                if (unit === "_cap_") {
+                    garrison.setCapacity(num);
+                } else if (tsosim.units.hasOwnProperty(unit)) {
+                    garrison.addUnits(tsosim.units[unit], num);
+                } else if (tsosim.generals.hasOwnProperty(unit)) {
+                    garrison.addUnits(tsosim.generals[unit], num);
+                }
+            }
+        }
+    }
+    setPlayerGarrisonValues("pgen1");
+    
+    if (data.map === "playerIsland") {
+        map_id = "playerIsland";
+    } else {
+        map_id = tsosim.lang.adv[data.map];
+    }
+    garrison = garrisonData.computer[map_id].garrison;
+
+    if (garrison) {
+        garrison.clear();
+
+        current = data.defender[0];
+        for (unit in current) {
+            if (current.hasOwnProperty(unit)) {
+                num = current[unit];
+                if (unit === "_tower_") {
+                    garrison.setTowerBonus(num);
+                }
+                if (tsosim.computerUnits.hasOwnProperty(unit)) {
+                    garrison.addUnits(tsosim.computerUnits[unit], num);
+                } else if (tsosim.camps.hasOwnProperty(unit)) {
+                    garrison.addUnits(tsosim.camps[unit], num);
+                }
+            }
+        }
+        setComputerGarrisonValues(map_id, garrison);
+
+        if (map_id !== "playerIsland") {
+            advtab  = document.getElementById("tabAdvSelect");     // adventure tab
+            seladv  = document.getElementById("selAdv");
+
+            seladv.value = map_id;
+            // this is for the stupid internet explorer that doesn't allow directly setting the value property
+            if (seladv.value !== map_id) {
+                for (i = 0; i < seladv.options.length; i += 1) {
+                    if (seladv.options[i].value === map_id) {
+                        seladv.selectedIndex = i;
+                        break;
+                    }
+                }
+            }
+            advtab.onclick();
+        }
+    }
+}
+
+function urlGetType(str) {
+    var arr = str.split("=");
+    if (arr[0] === "type") {
+        if (arr[1] === "adv") {
+            return "adv";
+        } else if (arr[1] === "exp") {
+            return "exp";
+        }
+    }
+    // default to adv
+    return "adv";
+}
+
+function urlGetGarrisonList(str) {
+    return str.split("endg");
+}
+
+function urlGetGarrison(str) {
+    var result, arr, i, tmp;
+    if (str === "") {
+        return null;
+    }
+    result = {};
+    arr = str.split("&");
+    for (i = 0; i  < arr.length; i += 1) {
+        if (arr[i] !== "") {
+            tmp = arr[i].split("=");
+            result[tmp[0]] = parseInt(tmp[1], 10);
+        }
+    }
+    return result;
+}
+
+function evalURL() {
+    
+    /*
+     * URL      = $type; $attacker; $map; $defender;
+     * type     = 'adv'|'exp'
+     * attacker = $list
+     * defender = $list
+     * list     = ($garrison$end_g)*
+     * garrison = $unit '=' num [&]
+     * end_g    = 'end_g'
+     * unit     = 'R' | 'M' | ...
+     */
+    var search, arr, data, current, attacker, map, defender, idx_a, idx_d, g;
+    search = window.location.search.substring(1);
+    arr = search.split(";");
+    
+    if (arr.length !== 4 && !(arr.length === 5 && arr[4] === "")) {
+        return null;
+    }
+    
+    data = {};
+    current = arr[0];
+
+    data.type = urlGetType(current);
+
+    data.attacker = [];
+    attacker = urlGetGarrisonList(arr[1]);
+    for (idx_a = 0; idx_a < attacker.length; idx_a += 1) {
+        g = urlGetGarrison(attacker[idx_a]);
+        if (g) {
+            data.attacker[idx_a] = g;
+        }
+    }
+    
+    map = arr[2].split("=");
+    data.map = map[1];
+    
+    data.defender = [];
+    defender = urlGetGarrisonList(arr[3]);
+    for (idx_d = 0; idx_d < defender.length; idx_d += 1) {
+        g = urlGetGarrison(defender[idx_d]);
+        if (g) {
+            data.defender[idx_d] = g;
+        }
+    }
+    
+    processUrlData(data);
+}
+
+function createUrlFromGarrisons(attacker_a, defender) {
+    var result = "", adv, idx_a, gar, g;
+    
+    // type
+    result += "type='adv';";
+    
+    // attacker
+    for (idx_a = 0; idx_a < attacker_a.length; idx_a += 1) {
+        gar = attacker_a[idx_a];
+        for (g in gar.groups) {
+            if (gar.groups.hasOwnProperty(g)) {
+                result += gar.groups[g].type.id + "=" + gar.groups[g].startNumber + "&";
+            }
+        }
+        result += "_cap_=" + gar.capacity + "&";
+        result += "endg";
+    }
+    result += ";";
+    
+    adv = getActiveAdventure();
+    if (tsosim.advNames[adv]) {
+        result += "_adv_=" + tsosim.advNames[adv] + ";";
+    } else {
+        result += "_adv_=" + adv + ";";
+    }
+
+    // defender
+    gar = defender;
+    for (g in gar.groups) {
+        if (gar.groups.hasOwnProperty(g)) {
+            result += gar.groups[g].type.id + "=" + gar.groups[g].startNumber + "&";
+        }
+    }
+    result += "_tower_=" + defender.towerBonus + "&";
+    result += "endg";
+    result += ";";
+    
+    return document.location.protocol + "//" + document.location.host + document.location.pathname + "?" + result;
 }
 
 window.onload = function () {
@@ -1499,4 +1730,6 @@ window.onload = function () {
 
     buttonLog = document.getElementById("buttonCombatLog");
     buttonLog.onclick = function () { setControlButtonState(buttonLog); };
+    
+    evalURL();
 };
