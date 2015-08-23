@@ -50,7 +50,7 @@ function createUnitTooltip(unit) {
     tr.appendChild(th);
     tab.appendChild(tr);
     
-    if (tsosim.version !== tso.versions[2].id) {
+    if (tsosim.version !== tso.versions.Exp.id) {
         tab.appendChild(createUnitTooltipLine(tsosim.lang.ui.hitpoints, unit.hitpoints));
         tab.appendChild(createUnitTooltipLine(tsosim.lang.ui.damage, unit.damage.min + " - " + unit.damage.max));
         tab.appendChild(createUnitTooltipLine(tsosim.lang.ui.accuracy, unit.accuracy + "%"));
@@ -263,7 +263,7 @@ function setupGeneralSelectionOption(value, text, att_id, att_class) {
     // if tab is clicked, then previously selected tab will be disabled (via css class) and the selected on enabled
     span.onclick = function () {
         var options, node, opt, attr, optCap, val;
-        if (tsosim.version !== tso.versions[2].id) {
+        if (tsosim.version !== tso.versions.Exp.id) {
             options = ["genSel200", "genSel220", "genSel250", "genSel270", "genSelMMA", "genSelLEG"];
         } else {
             options = ["genSel100"];
@@ -293,7 +293,7 @@ function setupGeneralSelectionArea() {
     label.innerHTML = tsosim.lang.unit.general + ": ";
     base.appendChild(label);
     
-    if (tsosim.version !== tso.versions[2].id) {
+    if (tsosim.version !== tso.versions.Exp.id) {
         base.appendChild(setupGeneralSelectionOption(200, "200", "genSel200", "genSel selOptActive"));
         base.appendChild(setupGeneralSelectionOption(220, "220", "genSel220", "genSel selOpt"));
         base.appendChild(setupGeneralSelectionOption(250, "250", "genSel250", "genSel selOpt"));
@@ -400,7 +400,7 @@ function resetGarrisonValues() {
 function storePlayerGarrisonValues(gen_id, units) {
     var garrison, idx, node, value, genIds, g, setStart;
     
-    if (tsosim.version === tso.versions[2].id) {
+    if (tsosim.version === tso.versions.Exp.id) {
         garrison = expData.getExpData(gen_id).garrison;
         garrison.clear();
     } else {
@@ -426,7 +426,7 @@ function storePlayerGarrisonValues(gen_id, units) {
     }
     
     // store general
-    if (tsosim.version !== tso.versions[2].id) {
+    if (tsosim.version !== tso.versions.Exp.id) {
         genIds = ["genSel200", "genSel220", "genSel250", "genSel270", "genSelMMA", "genSelLEG"];
         for (g = 0; g < genIds.length; g += 1) {
             node = document.getElementById(genIds[g]);
@@ -537,7 +537,7 @@ function setupAdventureTabs() {
         }
         
         pisland.setAttribute("class", "compTab inputTabActive");
-        if (tsosim.version !== tso.versions[2].id) {
+        if (tsosim.version !== tso.versions.Exp.id) {
             setupComputerInputFields(tsosim.adv_maps.playerIsland.sort(function (u1, u2) { return u1.attackId - u2.attackId; }));
         } else {
             setupComputerInputFields(tsosim.adv_maps.expeditionIsland);//.sort(function (u1, u2) { return u1.attackId - u2.attackId; }));
@@ -589,7 +589,7 @@ function setupTowerBonusSelectionOption(value, text, att_id, att_class, active, 
     span.onclick = function () {
         console.log("clicked TB: " + value);
         var options, opt, node, attr;
-        if (tsosim.version === tso.versions[0].id) {
+        if (tsosim.version === tso.versions.live.id) {
             options = ["towerBonus0", "towerBonus50", "towerBonus75", "towerBonus90"];
         } else {
             options = ["towerBonus0", "towerBonus10", "towerBonus20", "towerBonus30", "towerBonus40", "towerBonus50"];
@@ -624,7 +624,7 @@ function setupTowerBonusSelectionArea() {
     base.appendChild(label);
     
     // live
-    if (tsosim.version === tso.versions[0].id) {
+    if (tsosim.version === tso.versions.live.id) {
         base.appendChild(setupTowerBonusSelectionOption(0,  "None", "towerBonus0",  "towerLive", true,  "No watchtower"));
         base.appendChild(setupTowerBonusSelectionOption(50, "WT",   "towerBonus50", "towerLive", false, "Watchtower - 50%"));
         base.appendChild(setupTowerBonusSelectionOption(75, "RWT",  "towerBonus75", "towerLive", false, "Reinforced Watchtower - 75%"));
@@ -708,7 +708,7 @@ function setupComputerInputFields(units, capacity) {
         base.appendChild(table);
     }
     
-    if (tsosim.version !== tso.versions[2].id) {
+    if (tsosim.version !== tso.versions.Exp.id) {
         campSpan = document.createElement("span");
         campSpan.setAttribute("class", "computerCamp");
         label = document.createElement("label");
@@ -766,7 +766,7 @@ function setupAdventures() {
 
 function storeAdventureValues() {
     var tabs, i, select, advName, node;
-    if (tsosim.version === tso.versions[2].id) {
+    if (tsosim.version === tso.versions.Exp.id) {
         tabs = ["pgen1", "pgen2", "pgen3", "pgen4"];
         for (i = 0; i < tabs.length; i += 1) {
             node = document.getElementById(tabs[i]);
@@ -827,7 +827,7 @@ function resetAdventureValues() {
 function storeComputerGarrisonValues(map_id, units) {
     var garrison, idx, node, value, t, towerIds, start;
     
-    if (tsosim.version === tso.versions[2].id) {
+    if (tsosim.version === tso.versions.Exp.id) {
         garrison = expData.getExpData(map_id).expedition;
         garrison.clear();
     } else {
@@ -852,7 +852,7 @@ function storeComputerGarrisonValues(map_id, units) {
         }
     }
     
-    if (tsosim.version !== tso.versions[2].id) {
+    if (tsosim.version !== tso.versions.Exp.id) {
         // store camp
         node = document.getElementById("computerCamp");
         for (idx in tsosim.camps) {
@@ -864,7 +864,7 @@ function storeComputerGarrisonValues(map_id, units) {
         }
     
         // store tower bonus
-        if (tsosim.version === tso.versions[0].id) {
+        if (tsosim.version === tso.versions.live.id) {
             towerIds = ["towerBonus0", "towerBonus50", "towerBonus75", "towerBonus90"];
         } else {
             towerIds = ["towerBonus0", "towerBonus10", "towerBonus20", "towerBonus30", "towerBonus40", "towerBonus50"];
@@ -1199,7 +1199,7 @@ function computeSimulation() {
     var sim, player, computer, genIds, repeats, i, computeStats, computeLogs, logs, data, genId, cbox, par, params,
         setStart, units, nodeOn, nodeMin, nodeMax, nodeCost, valMin, valMax, valCost, idx;
     
-    if (tsosim.version === tso.versions[2].id) {
+    if (tsosim.version === tso.versions.Exp.id) {
         
         //testExpedition();
 
@@ -1298,12 +1298,14 @@ function setupSimVersionButtons(onlyButtons) {
     base = document.getElementById("simVersions");
     
     if (onlyButtons === true) {
-        for (idx = 0; idx < tso.versions.length; idx += 1) {
-            v = tso.versions[idx];
-            if (v.id !== "test") {
-                div = document.getElementById("vb_" + v.id);
-                if (div) {
-                    div.innerHTML   = v.name;
+        for (idx in tso.versions) {
+            if(tso.versions.hasOwnProperty(idx)) {
+                v = tso.versions[idx];
+                if (v.id !== "test") {
+                    div = document.getElementById("vb_" + v.id);
+                    if (div) {
+                        div.innerHTML   = v.name;
+                    }
                 }
             }
         }
@@ -1319,12 +1321,14 @@ function setupSimVersionButtons(onlyButtons) {
                 return;
             } else {
                 elemID = elem.getAttribute("id");
-                for (i = 0; i < tso.versions.length; i += 1) {
-                    if (tso.versions[i].id !== "test") {
-                        elem2 = document.getElementById("vb_" + tso.versions[i].id);
-                        elem2.setAttribute("class", "versionButton");
-                        if (elemID === ("vb_" + tso.versions[i].id)) {
-                            clickedID = tso.versions[i].id;
+                for (i in tso.versions) {
+                    if(tso.versions.hasOwnProperty(i)) {
+                        if (tso.versions[i].id !== "test") {
+                            elem2 = document.getElementById("vb_" + tso.versions[i].id);
+                            elem2.setAttribute("class", "versionButton");
+                            if (elemID === ("vb_" + tso.versions[i].id)) {
+                                clickedID = tso.versions[i].id;
+                            }
                         }
                     }
                 }
@@ -1351,7 +1355,8 @@ function setupSimVersionButtons(onlyButtons) {
     };
 
     curIdx = 0;
-    for (idx = 0; idx < tso.versions.length; idx += 1) {
+    for (idx in tso.versions) {
+      if(tso.versions.hasOwnProperty(idx)) {
         v = tso.versions[idx];
         if (v.id !== "test") {
             div = document.createElement("div");
@@ -1370,6 +1375,7 @@ function setupSimVersionButtons(onlyButtons) {
             }
             curIdx += 1;
         }
+      }
     }
 }
 

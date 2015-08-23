@@ -269,7 +269,7 @@ function Simulator() {
 
         extraParams = {
             defBonus        : defending_garrison.towerBonus,
-            defPenValue     : tsosim.version === tso.versions[0].name ? 100 : 10,
+            defPenValue     : tsosim.version === tso.versions.live.id ? 100 : 10,
             hasCampDmgBonus : attacking_group.type.hasSkill(Skills.CAMP_DMG_BONUS),
             defIsCamp       : false
         };
