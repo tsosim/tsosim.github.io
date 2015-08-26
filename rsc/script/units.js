@@ -264,11 +264,11 @@ tso.data.live.functions.defineUnits = function () {
     cu.erGrumpyParrot    = new Unit("Grumpy Parrot",   25000, [2000, 4000], 95, Initiative.FIRST,  getAID(), [Skills.SPLASH_DAMAGE, Skills.ATTACK_WEAKEST], "1001_.png");
     cu.erOasisGuardian   = new Unit("Oasis Guardian",  40000, [5000,10000], 90, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE], "1001_016.png");
     // new Unit()
-    cu.epGiantBat        = new Unit("Giant Bat",      350000, [1000, 2000], 90, Initiative.FIRST, getAID(), [Skills.SPLASH_DAMAGE], "icon_epic_bat.png");
+    cu.erGiantBat        = new Unit("Giant Bat",      350000, [1000, 2000], 90, Initiative.FIRST, getAID(), [Skills.SPLASH_DAMAGE], "icon_epic_bat.png");
     // new Unit()
     // new Unit()
     // new Unit()
-    //new Unit()
+    cu.erLibraryGolem    = new Unit("Library Golem",   70000, [1750, 3500], 90, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE, Skills.ATTACK_WEAKEST], "1001_.png");
     // new Unit()
     cu.erMossyStoneStatue= new Unit("Mossy Stone Statue",500000, [400, 800],  90, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE], "1001_.png");
     
@@ -533,12 +533,12 @@ function defineAdventureMaps(units, adv_maps) {
     ];
     adv_maps.aliBabaThirdThief = [
         cu.erStonecannon, cu.erSwordclasher, cu.erDuneMarksman, cu.erHorseman, cu.erSwordWielder, cu.erSwordMaster, cu.erMountedBowman, cu.erDesertMarksman, 
-        cu.epBoar, cu.epBear, cu.epWolf, cu.epPackleaderWolf, cu.epFox, cu.epGiant, cu.epGiantBat,
+        cu.epBoar, cu.epBear, cu.epWolf, cu.epPackleaderWolf, cu.epFox, cu.epGiant, cu.erGiantBat,
         cu.erMystThief, cu.erGreedyThief, cu.erSillyThief, cu.erScarredThief, cu.erSnootyThief, cu.erShrewdThief 
     ];
     adv_maps.aliBabaTreasureKnowledge = [
         cu.erStonecannon, cu.erSwordclasher, cu.erDuneMarksman, cu.erHorseman, cu.erSwordWielder, cu.erSwordMaster, cu.erMountedBowman, cu.erDesertMarksman, 
-        cu.erTreacherousThief, cu.erScarredThief, cu.erSmartThief, cu.erShrewdThief, cu.erMystThief, cu.erGreedyThief, cu.erGrayedThief, cu.erSillyThief
+        cu.erTreacherousThief, cu.erScarredThief, cu.erSmartThief, cu.erShrewdThief, cu.erMystThief, cu.erGreedyThief, cu.erGrayedThief, cu.erSillyThief, cu.erLibraryGolem
     ];
     adv_maps.aliBabaTreasureWisdom = [
         cu.erStonecannon, cu.erSwordclasher, cu.erDuneMarksman, cu.erHorseman, cu.erSwordWielder, cu.erSwordMaster, cu.erMountedBowman, cu.erDesertMarksman, 
