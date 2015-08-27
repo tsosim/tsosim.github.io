@@ -67,7 +67,7 @@ function createUnitTooltip(unit) {
     } else {
         tab.appendChild(createUnitTooltipLine(tsosim.lang.ui.hitpoints, unit.hitpoints));
         tab.appendChild(createUnitTooltipLine(tsosim.lang.ui.damage, unit.damage));
-        tab.appendChild(createUnitTooltipLine(tsosim.lang.ui.type, new ExpUnitTypeName(unit)));
+        tab.appendChild(createUnitTooltipLine(tsosim.lang.ui.type, expUnitTypeName(unit)));
         for (b in unit.bonus) {
             if (unit.bonus.hasOwnProperty(b)) {
                 tab.appendChild(createUnitTooltipLine(tsosim.lang.ui.bonus, tsosim.lang.ui.vs + " " + ExpTypeNames[b] + " " + unit.bonus[b] + "%"));

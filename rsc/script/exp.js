@@ -118,7 +118,7 @@ function ExpUnit(name, hp, dmg, type, icon) {
     };
 }
 
-function ExpUnitTypeName(unit) {
+function expUnitTypeName(unit) {
     if (unit.isMelee()) {
         return tsosim.lang.ui.melee;
     } else if (unit.isRanged()) {
