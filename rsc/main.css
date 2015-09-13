@@ -204,20 +204,16 @@ footer {
 }
 
 .selOpt {
-    padding: 5px;
+    padding: 2px;
     text-align: center;
     cursor: pointer;
-    border-radius: 5px;
     border: 1px solid rgba(0,0,0,0);
 }
 .selOptActive {
-    background: rgba(225, 245, 155,0.75);
-    padding: 5px;
+    padding: 2px;
     text-align: center;
     cursor: pointer;
-    font-weight: bold;
     cursor: default;
-    border-radius: 5px;
     border: 1px solid black;
 }
 
@@ -226,9 +222,8 @@ footer {
 }
 
 #genSelLabel {
-    width: 80px;
-    padding: 5px;
-    text-decoration: underline;
+    width: 75px;
+    padding: 2px;
     #cursor: default;
     text-align: center;
 }
@@ -280,9 +275,8 @@ footer {
 }
 #towerBonusLabel {
     width: 120px;
-    padding: 5px;
+    padding: 2px;
     text-align: center;
-    text-decoration: underline;
     cursor: default;
 }
 

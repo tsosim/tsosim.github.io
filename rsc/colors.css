@@ -55,12 +55,11 @@ footer {
 /* left part of the input area */
 
 .selOpt {
-    border-radius: 5px;
+    border-radius: 2px;
 }
 .selOptActive {
     background: rgba(225, 245, 155,0.75);
-    font-weight: bold;
-    border-radius: 5px;
+    border-radius: 2px;
 }
 
 

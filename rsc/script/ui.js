@@ -253,18 +253,19 @@ function setupGeneralTabs() {
 //     text      : text written on the page
 //     att_id    : id attribute
 //     att_class : class attribute
-function setupGeneralSelectionOption(value, text, att_id, att_class) {
+function setupGeneralSelectionOption(value, text, att_id, att_class, title) {
     var span = document.createElement("span");
     span.setAttribute("id", att_id);
     span.setAttribute("class", att_class);
     span.setAttribute("value", value);
     span.innerHTML = text;
+    span.title = title;
     
     // if tab is clicked, then previously selected tab will be disabled (via css class) and the selected on enabled
     span.onclick = function () {
         var options, node, opt, attr, optCap, val;
         if (tsosim.version !== tso.versions.Exp.id) {
-            options = ["genSel200", "genSel220", "genSel250", "genSel270", "genSelMMA", "genSelLEG"];
+            options = ["genSel200", "genSel220", "genSel250", "genSel270", "genSelMMA", "genSelLEG", "genSelDRA"];
         } else {
             options = ["genSel100"];
         }
@@ -294,12 +295,13 @@ function setupGeneralSelectionArea() {
     base.appendChild(label);
     
     if (tsosim.version !== tso.versions.Exp.id) {
-        base.appendChild(setupGeneralSelectionOption(200, "200", "genSel200", "genSel selOptActive"));
-        base.appendChild(setupGeneralSelectionOption(220, "220", "genSel220", "genSel selOpt"));
-        base.appendChild(setupGeneralSelectionOption(250, "250", "genSel250", "genSel selOpt"));
-        base.appendChild(setupGeneralSelectionOption(270, "270", "genSel270", "genSel selOpt"));
-        base.appendChild(setupGeneralSelectionOption(220, "MMA", "genSelMMA", "genSel selOpt"));
-        base.appendChild(setupGeneralSelectionOption(200, "LEG", "genSelLEG", "genSel selOpt"));
+        base.appendChild(setupGeneralSelectionOption(200, "200", "genSel200", "genSel selOptActive", tsosim.lang.unit.general));
+        base.appendChild(setupGeneralSelectionOption(220, "220", "genSel220", "genSel selOpt", tsosim.lang.unit.general));
+        base.appendChild(setupGeneralSelectionOption(250, "250", "genSel250", "genSel selOpt", tsosim.lang.unit.general));
+        base.appendChild(setupGeneralSelectionOption(270, "270", "genSel270", "genSel selOpt", tsosim.lang.unit.general));
+        base.appendChild(setupGeneralSelectionOption(220, "MMA", "genSelMMA", "genSel selOpt", tsosim.lang.unit.mma));
+        base.appendChild(setupGeneralSelectionOption(200, "LEG", "genSelLEG", "genSel selOpt", tsosim.lang.unit.leg));
+        base.appendChild(setupGeneralSelectionOption(200, "Dra", "genSelDRA", "genSel selOpt", tsosim.lang.unit.dracula));
     } else {
         base.appendChild(setupGeneralSelectionOption(200, "100", "genSel100", "genSel selOptActive"));
     }
@@ -427,7 +429,7 @@ function storePlayerGarrisonValues(gen_id, units) {
     
     // store general
     if (tsosim.version !== tso.versions.Exp.id) {
-        genIds = ["genSel200", "genSel220", "genSel250", "genSel270", "genSelMMA", "genSelLEG"];
+        genIds = ["genSel200", "genSel220", "genSel250", "genSel270", "genSelMMA", "genSelLEG", "genSelDRA"];
         for (g = 0; g < genIds.length; g += 1) {
             node = document.getElementById(genIds[g]);
             if (node.getAttribute("class") === "genSel selOptActive") {
@@ -435,6 +437,8 @@ function storePlayerGarrisonValues(gen_id, units) {
                     garrison.addUnits(tsosim.generals.mma, 1);
                 } else if (genIds[g] === "genSelLEG") {
                     garrison.addUnits(tsosim.generals.leg, 1);
+                } else if (genIds[g] === "genSelDRA") {
+                    garrison.addUnits(tsosim.generals.dracula, 1);
                 } else {
                     garrison.addUnits(tsosim.generals.general, 1);
                 }
@@ -471,6 +475,9 @@ function setPlayerGarrisonValues(gen_id) {
                     node.onclick();
                 } else if (group.type.id === tsosim.generals.leg.id) {
                     node = document.getElementById("genSelLEG");
+                    node.onclick();
+                } else if (group.type.id === tsosim.generals.dracula.id) {
+                    node = document.getElementById("genSelDRA");
                     node.onclick();
                 } else {
                     node = document.getElementById("genSel" + garrison.capacity);

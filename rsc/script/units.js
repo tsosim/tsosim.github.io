@@ -146,8 +146,9 @@ tso.data.live.functions.defineUnits = function () {
 
     // -------------- //
     vData.generals.general    = new Unit("General",                1, [120, 120], 80, Initiative.SECOND, getAID(), [Skills.GENERAL]);
-    vData.generals.mma        = new Unit("Martial Arts General",   1, [450, 500], 80, Initiative.FIRST, getAID(), [Skills.GENERAL, Skills.SPLASH_DAMAGE, Skills.ATTACK_WEAKEST]);
+    vData.generals.mma        = new Unit("Martial Arts General",   1, [450, 500], 80, Initiative.FIRST,  getAID(), [Skills.GENERAL, Skills.SPLASH_DAMAGE, Skills.ATTACK_WEAKEST]);
     vData.generals.leg        = new Unit("Legendary Veteran",   5000, [ 25,  50], 80, Initiative.SECOND, getAID(), [Skills.GENERAL, Skills.SPLASH_DAMAGE, Skills.ATTACK_WEAKEST]);
+    vData.generals.dracula    = new Unit("Lord Dracul",          999, [111, 333], 77, Initiative.FIRST,  getAID(), [Skills.GENERAL, Skills.SPLASH_DAMAGE]);
     
     setUnitIDs(vData.generals);
     setUnitClass(vData.generals, EnemyType.PLAYER);

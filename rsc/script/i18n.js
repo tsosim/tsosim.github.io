@@ -26,6 +26,7 @@ var lang = {
 			general           : "General",
 			mma               : "Master of Martial Arts",
             leg               : "Legendary Veteran",
+            dracula           : "Lord Dracul",
 			/* bandits */
 			bWildMary         : "Wild Mary",
 			bChuck            : "Chuck",
@@ -342,6 +343,7 @@ var lang = {
 			general           : "General",
 			mma               : "Meister der Kampfkunst",
             leg               : "Legendärer Veteran",
+            dracula           : "Lord Dracul",
 			/* bandits */
 			bWildMary         : "Waltraud",
 			bChuck            : "Chuck",
@@ -658,6 +660,7 @@ var lang = {
             general           : "Generaal",
             mma               : "Meester in Gevechtskunst",
             leg               : "Legendary Veteran",
+            dracula           : "Lord Dracul",
             /* bandits */
             bWildMary         : "Wilde Mary",
             bChuck            : "Chuck",
@@ -974,6 +977,7 @@ var lang = {
 			general           : "Marszałek",
 			mma               : "Master of Martial Arts",
 			leg               : "Legendary Veteran",
+            dracula           : "Lord Dracul",
 			/* bandits */
 			bWildMary         : "Wild Mary",
 			bChuck            : "Chuck",
