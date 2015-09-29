@@ -137,6 +137,14 @@ function expUnitTypeName(unit) {
 function FightingUnit(unit) {
     this.unit_info = unit; // for lookup
 	this.hitpoints = unit ? unit.hitpoints : 0;
+    
+    this.clone = function() {
+        var fu;
+        fu = new FightingUnit();
+        fu.unit_info = this.unit_info;
+        fu.hitpoints = this.hitpoints;
+        return fu;
+    };
 }
 
 
@@ -145,6 +153,20 @@ function FightingStack() {
     this.unit_type = null;
 	this.info  = { number : 0, hitpoints : 0	};
     this.units = [];
+    
+    this.clone = function() {
+        var stack, i;
+        stack = new FightingStack();
+        stack.unit_type = this.unit_type;
+        stack.info.number = this.info.number;
+        stack.info.hitpoints = this.info.hitpoints;
+        stack.units = [];
+        stack.units.length = this.units.length;
+        for (i=0; i < this.units.length; i += 1) {
+            stack.units[i] = this.units[i].clone();
+        }
+        return stack;
+    };
 
 	this.get_hitpoints = function () {
 		var hitpoints, idx;
@@ -343,9 +365,21 @@ function StackItem(uA, hpA, dmgA, lostA, uD, hpD, dmgD, lostD) {
     this.lostD = lostD;
 }
 
-function ExpStackData(gAttack, gDefend) {
+// 'stacks' can be null or undefined or empty
+function cloneStacks(stacks) {
+    var item, newStacks = {};
+    for(item in stacks) {
+        if(stacks.hasOwnProperty(item)) {
+            newStacks[item] = stacks[item].clone();
+        }
+    }
+    return newStacks;
+}
+
+function ExpStackData(gAttack, gDefend, stacks) {
     this.garrisonAttack = gAttack.clone();
     this.garrisonDefend = gDefend.clone();
+    this.stacks = cloneStacks(stacks);
     this.log = [];
 }
 
@@ -375,6 +409,8 @@ function fight_combat(genId, combatNum) {
     
     gAttack = data.data[combatNum].garrisonAttack.clone();
     gDefend = data.data[combatNum].garrisonDefend.clone();
+    
+    stacks  = cloneStacks(data.data[combatNum].stacks);
 
     /*var delNum = combatNum+1;
     while(delNum < data.data.length) {
@@ -386,8 +422,6 @@ function fight_combat(genId, combatNum) {
     
     num_rounds = 0;
 
-    stacks = {};
-    
     while (gAttack.total > 0 && gDefend.total > 0) {
 
         nextAttack = gAttack.currentUnit;
@@ -434,7 +468,7 @@ function fight_combat(genId, combatNum) {
         getNextUnittype(gDefend);
 
         combatNum += 1;
-        data.data[combatNum] = new ExpStackData(gAttack, gDefend); // cloning
+        data.data[combatNum] = new ExpStackData(gAttack, gDefend, stacks); // cloning
     }
 }
 
