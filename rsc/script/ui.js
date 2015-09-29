@@ -200,7 +200,10 @@ function updateSumInput() {
 // (1) run through all general tabs and find and deactivate the active one
 function deactivateGeneralTab() {
     var tabs, i;
-    tabs = [document.getElementById("pgen1"), document.getElementById("pgen2"), document.getElementById("pgen3"), document.getElementById("pgen4")];
+    tabs = [
+        document.getElementById("pgen1"), document.getElementById("pgen2"), document.getElementById("pgen3"), 
+        document.getElementById("pgen4"), document.getElementById("pgen5"), document.getElementById("pgen6")
+    ];
     for (i = 0; i < tabs.length; i += 1) {
         if (tabs[i].getAttribute("class") === "genTab inputTabActive") {
             storePlayerGarrisonValues(tabs[i].getAttribute("id"), tsosim.units);
@@ -219,7 +222,7 @@ function onclickGenTab(node, gen_id) {
 
 // (1) setup general tabs to react on click event - activate and display stored garrison values
 function setupGeneralTabs() {
-    var pgen1, pgen2, pgen3, pgen4, setStr;
+    var pgen1, pgen2, pgen3, pgen4, pgen5, pgen6, setStr;
     
     setStr = function (gen) {
         gen.innerHTML = tsosim.lang.unit.general;
@@ -244,6 +247,16 @@ function setupGeneralTabs() {
     pgen4.onclick = function () { onclickGenTab(pgen4, "pgen4"); };
     garrisonData.addNewGeneral("pgen4");
     setStr(pgen4);
+    
+    pgen5 = document.getElementById("pgen5");
+    pgen5.onclick = function () { onclickGenTab(pgen5, "pgen5"); };
+    garrisonData.addNewGeneral("pgen5");
+    setStr(pgen5);
+    
+    pgen6 = document.getElementById("pgen6");
+    pgen6.onclick = function () { onclickGenTab(pgen6, "pgen6"); };
+    garrisonData.addNewGeneral("pgen6");
+    setStr(pgen6);
 }
 
 
@@ -363,7 +376,10 @@ function setupPlayerInputFields(units, capacity) {
 // (3) find active general tab and store the unit values
 function storeGarrisonValues() {
     var tabs, i;
-    tabs = [document.getElementById("pgen1"), document.getElementById("pgen2"), document.getElementById("pgen3"), document.getElementById("pgen4")];
+    tabs = [
+        document.getElementById("pgen1"), document.getElementById("pgen2"), document.getElementById("pgen3"), 
+        document.getElementById("pgen4"), document.getElementById("pgen5"), document.getElementById("pgen6")
+    ];
     for (i = 0; i < tabs.length; i += 1) {
         if (tabs[i].getAttribute("class") === "genTab inputTabActive") {
             storePlayerGarrisonValues(tabs[i].getAttribute("id"), tsosim.units);
@@ -376,7 +392,10 @@ function storeGarrisonValues() {
 
 function resetGarrisonValues() {
     var tabs, i, idx, node;
-    tabs = [document.getElementById("pgen1"), document.getElementById("pgen2"), document.getElementById("pgen3"), document.getElementById("pgen4")];
+    tabs = [
+        document.getElementById("pgen1"), document.getElementById("pgen2"), document.getElementById("pgen3"), 
+        document.getElementById("pgen4"), document.getElementById("pgen5"), document.getElementById("pgen6")
+    ];
     for (i = 0; i < tabs.length; i += 1) {
         if (tabs[i].getAttribute("class") === "genTab inputTabActive") {
 
@@ -774,7 +793,7 @@ function setupAdventures() {
 function storeAdventureValues() {
     var tabs, i, select, advName, node;
     if (tsosim.version === tso.versions.Exp.id) {
-        tabs = ["pgen1", "pgen2", "pgen3", "pgen4"];
+        tabs = ["pgen1", "pgen2", "pgen3", "pgen4", "pgen5", "pgen6"];
         for (i = 0; i < tabs.length; i += 1) {
             node = document.getElementById(tabs[i]);
             if (node && node.getAttribute("class") === "genTab inputTabActive") {
@@ -1249,7 +1268,7 @@ function computeSimulation() {
     storeAdventureValues();
     
     player = [];
-    genIds = ["pgen1", "pgen2", "pgen3", "pgen4"];
+    genIds = ["pgen1", "pgen2", "pgen3", "pgen4", "pgen5", "pgen6"];
     for (i = 0; i < genIds.length; i += 1) {
         if (garrisonData.player[genIds[i]].garrison.hasUnitsWithHitpoints(false) > 0) {
             player.push(garrisonData.player[genIds[i]].garrison);
