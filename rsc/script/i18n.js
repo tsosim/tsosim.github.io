@@ -185,7 +185,7 @@ var lang = {
             pcWhiner          : "Whiner",
             pcScallywag       : "Scallywag",
             pcCrasherDenis    : "Denis the Delinquent",
-            pcCrahserAlex     : "Alex the Troublemaker",
+            pcCrasherAlex     : "Alex the Troublemaker",
             pcCrasherBob      : "Bob the Miscreant",
                         
             // exp
@@ -518,7 +518,7 @@ var lang = {
             pcWhiner          : "Quengler",
             pcScallywag       : "Lump",
             pcCrasherDenis    : "Denis der Delinquent",
-            pcCrahserAlex     : "Alex der Querulant",
+            pcCrasherAlex     : "Alex der Querulant",
             pcCrasherBob      : "Bob der Hinterhältige",
 
             // exp
@@ -851,7 +851,7 @@ var lang = {
             pcWhiner          : "Whiner",
             pcScallywag       : "Scallywag",
             pcCrasherDenis    : "Denis the Delinquent",
-            pcCrahserAlex     : "Alex the Troublemaker",
+            pcCrasherAlex     : "Alex the Troublemaker",
             pcCrasherBob      : "Bob the Miscreant",
 
             // Kolonies
@@ -1185,7 +1185,7 @@ var lang = {
             pcWhiner          : "Whiner",
             pcScallywag       : "Scallywag",
             pcCrasherDenis    : "Denis the Delinquent",
-            pcCrahserAlex     : "Alex the Troublemaker",
+            pcCrasherAlex     : "Alex the Troublemaker",
             pcCrasherBob      : "Bob the Miscreant",
 
             // exp
