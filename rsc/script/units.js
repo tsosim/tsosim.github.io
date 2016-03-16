@@ -231,57 +231,57 @@ tso.data.live.functions.defineUnits = function () {
 
     
     /* epicRaiders */
-    cu.erSwordclasher    = new Unit("Swordclasher",      100, [  75,  150],  80, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE], "1001_012.png");
-    cu.erSwordWielder    = new Unit("Swordwielder",      300, [  25,   50],  80, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE], "1001_005.png");
-    cu.erSwordMaster     = new Unit("Swordmaster",       500, [  25,   50],  80, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE], "1001_007.png");
-    cu.erHorseman        = new Unit("Horseman",           50, [  50,  100],  80, Initiative.FIRST,  getAID(), [Skills.SPLASH_DAMAGE], "1001_013.png");
-    cu.erDuneMarksman    = new Unit("DuneMarksman",       30, [ 100,  200],  80, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE], "1001_006.png");
-    cu.erDesertMarksman  = new Unit("Desert Marksmen",    80, [  50,  100],  80, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE, Skills.ATTACK_WEAKEST], "1001_009.png");
-    cu.erMountedBowman   = new Unit("Mouted Bowman",      70, [  35,   70],  80, Initiative.FIRST,  getAID(), [Skills.SPLASH_DAMAGE, Skills.ATTACK_WEAKEST], "1001_010.png");
-    cu.erStonecannon     = new Unit("Stonecannon",       100, [ 150,  300],  80, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE], "1001_001.png");
+    cu.erSwordclasher    = new Unit("Swordclasher",      100, [  75,  150],  80, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE], "1001_bandit_01.png");
+    cu.erSwordWielder    = new Unit("Swordwielder",      300, [  25,   50],  80, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE], "1001_bandit_02.png");
+    cu.erSwordMaster     = new Unit("Swordmaster",       500, [  25,   50],  80, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE], "1001_bandit_03.png");
+    cu.erHorseman        = new Unit("Horseman",           50, [  50,  100],  80, Initiative.FIRST,  getAID(), [Skills.SPLASH_DAMAGE], "1001_bandit_04.png");
+    cu.erDuneMarksman    = new Unit("DuneMarksman",       30, [ 100,  200],  80, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE], "1001_bandit_05.png");
+    cu.erDesertMarksman  = new Unit("Desert Marksmen",    80, [  50,  100],  80, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE, Skills.ATTACK_WEAKEST], "1001_bandit_06.png");
+    cu.erMountedBowman   = new Unit("Mouted Bowman",      70, [  35,   70],  80, Initiative.FIRST,  getAID(), [Skills.SPLASH_DAMAGE, Skills.ATTACK_WEAKEST], "1001_bandit_07.png");
+    cu.erStonecannon     = new Unit("Stonecannon",       100, [ 150,  300],  80, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE], "1001_bandit_08.png");
 
-    cu.erShrewdThief     = new Unit("Shrewd Thief",     1000, [ 250,  500],  80, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE], "1001_011.png");
-    cu.erSmartThief      = new Unit("Smart Thief",      5000, [ 500, 1000],  80, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE], "1001_018.png");
-    cu.erMystThief       = new Unit("Mysterious Thief",20000, [1000, 2000],  80, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE], "1001_002.png");
-    cu.erTreacherousThief= new Unit("Treacherous Thief",50000,[ 250,  500],  80, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE], "1001_003.png");
-    cu.erSnootyThief     = new Unit("Snooty Thief",   150000, [ 500, 1000],  80, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE], "1001_020.png");
-    cu.erGrayedThief     = new Unit("Grayed Thief",      500, [ 375,  750],  80, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE, Skills.ATTACK_WEAKEST], "1001_015.png");
-    cu.erSneakingThief   = new Unit("Sneaking Thief",   1000, [ 250,  500],  80, Initiative.FIRST,  getAID(), [Skills.SPLASH_DAMAGE], "1001_019.png");
-    cu.erScarredThief    = new Unit("Scarred Thief",     500, [ 150,  300],  80, Initiative.FIRST,  getAID(), [Skills.SPLASH_DAMAGE, Skills.ATTACK_WEAKEST], "1001_017.png");
-    cu.erGreedyThief     = new Unit("Greedy Thief",    10000, [2500, 5000],  80, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE, Skills.ATTACK_WEAKEST], "1001_008.png");
-    cu.erSillyThief      = new Unit("Silly Thief",     50000, [3500, 7000],  80, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE], "1001_021.png");
+    cu.erShrewdThief     = new Unit("Shrewd Thief",     1000, [ 250,  500],  80, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE], "1001_boss_01.png");
+    cu.erSmartThief      = new Unit("Smart Thief",      5000, [ 500, 1000],  80, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE], "1001_boss_02.png");
+    cu.erMystThief       = new Unit("Mysterious Thief",20000, [1000, 2000],  80, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE], "1001_boss_03.png");
+    cu.erTreacherousThief= new Unit("Treacherous Thief",50000,[ 250,  500],  80, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE], "1001_boss_04.png");
+    cu.erSnootyThief     = new Unit("Snooty Thief",   150000, [ 500, 1000],  80, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE], "1001_boss_05.png");
+    cu.erGrayedThief     = new Unit("Grayed Thief",      500, [ 375,  750],  80, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE, Skills.ATTACK_WEAKEST], "1001_boss_06.png");
+    cu.erSneakingThief   = new Unit("Sneaking Thief",   1000, [ 250,  500],  80, Initiative.FIRST,  getAID(), [Skills.SPLASH_DAMAGE], "1001_boss_07.png");
+    cu.erScarredThief    = new Unit("Scarred Thief",     500, [ 150,  300],  80, Initiative.FIRST,  getAID(), [Skills.SPLASH_DAMAGE, Skills.ATTACK_WEAKEST], "1001_boss_08.png");
+    cu.erGreedyThief     = new Unit("Greedy Thief",    10000, [2500, 5000],  80, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE, Skills.ATTACK_WEAKEST], "1001_boss_09.png");
+    cu.erSillyThief      = new Unit("Silly Thief",     50000, [3500, 7000],  80, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE], "1001_boss_10.png");
 
-    cu.erSailor          = new Unit("Sailor",            100, [50, 100],  80, Initiative.SECOND,  getAID(), [Skills.SPLASH_DAMAGE], ".png");
-    cu.erBattleHardSailor= new Unit("BattleHardSailor",  200, [25,  50],  80, Initiative.SECOND,  getAID(), [Skills.SPLASH_DAMAGE], ".png");
-    cu.erMountedSailor   = new Unit("Mounted Sailor",     50, [35,  70],  80, Initiative.FIRST,  getAID(), [Skills.SPLASH_DAMAGE], ".png");
-    cu.erBoatswain       = new Unit("Boatswain",          40, [25,  50],  80, Initiative.FIRST,  getAID(), [Skills.SPLASH_DAMAGE, Skills.ATTACK_WEAKEST], ".png");
-    cu.erPettyOfficer    = new Unit("Petty Officer 2nd",  70, [35,  70],  80, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE, Skills.ATTACK_WEAKEST], ".png");
-    cu.erCannonMaster    = new Unit("Cannon Master",     100, [100,200],  80, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE], ".png");
+    cu.erSailor          = new Unit("Sailor",            100, [50, 100],  80, Initiative.SECOND,  getAID(), [Skills.SPLASH_DAMAGE], "oriental_bandit_01.png");
+    cu.erBattleHardSailor= new Unit("BattleHardSailor",  200, [25,  50],  80, Initiative.SECOND,  getAID(), [Skills.SPLASH_DAMAGE], "oriental_bandit_02.png");
+    cu.erMountedSailor   = new Unit("Mounted Sailor",     50, [35,  70],  80, Initiative.FIRST,  getAID(), [Skills.SPLASH_DAMAGE], "oriental_bandit_03.png");
+    cu.erBoatswain       = new Unit("Boatswain",          40, [25,  50],  80, Initiative.FIRST,  getAID(), [Skills.SPLASH_DAMAGE, Skills.ATTACK_WEAKEST], "oriental_bandit_04.png");
+    cu.erPettyOfficer    = new Unit("Petty Officer 2nd",  70, [35,  70],  80, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE, Skills.ATTACK_WEAKEST], "oriental_bandit_06.png");
+    cu.erCannonMaster    = new Unit("Cannon Master",     100, [100,200],  80, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE], "oriental_bandit_05.png");
 
-    cu.erSteersman       = new Unit("Steersman",      250000, [250,   500], 80, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE], ".png");
-    cu.erMutineer        = new Unit("Mutineer",         5000, [2500, 5000], 80, Initiative.FIRST,  getAID(), [Skills.SPLASH_DAMAGE], ".png");
-    cu.erCaptain         = new Unit("Captain",         10000, [4000, 8000], 80, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE], "1001_014.png");
-    cu.erLord            = new Unit("Lord",            30000, [3500, 7000], 90, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE, Skills.ATTACK_WEAKEST], "1001_004.png");
-    cu.erGrumpyParrot    = new Unit("Grumpy Parrot",   25000, [2000, 4000], 95, Initiative.FIRST,  getAID(), [Skills.SPLASH_DAMAGE, Skills.ATTACK_WEAKEST], "1001_.png");
-    cu.erOasisGuardian   = new Unit("Oasis Guardian",  40000, [5000,10000], 90, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE], "1001_016.png");
+    cu.erSteersman       = new Unit("Steersman",      250000, [250,   500], 80, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE], "oriental_boss_01.png");
+    cu.erMutineer        = new Unit("Mutineer",         5000, [2500, 5000], 80, Initiative.FIRST,  getAID(), [Skills.SPLASH_DAMAGE], "oriental_boss_02.png");
+    cu.erCaptain         = new Unit("Captain",         10000, [4000, 8000], 80, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE], "oriental_boss_03.png");
+    cu.erLord            = new Unit("Lord",            30000, [3500, 7000], 90, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE, Skills.ATTACK_WEAKEST], "oriental_bandit_lord.png");
+    cu.erGrumpyParrot    = new Unit("Grumpy Parrot",   25000, [2000, 4000], 95, Initiative.FIRST,  getAID(), [Skills.SPLASH_DAMAGE, Skills.ATTACK_WEAKEST], "grumpy_parrot.png");
+    cu.erOasisGuardian   = new Unit("Oasis Guardian",  40000, [5000,10000], 90, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE], "oasis_guardian.png");
     // new Unit()
-    cu.erGiantBat        = new Unit("Giant Bat",      350000, [1000, 2000], 90, Initiative.FIRST, getAID(), [Skills.SPLASH_DAMAGE], "icon_epic_bat.png");
+    cu.erGiantBat        = new Unit("Giant Bat",      150000, [ 450,  900], 90, Initiative.FIRST, getAID(), [Skills.SPLASH_DAMAGE], "giant_bat.png");
     // new Unit()
     // new Unit()
     // new Unit()
-    cu.erLibraryGolem    = new Unit("Library Golem",   70000, [1750, 3500], 90, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE, Skills.ATTACK_WEAKEST], "1001_.png");
+    cu.erLibraryGolem    = new Unit("Library Golem",   70000, [1750, 3500], 90, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE, Skills.ATTACK_WEAKEST], "library_boss.png");
     // new Unit()
-    cu.erMossyStoneStatue= new Unit("Mossy Stone Statue",500000, [400, 800],  90, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE], "1001_.png");
+    cu.erMossyStoneStatue= new Unit("Mossy Stone Statue",500000, [400, 800],  90, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE], "statue_snake.png");
     
-    cu.erStickApe        = new Unit("Stick-wielding Ape",150, [ 90, 180],  95, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE], ".png");
-    cu.erStoneApe        = new Unit("Stone-throwing Ape", 70, [125, 250],  95, Initiative.FIRST,  getAID(), [Skills.SPLASH_DAMAGE, Skills.ATTACK_WEAKEST], ".png");
-    cu.erAlphaApe        = new Unit("Alpha Ape",         500, [ 35,  70],  95, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE], ".png");
-    cu.erNervousApe      = new Unit("Nervous Ape",       100, [ 80, 160],  95, Initiative.FIRST,  getAID(), [Skills.SPLASH_DAMAGE], ".png");
+    cu.erStickApe        = new Unit("Stick-wielding Ape",150, [ 90, 180],  95, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE], "ape_01.png");
+    cu.erStoneApe        = new Unit("Stone-throwing Ape", 70, [125, 250],  95, Initiative.FIRST,  getAID(), [Skills.SPLASH_DAMAGE, Skills.ATTACK_WEAKEST], "ape_02.png");
+    cu.erAlphaApe        = new Unit("Alpha Ape",         500, [ 35,  70],  95, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE], "ape_03.png");
+    cu.erNervousApe      = new Unit("Nervous Ape",       100, [ 80, 160],  95, Initiative.FIRST,  getAID(), [Skills.SPLASH_DAMAGE], "ape_04.png");
     
-    cu.erGiantCannon     = new Unit("Giant Cannon",    35000,[7500,15000], 85, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE], ".png");
+    cu.erGiantCannon     = new Unit("Giant Cannon",    35000,[7500,15000], 85, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE], "canon_tower1.png");
     // new Unit()
     // new Unit()
-    cu.erGiantSeaSnake   = new Unit("Giant Sea Snake",900000, [350, 700],  80, Initiative.FIRST,  getAID(), [Skills.SPLASH_DAMAGE, Skills.ATTACK_WEAKEST], ".png");
+    cu.erGiantSeaSnake   = new Unit("Giant Sea Snake",700000, [300, 600],  80, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE], "sea_snake.png");
     // new Unit()
     // new Unit()
     
@@ -321,6 +321,23 @@ tso.data.live.functions.defineUnits = function () {
     cu.rabbitHunter      = new Unit("",   10, [ 20,  40], 60, Initiative.SECOND, getAID(), [Skills.TOWER_BONUS], "icon_bandit_longbowman.png");
     cu.hound             = new Unit("",    5, [  5,  10], 60, Initiative.FIRST,  getAID(), [Skills.ATTACK_WEAKEST], "icon_bandit_wardog.png");
     cu.garrunTrapper     = new Unit("", 6000, [300, 500], 50, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE], "icon_trapper.png");
+
+    
+    /* party crashers */
+    cu.pcRascal          = new Unit("Rascal",       20, [15,  30], 90, Initiative.SECOND, getAID(), [], "party_rascal.png");
+    cu.pcVandal          = new Unit("Vandal",       50, [20,  40], 90, Initiative.SECOND, getAID(), [], "party_vandal.png");
+    cu.pcBully           = new Unit("Bully",        90, [20,  40], 90, Initiative.FIRST,  getAID(), [Skills.ATTACK_WEAKEST, Skills.SPLASH_DAMAGE], "party_bully.png");
+    cu.pcPrankster       = new Unit("Prankster",    20, [10,  20], 80, Initiative.FIRST,  getAID(), [Skills.ATTACK_WEAKEST], "party_prankster.png");
+    cu.pcRuffian         = new Unit("Ruffian",      10, [25,  50], 90, Initiative.SECOND, getAID(), [Skills.TOWER_BONUS], "party_ruffian.png");
+    cu.pcScoundrel       = new Unit("Scoundrel",    10, [40,  75], 90, Initiative.SECOND, getAID(), [Skills.TOWER_BONUS], "party_scoundrel.png");
+    cu.pcCad             = new Unit("Cad",          10, [50, 100], 90, Initiative.SECOND, getAID(), [Skills.TOWER_BONUS], "party_cad.png");
+    cu.pcGrouch          = new Unit("Grouch",      120, [20,  40], 90, Initiative.SECOND, getAID(), [], "party_grouch.png");
+    cu.pcWhiner          = new Unit("Whiner",       40, [70, 140], 90, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE], "party_whiner.png");
+    cu.pcScallywag       = new Unit("Scallywag",    50, [25,  50], 90, Initiative.FIRST,  getAID(), [Skills.ATTACK_WEAKEST], "party_scallywag.png");
+    cu.pcCrasherDenis    = new Unit("Denis the Delinquent",   5000, [100, 200], 80, Initiative.FIRST, getAID(), [Skills.ATTACK_WEAKEST], "party_boss_denis.png");
+    cu.pcCrasherAlex     = new Unit("Alex the Troubkemaker", 17000, [700,1500], 90, Initiative.THIRD, getAID(), [], "party_boss_alex.png");
+    cu.pcCrasherBob      = new Unit("Bob the Miscreant",     35000, [1250,2500],70, Initiative.THIRD, getAID(), [], "party_boss_bob.png");
+    
     
     
     // camps
@@ -522,7 +539,7 @@ function defineAdventureMaps(units, adv_maps) {
     
     adv_maps.aliBabaYoungCutter= [
         cu.erStonecannon, cu.erSwordclasher, cu.erDuneMarksman, cu.erHorseman, cu.erSwordWielder, cu.erSwordMaster, cu.erMountedBowman, 
-        cu.erMystThief, cu.erTreacherousThief, cu.erDesertMarksman, cu.erLord, cu.erGreedyThief, cu.erCaptain, cu.erShrewdThief
+        cu.erMystThief, cu.erTreacherousThief, cu.erDesertMarksman, cu.erLord, cu.erGreedyThief, cu.erCaptain, cu.erShrewdThief, cu.erSmartThief
     ];
     adv_maps.aliBabaFirstThief = [
         cu.erStonecannon, cu.erSwordclasher, cu.erDuneMarksman, cu.erHorseman, cu.erSwordWielder, cu.erSwordMaster, cu.erMountedBowman, cu.erDesertMarksman, 
@@ -539,7 +556,7 @@ function defineAdventureMaps(units, adv_maps) {
     ];
     adv_maps.aliBabaTreasureKnowledge = [
         cu.erStonecannon, cu.erSwordclasher, cu.erDuneMarksman, cu.erHorseman, cu.erSwordWielder, cu.erSwordMaster, cu.erMountedBowman, cu.erDesertMarksman, 
-        cu.erTreacherousThief, cu.erScarredThief, cu.erSmartThief, cu.erShrewdThief, cu.erMystThief, cu.erGreedyThief, cu.erGrayedThief, cu.erSillyThief, cu.erLibraryGolem
+        cu.erTreacherousThief, cu.erScarredThief, cu.erSmartThief, cu.erShrewdThief, cu.erMystThief, cu.erGreedyThief, cu.erGrayedThief, cu.erSillyThief, cu.erSneakingThief, cu.erLibraryGolem
     ];
     adv_maps.aliBabaTreasureWisdom = [
         cu.erStonecannon, cu.erSwordclasher, cu.erDuneMarksman, cu.erHorseman, cu.erSwordWielder, cu.erSwordMaster, cu.erMountedBowman, cu.erDesertMarksman, 
@@ -564,6 +581,12 @@ function defineAdventureMaps(units, adv_maps) {
         cu.erSailor, cu.erMountedSailor, cu.erBoatswain, cu.erCannonMaster, cu.erBattleHardSailor, cu.erPettyOfficer,     
         cu.erSteersman, cu.erMutineer, cu.erCaptain, cu.erGiantSeaSnake
     ];
+
+    adv_maps.partyCrashers = [
+        cu.pcRascal, cu.pcVandal, cu.pcBully, cu.pcPrankster, cu.pcRuffian, cu.pcScoundrel, cu.pcCad, cu.pcGrouch, 
+        cu.pcWhiner, cu.pcScallywag, cu.pcCrasherDenis, cu.pcCrasherAlex, cu.pcCrasherBob
+    ];
+
     
     for (idx in adv_maps) {
         if (adv_maps.hasOwnProperty(idx)) {
