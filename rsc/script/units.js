@@ -326,7 +326,7 @@ tso.data.live.functions.defineUnits = function () {
     /* party crashers */
     cu.pcRascal          = new Unit("Rascal",       20, [15,  30], 90, Initiative.SECOND, getAID(), [], "party_rascal.png");
     cu.pcVandal          = new Unit("Vandal",       50, [20,  40], 90, Initiative.SECOND, getAID(), [], "party_vandal.png");
-    cu.pcBully           = new Unit("Bully",        90, [20,  40], 90, Initiative.FIRST,  getAID(), [Skills.ATTACK_WEAKEST, Skills.SPLASH_DAMAGE], "party_bully.png");
+    cu.pcBully           = new Unit("Bully",        90, [20,  40], 90, Initiative.SECOND, getAID(), [], "party_bully.png");
     cu.pcPrankster       = new Unit("Prankster",    20, [10,  20], 80, Initiative.FIRST,  getAID(), [Skills.ATTACK_WEAKEST], "party_prankster.png");
     cu.pcRuffian         = new Unit("Ruffian",      10, [25,  50], 90, Initiative.SECOND, getAID(), [Skills.TOWER_BONUS], "party_ruffian.png");
     cu.pcScoundrel       = new Unit("Scoundrel",    10, [40,  75], 90, Initiative.SECOND, getAID(), [Skills.TOWER_BONUS], "party_scoundrel.png");
@@ -335,7 +335,7 @@ tso.data.live.functions.defineUnits = function () {
     cu.pcWhiner          = new Unit("Whiner",       40, [70, 140], 90, Initiative.THIRD,  getAID(), [Skills.SPLASH_DAMAGE], "party_whiner.png");
     cu.pcScallywag       = new Unit("Scallywag",    50, [25,  50], 90, Initiative.FIRST,  getAID(), [Skills.ATTACK_WEAKEST], "party_scallywag.png");
     cu.pcCrasherDenis    = new Unit("Denis the Delinquent",   5000, [100, 200], 80, Initiative.FIRST, getAID(), [Skills.ATTACK_WEAKEST], "party_boss_denis.png");
-    cu.pcCrasherAlex     = new Unit("Alex the Troubkemaker", 17000, [700,1500], 90, Initiative.THIRD, getAID(), [], "party_boss_alex.png");
+    cu.pcCrasherAlex     = new Unit("Alex the Troubkemaker", 17000, [700,1500], 90, Initiative.THIRD, getAID(), [Skills.SPLASH_DAMAGE], "party_boss_alex.png");
     cu.pcCrasherBob      = new Unit("Bob the Miscreant",     35000, [1250,2500],70, Initiative.THIRD, getAID(), [], "party_boss_bob.png");
     
     
