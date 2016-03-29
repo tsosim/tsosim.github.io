@@ -336,7 +336,7 @@ tso.data.live.functions.defineUnits = function () {
     cu.pcScallywag       = new Unit("Scallywag",    50, [25,  50], 90, Initiative.FIRST,  getAID(), [Skills.ATTACK_WEAKEST], "party_scallywag.png");
     cu.pcCrasherDenis    = new Unit("Denis the Delinquent",   5000, [100, 200], 80, Initiative.FIRST, getAID(), [Skills.ATTACK_WEAKEST], "party_boss_denis.png");
     cu.pcCrasherAlex     = new Unit("Alex the Troubkemaker", 17000, [700,1500], 90, Initiative.THIRD, getAID(), [Skills.SPLASH_DAMAGE], "party_boss_alex.png");
-    cu.pcCrasherBob      = new Unit("Bob the Miscreant",     35000, [1250,2500],70, Initiative.THIRD, getAID(), [], "party_boss_bob.png");
+    cu.pcCrasherBob      = new Unit("Bob the Miscreant",     35000, [1250,2500],70, Initiative.THIRD, getAID(), [Skills.SPLASH_DAMAGE], "party_boss_bob.png");
     
     
     
