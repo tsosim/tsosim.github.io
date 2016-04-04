@@ -309,7 +309,7 @@ function Simulator() {
     };
 
     this.computeAttackOnUnitgroup = function (attacking_group, defending_group, extraParams, LOG) {
-        var current_def, current_att, rand_num, damage, bonus_damage, defense_bonus, def_bonus, damage_left, defHasTower, attHasSplash, numAttacked, attNum, defNum, appliedDamage, maxDamage;
+        var current_def, current_att, rand_num, damage, bonus_damage, def_bonus, damage_left, defHasTower, attHasSplash, numAttacked, attNum, defNum, appliedDamage, maxDamage;
 
         if (defending_group.number_after_attack < 1) {
             return 0;
@@ -373,7 +373,7 @@ function Simulator() {
              * Compute tower defense bonus
              */
             if (defHasTower && (extraParams.defBonus > 0)) {
-                def_bonus = defense_bonus - (attacking_group.type.hasSkill(Skills.ARMOR_PENETRATION) ? extraParams.defPenValue : 0);
+                def_bonus = extraParams.defBonus - (attacking_group.type.hasSkill(Skills.ARMOR_PENETRATION) ? extraParams.defPenValue : 0);
                 if (def_bonus < 0) {
                     def_bonus = 0;
                 }
