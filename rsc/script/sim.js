@@ -257,7 +257,7 @@ function Simulator() {
 
     this.computeAttackOnGarrison = function (attacking_group, defending_garrison, attackedNonCampUnits, LOG) {
         // determine defender's group ordering
-        var def_groups, idx, current_def_group, defense_bonus, defense_pen_value, extraParams, isFirst, hasAttacked;
+        var def_groups, idx, current_def_group, defense_pen_value, extraParams, isFirst, hasAttacked;
 
         if (attacking_group.type.hasSkill(Skills.CAMP)) { // a camp cannot attack -> return
             return { attacked: false, onCamp: false };
