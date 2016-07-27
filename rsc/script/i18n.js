@@ -1,5 +1,6 @@
 /*
  * Dutch translation by Wim Janssen.
+ * French translation by ciskomi.
  */
 
 var lang = {
@@ -188,6 +189,18 @@ var lang = {
 			pcCrasherAlex     : "Alex the Troublemaker",
 			pcCrasherBob      : "Bob the Miscreant",
 
+			// excelsior
+			excRoyalHuntLead  : "Royal Huntsmen Leader",
+			excEvilQueen      : "Ilesbille , the Evil Queen",
+			excRoyalCaptain   : "Royal Captain",
+			excRoyalJuggernaut: "Royal Juggernaut",
+			excKingOfRats     : "King of Rats",
+			excPiper          : "Piet Piper of Hamelin",
+			excMayor          : "The Mayor",
+			excEvilStepMother : "The Evil Stepmother",
+			excPreacherFlame  : "Preacher of Flames",
+			excAncientDragon  : "Ancient Dragon",
+
 			// exp
 
 			expAttackInf      : "Infantry",
@@ -274,7 +287,8 @@ var lang = {
 			alladinBeatifulPrincess  : "Alladin and the Beautiful Princess",
 			sindbadBesiegedCity      : "Sindbad and the Besieged City",
 			sindbadSeaSnake          : "Sindbad and the Sea Snake",
-			partyCrashers     : "The Party Crashers"
+			partyCrashers     : "The Party Crashers",
+			excelsior         : "Excelsior"
 		},
 		ui : {
 			title             : "The Settlers Online - Combat Simulator",
@@ -521,6 +535,18 @@ var lang = {
 			pcCrasherAlex     : "Alex der Querulant",
 			pcCrasherBob      : "Bob der Hinterhältige",
 
+			// excelsior
+			excRoyalHuntLead  : "Royal Huntsmen Leader",
+			excEvilQueen      : "Ilesbille , the Evil Queen",
+			excRoyalCaptain   : "Royal Captain",
+			excRoyalJuggernaut: "Royal Juggernaut",
+			excKingOfRats     : "King of Rats",
+			excPiper          : "Piet Piper of Hamelin",
+			excMayor          : "The Mayor",
+			excEvilStepMother : "The Evil Stepmother",
+			excPreacherFlame  : "Preacher of Flames",
+			excAncientDragon  : "Ancient Dragon",
+
 			// exp
 
 			expAttackInf      : "Angriffsinfanterie",
@@ -607,7 +633,8 @@ var lang = {
 			alladinBeatifulPrincess  : "Alladin und die schöne Prinzessin",
 			sindbadBesiegedCity      : "Sindbad und die belagerte Stadt",
 			sindbadSeaSnake          : "Sindbad und die Seeschlange",
-			partyCrashers     : "Die Störenfriede"
+			partyCrashers     : "Die Störenfriede",
+			excelsior         : "Excelsior"
 		},
 		ui : {
 			title             : "Die Siedler Online - Kampfsimulator",
@@ -853,6 +880,19 @@ var lang = {
 			pcCrasherAlex     : "Alex the Troublemaker",
 			pcCrasherBob      : "Bob the Miscreant",
 
+			// excelsior
+			excRoyalHuntLead  : "Royal Huntsmen Leader",
+			excEvilQueen      : "Ilesbille , the Evil Queen",
+			excRoyalCaptain   : "Royal Captain",
+			excRoyalJuggernaut: "Royal Juggernaut",
+			excKingOfRats     : "King of Rats",
+			excPiper          : "Piet Piper of Hamelin",
+			excMayor          : "The Mayor",
+			excEvilStepMother : "The Evil Stepmother",
+			excPreacherFlame  : "Preacher of Flames",
+			excAncientDragon  : "Ancient Dragon",
+
+
 			// Kolonies
 
 			expAttackInf      : "Aanvalsinfanterie",
@@ -939,7 +979,8 @@ var lang = {
 			alladinBeatifulPrincess  : "Alladin and the Beautiful Princess",
 			sindbadBesiegedCity      : "Sindbad and the Besieged City",
 			sindbadSeaSnake          : "Sindbad and the Sea Snake",
-			partyCrashers     : "The Party Crashers"
+			partyCrashers     : "The Party Crashers",
+			excelsior         : "Excelsior"
 		},
 		ui : {
 			title             : "The Settlers Online - Gevechtssimulator",
@@ -1186,6 +1227,19 @@ var lang = {
 			pcCrasherAlex     : "Alex the Troublemaker",
 			pcCrasherBob      : "Bob the Miscreant",
 
+			// excelsior
+			excRoyalHuntLead  : "Royal Huntsmen Leader",
+			excEvilQueen      : "Ilesbille , the Evil Queen",
+			excRoyalCaptain   : "Royal Captain",
+			excRoyalJuggernaut: "Royal Juggernaut",
+			excKingOfRats     : "King of Rats",
+			excPiper          : "Piet Piper of Hamelin",
+			excMayor          : "The Mayor",
+			excEvilStepMother : "The Evil Stepmother",
+			excPreacherFlame  : "Preacher of Flames",
+			excAncientDragon  : "Ancient Dragon",
+
+
             // exp
 
 			expAttackInf      : "Piechota",
@@ -1272,7 +1326,8 @@ var lang = {
 			alladinBeatifulPrincess  : "Alladin i Piękna Księżniczka",
 			sindbadBesiegedCity      : "Sindbad i Oblężone Miasto",
 			sindbadSeaSnake          : "Sindbad i Wąż Morski",
-			partyCrashers     : "The Party Crashers"
+			partyCrashers     : "The Party Crashers",
+			excelsior         : "Excelsior"
 		},
 		ui : {
 			title             : "The Settlers Online – Symulator Walki",
@@ -1519,6 +1574,18 @@ var lang = {
 			pcCrasherAlex     : "Alex le Fauteur de trouble",
 			pcCrasherBob      : "Bob le Mécréant",
 
+			// excelsior
+			excRoyalHuntLead  : "Royal Huntsmen Leader",
+			excEvilQueen      : "Ilesbille , the Evil Queen",
+			excRoyalCaptain   : "Royal Captain",
+			excRoyalJuggernaut: "Royal Juggernaut",
+			excKingOfRats     : "King of Rats",
+			excPiper          : "Piet Piper of Hamelin",
+			excMayor          : "The Mayor",
+			excEvilStepMother : "The Evil Stepmother",
+			excPreacherFlame  : "Preacher of Flames",
+			excAncientDragon  : "Ancient Dragon",
+
 			// exp
 
 			expAttackInf      : "Soldat d'attaque",
@@ -1564,7 +1631,6 @@ var lang = {
 			oldFriends        : "Vieux amis",
 			oldRuins          : "Ruines antiques",
 			outlaws           : "Hors-la-loi",
-			outlaws           : "Hors-la-loi",
 			pirateLife        : "Vie de pirate",
 			raidingTheRaiders : "À l'assaut des pillards",
 			retToBanditNest   : "Retour au repaire des bandits",
@@ -1606,7 +1672,8 @@ var lang = {
 			alladinBeatifulPrincess  : "Aladin et la Belle princesse",
 			sindbadBesiegedCity      : "Sinbad et la Ville assiégée",
 			sindbadSeaSnake          : "Sinbad et le Serpent de mer",
-			partyCrashers     : "Les hôtes inopportuns"
+			partyCrashers     : "Les hôtes inopportuns",
+			excelsior         : "Excelsior"
 		},
 		ui : {
 			title             : "The Settlers Online - Simulateur de combat",

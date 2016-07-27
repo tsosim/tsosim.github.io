@@ -31,8 +31,8 @@ var tso = {
 
 (function initializeTsoData() {
     var idx;
-    for(idx in tso.versions) {
-        if(tso.versions.hasOwnProperty(idx)) {
+    for (idx in tso.versions) {
+        if (tso.versions.hasOwnProperty(idx)) {
             tso.data[tso.versions[idx].id] = new VersionData();
         }
     }
@@ -338,6 +338,17 @@ tso.data.live.functions.defineUnits = function () {
     cu.pcCrasherAlex     = new Unit("Alex the Troubkemaker", 17000, [700,1500], 90, Initiative.THIRD, getAID(), [Skills.SPLASH_DAMAGE], "party_boss_alex.png");
     cu.pcCrasherBob      = new Unit("Bob the Miscreant",     35000, [1250,2500],70, Initiative.THIRD, getAID(), [Skills.SPLASH_DAMAGE], "party_boss_bob.png");
     
+    /* excelsior :                  name, hp, dmg, acc, init, attack_id, skills, icon */
+    cu.excRoyalHuntLead  = new Unit("",       45000, [200, 700], 80, Initiative.THIRD, getAID(), [Skills.SPLASH_DAMAGE], "todo");
+    cu.excEvilQueen      = new Unit("",       95000, [400, 600], 80, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE], "todo");
+    cu.excRoyalCaptain   = new Unit("",       45000, [300, 500], 80, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE], "todo");
+    cu.excRoyalJuggernaut= new Unit("",       70000, [200,1000], 35, Initiative.THIRD, getAID(), [Skills.SPLASH_DAMAGE], "todo");
+    cu.excKingOfRats     = new Unit("",       40000, [200, 800], 60, Initiative.THIRD, getAID(), [Skills.SPLASH_DAMAGE], "todo");
+    cu.excPiper          = new Unit("",       55000, [200, 450], 90, Initiative.THIRD, getAID(), [Skills.SPLASH_DAMAGE], "todo");
+    cu.excMayor          = new Unit("",       95000, [400, 600], 80, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE], "todo");
+    cu.excEvilStepMother = new Unit("",       95000, [400, 600], 80, Initiative.SECOND, getAID(), [Skills.SPLASH_DAMAGE], "todo");
+    cu.excPreacherFlame  = new Unit("",       11000, [500, 700], 75, Initiative.THIRD, getAID(), [Skills.SPLASH_DAMAGE, Skills.ATTACK_WEAKEST], "todo");
+    cu.excAncientDragon  = new Unit("",       50000, [500, 750], 50, Initiative.FIRST, getAID(), [Skills.SPLASH_DAMAGE], "todo");
     
     
     // camps
@@ -538,21 +549,21 @@ function defineAdventureMaps(units, adv_maps) {
     adv_maps.arcticExplosion   = [cu.nHousekarl, cu.nValkyrie, cu.nKarl, cu.nJomsviking, cu.nBerserk];
     
     adv_maps.aliBabaYoungCutter= [
-        cu.erStonecannon, cu.erSwordclasher, cu.erDuneMarksman, cu.erHorseman, cu.erSwordWielder, cu.erSwordMaster, cu.erMountedBowman, 
+        cu.erStonecannon, cu.erSwordclasher, cu.erDuneMarksman, cu.erHorseman, cu.erSwordWielder, cu.erSwordMaster, cu.erMountedBowman,
         cu.erMystThief, cu.erTreacherousThief, cu.erDesertMarksman, cu.erLord, cu.erGreedyThief, cu.erCaptain, cu.erShrewdThief, cu.erSmartThief
     ];
     adv_maps.aliBabaFirstThief = [
-        cu.erStonecannon, cu.erSwordclasher, cu.erDuneMarksman, cu.erHorseman, cu.erSwordWielder, cu.erSwordMaster, cu.erMountedBowman, cu.erDesertMarksman, 
+        cu.erStonecannon, cu.erSwordclasher, cu.erDuneMarksman, cu.erHorseman, cu.erSwordWielder, cu.erSwordMaster, cu.erMountedBowman, cu.erDesertMarksman,
         cu.erScarredThief, cu.erSmartThief, cu.erSnootyThief, cu.erGrayedThief, cu.erSillyThief
-    ];    
+    ];
     adv_maps.aliBabaSecondThief = [
-        cu.erStonecannon, cu.erSwordclasher, cu.erDuneMarksman, cu.erHorseman, cu.erSwordWielder, cu.erSwordMaster, cu.erMountedBowman, cu.erDesertMarksman, 
+        cu.erStonecannon, cu.erSwordclasher, cu.erDuneMarksman, cu.erHorseman, cu.erSwordWielder, cu.erSwordMaster, cu.erMountedBowman, cu.erDesertMarksman,
         cu.erSnootyThief, cu.erMystThief, cu.erTreacherousThief, cu.erShrewdThief, cu.erSneakingThief, cu.erGrayedThief, cu.erGrumpyParrot, cu.erOasisGuardian, cu.erGreedyThief
     ];
     adv_maps.aliBabaThirdThief = [
-        cu.erStonecannon, cu.erSwordclasher, cu.erDuneMarksman, cu.erHorseman, cu.erSwordWielder, cu.erSwordMaster, cu.erMountedBowman, cu.erDesertMarksman, 
+        cu.erStonecannon, cu.erSwordclasher, cu.erDuneMarksman, cu.erHorseman, cu.erSwordWielder, cu.erSwordMaster, cu.erMountedBowman, cu.erDesertMarksman,
         cu.epBoar, cu.epBear, cu.epWolf, cu.epPackleaderWolf, cu.epFox, cu.epGiant, cu.erGiantBat,
-        cu.erMystThief, cu.erGreedyThief, cu.erSillyThief, cu.erScarredThief, cu.erSnootyThief, cu.erShrewdThief 
+        cu.erMystThief, cu.erGreedyThief, cu.erSillyThief, cu.erScarredThief, cu.erSnootyThief, cu.erShrewdThief
     ];
     adv_maps.aliBabaTreasureKnowledge = [
         cu.erStonecannon, cu.erSwordclasher, cu.erDuneMarksman, cu.erHorseman, cu.erSwordWielder, cu.erSwordMaster, cu.erMountedBowman, cu.erDesertMarksman, 
@@ -585,6 +596,20 @@ function defineAdventureMaps(units, adv_maps) {
     adv_maps.partyCrashers = [
         cu.pcRascal, cu.pcVandal, cu.pcBully, cu.pcPrankster, cu.pcRuffian, cu.pcScoundrel, cu.pcCad, cu.pcGrouch, 
         cu.pcWhiner, cu.pcScallywag, cu.pcCrasherDenis, cu.pcCrasherAlex, cu.pcCrasherBob
+    ];
+    
+    adv_maps.excelsior = [
+        cu.desEliteSoldier,
+        //
+        cu.epBoar, cu.epBear, cu.epWolf, cu.epPackleaderWolf, cu.epFox, cu.epGiant,
+        //
+        cu.royalRecruit, cu.royalMilitia, cu.royalBowman, cu.royalLongbowman, cu.royalCavalry, cu.royalCannoneer,
+        //
+        cu.epGiantLeader1, cu.epGiantLeader2, cu.epUnicorn, cu.epGiantBoar, cu.epEvilKing, cu.epIronFist, cu.epGiantBear, cu.epRivalDressmaker, cu.epBlackBull,
+        cu.epDarkWizard, cu.epLyingGoat, cu.epThugLeader, cu.epAssassine, cu.epGreedyInnkeeper,
+        //
+        cu.excRoyalHuntLead, cu.excEvilQueen, cu.excRoyalCaptain, cu.excRoyalJuggernaut, cu.excKingOfRats, cu.excPiper,
+        cu.excMayor, cu.excEvilStepMother, cu.excPreacherFlame, cu.excAncientDragon
     ];
 
     
